@@ -146,9 +146,19 @@ if (_namePrefix isEqualTo "") then {
         ["_broadcastChannel", 5, [0]]
     ];
 
-    _iconCtrl lbSetCurSel (_modifier select 0);
-    _mod1Ctrl lbSetCurSel (_modifier select 1);
-    _mod2Ctrl lbSetCurSel (_modifier select 2);
+    //because of the sorting, the index needs to be found with the help of the value
+    {
+        _x params ["_ctrl", "_dropdownArray"];
+
+        CHECK(_ctrl isEqualTo _echelonCtrl);
+
+        for "_index" from 0 to ((count _dropdownArray) -1) step 1 do {
+            private _lbValue = _ctrl lbValue _index;
+            if (_lbValue isEqualTo (_modifier select _forEachIndex)) exitWith {
+                _ctrl lbSetCurSel _index;
+            };
+        };
+    } forEach _ctrlArray;
 
     _echelonCtrl lbSetCurSel (_size select 0);
     _reinforcedCbCtrl cbSetChecked (_size select 1);
