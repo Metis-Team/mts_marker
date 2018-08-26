@@ -69,6 +69,7 @@ private _ctrlArray = [
         _ctrl lbSetPicture [_index, _selectionPicturePath];
     } count _dropdownArray;
 
+    //sort icon, mod1 and mod2 dropdowns alphabetically
     if !(_ctrl isEqualTo _echelonCtrl) then {
         lbSort _ctrl;
     };
