@@ -1,14 +1,12 @@
 **Arma 3 Version:** `1.xx` (stable/rc/dev)  
-**Metis Marker Version:** `1.x.x` (stable/dev)  
+**Metis Marker Version:** `1.x.x` (stable/dev + commit hash)  
 **CBA Version:** `3.x.x` (stable/dev + commit hash)  
-**ACE Version:** `3.x.x` (stable/dev)  
 
 
 **Mods:**
 ```
 - Metis_Marker
 - CBA_A3
-- ACE
 ```
 
 **Description:**
