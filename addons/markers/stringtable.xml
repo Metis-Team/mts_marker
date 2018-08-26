@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="MTS Markers">
+	<Package name="mts_markers">
+        <Container name="Misc">
+    		<Key ID="str_mts_markers_authors">
+    			<Original>Timi007, PhILoX, Bix</Original>
+				<German>Timi007, PhILoX, Bix</German>
+    		</Key>
+        </Container>
+    	<Container name="UI_general">
+    		<Key ID="str_mts_markers_ui_general_headTXT">
+    			<Original>UNIT MARKER</Original>
+    			<German>EINHEITEN MARKER</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_previewTXT">
+    			<Original>Preview</Original>
+    			<German>Vorschau</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_identityTXT">
+    			<Original>Identity:</Original>
+    			<German>Identität:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_iconTXT">
+    			<Original>Icon:</Original>
+    			<German>Grundzeichen:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_mod1TXT">
+    			<Original>Modifier 1:</Original>
+    			<German>Ergänzungsz. 1:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_mod2TXT">
+    			<Original>Modifier 2:</Original>
+    			<German>Ergänzungsz. 2:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_echelonTXT">
+    			<Original>Echelon:</Original>
+    			<German>Größenordnung:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_reinforcedTXT">
+    			<Original>Reinforced:</Original>
+    			<German>Verstärkt:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_reducedTXT">
+    			<Original>Reduced:</Original>
+    			<German>Vermindert:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_higherTXT">
+    			<Original>Higher Formation:</Original>
+    			<German>Ü. Führungsebene:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_uniqueTXT">
+    			<Original>Unique Designation:</Original>
+    			<German>Eind. Kennung:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_channelTXT">
+    			<Original>Channel:</Original>
+    			<German>Kanal:</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_okBTN">
+    			<Original>OK</Original>
+    			<German>OK</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_general_cancelBTN">
+    			<Original>CANCEL</Original>
+    			<German>ABBRUCH</German>
+    		</Key>
+        </Container>
+    	<Container name="UI_identity">
+    		<Key ID="str_mts_markers_ui_identity_friend">
+    			<Original>FRIEND</Original>
+    			<German>Freund</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_identity_assumed_friend">
+    			<Original>ASSUMED FRIEND</Original>
+    			<German>Vermutlich Freund</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_identity_hostile">
+    			<Original>HOSTILE</Original>
+    			<German>Feind</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_identity_suspect">
+    			<Original>SUSPECT</Original>
+    			<German>Verdächtigt</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_identity_neutral">
+    			<Original>NEUTRAL</Original>
+    			<German>Neutral</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_identity_unknown">
+    			<Original>UNKNOWN</Original>
+    			<German>Unbekannt</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_identity_pending">
+    			<Original>PENDING</Original>
+    			<German>Noch unbestimmt</German>
+    		</Key>
+    	</Container>
+    	<Container name="UI_icon">
+            <Key ID="str_mts_markers_ui_icon_empty">
+    			<Original>-Empty-</Original>
+                <German>-Leer-</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_icon_infantry">
+                <Original>Infantry</Original>
+                <German>Infanterie</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_infantry_mechanized">
+                <Original>Infantry Mechanized</Original>
+                <German>Mechanisierte Infanterie</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_infantry_motorized">
+                <Original>Infantry Motorized</Original>
+                <German>Motorisierte Infanterie</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_armor">
+                <Original>Armor</Original>
+                <German>Panzer</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_anti_armor">
+                <Original>Anti Armor</Original>
+                <German>Panzerabwehr</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_anti_armor_armored">
+                <Original>Anti Armor Armored</Original>
+                <German>Gepanzerte Panzerabwehr</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_anti_armor_motorized">
+                <Original>Anti Armor Motorized</Original>
+                <German>Motorisierte Panzerabwehr</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_maintenance">
+                <Original>Maintenance</Original>
+				<German>Instandsetzung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_air_defence">
+                <Original>Air Defence</Original>
+                <German>Flugabwehr</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_air_defence_missile">
+                <Original>Air Defense Missile</Original>
+                <German>Startgerät Flugabwehrrakete Boden-Luft (SAM)</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_fixed_wing">
+                <Original>Fixed Wing</Original>
+				<German>Starrflügler</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_rotary_wing">
+                <Original>Rotary Wing</Original>
+				<German>Drehflügler</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_uav">
+                <Original>Unmanned systems</Original>
+                <German>Unbemannte Systeme</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_engineer">
+                <Original>Engineer</Original>
+                <German>Pionier</German>
+    		</Key>
+			<Key ID="str_mts_markers_ui_icon_engineer_armored">
+                <Original>Armored Engineer</Original>
+                <German>Panzerpionier</German>
+    		</Key>
+			<Key ID="str_mts_markers_ui_icon_engineer_motorized">
+                <Original>Motorized Engineer</Original>
+                <German>Motorisierte Pioniere</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_artillery">
+                <Original>Field Artillery</Original>
+                <German>Artillerie</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_artillery_sp">
+                <Original>Self-Propelled Field Artillery</Original>
+                <German>Panzerartillerie</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_mortar">
+                <Original>Mortar</Original>
+                <German>Mörser</German>
+    		</Key>
+			<Key ID="str_mts_markers_ui_icon_mortar_armored">
+                <Original>Tracked Mortar</Original>
+                <German>Panzermörser</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_reconnaissance">
+                <Original>Reconnaissance</Original>
+                <German>Aufklärung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_reconnaissance_armored">
+                <Original>Reconnaissance Armored</Original>
+                <German>Gepanzerte Aufklärung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_reconnaissance_motorized">
+                <Original>Reconnaissance Motorized</Original>
+                <German>Motorisierte Aufklärung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_surface_surface_missile">
+                <Original>Surface-Surface Missile</Original>
+                <German>Startgerät Boden-Boden-Flugkörper</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_cbrn">
+                <Original>CBRN</Original>
+				<German>ABC-Abwehr</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_military_intelligence">
+                <Original>Military Intelligence</Original>
+                <German>Militärisches Nachrichtenwesen</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_military_police">
+                <Original>Military Police</Original>
+                <German>Militärpolizei/Feldjäger</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_signal_unit">
+                <Original>Signal Unit</Original>
+                <German>Fernmelde</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_combat_service_support">
+                <Original>Combat Service Support</Original>
+                <German>Einsatzunterstützung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_medical">
+                <Original>Medical</Original>
+                <German>Sanitätsdienst</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_supply">
+                <Original>Supply</Original>
+                <German>Nachschub</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_icon_transportation">
+                <Original>Transportation</Original>
+                <German>Transport</German>
+    		</Key>
+    	</Container>
+    	<Container name="UI_mod1">
+            <Key ID="str_mts_markers_ui_mod1_empty">
+    			<Original>-Empty-</Original>
+                <German>-Leer-</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_mod1_air_assault">
+    			<Original>Air assault</Original>
+                <German>Luftgestützt</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod1_attack">
+    			<Original>Attack</Original>
+                <German>Angriff</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod1_maintenance_top">
+    			<Original>Maintenance</Original>
+                <German>Instandsetzung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod1_multiple_rocket_launcher">
+    			<Original>Multiple Rocket Launcher</Original>
+                <German>Mehrfachraketenwerfer</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod1_single_rocket_launcher">
+    			<Original>Single Rocket Launcher</Original>
+                <German>Einzelraketenwerfer</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod1_sniper">
+    			<Original>Sniper</Original>
+    			<German>Scharfschütze</German>
+    		</Key>
+    	</Container>
+    	<Container name="UI_mod2">
+            <Key ID="str_mts_markers_ui_mod2_empty">
+    			<Original>-Empty-</Original>
+                <German>-Leer-</German>
+    		</Key>
+    		<Key ID="str_mts_markers_ui_mod2_airborne">
+    			<Original>Airborne</Original>
+                <German>Luftlande-/Fallschirm-</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_heavy">
+    			<Original>Heavy</Original>
+                <German>Schwer</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_light">
+    			<Original>Light</Original>
+                <German>Leicht</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_medium">
+    			<Original>Medium</Original>
+                <German>Mittel</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_mountain">
+    			<Original>Mountain</Original>
+                <German>Gebirgs-</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_vstol">
+    			<Original>VSTOL</Original>
+                <German>Senkrecht- oder Kurzstart und -landung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_wheeled">
+    			<Original>Wheeled</Original>
+                <German>Auf Rädern/Rad-</German>
+    		</Key>
+    	</Container>
+    	<Container name="UI_echelon">
+            <Key ID="str_mts_markers_ui_echelon_empty">
+    			<Original>-Empty-</Original>
+                <German>-Leer-</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_team">
+    			<Original>Team/Crew</Original>
+                <German>Team/Besatzung</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_squad">
+    			<Original>Squad</Original>
+    			<German>Trupp</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_section">
+    			<Original>Section</Original>
+                <German>Gruppe</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_platoon">
+    			<Original>Platoon</Original>
+    			<German>Zug</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_company">
+    			<Original>Company/Battery</Original>
+    			<German>Kompanie/Batterie</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_battalion">
+    			<Original>Battalion</Original>
+    			<German>Bataillon</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_regiment">
+    			<Original>Regiment/Group</Original>
+    			<German>Regiment/Kampfgruppe</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_brigade">
+    			<Original>Brigade</Original>
+    			<German>Brigade</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_division">
+    			<Original>Division</Original>
+    			<German>Division</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_corps">
+    			<Original>Corps</Original>
+    			<German>Korps</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_army">
+    			<Original>Army</Original>
+    			<German>Armee</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_echelon_army_group">
+    			<Original>Army Group/Front</Original>
+    			<German>Armeegruppe</German>
+    		</Key>
+    	</Container>
+		<Container name="UI_hint">
+    		<Key ID="str_mts_markers_ui_hint_character_limit">
+    			<Original>The unique formation can only have max. 3 characters!</Original>
+                <German>Die eindeutige Kennung kann nur max. 3 Zeichen besitzen!</German>
+    		</Key>
+			<Key ID="str_mts_markers_ui_hint_character_invalid">
+    			<Original>The unique formation has invalid characters!</Original>
+                <German>Die eindeutige Kennung hat ungültige Zeichen!</German>
+    		</Key>
+    	</Container>
+        <Container name="CBA_Keybinding">
+            <Key ID="str_mts_markers_cba_keybinding_categoryName">
+    			<Original>vLehrBrig16 Metis Marker</Original>
+				<German>vLehrBrig16 Metis Marker</German>
+    		</Key>
+			<Key ID="str_mts_markers_cba_keybinding_open_window">
+    			<Original>Open Marker Interface</Original>
+                <German>Marker Interface öffnen</German>
+    		</Key>
+    		<Key ID="str_mts_markers_cba_keybinding_delete">
+    			<Original>Delete Marker</Original>
+                <German>Marker löschen</German>
+    		</Key>
+			<Key ID="str_mts_markers_cba_keybinding_edit">
+    			<Original>Edit Marker</Original>
+                <German>Marker editieren</German>
+    		</Key>
+            <Key ID="str_mts_markers_cba_keybinding_move">
+    			<Original>Move Marker</Original>
+                <German>Marker verschieben</German>
+    		</Key>
+    	</Container>
+	</Package>
+</Project>

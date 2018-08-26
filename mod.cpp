@@ -1,0 +1,12 @@
+name = "Metis Marker";
+//picture = "logo_mts_ca.paa";
+actionName = "Github";
+action = "https://github.com/Metis-Team";
+//description = "";
+//logo = "logo_mts_ca.paa";
+//logoOver = "logo_mts_ca.paa";
+tooltip = "Metis Marker";
+tooltipOwned = "Metis Marker owned";
+overview = "Metis Marker";
+author = "Bix, PhILoX, Timi007";
+//overviewPicture = "logo_mts_ca.paa";
