@@ -359,8 +359,8 @@
     	</Container>
         <Container name="CBA_Keybinding">
             <Key ID="str_mts_markers_cba_keybinding_categoryName">
-    			<Original>vLehrBrig16 Metis Marker</Original>
-				<German>vLehrBrig16 Metis Marker</German>
+    			<Original>Metis Marker</Original>
+				<German>Metis Marker</German>
     		</Key>
 			<Key ID="str_mts_markers_cba_keybinding_open_window">
     			<Original>Open Marker Interface</Original>
