@@ -272,13 +272,13 @@
     			<Original>Heavy</Original>
                 <German>Schwer</German>
     		</Key>
-            <Key ID="str_mts_markers_ui_mod2_light">
-    			<Original>Light</Original>
-                <German>Leicht</German>
-    		</Key>
             <Key ID="str_mts_markers_ui_mod2_medium">
     			<Original>Medium</Original>
                 <German>Mittel</German>
+    		</Key>
+            <Key ID="str_mts_markers_ui_mod2_light">
+    			<Original>Light</Original>
+                <German>Leicht</German>
     		</Key>
             <Key ID="str_mts_markers_ui_mod2_mountain">
     			<Original>Mountain</Original>
