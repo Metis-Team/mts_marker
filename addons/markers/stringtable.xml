@@ -206,7 +206,7 @@
     		</Key>
             <Key ID="str_mts_markers_ui_icon_military_police">
                 <Original>Military Police</Original>
-                <German>Militärpolizei/Feldjäger</German>
+                <German>Militärpolizei</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_signal_unit">
                 <Original>Signal Unit</Original>
@@ -343,7 +343,7 @@
     			<German>Armee</German>
     		</Key>
             <Key ID="str_mts_markers_ui_echelon_army_group">
-    			<Original>Army Group/Front</Original>
+    			<Original>Army Group</Original>
     			<German>Armeegruppe</German>
     		</Key>
     	</Container>
