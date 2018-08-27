@@ -48,7 +48,8 @@ Our customizable marker system consists of:
     - Unique Designation
 
 ## Contributing
-Link zum Wiki
+- [Issues & Feature requests](https://github.com/Metis-Team/mts_marker/issues)
+- [Become a developer](https://github.com/Metis-Team/mts_marker/wiki/For-developers)
 
 ## Contact
 Do you want to get in touch with us?  
