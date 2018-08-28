@@ -67,31 +67,31 @@
         </Container>
     	<Container name="UI_identity">
     		<Key ID="str_mts_markers_ui_identity_friend">
-    			<Original>FRIEND</Original>
+    			<Original>Friend</Original>
     			<German>Freund</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_identity_assumed_friend">
-    			<Original>ASSUMED FRIEND</Original>
+    			<Original>Assumed Friend</Original>
     			<German>Vermutlich Freund</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_identity_hostile">
-    			<Original>HOSTILE</Original>
+    			<Original>Hostile</Original>
     			<German>Feind</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_identity_suspect">
-    			<Original>SUSPECT</Original>
-    			<German>Verdächtigt</German>
+    			<Original>Suspect</Original>
+    			<German>Verdächtig</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_identity_neutral">
-    			<Original>NEUTRAL</Original>
+    			<Original>Neutral</Original>
     			<German>Neutral</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_identity_unknown">
-    			<Original>UNKNOWN</Original>
+    			<Original>Unknown</Original>
     			<German>Unbekannt</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_identity_pending">
-    			<Original>PENDING</Original>
+    			<Original>Pending</Original>
     			<German>Noch unbestimmt</German>
     		</Key>
     	</Container>
@@ -137,7 +137,7 @@
                 <German>Flugabwehr</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_air_defence_missile">
-                <Original>Air Defense Missile</Original>
+                <Original>Air Defence Missile</Original>
                 <German>Startgerät Flugabwehrrakete Boden-Luft (SAM)</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_fixed_wing">
@@ -149,7 +149,7 @@
 				<German>Drehflügler</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_uav">
-                <Original>Unmanned systems</Original>
+                <Original>Unmanned Systems</Original>
                 <German>Unbemannte Systeme</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_engineer">
@@ -197,7 +197,7 @@
                 <German>Startgerät Boden-Boden-Flugkörper</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_cbrn">
-                <Original>CBRN</Original>
+                <Original>CBRN Defence</Original>
 				<German>ABC-Abwehr</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_military_intelligence">
@@ -209,8 +209,8 @@
                 <German>Militärpolizei</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_signal_unit">
-                <Original>Signal Unit</Original>
-                <German>Fernmelde</German>
+                <Original>Signal</Original>
+                <German>Führungsunterstützung</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_combat_service_support">
                 <Original>Combat Service Support</Original>
@@ -235,12 +235,12 @@
                 <German>-Leer-</German>
     		</Key>
     		<Key ID="str_mts_markers_ui_mod1_air_assault">
-    			<Original>Air assault</Original>
+    			<Original>Air Assault</Original>
                 <German>Luftgestützt</German>
     		</Key>
             <Key ID="str_mts_markers_ui_mod1_attack">
     			<Original>Attack</Original>
-                <German>Angriff</German>
+                <German>Angriffs-</German>
     		</Key>
             <Key ID="str_mts_markers_ui_mod1_maintenance_top">
     			<Original>Maintenance</Original>
