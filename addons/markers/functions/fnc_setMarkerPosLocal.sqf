@@ -22,7 +22,7 @@ params [["_namePrefix", "", [""]], ["_newPos", [0,0], [[]], [2,3]]];
 CHECK(_namePrefix isEqualTo "");
 
 //get marker set
-private _markerInformation = GVAR(markerNamespace) getVariable [_namePrefix, [[]]];
+private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
 private _markerFamily = _markerInformation select 0;
 CHECK(_markerFamily isEqualTo []);
 

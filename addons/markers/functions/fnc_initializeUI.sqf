@@ -128,7 +128,7 @@ if (_namePrefix isEqualTo "") then {
 } else {
     //when editing marker
     //get marker family parameter & information from namespace
-    private _markerInformation = GVAR(markerNamespace) getVariable [_namePrefix, [[]]];
+    private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
     private _markerParameter = _markerInformation select 1;
     CHECK(_markerParameter isEqualTo []);
 

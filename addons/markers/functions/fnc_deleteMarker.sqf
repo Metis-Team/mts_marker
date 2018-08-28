@@ -20,7 +20,7 @@ params [["_namePrefix", "", [""]]];
 CHECK(_namePrefix isEqualTo "");
 
 //get marker set
-private _markerInformation = GVAR(markerNamespace) getVariable [_namePrefix, [[]]];
+private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
 private _markerFamily = _markerInformation select 0;
 
 //delete every marker in the set & delete it in the namespace
@@ -28,7 +28,7 @@ if !(_markerFamily isEqualTo []) then {
     {
         deleteMarker _x;
     } count _markerFamily;
-    GVAR(markerNamespace) setVariable [_namePrefix, nil, true];
+    GVAR(namespace) setVariable [_namePrefix, nil, true];
 };
 
 if (is3DEN) then {

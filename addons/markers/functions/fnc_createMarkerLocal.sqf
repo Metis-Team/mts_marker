@@ -4,7 +4,7 @@
  *
  *  Description:
  *      Places marker set/family on map.
- *      Adds the marker set/family to the mts_markers_markerFamilypace.
+ *      Adds the marker set/family to the mts_markers_namespace.
  *      This function has a local effect.
  *
  *  Parameter(s):
@@ -152,11 +152,11 @@ if (((count _textLeft) > 0) && {(count _textLeft) <= 3}) then {
     };
 };
 
-private _markerInformation = GVAR(markerNamespace) getVariable [_namePrefix, []];
-if (_markerInformation isEqualTo []) then { //save in mts_markers_markerFamilypace
+private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
+if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save marker parameters for editing purposes
     private _markerParameter = [_frameshape, _dashedFrameshape, _modifier, _size, _textleft, _textright, _broadcastChannel];
-    GVAR(markerNamespace) setVariable [_namePrefix, [_markerFamily, _markerParameter], true];
+    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter], true];
 
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute
