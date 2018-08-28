@@ -56,4 +56,4 @@ Do you want to get in touch with us?
 Contact us on the [Bohemia Thread](https://forums.bohemia.net/forums/forum/218-arma-3/)
 
 ## License
-MTS Metis Marker is licensed under Arma Public License No Derivatives ([APL-ND](https://github.com/Metis-Team/mts_marker/blob/master/LICENSE)).
+Metis Marker is licensed under Arma Public License No Derivatives ([APL-ND](https://github.com/Metis-Team/mts_marker/blob/master/LICENSE)).
