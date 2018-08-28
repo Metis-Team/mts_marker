@@ -20,7 +20,7 @@ GVAR(iconArray) = [
     ["artillery"],
     ["artillery_sp"],
     ["mortar"],
-    ["mortar_armored", ["mortar", "armor"]],
+    ["mortar_armored"],
     ["reconnaissance"],
     ["reconnaissance_armored", ["reconnaissance", "armor"]],
     ["reconnaissance_motorized", ["reconnaissance", "motorized"]],

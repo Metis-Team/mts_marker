@@ -9,6 +9,7 @@ MARKER(red,mod,rotary_wing);
 MARKER(red,mod,artillery);
 MARKER(red,mod,artillery_sp);
 MARKER(red,mod,mortar);
+MARKER(red,mod,mortar_armored);
 MARKER(red,mod,air_defence);
 MARKER(red,mod,missile);
 MARKER(red,mod,surface_surface);
