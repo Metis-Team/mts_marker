@@ -21,10 +21,11 @@
 
 //Map displays
 #define MAP_3DEN_DISPLAY 313
-#define MAP_BRIEFING_DISPLAY 52
+#define MAP_BRIEFING_SERVER_DISPLAY 52
+#define MAP_BRIEFING_CLIENT_DISPLAY 53
 #define MAP_PLAYER_DISPLAY 12
 
-//Map Ctrl is same for all 3 displays
+//Map Ctrl is same for all 4 displays
 #define MAP_CTRL 51
 
 //default marker scale

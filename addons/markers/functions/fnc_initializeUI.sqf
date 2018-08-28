@@ -165,10 +165,10 @@ if (_namePrefix isEqualTo "") then {
 };
 
 //call same ui events that CBA is adding to the map display. Thanks to commy2 for this work-around!
-if (_curMapDisplay isEqualTo (findDisplay MAP_PLAYER_DISPLAY)) then {
+if ((ctrlIDD _curMapDisplay) isEqualTo MAP_PLAYER_DISPLAY) then {
     _mainDisplay call (uiNamespace getVariable "cba_events_fnc_initDisplayMainMap");
 };
-if (_curMapDisplay isEqualTo (findDisplay MAP_BRIEFING_DISPLAY)) then {
+if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVER_DISPLAY]) then {
     _mainDisplay call (uiNamespace getVariable "cba_events_fnc_initDisplayCurator");
 };
 
