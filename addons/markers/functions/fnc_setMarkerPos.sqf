@@ -27,7 +27,9 @@ private _namePrefix = (_markerFrame splitString "_") select 0;
 
 
 //get channel ID from marker prefix
-private _markerChannelId = parseNumber ((_namePrefix splitString "/") param [2, "5"]);
+private _markerChannelId = parseNumber ((_namePrefix splitString "/") param [2, "-1"]);
+
+CHECK((_markerChannelId > 5) || {_markerChannelId < -1});
 
 //broadcast marker depending on channel ID
 [_namePrefix, _newPos] remoteExecCall [QFUNC(setMarkerPosLocal), ([_markerChannelId] call FUNC(getBroadcastTargets)), true];

@@ -34,7 +34,7 @@
 
 params [
     ["_namePrefix", "", [""]],
-    ["_broadcastChannel", 5, [0]],
+    ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
     ["_frameshape", "", [""]],
     ["_modifier", [0,0,0], [[]], 3],

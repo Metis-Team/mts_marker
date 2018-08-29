@@ -7,7 +7,7 @@
  *
  *  Parameter(s):
  *      0: ARRAY - Position where the marker will be placed.
- *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID)
+ *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID; Use -1 for local creation (only with non-editable markers))
  *      2: BOOLEAN - Is marker editable.
  *      3: STRING - Frameshape of the marker. (blu, bludash, red, reddash, neu, unk, unkdash)
  *      4: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
@@ -32,7 +32,7 @@
 
 params [
     ["_pos", [0,0], [[]], [2,3]],
-    ["_broadcastChannel", 5, [0]],
+    ["_broadcastChannel", -1, [0]],
     ["_editable", true, [true]],
     ["_frameshape", "", [""]],
     ["_modifier", [0,0,0], [[]], 3],
@@ -41,6 +41,8 @@ params [
     ["_textright", "", [""]],
     ["_scale", MARKER_SCALE, [0]]
 ];
+
+CHECKRET(!((!_editable && _broadcastChannel isEqualTo -1) || (_editable && ((_broadcastChannel > 5) || (_broadcastChannel < 0)))), ERROR("Channel ID not supported"));
 CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
 
 //get player UID

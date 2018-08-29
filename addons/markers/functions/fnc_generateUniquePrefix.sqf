@@ -8,7 +8,7 @@
  *  Parameter(s):
  *      0: BOOLEAN - Is marker editable.
  *      1: STRING - Player UID.
- *      2: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID)
+ *      2: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID; Use -1 for local creation (only with non-editable markers))
  *
  *  Returns:
  *      STRING - Unique marker Prefix
@@ -18,8 +18,10 @@
  *
  */
 
-params [["_editable", true, [true]], ["_playerUID", "0", [""]], ["_broadcastChannel", 5, [0]]];
+params [["_editable", true, [true]], ["_playerUID", "0", [""]], ["_broadcastChannel", -1, [0]]];
 private ["_namePrefix"];
+
+CHECKRET(!((!_editable && _broadcastChannel isEqualTo -1) || (_editable && ((_broadcastChannel > 5) || (_broadcastChannel < 0)))), ERROR("Channel ID not supported"));
 
 //generate unique marker name & return
 private _uniqueName = false;

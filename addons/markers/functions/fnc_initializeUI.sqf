@@ -143,7 +143,7 @@ if (_namePrefix isEqualTo "") then {
         ["_size", [0,false,false], [[]], 3],
         ["_textleft", [], [[]]],
         ["_textright", "", [""]],
-        ["_broadcastChannel", 5, [0]]
+        ["_broadcastChannel", -1, [0]]
     ];
 
     _iconCtrl lbSetCurSel (_modifier select 0);
