@@ -73,7 +73,7 @@ _markerFrame setMarkerColorLocal _frameshapecolor;
 
 //create group size marker
 if (_grpsize > 0) then {
-    private _unitsize = format ["mts_%1_size_%2", _frameshape, _size select 0];
+    private _unitsize = format ["mts_%1_size_%2", _frameshape, _grpsize];
     private _markerSize = createMarkerLocal [format ["%1_size", _namePrefix], _pos];
     _markerSize setMarkerTypeLocal _unitsize;
     _markerSize setMarkerSizeLocal [_scale, _scale];
