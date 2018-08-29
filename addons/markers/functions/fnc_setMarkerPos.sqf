@@ -30,16 +30,4 @@ private _namePrefix = (_markerFrame splitString "_") select 0;
 private _markerChannelId = parseNumber ((_namePrefix splitString "/") param [2, "5"]);
 
 //broadcast marker depending on channel ID
-if ((_markerChannelId <= 4) && {_markerChannelId >= 0}) then {
-    private _broadcastTargets = [
-        (call CBA_fnc_players),
-        playerSide,
-        ((allGroups select {side _x isEqualTo playerSide}) apply {leader _x}),
-        (units player),
-        (crew cameraOn)
-    ] select _markerChannelId;
-
-    [_namePrefix, _newPos] remoteExecCall [QFUNC(setMarkerPosLocal), _broadcastTargets, true];
-} else {
-    [_namePrefix, _newPos] call FUNC(setMarkerPosLocal);
-};
+[_namePrefix, _newPos] remoteExecCall [QFUNC(setMarkerPosLocal), ([_markerChannelId] call FUNC(getBroadcastTargets)), true];

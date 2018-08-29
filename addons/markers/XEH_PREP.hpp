@@ -3,6 +3,7 @@ PREP(createMarkerLocal);
 PREP(deleteMarker);
 PREP(generateUniquePrefix);
 PREP(getAllModifiers);
+PREP(getBroadcastTargets);
 PREP(getDisplay);
 PREP(getMouseOverMarkerPrefix);
 PREP(identityButtonsAction);

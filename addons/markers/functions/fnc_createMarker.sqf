@@ -49,19 +49,5 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
     _playerUID = "0";
 };
 
-//broadcast marker depending on channel ID
-if ((_broadcastChannel <= 4) && {_broadcastChannel >= 0}) then {
-    private _broadcastTargets = [
-        (call CBA_fnc_players),
-        playerSide,
-        ((allGroups select {side _x isEqualTo playerSide}) apply {leader _x}),
-        (units player),
-        (crew cameraOn)
-    ] select _broadcastChannel;
-
-    private _namePrefix = [_editable, _playerUID, _broadcastChannel] call FUNC(generateUniquePrefix);
-    [_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), _broadcastTargets, true];
-} else {
-    private _namePrefix = [_editable, _playerUID, 5] call FUNC(generateUniquePrefix);
-    [_namePrefix, 5, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] call FUNC(createMarkerLocal);
-};
+private _namePrefix = [_editable, _playerUID, _broadcastChannel] call FUNC(generateUniquePrefix);
+[_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
