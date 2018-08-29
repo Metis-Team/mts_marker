@@ -32,7 +32,7 @@ private _markerChannelId = parseNumber ((_namePrefix splitString "/") param [2, 
 //broadcast marker depending on channel ID
 if ((_markerChannelId <= 4) && {_markerChannelId >= 0}) then {
     private _broadcastTargets = [
-        0,
+        (call CBA_fnc_players),
         playerSide,
         ((allGroups select {side _x isEqualTo playerSide}) apply {leader _x}),
         (units player),
