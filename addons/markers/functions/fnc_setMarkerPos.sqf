@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Broadcast new marker pos to channel of the origin.
+ *      Broadcast new marker position based on channel of origin.
  *
  *  Parameter(s):
  *      0: ARRAY - Names of all markers in one set.

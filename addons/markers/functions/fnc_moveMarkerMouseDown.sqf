@@ -7,6 +7,7 @@
  *
  *  Parameter(s):
  *      0: CONTROL - Map control. (Optional, default: Map control)
+ *      1: BOOLEAN - Include non-editable markers. (Optional, default: don't include)
  *
  *  Returns:
  *      Nothing.

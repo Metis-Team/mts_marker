@@ -12,7 +12,7 @@
  *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID)
  *      2: ARRAY - Position where the marker will be placed.
  *      3: STRING - Frameshape of the marker (blu, bludash, red, reddash, neu, unk, unkdash).
- *      4: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
+ *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
  *          2: NUMBER - Modifier 2 (0 for none).
@@ -20,7 +20,7 @@
  *          0: NUMBER - Group size (0 for none).
  *          1: BOOLEAN - Reinforced or (+) symbol.
  *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
- *      6: ARRAY - Marker text left. (Optional, default: no text)
+ *      6: ARRAY - Marker text left. Can only be max. 3 characters. (Optional, default: no text)
  *      7: STRING - Marker text right. (Optional, default: no text)
  *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
@@ -44,11 +44,15 @@ params [
     ["_scale", MARKER_SCALE, [0]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
-CHECKRET(_namePrefix isEqualTo "", ERROR("No unique marker prefix"));
+
+CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
 
 //prevent unscaled markers
-if (_scale <= 0) then {_scale = MARKER_SCALE;};
+if (_scale <= 0) then {
+    WARNING("Negative scale for markers aren't allowed. Reseted marker scale back to default");
+    _scale = MARKER_SCALE;
+};
 
 //for marker editing
 private _dashedFrameshape = false;

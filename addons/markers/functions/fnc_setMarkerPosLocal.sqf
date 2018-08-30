@@ -19,7 +19,7 @@
  */
 
 params [["_namePrefix", "", [""]], ["_newPos", [0,0], [[]], [2,3]]];
-CHECK(_namePrefix isEqualTo "");
+CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
 //get marker set
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);

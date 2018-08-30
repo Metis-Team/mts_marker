@@ -3,14 +3,14 @@
  *  Author: PhILoX, Timi007
  *
  *  Description:
- *      Executes createMarkerLocal function with given player channel locality.
+ *      Creates marker with given channel locality.
  *
  *  Parameter(s):
  *      0: ARRAY - Position where the marker will be placed.
- *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID; Use -1 for local creation (only with non-editable markers))
- *      2: BOOLEAN - Is marker editable.
+ *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
+ *      2: BOOLEAN - Is the marker editable.
  *      3: STRING - Frameshape of the marker. (blu, bludash, red, reddash, neu, unk, unkdash)
- *      4: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
+ *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
  *          2: NUMBER - Modifier 2 (0 for none).
@@ -18,7 +18,7 @@
  *          0: NUMBER - Group size (0 for none).
  *          1: BOOLEAN - Reinforced or (+) symbol.
  *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
- *      6: ARRAY - Marker text left. (Optional, default: no text)
+ *      6: ARRAY - Marker text left. Can only be max. 3 characters. (Optional, default: no text)
  *      7: STRING - Marker text right. (Optional, default: no text)
  *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *

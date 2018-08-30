@@ -6,13 +6,13 @@
  *      Returnes broadcast targets for remoteExec based on the broadcast channel.
  *
  *  Parameter(s):
- *      0: NUMBER - Broadcast channel.
+ *      0: NUMBER - Broadcast channel. (Check "currentChannel" command for channel ID; Use -1 for local creation)
  *
  *  Returns:
  *      ARRAY/SIDE/OBJECT - Broadcast targets. Array of players, player side or player object.
  *
  *  Example:
- *      [0] call mts_markers_fnc_getBroadcastTargets
+ *      _broadcastTargets = [0] call mts_markers_fnc_getBroadcastTargets
  *
  */
 
