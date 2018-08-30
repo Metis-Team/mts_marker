@@ -32,8 +32,7 @@ while {!_uniqueName} do {
     } else {
         _namePrefix = format ["mts3DEN#%1", _randomnumber];
     };
-    private _checkname = format ["%1_frame", _namePrefix];
-    if !(_checkname in allMapMarkers) then {_uniqueName = true;};
+    if ((GVAR(namespace) getVariable [_namePrefix, false]) isEqualTo false) then {_uniqueName = true;};
 };
 
 _namePrefix
