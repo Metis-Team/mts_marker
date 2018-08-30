@@ -42,7 +42,7 @@ params [
     ["_scale", MARKER_SCALE, [0]]
 ];
 
-CHECKRET(!((!_editable && _broadcastChannel isEqualTo -1) || (_editable && ((_broadcastChannel > 5) || (_broadcastChannel < 0)))), ERROR("Channel ID not supported"));
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
 CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
 
 //get player UID
