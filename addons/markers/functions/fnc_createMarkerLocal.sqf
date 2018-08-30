@@ -25,10 +25,10 @@
  *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
- *     ARRAY - List of all marker names in the created set.
+ *     STRING - Marker prefix.
  *
  *  Example:
- *      _createmarker = ["mtsmarker#123/0/1", 1, [2000,1000], "blu", [4,0,0], [4, false, true], ["3","3"], "MTS"] call mts_markers_fnc_createMarkerLocal
+ *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], "blu", [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarkerLocal
  *
  */
 
@@ -166,4 +166,4 @@ if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     };
 };
 
-_markerFamily
+_namePrefix

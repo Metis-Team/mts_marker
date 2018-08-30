@@ -23,10 +23,10 @@
  *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
- *      Nothing.
+ *      STRING - Marker prefix.
  *
  *  Example:
- *     [[2000,1000], 1, true, "blu", [4,0,0], [4, false, true], ["3","3"], "MTS"] call mts_markers_fnc_createMarker
+ *     _namePrefix = [[2000,1000], 1, true, "blu", [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarker
  *
  */
 
@@ -53,3 +53,5 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
 
 private _namePrefix = [_editable, _playerUID, _broadcastChannel] call FUNC(generateUniquePrefix);
 [_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+
+_namePrefix
