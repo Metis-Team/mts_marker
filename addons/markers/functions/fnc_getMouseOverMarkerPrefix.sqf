@@ -21,7 +21,7 @@ params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false
 CHECKRET(isNull _mapCtrl, "");
 
 private _mouseOverMarker = ctrlMapMouseOver _mapCtrl;
-CHECKRET((_mouseOverMarker select 0) isEqualTo "marker", "");
+CHECKRET(!((_mouseOverMarker select 0) isEqualTo "marker"), "");
 private _markerName = _mouseOverMarker select 1;
 
 private _isMtsMarker = [_markerName] call FUNC(isMtsMarker);
