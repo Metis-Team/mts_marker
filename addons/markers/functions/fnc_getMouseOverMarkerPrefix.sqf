@@ -17,7 +17,7 @@
  *
  */
 
-params [["_mapCtrl", controlNull, [controlNull]], ["_include3denMarker", false, [false]]];
+params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false, [false]]];
 CHECKRET(isNull _mapCtrl, "");
 
 private _mouseOverMarker = ctrlMapMouseOver _mapCtrl;

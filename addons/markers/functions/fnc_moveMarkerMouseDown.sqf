@@ -17,11 +17,11 @@
  *
  */
 
-params [["_mapCtrl", controlNull, [controlNull]], ["_include3denMarker", false, [false]]];
+params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false, [false]]];
 CHECK(isNull _mapCtrl);
 
 //get marker prefix
-private _namePrefix = [_mapCtrl, _include3denMarker] call FUNC(getMouseOverMarkerPrefix);
+private _namePrefix = [_mapCtrl, _includeNoEditMarker] call FUNC(getMouseOverMarkerPrefix);
 CHECK(_namePrefix isEqualTo "");
 
 //get marker set

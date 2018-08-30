@@ -30,7 +30,7 @@ while {!_uniqueName} do {
     if (_editable) then {
         _namePrefix = format ["mtsmarker#%1/%2/%3", _randomNumber, _playerUID, _broadcastChannel];
     } else {
-        _namePrefix = format ["mts3DEN#%1", _randomnumber];
+        _namePrefix = format ["mtsnoedit#%1~%2", _randomNumber, _broadcastChannel];
     };
     if ((GVAR(namespace) getVariable [_namePrefix, false]) isEqualTo false) then {_uniqueName = true;};
 };
