@@ -21,10 +21,14 @@ params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false
 CHECKRET(isNull _mapCtrl, "");
 
 private _mouseOverMarker = ctrlMapMouseOver _mapCtrl;
+CHECKRET((_mouseOverMarker select 0) isEqualTo "marker", "");
+private _markerName = _mouseOverMarker select 1;
 
-if ([_mapCtrl, _include3denMarker] call FUNC(isMtsMarker)) exitWith {
-    private _markerName = _mouseOverMarker select 1;
-    private _namePrefix = (_markerName splitString "_") select 0;
-    _namePrefix
+private _isMtsMarker = [_markerName] call FUNC(isMtsMarker);
+CHECKRET(_isMtsMarker isEqualTo 0, "");
+
+if (_isMtsMarker isEqualTo 1 || _includeNoEditMarker) exitWith {
+    (_markerName splitString "_") select 0
 };
+
 ""
