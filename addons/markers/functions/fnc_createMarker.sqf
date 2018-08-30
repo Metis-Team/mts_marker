@@ -51,7 +51,7 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
     _playerUID = "0";
 };
 
-private _namePrefix = [_editable, _playerUID, _broadcastChannel] call FUNC(generateUniquePrefix);
+private _namePrefix = [_editable, _broadcastChannel, _playerUID] call FUNC(generateUniquePrefix);
 [_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
 
 _namePrefix

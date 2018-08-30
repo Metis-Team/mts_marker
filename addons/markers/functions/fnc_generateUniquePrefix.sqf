@@ -7,18 +7,18 @@
  *
  *  Parameter(s):
  *      0: BOOLEAN - Is marker editable.
- *      1: STRING - Player UID.
- *      2: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID; Use -1 for local creation (only with non-editable markers))
+ *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID; Use -1 for local creation)
+ *      2: STRING - Player UID.
  *
  *  Returns:
  *      STRING - Unique marker Prefix
  *
  *  Example:
- *      [true, (getPlayerUID player), 0] call mts_markers_fnc_generateUniquePrefix
+ *      [true, 0, (getPlayerUID player)] call mts_markers_fnc_generateUniquePrefix
  *
  */
 
-params [["_editable", true, [true]], ["_playerUID", "0", [""]], ["_broadcastChannel", -1, [0]]];
+params [["_editable", true, [true]], ["_broadcastChannel", -1, [0]], ["_playerUID", "0", [""]]];
 private ["_namePrefix"];
 
 CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
