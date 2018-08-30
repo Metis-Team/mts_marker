@@ -26,9 +26,9 @@ CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel I
 //generate unique marker name & return
 private _uniqueName = false;
 while {!_uniqueName} do {
-    private _randomnumber = floor (random 100000);
+    private _randomNumber = floor (random 100000);
     if (_editable) then {
-        _namePrefix = format ["mtsmarker#%1/%2/%3", _randomnumber, _playerUID, _broadcastChannel];
+        _namePrefix = format ["mtsmarker#%1/%2/%3", _randomNumber, _playerUID, _broadcastChannel];
     } else {
         _namePrefix = format ["mts3DEN#%1", _randomnumber];
     };
