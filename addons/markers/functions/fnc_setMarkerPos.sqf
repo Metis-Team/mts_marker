@@ -13,18 +13,13 @@
  *      Nothing.
  *
  *  Example:
- *      [["mtsmarker#123/0/1_frame"], [300,1000]] call mts_markers_fnc_setMarkerPos
+ *      ["mtsmarker#123/0/1", [300,1000]] call mts_markers_fnc_setMarkerPos
  *
  */
 
-params [["_markerFamily", [], [[]]], ["_newPos", [0,0], [[]], [2,3]]];
-CHECK(_markerFamily isEqualTo []);
+params [["_namePrefix", "", [""]], ["_newPos", [0,0], [[]], [2,3]]];
 
-//get marker prefix from marker frameshape which is always present
-private _markerFrame = _markerFamily select 0;
-CHECK(!(_markerFrame isEqualType ""));
-private _namePrefix = (_markerFrame splitString "_") select 0;
-
+CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
 //get channel ID from marker prefix
 private _markerChannelId = parseNumber ((_namePrefix splitString "/") param [2, "-1"]);

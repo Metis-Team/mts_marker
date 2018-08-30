@@ -38,10 +38,10 @@ GVAR(MarkerMoveInProgress) = true;
 
 // updating position of all markers in markerFamily while moving the marker & make marker see-through
 if (is3DEN) then {
-    GVAR(FHVars) = [_markerFamily, _mapCtrl, _originAlpha];
+    GVAR(FHVars) = [_namePrefix, _markerFamily, _mapCtrl, _originAlpha];
     addMissionEventHandler ["EachFrame", {call FUNC(moveMarkerInProgress3DEN)}];
 } else {
     //change cursor
     _mapCtrl ctrlMapCursor ["Track", "Move"];
-    [FUNC(moveMarkerInProgress), 0, [_markerFamily, _mapCtrl, _originAlpha]] call CBA_fnc_addPerFrameHandler;
+    [FUNC(moveMarkerInProgress), 0, [_namePrefix, _markerFamily, _mapCtrl, _originAlpha]] call CBA_fnc_addPerFrameHandler;
 };
