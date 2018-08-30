@@ -18,6 +18,10 @@
 
 params [["_broadcastChannel", -1, [0]]];
 
+if (is3DEN) exitWith {
+    0
+};
+
 switch (_broadcastChannel) do {
     case 0: {
         (call CBA_fnc_players)
