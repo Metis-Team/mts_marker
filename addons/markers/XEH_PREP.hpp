@@ -5,6 +5,7 @@ PREP(generateUniquePrefix);
 PREP(getAllModifiers);
 PREP(getBroadcastTargets);
 PREP(getDisplay);
+PREP(getMarkerFamily);
 PREP(getMouseOverMarkerPrefix);
 PREP(identityButtonsAction);
 PREP(initializeUI);

@@ -24,8 +24,7 @@ private _namePrefix = [_mapCtrl, _include3denMarker] call FUNC(getMouseOverMarke
 CHECK(_namePrefix isEqualTo "");
 
 //get marker set
-private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
-private _markerFamily = _markerInformation select 0;
+private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
 CHECK(_markerFamily isEqualTo []);
 
 private _originAlpha = markerAlpha (_markerFamily select 0);
