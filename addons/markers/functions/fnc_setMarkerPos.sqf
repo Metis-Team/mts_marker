@@ -28,3 +28,5 @@ CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Invalid m
 
 //broadcast marker depending on channel ID
 [_namePrefix, _newPos] remoteExecCall [QFUNC(setMarkerPosLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+
+nil
