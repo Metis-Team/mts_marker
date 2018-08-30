@@ -3,6 +3,7 @@ PREP(createMarkerLocal);
 PREP(deleteMarker);
 PREP(generateUniquePrefix);
 PREP(getAllModifiers);
+PREP(getBroadcastChannel);
 PREP(getBroadcastTargets);
 PREP(getDisplay);
 PREP(getMarkerFamily);

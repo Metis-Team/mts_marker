@@ -17,19 +17,13 @@
  */
 
 params [["_namePrefix", "", [""]]];
-CHECK(_namePrefix isEqualTo "");
 
-//get marker set
-private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
-private _markerFamily = _markerInformation select 0;
+CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
-//delete every marker in the set & delete it in the namespace
-if !(_markerFamily isEqualTo []) then {
-    {
-        deleteMarker _x;
-    } count _markerFamily;
-    GVAR(namespace) setVariable [_namePrefix, nil, true];
-};
+//get channel ID from marker prefix
+private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
+
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Invalid marker prefix. No MTS marker"));
 
 if (is3DEN) then {
     //delete 3DEN marker from attribute
