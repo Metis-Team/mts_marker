@@ -23,6 +23,7 @@
             private _curMapDisplay = call FUNC(getDisplay);
             if (!isNull _curMapDisplay) then {
                 private _namePrefix = [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(getMouseOverMarkerPrefix);
+                CHECK(_namePrefix isEqualTo "");
                 [_namePrefix] call FUNC(deleteMarker);
             };
         };
@@ -96,6 +97,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
                 private _curMapDisplay = call FUNC(getDisplay);
                 if (!isNull _curMapDisplay) then {
                     private _namePrefix = [_curMapDisplay displayCtrl MAP_CTRL, true] call FUNC(getMouseOverMarkerPrefix);
+                    CHECK(_namePrefix isEqualTo "");
                     [_namePrefix] call FUNC(deleteMarker);
                 };
             };
