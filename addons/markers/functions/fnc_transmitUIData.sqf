@@ -60,12 +60,7 @@ if (_isForMarkerCreation) then {
 
     //get the left text and check if it is valid
     private _textleft = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
-    private _textleftCharacters = count _textleft;
-    if (_textleftCharacters > 3) then {
-        //don't allow more than 3 characters
-        hint LLSTRING(ui_hint_character_limit);
-        breakOut "main";
-    };
+
     private _validCharacters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
     {
         if !(_x in _validCharacters) then {

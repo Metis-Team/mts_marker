@@ -132,7 +132,11 @@ if !(_textright isEqualTo "") then {
 };
 
 //create text marker (left side of marker)
-if (((count _textLeft) > 0) && {(count _textLeft) <= 3}) then {
+if ((count _textLeft) > 0) then {
+    //only take the first three characters of the left text
+    if ((count _textLeft) > 3) then {
+        _textLeft resize 3;
+    };
     //convert special number markers
     if (_textleft isEqualTo ["1","1"]) then {_textleft = ["11"];};
     if (_textleft isEqualTo ["1","1","1"]) then {_textleft = ["111"];};

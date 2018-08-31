@@ -348,10 +348,6 @@
     		</Key>
     	</Container>
 		<Container name="UI_hint">
-    		<Key ID="str_mts_markers_ui_hint_character_limit">
-    			<Original>The unique formation can only have max. 3 characters!</Original>
-                <German>Die eindeutige Kennung kann nur max. 3 Zeichen besitzen!</German>
-    		</Key>
 			<Key ID="str_mts_markers_ui_hint_character_invalid">
     			<Original>The unique formation has invalid characters!</Original>
                 <German>Die eindeutige Kennung hat ungültige Zeichen!</German>
