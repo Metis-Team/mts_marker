@@ -105,11 +105,11 @@
                 <German>Infanterie</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_infantry_mechanized">
-                <Original>Infantry Mechanized</Original>
+                <Original>Mechanized Infantry</Original>
                 <German>Mechanisierte Infanterie</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_infantry_motorized">
-                <Original>Infantry Motorized</Original>
+                <Original>Motorized Infantry</Original>
                 <German>Motorisierte Infanterie</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_armor">
@@ -121,11 +121,11 @@
                 <German>Panzerabwehr</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_anti_armor_armored">
-                <Original>Anti Armor Armored</Original>
+                <Original>Armored Anti Armor</Original>
                 <German>Gepanzerte Panzerabwehr</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_anti_armor_motorized">
-                <Original>Anti Armor Motorized</Original>
+                <Original>Motorized Anti Armor</Original>
                 <German>Motorisierte Panzerabwehr</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_maintenance">
@@ -185,11 +185,11 @@
                 <German>Aufklärung</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance_armored">
-                <Original>Reconnaissance Armored</Original>
+                <Original>Armored Reconnaissance</Original>
                 <German>Gepanzerte Aufklärung</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance_motorized">
-                <Original>Reconnaissance Motorized</Original>
+                <Original>Motorized Reconnaissance</Original>
                 <German>Motorisierte Aufklärung</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_surface_surface_missile">
