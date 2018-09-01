@@ -133,10 +133,24 @@ if !(_textright isEqualTo "") then {
 
 //create text marker (left side of marker)
 if ((count _textLeft) > 0) then {
+    scopeName "textLeftCreation";
     //only take the first three characters of the left text
     if ((count _textLeft) > 3) then {
         _textLeft resize 3;
     };
+
+    //check if all characters are valid & make all characters uppercase
+    {
+        _x = toUpper _x;
+        _textLeft set [_forEachIndex, _x];
+        if !(_x in GVAR(validCharacters)) then {
+            //only allow valid characters that are in the array
+            WARNING("Invalid character in marker text left. Creating marker without unique designation");
+            _textLeft = [];
+            breakOut "textLeftCreation";
+        };
+    } forEach _textleft;
+
     //convert special number markers
     if (_textleft isEqualTo ["1","1"]) then {_textleft = ["11"];};
     if (_textleft isEqualTo ["1","1","1"]) then {_textleft = ["111"];};
