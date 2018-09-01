@@ -349,8 +349,8 @@
     	</Container>
 		<Container name="UI_hint">
 			<Key ID="str_mts_markers_ui_hint_character_invalid">
-    			<Original>The unique formation has invalid characters!</Original>
-                <German>Die eindeutige Kennung hat ungültige Zeichen!</German>
+    			<Original>The unique formation has invalid characters! Allowed characters: A-Z and 0-9</Original>
+                <German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z und 0-9</German>
     		</Key>
     	</Container>
         <Container name="CBA_Keybinding">
