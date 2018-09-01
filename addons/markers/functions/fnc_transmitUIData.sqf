@@ -65,7 +65,11 @@ if (_isForMarkerCreation) then {
     {
         if !(_x in _validCharacters) then {
             //only allow valid characters that are in the array
-            hint LLSTRING(ui_hint_character_invalid);
+            if (is3DEN) then {
+                [LLSTRING(ui_hint_character_invalid), 1, 2, true] call BIS_fnc_3DENNotification;
+            } else {
+                hint LLSTRING(ui_hint_character_invalid);
+            };
             breakOut "main";
         };
     } count _textleft;
