@@ -65,7 +65,7 @@ if (_isForMarkerCreation) then {
         if !(_x in GVAR(validCharacters)) then {
             //only allow valid characters that are in the array
             if (is3DEN) then {
-                [LLSTRING(ui_hint_character_invalid), 1, 2, true] call BIS_fnc_3DENNotification;
+                [LLSTRING(ui_hint_character_invalid), 1, 5, true] call BIS_fnc_3DENNotification;
             } else {
                 hint LLSTRING(ui_hint_character_invalid);
             };
