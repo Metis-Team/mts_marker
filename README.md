@@ -24,7 +24,7 @@
     <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a>.</sup></strong>
 </p>
 
-**Metis Marker** brings you the opportunity to create NATO joint military symbols after the *APP-6(C)* regulation.  
+**Metis Marker** brings you the opportunity to create NATO joint military symbols according to *APP-6(C)*.  
 It allows to build symbols from components, including frame, icon, first modifier, second modifier and amplifiers, rather than pre-define all possible symbols.
 
 ## Features:
@@ -34,7 +34,7 @@ It allows to build symbols from components, including frame, icon, first modifie
 - Build in preview
 - Full 3DEN support (create, move, edit marker)
 - Briefing support (create, move, edit marker)
-- Communication channel support e.g. Global-, Side- or Groupchannel 
+- Communication channel support e.g. Global, Side or Group channel 
 
 ## Customizable marker system
 Our customizable marker system consists of:  
