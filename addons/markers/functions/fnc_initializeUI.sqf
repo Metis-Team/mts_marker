@@ -97,7 +97,7 @@ if (!isMultiplayer || is3DEN) then {
     {
         _x params ["_channelText", "_channelID", "_channelColor"];
 
-        if ((channelEnabled _channelID) isEqualTo [false, false] || _channelID isEqualTo 3) then {
+        if (!((channelEnabled _channelID) isEqualTo [false, false]) || _channelID isEqualTo 3) then {
             private _selectionColor = (configfile >> "RscChatListMission" >> _channelColor) call BIS_fnc_colorConfigToRGBA;
             private _index = _channelCtrl lbAdd (localize _channelText);
             _channelCtrl lbSetValue [_index, _channelID];
