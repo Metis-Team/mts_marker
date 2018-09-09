@@ -433,6 +433,7 @@ class GVAR(dialog) {
             colorBackground[] = {0,0,0,1};
             sizeEx = 0.035;
             shadow = 0;
+            maxChars = 3;
         };
         class channelDD: RscCombo {
             idc = CHANNEL_DROPDOWN;

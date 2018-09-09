@@ -8,13 +8,13 @@ PREP_RECOMPILE_END;
 
 ADDON = true;
 
-CHECK(!hasInterface);
-
 //create namespace
 if (isServer || (!isMultiplayer)) then {
-    GVAR(markerNamespace) = true call CBA_fnc_createNamespace;
-    publicVariable QGVAR(markerNamespace);
+    GVAR(namespace) = true call CBA_fnc_createNamespace;
+    publicVariable QGVAR(namespace);
 };
+
+CHECK(!hasInterface);
 
 #include "initKeybinds.hpp"
 #include "initMarkerVariables.hpp"

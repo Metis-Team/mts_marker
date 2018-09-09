@@ -1,9 +1,13 @@
 PREP(createMarker);
 PREP(createMarkerLocal);
 PREP(deleteMarker);
+PREP(deleteMarkerLocal);
 PREP(generateUniquePrefix);
 PREP(getAllModifiers);
+PREP(getBroadcastChannel);
+PREP(getBroadcastTargets);
 PREP(getDisplay);
+PREP(getMarkerFamily);
 PREP(getMouseOverMarkerPrefix);
 PREP(identityButtonsAction);
 PREP(initializeUI);
