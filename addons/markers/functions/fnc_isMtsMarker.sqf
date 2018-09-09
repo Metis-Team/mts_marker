@@ -3,36 +3,29 @@
  *  Author: PhILoX, Timi007
  *
  *  Description:
- *      Checks if pointed map marker is a MTS marker.
+ *      Checks if marker is a MTS marker.
  *
  *  Parameter(s):
- *      0: CONTROL - Map control.
- *      1: BOOLEAN - Include the non editable 3DEN markers. (Optional, default: don't include)
+ *      0: STRING - Marker name.
  *
  *  Returns:
- *      BOOLEAN - Is mts marker.
+ *      NUMBER - 0: isn't a MTS marker, 1: is an editable MTS marker, 2: is a non-editable MTS marker.
  *
  *  Example:
- *      _ismtsmarker = [(findDisplay 12) displayCtrl 51] call mts_markers_fnc_isMtsMarker
+ *      _ismtsmarker = ["mtsmarker#123/0/1"] call mts_markers_fnc_isMtsMarker
  *
  */
 
-params [["_mapCtrl", controlNull, [controlNull]], ["_include3denMarker", false, [false]]];
-CHECKRET(isNull _mapCtrl, false);
+params [["_markerName", "", [""]]];
+CHECKRET(_markerName isEqualTo "", 0);
 
-scopeName "exit";
+private _markerNamePrefix = toLower (_markerName select [0, 9]);
 
-private _mouseOverMarker = ctrlMapMouseOver _mapCtrl;
-
-if (count (_mouseOverMarker) isEqualTo 2) then {
-    if ((_mouseOverMarker select 0) isEqualTo "marker") then {
-        private _markerName = _mouseOverMarker select 1;
-        if ((_markerName select [0, 9]) isEqualTo "mtsmarker") then {
-            true breakOut "exit";
-        };
-        if (_include3denMarker && (_markerName select [0, 7]) isEqualTo "mts3DEN") then {
-            true breakOut "exit";
-        };
-    };
+if (_markerNamePrefix isEqualTo "mtsmarker") exitWith {
+    1
 };
-false
+if (_markerNamePrefix isEqualTo "mtsnoedit") exitWith {
+    2
+};
+
+0
