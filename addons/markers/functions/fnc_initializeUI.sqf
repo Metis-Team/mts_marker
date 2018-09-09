@@ -95,21 +95,15 @@ if (!isMultiplayer || is3DEN) then {
     ];
 
     {
-        _x params ["_selectionText", "_selectionData", "_channelColorData"];
+        _x params ["_channelText", "_channelID", "_channelColor"];
 
-        if ((channelEnabled _selectionData) select 0) then {
-            private _selectionColor = (configfile >> "RscChatListMission" >> _channelColorData) call BIS_fnc_colorConfigToRGBA;
-            private _index = _channelCtrl lbAdd (localize _selectionText);
-            _channelCtrl lbSetValue [_index, _selectionData];
+        if ((channelEnabled _channelID) isEqualTo [false, false] || _channelID isEqualTo 3) then {
+            private _selectionColor = (configfile >> "RscChatListMission" >> _channelColor) call BIS_fnc_colorConfigToRGBA;
+            private _index = _channelCtrl lbAdd (localize _channelText);
+            _channelCtrl lbSetValue [_index, _channelID];
             _channelCtrl lbSetColor [_index, _selectionColor];
         };
     } count _channelDropdownArray;
-
-    if (currentChannel <= 4) then {
-        _channelCtrl lbSetCurSel currentChannel;
-    } else {
-        _channelCtrl lbSetCurSel 5;
-    };
 };
 
 private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
@@ -118,6 +112,19 @@ private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
 
 if (_namePrefix isEqualTo "") then {
+    //select the current channel in the dropdown
+    if (isMultiplayer) then {
+        private _selectedChannel = currentChannel;
+        if (currentChannel > 5) then {_selectedChannel = 3;};
+
+        for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
+            private _channelID = _channelCtrl lbValue _index;
+            if (_channelID isEqualTo _selectedChannel) exitWith {
+                _channelCtrl lbSetCurSel _index;
+            };
+        };
+    };
+
     //save future marker position
     private _pos = _mapCtrl ctrlMapScreenToWorld [(_mousePos select 0), (_mousePos select 1)];
     _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), _pos];
@@ -157,7 +164,13 @@ if (_namePrefix isEqualTo "") then {
     (_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText _textright;
     (_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_textleft joinString "");
 
-    _channelCtrl lbSetCurSel _broadcastChannel;
+    //select the original broadcast channel in dropdown
+    for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
+        private _channelID = _channelCtrl lbValue _index;
+        if (_channelID isEqualTo _broadcastChannel) exitWith {
+            _channelCtrl lbSetCurSel _index;
+        };
+    };
 
     //select right identity in the dialog & update preview
     _suspectedCbCtrl cbSetChecked _dashedFrameshape;
