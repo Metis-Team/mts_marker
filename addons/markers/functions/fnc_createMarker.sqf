@@ -3,14 +3,14 @@
  *  Author: PhILoX, Timi007
  *
  *  Description:
- *      Executes createMarkerLocal function with given player channel locality.
+ *      Creates marker with given channel locality.
  *
  *  Parameter(s):
  *      0: ARRAY - Position where the marker will be placed.
- *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID)
- *      2: BOOLEAN - Is marker editable.
+ *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
+ *      2: BOOLEAN - Is the marker editable.
  *      3: STRING - Frameshape of the marker. (blu, bludash, red, reddash, neu, unk, unkdash)
- *      4: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
+ *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
  *          2: NUMBER - Modifier 2 (0 for none).
@@ -18,21 +18,21 @@
  *          0: NUMBER - Group size (0 for none).
  *          1: BOOLEAN - Reinforced or (+) symbol.
  *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
- *      6: ARRAY - Marker text left. (Optional, default: no text)
+ *      6: ARRAY - Marker text left. Can only be max. 3 characters. (Optional, default: no text)
  *      7: STRING - Marker text right. (Optional, default: no text)
  *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
- *      Nothing.
+ *      STRING - Marker prefix.
  *
  *  Example:
- *     [[2000,1000], 1, true, "blu", [4,0,0], [4, false, true], ["3","3"], "MTS"] call mts_markers_fnc_createMarker
+ *     _namePrefix = [[2000,1000], 1, true, "blu", [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarker
  *
  */
 
 params [
     ["_pos", [0,0], [[]], [2,3]],
-    ["_broadcastChannel", 5, [0]],
+    ["_broadcastChannel", -1, [0]],
     ["_editable", true, [true]],
     ["_frameshape", "", [""]],
     ["_modifier", [0,0,0], [[]], 3],
@@ -41,6 +41,8 @@ params [
     ["_textright", "", [""]],
     ["_scale", MARKER_SCALE, [0]]
 ];
+
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
 CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
 
 //get player UID
@@ -49,19 +51,7 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
     _playerUID = "0";
 };
 
-//broadcast marker depending on channel ID
-if ((_broadcastChannel <= 4) && {_broadcastChannel >= 0}) then {
-    private _broadcastTargets = [
-        0,
-        playerSide,
-        ((allGroups select {side _x isEqualTo playerSide}) apply {leader _x}),
-        (units player),
-        (crew cameraOn)
-    ] select _broadcastChannel;
+private _namePrefix = [_editable, _broadcastChannel, _playerUID] call FUNC(generateUniquePrefix);
+[_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
 
-    private _namePrefix = [_editable, _playerUID, _broadcastChannel] call FUNC(generateUniquePrefix);
-    [_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), _broadcastTargets, true];
-} else {
-    private _namePrefix = [_editable, _playerUID, 5] call FUNC(generateUniquePrefix);
-    [_namePrefix, 5, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] call FUNC(createMarkerLocal);
-};
+_namePrefix
