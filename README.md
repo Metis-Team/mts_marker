@@ -1,18 +1,18 @@
 <p align="center">
-    <img src="https://i.imgur.com/zJLjVXn.png" width="1024">
+    <img src="https://i.imgur.com/PY2cSOK.png" width="1024">
 </p>
 
 <p align="center">
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
         <img src="https://img.shields.io/badge/Version-1.0.0-blue.svg?style=flat-square" alt="Metis Marker Version">
     </a>
-    <a href="https://github.com/Metis-Team/mts_marker/releases">
+    <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
         <img src="https://img.shields.io/github/downloads/Metis-Team/mts_marker/total.svg?style=flat-square&label=Downloads" alt="Metis Marker Downloads">
     </a>
-    <a href="">
+    <a href="https://forums.bohemia.net/forums/topic/219275-metis-marker/">
         <img src="https://img.shields.io/badge/BIF-Thread-lightgrey.svg?style=flat-square" alt="BIF Thread">
     </a>
-    <a href="">
+    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1508091616">
         <img src="https://img.shields.io/badge/Steam-Workshop-green.svg?style=flat-square" alt="Steam Workshop">
     </a>
     <a href="https://github.com/Metis-Team/mts_marker/blob/master/LICENSE">
@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-    <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a>.</sup></strong>
+    <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases/latest">CBA A3</a>.</sup></strong>
 </p>
 
 **Metis Marker** brings you the opportunity to create NATO joint military symbols according to *APP-6(C)*.  
@@ -53,7 +53,24 @@ Our customizable marker system consists of:
 
 ## Contact
 Do you want to get in touch with us?  
-Contact us on the [Bohemia Thread](https://forums.bohemia.net/forums/forum/218-arma-3/)
+Contact us on the [Bohemia Thread](https://forums.bohemia.net/forums/topic/219275-metis-marker/)
 
 ## License
 Metis Marker is licensed under Arma Public License No Derivatives ([APL-ND](https://github.com/Metis-Team/mts_marker/blob/master/LICENSE)).
+
+## Images
+<p align="center">
+    <img src="https://i.imgur.com/ZHi6e4d.jpg" width="1024">
+</p>
+<p align="center">
+    <img src="https://i.imgur.com/zhCWJij.jpg" width="1024">
+</p>
+<p align="center">
+    <img src="https://i.imgur.com/KjEGjsM.jpg" width="1024">
+</p>
+<p align="center">
+    <img src="https://i.imgur.com/18BRaIO.jpg" width="1024">
+</p>
+<p align="center">
+    <img src="https://i.imgur.com/XXuJ28E.jpg" width="1024">
+</p>
