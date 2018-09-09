@@ -186,7 +186,7 @@
     		</Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance_armored">
                 <Original>Armored Reconnaissance</Original>
-                <German>Gepanzerte Aufklärung</German>
+                <German>Panzeraufklärer</German>
     		</Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance_motorized">
                 <Original>Motorized Reconnaissance</Original>
