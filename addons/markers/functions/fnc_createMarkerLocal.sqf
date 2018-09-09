@@ -45,6 +45,7 @@ params [
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
+CHECK(!hasInterface);
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
 

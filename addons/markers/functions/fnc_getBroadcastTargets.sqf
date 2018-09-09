@@ -18,13 +18,9 @@
 
 params [["_broadcastChannel", -1, [0]]];
 
-if (is3DEN) exitWith {
-    0
-};
-
 switch (_broadcastChannel) do {
     case 0: {
-        (call CBA_fnc_players)
+        0
     };
     case 1: {
         playerSide
@@ -33,7 +29,7 @@ switch (_broadcastChannel) do {
         ((allGroups select {side _x isEqualTo playerSide}) apply {leader _x})
     };
     case 3: {
-        (units player)
+        (group player)
     };
     case 4: {
         (crew cameraOn)

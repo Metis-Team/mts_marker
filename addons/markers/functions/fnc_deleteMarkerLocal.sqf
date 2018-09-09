@@ -18,6 +18,7 @@
  */
 
 params [["_namePrefix", "", [""]]];
+CHECK(!hasInterface);
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
 //get marker set
