@@ -20,7 +20,7 @@ GVAR(iconArray) = [
     ["artillery"],
     ["artillery_sp"],
     ["mortar"],
-    ["mortar_armored", ["mortar", "armor"]],
+    ["mortar_armored"],
     ["reconnaissance"],
     ["reconnaissance_armored", ["reconnaissance", "armor"]],
     ["reconnaissance_motorized", ["reconnaissance", "motorized"]],
@@ -71,3 +71,6 @@ GVAR(echelonArray) = [
     ["army"],
     ["army_group"]
 ];
+
+//declare valid characters for the unique designation
+GVAR(validCharacters) = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
