@@ -7,6 +7,7 @@
  *
  *  Parameter(s):
  *      0: CONTROL - Map control. (Optional, default: Map control)
+ *      1: BOOLEAN - Include non-editable markers. (Optional, default: don't include)
  *
  *  Returns:
  *      Nothing.
@@ -16,16 +17,15 @@
  *
  */
 
-params [["_mapCtrl", controlNull, [controlNull]], ["_include3denMarker", false, [false]]];
+params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false, [false]]];
 CHECK(isNull _mapCtrl);
 
 //get marker prefix
-private _namePrefix = [_mapCtrl, _include3denMarker] call FUNC(getMouseOverMarkerPrefix);
+private _namePrefix = [_mapCtrl, _includeNoEditMarker] call FUNC(getMouseOverMarkerPrefix);
 CHECK(_namePrefix isEqualTo "");
 
 //get marker set
-private _markerInformation = GVAR(markerNamespace) getVariable [_namePrefix, [[]]];
-private _markerFamily = _markerInformation select 0;
+private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
 CHECK(_markerFamily isEqualTo []);
 
 private _originAlpha = markerAlpha (_markerFamily select 0);
@@ -38,10 +38,10 @@ GVAR(MarkerMoveInProgress) = true;
 
 // updating position of all markers in markerFamily while moving the marker & make marker see-through
 if (is3DEN) then {
-    GVAR(FHVars) = [_markerFamily, _mapCtrl, _originAlpha];
+    GVAR(FHVars) = [_namePrefix, _markerFamily, _mapCtrl, _originAlpha];
     addMissionEventHandler ["EachFrame", {call FUNC(moveMarkerInProgress3DEN)}];
 } else {
     //change cursor
     _mapCtrl ctrlMapCursor ["Track", "Move"];
-    [FUNC(moveMarkerInProgress), 0, [_markerFamily, _mapCtrl, _originAlpha]] call CBA_fnc_addPerFrameHandler;
+    [FUNC(moveMarkerInProgress), 0, [_namePrefix, _markerFamily, _mapCtrl, _originAlpha]] call CBA_fnc_addPerFrameHandler;
 };
