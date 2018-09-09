@@ -21,8 +21,9 @@ class Extended_DisplayLoad_EventHandlers {
     class RscDiary {
         GVAR(briefingDisplayOpened) = QUOTE(\
             params ['_display'];\
-            CHECK(!((ctrlIDD _display) isEqualTo 52));\
-            _display call (uiNamespace getVariable 'cba_events_fnc_initDisplayCurator');\
+            if ((ctrlIDD _display) in [ARR_2(MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVER_DISPLAY)]) then {\
+                 _display call (uiNamespace getVariable 'cba_events_fnc_initDisplayCurator');\
+            };\
         );
     };
 };

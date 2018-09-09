@@ -3,7 +3,7 @@
  *  Author: PhILoX, Timi007
  *
  *  Description:
- *      Deletes marker.
+ *      Deletes marker based on channel of origin.
  *
  *  Parameter(s):
  *      0: STRING - Marker prefix.
@@ -17,24 +17,15 @@
  */
 
 params [["_namePrefix", "", [""]]];
-CHECK(_namePrefix isEqualTo "");
 
-//get marker set
-private _markerInformation = GVAR(markerNamespace) getVariable [_namePrefix, [[]]];
-private _markerFamily = _markerInformation select 0;
+CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
-//delete every marker in the set & delete it in the namespace
-if !(_markerFamily isEqualTo []) then {
-    {
-        deleteMarker _x;
-    } count _markerFamily;
-    GVAR(markerNamespace) setVariable [_namePrefix, nil, true];
-};
+//get channel ID from marker prefix
+private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
-if (is3DEN) then {
-    //delete 3DEN marker from attribute
-    private _3denData = "Scenario" get3DENMissionAttribute QGVAR(3denData);
-    private _index = _3denData findif {(_x select 0) isEqualTo _namePrefix};
-    _3denData deleteAt _index;
-    set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
-};
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Invalid marker prefix. No MTS marker"));
+
+//broadcast marker depending on channel ID
+[_namePrefix] remoteExecCall [QFUNC(deleteMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+
+nil
