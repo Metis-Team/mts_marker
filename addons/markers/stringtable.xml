@@ -13,8 +13,8 @@
 			<Key ID="str_mts_markers_ui_general_headTXT">
 				<Original>UNIT MARKER</Original>
 				<German>EINHEITEN MARKER</German>
-				<Chinesesimp>军事单位</Chinesesimp>
 				<Chinese>軍事單位</Chinese>
+				<Chinesesimp>军事单位</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_general_previewTXT">
 				<Original>Preview</Original>
@@ -67,14 +67,14 @@
 			<Key ID="str_mts_markers_ui_general_higherTXT">
 				<Original>Higher Formation:</Original>
 				<German>Ü. Führungsebene:</German>
-				<Chinese>隸屬指揮體系:</Chinese>
-				<Chinesesimp>隶属指挥体系:</Chinesesimp>
+				<Chinese>上級單位:</Chinese>
+				<Chinesesimp>上级单位:</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_general_uniqueTXT">
 				<Original>Unique Designation:</Original>
 				<German>Eind. Kennung:</German>
-				<Chinese>唯一指示符:</Chinese>
-				<Chinesesimp>唯一指示符:</Chinesesimp>
+				<Chinese>其它文字備註:</Chinese>
+				<Chinesesimp>其它文字备注:</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_general_channelTXT">
 				<Original>Channel:</Original>
@@ -105,8 +105,8 @@
 			<Key ID="str_mts_markers_ui_identity_assumed_friend">
 				<Original>Assumed Friend</Original>
 				<German>Vermutlich Freund</German>
-				<Chinese>計劃、預期、疑似</Chinese>
-				<Chinesesimp>计划、预期、疑似</Chinesesimp>
+				<Chinese>計劃 / 預期 / 疑似</Chinese>
+				<Chinesesimp>计划 / 预期 / 疑似</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_identity_hostile">
 				<Original>Hostile</Original>
@@ -117,8 +117,8 @@
 			<Key ID="str_mts_markers_ui_identity_suspect">
 				<Original>Suspect</Original>
 				<German>Verdächtig</German>
-				<Chinese>計劃、預期、疑似</Chinese>
-				<Chinesesimp>计划、预期、疑似</Chinesesimp>
+				<Chinese>計劃 / 預期 / 疑似</Chinese>
+				<Chinesesimp>计划 / 预期 / 疑似</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_identity_neutral">
 				<Original>Neutral</Original>
@@ -135,8 +135,8 @@
 			<Key ID="str_mts_markers_ui_identity_pending">
 				<Original>Pending</Original>
 				<German>Noch unbestimmt</German>
-				<Chinese>計劃、預期、疑似</Chinese>
-				<Chinesesimp>计划、预期、疑似</Chinesesimp>
+				<Chinese>計劃 / 預期 / 疑似</Chinese>
+				<Chinesesimp>计划 / 预期 / 疑似</Chinesesimp>
 			</Key>
 		</Container>
 		<Container name="UI_icon">
@@ -179,8 +179,8 @@
 			<Key ID="str_mts_markers_ui_icon_anti_armor_armored">
 				<Original>Armored Anti Armor</Original>
 				<German>Gepanzerte Panzerabwehr</German>
-				<Chinese>裝甲式反裝甲</Chinese>
-				<Chinesesimp>装甲式反装甲</Chinesesimp>
+				<Chinese>機械化反裝甲</Chinese>
+				<Chinesesimp>机械化反装甲</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_icon_anti_armor_motorized">
 				<Original>Motorized Anti Armor</Original>
@@ -209,14 +209,14 @@
 			<Key ID="str_mts_markers_ui_icon_fixed_wing">
 				<Original>Fixed Wing</Original>
 				<German>Starrflügler</German>
-				<Chinese>固定翼</Chinese>
-				<Chinesesimp>固定翼</Chinesesimp>
+				<Chinese>定翼機</Chinese>
+				<Chinesesimp>定翼机</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_icon_rotary_wing">
 				<Original>Rotary Wing</Original>
 				<German>Drehflügler</German>
-				<Chinese>旋翼</Chinese>
-				<Chinesesimp>旋翼</Chinesesimp>
+				<Chinese>旋翼機</Chinese>
+				<Chinesesimp>旋翼机</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_icon_uav">
 				<Original>Unmanned Systems</Original>
@@ -263,8 +263,8 @@
 			<Key ID="str_mts_markers_ui_icon_mortar_armored">
 				<Original>Tracked Mortar</Original>
 				<German>Panzermörser</German>
-				<Chinese>履帶式迫擊炮</Chinese>
-				<Chinesesimp>履带式迫击炮</Chinesesimp>
+				<Chinese>機械化迫擊炮</Chinese>
+				<Chinesesimp>机械化迫击炮</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_icon_reconnaissance">
 				<Original>Reconnaissance</Original>
@@ -287,8 +287,8 @@
 			<Key ID="str_mts_markers_ui_icon_surface_surface_missile">
 				<Original>Surface-Surface Missile</Original>
 				<German>Startgerät Boden-Boden-Flugkörper</German>
-				<Chinese>攻陸導彈</Chinese>
-				<Chinesesimp>攻陆导弹</Chinesesimp>
+				<Chinese>面對面導彈</Chinese>
+				<Chinesesimp>面对面导弹</Chinesesimp>
 			</Key>
 			<Key ID="str_mts_markers_ui_icon_cbrn">
 				<Original>CBRN Defence</Original>
@@ -517,8 +517,8 @@
 			<Key ID="str_mts_markers_ui_hint_character_invalid">
 				<Original>The unique formation has invalid characters! Allowed characters: A-Z and 0-9</Original>
 				<German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z und 0-9</German>
-				<Chinese>唯一指示符被輸入錯誤的值! 只允許以下字元: A-Z與0-9</Chinese>
-				<Chinesesimp>唯一指示符被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
+				<Chinese>其它文字備註被輸入錯誤的值! 只允許以下字元: A-Z與0-9</Chinese>
+				<Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
 			</Key>
 		</Container>
 		<Container name="CBA_Keybinding">
