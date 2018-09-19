@@ -68,6 +68,38 @@
     [0xF0, [false, false, true]] //Alt + LMouse
 ] call CBA_fnc_addKeybind;
 
+[
+    LLSTRING(cba_keybinding_categoryName),
+    QGVAR(copy_marker),
+    LLSTRING(cba_keybinding_copy),
+    {
+        if (HAS_MAP) then {
+            private _curMapDisplay = call FUNC(getDisplay);
+            if (!isNull _curMapDisplay) then {
+                [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(copyMarker);
+            };
+        };
+    },
+    "",
+    [0x2E, [false, true, false]] //Strg + C
+] call CBA_fnc_addKeybind;
+
+[
+    LLSTRING(cba_keybinding_categoryName),
+    QGVAR(paste_marker),
+    LLSTRING(cba_keybinding_paste),
+    {
+        if (HAS_MAP) then {
+            private _curMapDisplay = call FUNC(getDisplay);
+            if (!isNull _curMapDisplay) then {
+                [_curMapDisplay displayCtrl MAP_CTRL, getMousePosition] call FUNC(pasteMarker);
+            };
+        };
+    },
+    "",
+    [0x2F, [false, true, false]] //Strg + V
+] call CBA_fnc_addKeybind;
+
 //add 3DEN key eventhandlers because CBA keybindung doesn't work in 3DEN editor
 if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
     private _map3denDisplay = findDisplay MAP_3DEN_DISPLAY;
@@ -134,6 +166,30 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
     _map3denDisplay displayAddEventHandler ["MouseButtonUp", {
         if (GVAR(MarkerMoveInProgress)) then {
             GVAR(MarkerMoveInProgress) = false;
+        };
+    }];
+
+    _map3denDisplay displayAddEventHandler ["KeyDown", {
+        params ["_control", "_key", "_shift", "_ctrl", "_alt"];
+        if (_key isEqualTo 0x2E && _shift && !_ctrl && !_alt) then { //Strg + C
+            if (IN_3DEN_MAP) then {
+                private _curMapDisplay = call FUNC(getDisplay);
+                if (!isNull _curMapDisplay) then {
+                    [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(copyMarker);
+                };
+            };
+        };
+
+    }];
+    _map3denDisplay displayAddEventHandler ["KeyDown", {
+        params ["_control", "_key", "_shift", "_ctrl", "_alt"];
+        if (_key isEqualTo 0x2F && _shift && !_ctrl && !_alt) then { //Shift + V
+            if (IN_3DEN_MAP) then {
+                private _curMapDisplay = call FUNC(getDisplay);
+                if (!isNull _curMapDisplay) then {
+                    [_curMapDisplay displayCtrl MAP_CTRL, getMousePosition] call FUNC(pasteMarker);
+                };
+            };
         };
     }];
 };

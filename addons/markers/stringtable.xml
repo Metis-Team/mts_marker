@@ -374,6 +374,14 @@
     			<Original>Move Marker</Original>
                 <German>Marker verschieben</German>
     		</Key>
+            <Key ID="str_mts_markers_cba_keybinding_copy">
+                <Original>Copy Marker</Original>
+                <German>Marker kopieren</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_keybinding_paste">
+                <Original>Paste Marker</Original>
+                <German>Marker einfügen</German>
+            </Key>
     	</Container>
 	</Package>
 </Project>

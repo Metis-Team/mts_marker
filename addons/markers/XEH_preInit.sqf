@@ -24,3 +24,5 @@ if (is3DEN) then {
         _x call FUNC(createMarkerLocal);
     } forEach ("Scenario" get3DENMissionAttribute QGVAR(3denData));
 };
+
+GVAR(clipboard) = "";
