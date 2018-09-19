@@ -228,6 +228,38 @@
                 <Original>Transportation</Original>
                 <German>Transport</German>
     		</Key>
+            <Key ID="str_mts_markers_ui_icon_amphibious_infantry">
+                <Original>Amphibious Infantry</Original>
+                <German>Amphibische Infanterie</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_amphibious_armor">
+                <Original>Amphibious Armor</Original>
+                <German>Amphibische Panzer</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_amphibious_reconnaissance">
+                <Original>Amphibious Reconnaissance</Original>
+                <German>Amphibische Aufklärung</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_naval">
+                <Original>Naval</Original>
+                <German>Marine</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_combined_arms">
+                <Original>Combined Arms</Original>
+                <German>Verbundene Kräfte</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_joint_fire_support">
+                <Original>Joint Fire Support</Original>
+                <German>Streitkräftegemeinsame tak. Feuerunterstützung</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_special_forces">
+                <Original>Special Forces</Original>
+                <German>Spezialkräfte der Landstreitkräfte</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_special_operation_forces">
+                <Original>Special Operation Forces</Original>
+                <German>Spezialkräfte</German>
+            </Key>
     	</Container>
     	<Container name="UI_mod1">
             <Key ID="str_mts_markers_ui_mod1_empty">
@@ -258,6 +290,14 @@
     			<Original>Sniper</Original>
     			<German>Scharfschütze</German>
     		</Key>
+            <Key ID="str_mts_markers_ui_mod1_headquarters">
+                <Original>Headquarters (Element)</Original>
+                <German>Führungseinrichtung/Stab</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_mod1_naval_top">
+                <Original>Naval</Original>
+                <German>Marine-</German>
+            </Key>
     	</Container>
     	<Container name="UI_mod2">
             <Key ID="str_mts_markers_ui_mod2_empty">
