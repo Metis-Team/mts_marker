@@ -55,9 +55,6 @@ if (_scale <= 0) then {
     _scale = MARKER_SCALE;
 };
 
-//for marker editing
-private _dashedFrameshape = false;
-
 //create frameshape marker
 private _frameshapetype = format ["mts_%1_frameshape", _frameshape];
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
@@ -68,9 +65,13 @@ _markerFrame setMarkerSizeLocal [_scale, _scale];
 private _markerFamily = [_markerFrame];
 
 //Reset exeptions
-if (_frameshape isEqualTo "bludash") then {_frameshape = "blu"; _dashedFrameshape = true;};
-if (_frameshape isEqualTo "reddash") then {_frameshape = "red"; _dashedFrameshape = true;};
-if (_frameshape isEqualTo "unkdash") then {_frameshape = "unk"; _dashedFrameshape = true;};
+private _dashedFrameshape = false;
+
+if ((count _frameshape) > 3) then {
+    _frameshape = _frameshape select [0, 3];
+    CHECK(_frameshape isEqualTo "neu");
+    _dashedFrameshape = true;
+};
 
 //add color to the frameshape
 private _frameshapecolor = format ["mts_%1_color", _frameshape];

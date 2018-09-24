@@ -17,7 +17,10 @@ if (isServer || (!isMultiplayer)) then {
 CHECK(!hasInterface);
 
 #include "initKeybinds.hpp"
+#include "initSettings.hpp"
 #include "initMarkerVariables.hpp"
+
+GVAR(lastSelection) = [];
 
 if (is3DEN) then {
     {

@@ -94,6 +94,19 @@ if (_isForMarkerCreation) then {
         [_editMarkerNamePrefix] call FUNC(deleteMarker);
     };
 
+    if (GVAR(saveLastSelection)) then {
+        private _frameshapeIdentity = _frameshape;
+        private _dashedFrameshape = false;
+
+        if ((count _frameshapeIdentity) > 3) then {
+            _frameshapeIdentity = _frameshapeIdentity select [0, 3];
+            CHECK(_frameshapeIdentity isEqualTo "neu");
+            _frameshapeIdentity = true;
+        };
+
+        GVAR(lastSelection) = [_frameshapeIdentity, _dashedFrameshape, _modifier, [_grpsize, _reinforced, _reduced]];
+    };
+
     [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
     _mainDisplay closeDisplay 1;
 } else {

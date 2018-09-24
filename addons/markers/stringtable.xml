@@ -375,5 +375,19 @@
                 <German>Marker verschieben</German>
     		</Key>
     	</Container>
+        <Container name="CBA_Settings">
+            <Key ID="str_mts_markers_cba_settings_categoryName">
+                <Original>Metis Marker</Original>
+                <German>Metis Marker</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_save_last">
+                <Original>Save last selection</Original>
+                <German>Letzte Auswahl speichern</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_save_last_tooltip">
+                <Original>Enables/Disables the saving of the last selected icon and modifier.</Original>
+                <German>Aktiviert das Speichern der letzten ausgewählten Grundzeichen und Ergänzungszeichen.</German>
+            </Key>
+        </Container>
 	</Package>
 </Project>
