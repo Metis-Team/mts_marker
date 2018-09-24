@@ -353,11 +353,13 @@
                 <German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z und 0-9</German>
     		</Key>
     	</Container>
+        <Container name="CBA">
+            <Key ID="str_mts_markers_cba_category_name">
+                <Original>Metis Marker</Original>
+                <German>Metis Marker</German>
+            </Key>
+        </Container>
         <Container name="CBA_Keybinding">
-            <Key ID="str_mts_markers_cba_keybinding_categoryName">
-    			<Original>Metis Marker</Original>
-				<German>Metis Marker</German>
-    		</Key>
 			<Key ID="str_mts_markers_cba_keybinding_open_window">
     			<Original>Open Marker Interface</Original>
                 <German>Marker Interface öffnen</German>
@@ -376,10 +378,6 @@
     		</Key>
     	</Container>
         <Container name="CBA_Settings">
-            <Key ID="str_mts_markers_cba_settings_categoryName">
-                <Original>Metis Marker</Original>
-                <German>Metis Marker</German>
-            </Key>
             <Key ID="str_mts_markers_cba_settings_save_last">
                 <Original>Save last selection</Original>
                 <German>Letzte Auswahl speichern</German>

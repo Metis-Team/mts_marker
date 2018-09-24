@@ -1,5 +1,5 @@
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(create_dialog),
     LLSTRING(cba_keybinding_open_window),
     {
@@ -15,7 +15,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(delete_marker),
     LLSTRING(cba_keybinding_delete),
     {
@@ -33,7 +33,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(edit_marker),
     LLSTRING(cba_keybinding_edit),
     {
@@ -51,7 +51,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(move_marker),
     LLSTRING(cba_keybinding_move),
     {

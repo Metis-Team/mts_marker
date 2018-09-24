@@ -2,7 +2,7 @@
     QGVAR(saveLastSelection),
     "CHECKBOX",
     [LLSTRING(cba_settings_save_last), LLSTRING(cba_settings_save_last_tooltip)],
-    LLSTRING(cba_settings_categoryName),
+    LLSTRING(cba_category_name),
     false,
     0,
     {
