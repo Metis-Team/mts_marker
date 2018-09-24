@@ -6,7 +6,9 @@
  *      Adds the right picture to the different preview picture layers for comboboxes.
  *
  *  Parameter(s):
- *      0: STRING - Frameshape/identity.
+ *      0: ARRAY - Frameshape.
+ *          0: STRING - Identity (blu, red, neu, unk).
+ *          1: BOOLEAN - Dashed (e.g. supect).
  *      1: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
@@ -20,14 +22,18 @@
  *      Nothing.
  *
  *  Example:
- *      ["blu", [4,0,0], [5, false, true]] call mts_markers_fnc_setMarkerPreview
+ *      [["blu", false], [4,0,0], [5, false, true]] call mts_markers_fnc_setMarkerPreview
  *
  */
 
 params [
-    ["_frameshape", "", [""]],
+    ["_frameshape", ["",false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3]
+];
+_frameshape params [
+    ["_identity", "", [""]],
+    ["_dashedFrameshape", false, [false]]
 ];
 _size params [
     ["_grpsize", 0, [0]],
@@ -35,7 +41,7 @@ _size params [
     ["_reduced", false, [false]]
 ];
 
-CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
+CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _previewIdentityCtrl = _mainDisplay displayCtrl PREVIEW_LYR_IDENTITY;
@@ -51,35 +57,36 @@ private _previewSizeModCtrl = _mainDisplay displayCtrl PREVIEW_LYR_SIZE_MOD;
     _x ctrlSetText "";
 } count [_previewIdentityCtrl, _previewMod1Ctrl, _previewMod2Ctrl, _previewMod3Ctrl, _previewMod4Ctrl, _previewEchelonCtrl, _previewSizeModCtrl];
 
-private _framshapePrefix = _frameshape;
-if (_frameshape isEqualTo "bludash") then {_framshapePrefix = "blu";};
-if (_frameshape isEqualTo "reddash") then {_framshapePrefix = "red";};
-if (_frameshape isEqualTo "unkdash") then {_framshapePrefix = "unk";};
+private _identityComplete = if (_dashedFrameshape) then {
+    format ["%1dash", _identity]
+} else {
+    _identity
+};
 
 //set selected identity to corresponding layer
-_previewIdentityCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%2_frameshape_preview.paa), _framshapePrefix, _frameshape]);
+_previewIdentityCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%2_frameshape_preview.paa), _identity, _identityComplete]);
 
 //set all modifiers to corresponding layer
 private _allModifiers = _modifier call FUNC(getAllModifiers);
 if !(_allModifiers isEqualTo []) then {
     private _previewModCtrlArray = [_previewMod1Ctrl, _previewMod2Ctrl, _previewMod3Ctrl, _previewMod4Ctrl];
     for "_selectPos" from 0 to ((count _allModifiers) - 1) step 1 do {
-        (_previewModCtrlArray select _selectPos) ctrlSetText (format [QPATHTOF(data\%1\mod\mts_markers_%1_mod_%2.paa), _framshapePrefix, (_allModifiers select _selectPos)]);
+        (_previewModCtrlArray select _selectPos) ctrlSetText (format [QPATHTOF(data\%1\mod\mts_markers_%1_mod_%2.paa), _identity, (_allModifiers select _selectPos)]);
     };
 };
 
 //set echelon to corresponding layer
 if (_grpsize > 0) then {
-    _previewEchelonCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_%2.paa), _framshapePrefix, _grpsize]);
+    _previewEchelonCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_%2.paa), _identity, _grpsize]);
 };
 
 //set echelon modifier to corresponding layer
 if ((_reinforced) && (!_reduced)) then {
-    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced.paa), _framshapePrefix]);
+    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced.paa), _identity]);
 };
 if ((_reduced) && (!_reinforced)) then {
-    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reduced.paa), _framshapePrefix]);
+    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reduced.paa), _identity]);
 };
 if ((_reinforced) && (_reduced)) then {
-    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced_reduced.paa), _framshapePrefix]);
+    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced_reduced.paa), _identity]);
 };

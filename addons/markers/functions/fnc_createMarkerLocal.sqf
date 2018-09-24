@@ -11,7 +11,9 @@
  *      0: STRING - Unique marker prefix. Format: mtsmarker#<Random Number>/<Player UID>/<Channel ID>
  *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID)
  *      2: ARRAY - Position where the marker will be placed.
- *      3: STRING - Frameshape of the marker (blu, bludash, red, reddash, neu, unk, unkdash).
+ *      3: STRING/ARRAY - Frameshape of the marker (For string: blu, bludash, red, reddash, neu, unk, unkdash).
+ *          0: STRING - Identity (blu, red, neu, unk).
+ *          1: BOOLEAN - Dashed (e.g. supect).
  *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
@@ -28,7 +30,7 @@
  *     STRING - Marker prefix.
  *
  *  Example:
- *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], "blu", [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarkerLocal
+ *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], ["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarkerLocal
  *
  */
 
@@ -36,7 +38,7 @@ params [
     ["_namePrefix", "", [""]],
     ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
-    ["_frameshape", "", [""]],
+    ["_frameshape", ["", false], ["", []]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_textleft", [], [[]]],
@@ -47,7 +49,23 @@ _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced"
 
 CHECK(!hasInterface);
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
-CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
+
+//support old frameshape format
+if (_frameshape isEqualType "") then {
+    private _dashedFrameshape = false;
+
+    if ((count _frameshape) > 3) then {
+        _frameshape = _frameshape select [0, 3];
+        CHECK(_frameshape isEqualTo "neu");
+        _dashedFrameshape = true;
+    };
+
+    _frameshape = [_frameshape, _dashedFrameshape];
+};
+
+CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
+
+_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
 
 //prevent unscaled markers
 if (_scale <= 0) then {
@@ -56,7 +74,12 @@ if (_scale <= 0) then {
 };
 
 //create frameshape marker
-private _frameshapetype = format ["mts_%1_frameshape", _frameshape];
+private _identityComplete = if (_dashedFrameshape) then {
+    format ["%1dash", _identity]
+} else {
+    _identity
+};
+private _frameshapetype = format ["mts_%1_frameshape", _identityComplete];
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
 _markerFrame setMarkerTypeLocal _frameshapetype;
 _markerFrame setMarkerSizeLocal [_scale, _scale];
@@ -64,22 +87,13 @@ _markerFrame setMarkerSizeLocal [_scale, _scale];
 //create array with every marker name in the set. Minimum is the frameshape
 private _markerFamily = [_markerFrame];
 
-//Reset exeptions
-private _dashedFrameshape = false;
-
-if ((count _frameshape) > 3) then {
-    _frameshape = _frameshape select [0, 3];
-    CHECK(_frameshape isEqualTo "neu");
-    _dashedFrameshape = true;
-};
-
 //add color to the frameshape
-private _frameshapecolor = format ["mts_%1_color", _frameshape];
+private _frameshapecolor = format ["mts_%1_color", _identity];
 _markerFrame setMarkerColorLocal _frameshapecolor;
 
 //create group size marker
 if (_grpsize > 0) then {
-    private _unitsize = format ["mts_%1_size_%2", _frameshape, _grpsize];
+    private _unitsize = format ["mts_%1_size_%2", _identity, _grpsize];
     private _markerSize = createMarkerLocal [format ["%1_size", _namePrefix], _pos];
     _markerSize setMarkerTypeLocal _unitsize;
     _markerSize setMarkerSizeLocal [_scale, _scale];
@@ -89,7 +103,7 @@ if (_grpsize > 0) then {
 
 //creates (-),(+),(±) marker
 if ((_reinforced) && !(_reduced)) then {
-    private _unitsizeMod = format ["mts_%1_size_reinforced", _frameshape];
+    private _unitsizeMod = format ["mts_%1_size_reinforced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
     _markerSizeMod setMarkerSizeLocal [_scale, _scale];
@@ -97,7 +111,7 @@ if ((_reinforced) && !(_reduced)) then {
     _markerFamily pushBack _markerSizeMod;
 };
 if ((_reduced) && !(_reinforced)) then {
-    private _unitsizeMod = format ["mts_%1_size_reduced", _frameshape];
+    private _unitsizeMod = format ["mts_%1_size_reduced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
     _markerSizeMod setMarkerSizeLocal [_scale, _scale];
@@ -105,7 +119,7 @@ if ((_reduced) && !(_reinforced)) then {
     _markerFamily pushBack _markerSizeMod;
 };
 if ((_reinforced) && (_reduced)) then {
-    private _unitsizeMod = format ["mts_%1_size_reinforced_reduced", _frameshape];
+    private _unitsizeMod = format ["mts_%1_size_reinforced_reduced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
     _markerSizeMod setMarkerSizeLocal [_scale, _scale];
@@ -115,7 +129,7 @@ if ((_reinforced) && (_reduced)) then {
 
 //create all modifiers
 {
-    private _markertype = format ["mts_%1_mod_%2", _frameshape, _x];
+    private _markertype = format ["mts_%1_mod_%2", _identity, _x];
     private _markerMod = createMarkerLocal [format ["%1_%2", _namePrefix, _x], _pos];
     _markerMod setMarkerTypeLocal _markertype;
     _markerMod setMarkerSizeLocal [_scale, _scale];
@@ -165,7 +179,7 @@ if ((count _textLeft) > 0) then {
 
     for "_numIndex" from ((count _textLeft) -1) to 0 step -1 do {
         private _num = _textLeft select _numIndex;
-        private _numType = format ["mts_%1_num_%2_%3", _frameshape, _numPos, _num];
+        private _numType = format ["mts_%1_num_%2_%3", _identity, _numPos, _num];
         private _markerNumLeft = createMarkerLocal [format ["%1_num_%2_%3", _namePrefix, _numPos, _num], _pos];
         _markerNumLeft setMarkerTypeLocal _numType;
         _markerNumLeft setMarkerSizeLocal [_scale, _scale];
@@ -179,7 +193,7 @@ if ((count _textLeft) > 0) then {
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save marker parameters for editing purposes
-    private _markerParameter = [_frameshape, _dashedFrameshape, _modifier, _size, _textleft, _textright, _broadcastChannel];
+    private _markerParameter = [_frameshape, _modifier, _size, _textleft, _textright, _broadcastChannel];
     GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter], true];
 
     if (is3DEN) then {

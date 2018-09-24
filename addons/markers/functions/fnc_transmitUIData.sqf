@@ -21,15 +21,12 @@ params [["_isForMarkerCreation", true, [true]]];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
-//get frameshape
-private _frameshape = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
-CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
+//get identity
+private _identity = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
+CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
 //check if frameshape is dashed
-private _suspectedCbValue = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
-if (_suspectedCbValue) then {
-    _frameshape = format ["%1dash", _frameshape];
-};
+private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
 
 private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
 private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
@@ -95,20 +92,10 @@ if (_isForMarkerCreation) then {
     };
 
     if (GVAR(saveLastSelection)) then {
-        private _frameshapeIdentity = _frameshape;
-        private _dashedFrameshape = false;
-
-        if ((count _frameshapeIdentity) > 3) then {
-            _frameshapeIdentity = _frameshapeIdentity select [0, 3];
-            CHECK(_frameshapeIdentity isEqualTo "neu");
-            _frameshapeIdentity = true;
-        };
-
-        GVAR(lastSelection) = [_frameshapeIdentity, _dashedFrameshape, _modifier, [_grpsize, _reinforced, _reduced]];
+        GVAR(lastSelection) = [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced]];
     };
-
-    [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
+    [_pos, _broadcastChannel, !is3DEN, [_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
     _mainDisplay closeDisplay 1;
 } else {
-    [_frameshape, _modifier, [_grpsize, _reinforced, _reduced]] call FUNC(setMarkerPreview);
+    [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced]] call FUNC(setMarkerPreview);
 };

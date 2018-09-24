@@ -158,7 +158,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     private _markerParameter = [];
     if (GVAR(saveLastSelection) && (_namePrefix isEqualTo "")) then {
         if (GVAR(lastSelection) isEqualTo []) then {
-            _markerParameter set [0, "blu"];
+            _markerParameter set [0, ["blu", false]];
         } else {
             _markerParameter = GVAR(lastSelection);
         };
@@ -180,8 +180,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     CHECK(_markerParameter isEqualTo []);
 
     _markerParameter params [
-        ["_frameshape", "", [""]],
-        ["_dashedFrameshape", false, [false]],
+        ["_frameshape", ["",false], [[]]],
         ["_modifier", [0,0,0], [[]], 3],
         ["_size", [0,false,false], [[]], 3],
         ["_textleft", [], [[]]],
@@ -219,8 +218,8 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     };
 
     //select right identity in the dialog & update preview
-    _suspectedCbCtrl cbSetChecked _dashedFrameshape;
-    [_frameshape] call FUNC(identityButtonsAction);
+    _suspectedCbCtrl cbSetChecked (_frameshape select 1);
+    [(_frameshape select 0)] call FUNC(identityButtonsAction);
 };
 
 //call same ui events that CBA is adding to the map display. Thanks to commy2 for this work-around!
