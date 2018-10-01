@@ -6,6 +6,7 @@ MARKER(unk,mod,reconnaissance);
 MARKER(unk,mod,signal_unit);
 MARKER(unk,mod,anti_armor);
 MARKER(unk,mod,rotary_wing);
+MARKER(unk,mod,uav);
 MARKER(unk,mod,artillery);
 MARKER(unk,mod,artillery_sp);
 MARKER(unk,mod,mortar);
