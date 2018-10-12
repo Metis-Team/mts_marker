@@ -32,7 +32,15 @@ GVAR(iconArray) = [
     ["combat_service_support"],
     ["medical"],
     ["supply"],
-    ["transportation"]
+    ["transportation"],
+    ["amphibious_infantry", ["amphibious", "infantry"]],
+    ["amphibious_armor", ["amphibious", "armor"]],
+    ["amphibious_reconnaissance", ["amphibious", "reconnaissance"]],
+    ["naval"],
+    ["combined_arms"],
+    ["joint_fire_support"],
+    ["special_forces"],
+    ["special_operation_forces"]
 ];
 
 GVAR(mod1Array) = [
@@ -42,7 +50,9 @@ GVAR(mod1Array) = [
     ["maintenance_top"],
     ["multiple_rocket_launcher"],
     ["single_rocket_launcher"],
-    ["sniper"]
+    ["sniper"],
+    ["headquarters"],
+    ["naval_top"]
 ];
 
 GVAR(mod2Array) = [
