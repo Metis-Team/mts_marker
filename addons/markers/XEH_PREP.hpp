@@ -1,3 +1,4 @@
+PREP(copyMarker);
 PREP(createMarker);
 PREP(createMarkerLocal);
 PREP(deleteMarker);
@@ -15,6 +16,7 @@ PREP(isMtsMarker);
 PREP(moveMarkerInProgress);
 PREP(moveMarkerInProgress3DEN);
 PREP(moveMarkerMouseDown);
+PREP(pasteMarker);
 PREP(setMarkerPos);
 PREP(setMarkerPosLocal);
 PREP(setMarkerPreview);

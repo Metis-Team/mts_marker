@@ -594,6 +594,14 @@
                 <Chinese>移動軍事符號</Chinese>
                 <Chinesesimp>移动军事符号</Chinesesimp>
             </Key>
+            <Key ID="str_mts_markers_cba_keybinding_copy">
+                <Original>Copy Marker</Original>
+                <German>Marker kopieren</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_keybinding_paste">
+                <Original>Paste Marker</Original>
+                <German>Marker einfügen</German>
+            </Key>
         </Container>
         <Container name="CBA_Settings">
             <Key ID="str_mts_markers_cba_settings_save_last">

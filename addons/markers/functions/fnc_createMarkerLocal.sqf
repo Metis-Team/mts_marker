@@ -193,7 +193,7 @@ if ((count _textLeft) > 0) then {
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save marker parameters for editing purposes
-    private _markerParameter = [_frameshape, _modifier, _size, _textleft, _textright, _broadcastChannel];
+    private _markerParameter = [_frameshape, _modifier, _size, _textleft, _textright, _broadcastChannel, _scale];
     GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter], true];
 
     if (is3DEN) then {
