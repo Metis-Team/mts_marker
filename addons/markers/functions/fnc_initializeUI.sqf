@@ -127,8 +127,7 @@ private _setPosAndPrefix = {
         _pos = _mapCtrl ctrlMapScreenToWorld _mousePos;
     };
 
-    CHECK(isNil "_pos");
-    CHECK(isNull _mainDisplay);
+    CHECK(isNil "_pos" || isNull _mainDisplay);
     private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
     _okBtnCtrl setVariable [QGVAR(editMarkerNamePrefix), _namePrefix];
     _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), _pos];
