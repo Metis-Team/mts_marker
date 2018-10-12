@@ -9,7 +9,7 @@
  *      0: ARRAY - Position where the marker will be placed.
  *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
  *      2: BOOLEAN - Is the marker editable.
- *      3: STRING/ARRAY - Frameshape of the marker (For string: blu, bludash, red, reddash, neu, unk, unkdash).
+ *      3: ARRAY - Frameshape of the marker (For string (deprecated): blu, bludash, red, reddash, neu, unk, unkdash).
  *          0: STRING - Identity (blu, red, neu, unk).
  *          1: BOOLEAN - Dashed (e.g. supect).
  *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
