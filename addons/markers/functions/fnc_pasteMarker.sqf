@@ -29,3 +29,4 @@ CHECK(_markerInformation isEqualTo []);
 private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 
 [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, _size, _textLeft, _textRight, _scale] call FUNC(createMarker);
+nil
