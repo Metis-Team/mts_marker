@@ -50,8 +50,6 @@ private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
 //chose where the data will be transmited
 scopeName "main";
 if (_isForMarkerCreation) then {
-    private ["_broadcastChannel"];
-
     //get the text that will be to the right of the marker
     private _textright = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
 
@@ -73,15 +71,15 @@ if (_isForMarkerCreation) then {
     private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
     private _pos = _okBtnCtrl getVariable [QGVAR(createMarkerMousePosition), [0,0]];
 
-    call {
+    private _broadcastChannel = call {
         if (is3DEN) exitWith {
-            _broadcastChannel = 0;
+            0
         };
         if !(isMultiplayer) exitWith {
-            _broadcastChannel = currentChannel;
+            -1
         };
         private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
-        _broadcastChannel = _channelCtrl lbValue (lbCurSel _channelCtrl);
+        _channelCtrl lbValue (lbCurSel _channelCtrl)
     };
     setCurrentChannel _broadcastChannel;
 
