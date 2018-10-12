@@ -81,7 +81,7 @@
         };
     },
     "",
-    [0x2E, [false, true, false]] //Strg + C
+    [0x2E, [false, true, false]] //Ctrl + C
 ] call CBA_fnc_addKeybind;
 
 [
@@ -97,7 +97,7 @@
         };
     },
     "",
-    [0x2F, [false, true, false]] //Strg + V
+    [0x2F, [false, true, false]] //Ctrl + V
 ] call CBA_fnc_addKeybind;
 
 //add 3DEN key eventhandlers because CBA keybindung doesn't work in 3DEN editor
@@ -171,7 +171,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
 
     _map3denDisplay displayAddEventHandler ["KeyDown", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
-        if (_key isEqualTo 0x2E && _shift && !_ctrl && !_alt) then { //Strg + C
+        if (_key isEqualTo 0x2E && _shift && !_ctrl && !_alt) then { //Shift + C
             if (IN_3DEN_MAP) then {
                 private _curMapDisplay = call FUNC(getDisplay);
                 if (!isNull _curMapDisplay) then {

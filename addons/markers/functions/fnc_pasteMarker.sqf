@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Creates marker from previosly saved marker nameprefix in copyMarker function.
+ *      Creates marker from previously saved marker prefix in copyMarker function.
  *
  *  Parameter(s):
  *      0: CONTROL - Map control.
@@ -13,11 +13,11 @@
  *      Nothing.
  *
  *  Example:
- *     [getMousePosition] call mts_markers_fnc_pasteMarker
+ *     [(findDisplay 12) displayCtrl 51, getMousePosition] call mts_markers_fnc_pasteMarker
  *
  */
 
-params[["_mapCtrl", controlNull, [controlNull]], ["_mousepos", [0,0], [[]], [2,3]]];
+params[["_mapCtrl", controlNull, [controlNull]], ["_mousepos", [0,0], [[]], [2]]];
 
 CHECK(GVAR(clipboard) isEqualTo "");
 
@@ -30,6 +30,6 @@ if (_dashedFrameshape) then {
     _frameshape = _frameshape + "dash";
 };
 
-private _pos = _mapCtrl ctrlMapScreenToWorld [(_mousePos select 0), (_mousePos select 1)];
+private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 
 [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, _size, _textLeft, _textRight, _scale] call FUNC(createMarker);

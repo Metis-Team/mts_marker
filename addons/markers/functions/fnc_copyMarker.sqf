@@ -6,8 +6,7 @@
  *      Save valid marker nameprefix into global variable.
  *
  *  Parameter(s):
- *      0: CONTROL - Map control. (Optional, default: Map control)
- *      1: BOOLEAN - Include non-editable markers. (Optional, default: don't include)
+ *      0: CONTROL - Map control.
  *
  *  Returns:
  *      Nothing.
