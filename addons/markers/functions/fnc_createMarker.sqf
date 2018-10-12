@@ -9,7 +9,9 @@
  *      0: ARRAY - Position where the marker will be placed.
  *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
  *      2: BOOLEAN - Is the marker editable.
- *      3: STRING - Frameshape of the marker. (blu, bludash, red, reddash, neu, unk, unkdash)
+ *      3: ARRAY - Frameshape of the marker (For string (deprecated): blu, bludash, red, reddash, neu, unk, unkdash).
+ *          0: STRING - Identity (blu, red, neu, unk).
+ *          1: BOOLEAN - Dashed (e.g. supect).
  *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
@@ -26,7 +28,7 @@
  *      STRING - Marker prefix.
  *
  *  Example:
- *     _namePrefix = [[2000,1000], 1, true, "blu", [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarker
+ *     _namePrefix = [[2000,1000], 1, true, ["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarker
  *
  */
 
@@ -34,7 +36,7 @@ params [
     ["_pos", [0,0], [[]], [2,3]],
     ["_broadcastChannel", -1, [0]],
     ["_editable", true, [true]],
-    ["_frameshape", "", [""]],
+    ["_frameshape", ["",false], ["", []]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_textleft", [], [[]]],
@@ -43,7 +45,21 @@ params [
 ];
 
 CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
-CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
+
+//support old frameshape format
+if (_frameshape isEqualType "") then {
+    private _dashedFrameshape = false;
+
+    if ((count _frameshape) > 3) then {
+        _frameshape = _frameshape select [0, 3];
+        CHECK(_frameshape isEqualTo "neu");
+        _dashedFrameshape = true;
+    };
+
+    _frameshape = [_frameshape, _dashedFrameshape];
+};
+
+CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
 //get player UID
 private _playerUID = getPlayerUID player;
