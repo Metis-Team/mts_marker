@@ -24,11 +24,7 @@ CHECK(GVAR(clipboard) isEqualTo "");
 private _markerInformation = GVAR(namespace) getVariable [GVAR(clipboard), []];
 CHECK(_markerInformation isEqualTo []);
 
-(_markerInformation select 1) params ["_frameshape", "_dashedFrameshape", "_modifier", "_size", "_textLeft", "_textRight", "_broadcastChannel", "_scale"];
-
-if (_dashedFrameshape) then {
-    _frameshape = _frameshape + "dash";
-};
+(_markerInformation select 1) params ["_frameshape", "_modifier", "_size", "_textLeft", "_textRight", "_broadcastChannel", "_scale"];
 
 private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 

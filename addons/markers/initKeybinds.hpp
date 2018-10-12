@@ -69,7 +69,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(copy_marker),
     LLSTRING(cba_keybinding_copy),
     {
@@ -85,7 +85,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(paste_marker),
     LLSTRING(cba_keybinding_paste),
     {
