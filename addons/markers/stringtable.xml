@@ -561,13 +561,15 @@
                 <Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
             </Key>
         </Container>
-        <Container name="CBA_Keybinding">
-            <Key ID="str_mts_markers_cba_keybinding_categoryName">
+        <Container name="CBA">
+            <Key ID="str_mts_markers_cba_category_name">
                 <Original>Metis Marker</Original>
                 <German>Metis Marker</German>
                 <Chinese>Metis軍事符號</Chinese>
                 <Chinesesimp>Metis军事符号</Chinesesimp>
             </Key>
+        </Container>
+        <Container name="CBA_Keybinding">
             <Key ID="str_mts_markers_cba_keybinding_open_window">
                 <Original>Open Marker Interface</Original>
                 <German>Marker Interface öffnen</German>
@@ -591,6 +593,16 @@
                 <German>Marker verschieben</German>
                 <Chinese>移動軍事符號</Chinese>
                 <Chinesesimp>移动军事符号</Chinesesimp>
+            </Key>
+        </Container>
+        <Container name="CBA_Settings">
+            <Key ID="str_mts_markers_cba_settings_save_last">
+                <Original>Save last selection</Original>
+                <German>Letzte Auswahl speichern</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_save_last_tooltip">
+                <Original>Enables/Disables the saving of the last selected icon and modifier.</Original>
+                <German>Aktiviert das Speichern der letzten ausgewählten Grundzeichen und Ergänzungszeichen.</German>
             </Key>
         </Container>
     </Package>
