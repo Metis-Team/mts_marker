@@ -10,23 +10,23 @@
  *      1: ARRAY - Mouse position on map.
  *
  *  Returns:
- *      Nothing.
+ *      BOOLEAN - Successful.
  *
  *  Example:
  *     [(findDisplay 12) displayCtrl 51, getMousePosition] call mts_markers_fnc_pasteMarker
  *
  */
 
-params[["_mapCtrl", controlNull, [controlNull]], ["_mousepos", [0,0], [[]], [2]]];
+private _params = params [["_mapCtrl", controlNull, [controlNull]], ["_mousepos", [0,0], [[]], [2]]];
 
-CHECK(GVAR(clipboard) isEqualTo "");
+CHECKRET((GVAR(clipboard) isEqualTo "" || !_params), false);
 
 private _markerInformation = GVAR(namespace) getVariable [GVAR(clipboard), []];
-CHECK(_markerInformation isEqualTo []);
+CHECKRET(_markerInformation isEqualTo [], false);
 
 (_markerInformation select 1) params ["_frameshape", "_modifier", "_size", "_textLeft", "_textRight", "_broadcastChannel", "_scale"];
 
 private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 
 [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, _size, _textLeft, _textRight, _scale] call FUNC(createMarker);
-nil
+true

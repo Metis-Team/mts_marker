@@ -9,18 +9,18 @@
  *      0: CONTROL - Map control.
  *
  *  Returns:
- *      Nothing.
+ *      BOOLEAN - Successful.
  *
  *  Example:
  *      [(findDisplay 12) displayCtrl 51] call mts_markers_fnc_copyMarker
  *
  */
 
- params [["_mapCtrl", controlNull, [controlNull]]];
- CHECK(isNull _mapCtrl);
+params [["_mapCtrl", controlNull, [controlNull]]];
+CHECKRET(isNull _mapCtrl, false);
 
- private _namePrefix = [_mapCtrl, true] call FUNC(getMouseOverMarkerPrefix);
- CHECK(_namePrefix isEqualTo "");
+private _namePrefix = [_mapCtrl, true] call FUNC(getMouseOverMarkerPrefix);
+CHECKRET(_namePrefix isEqualTo "", false);
 
 GVAR(clipboard) = _namePrefix;
-nil
+true

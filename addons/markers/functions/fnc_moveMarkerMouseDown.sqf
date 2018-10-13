@@ -10,7 +10,7 @@
  *      1: BOOLEAN - Include non-editable markers. (Optional, default: don't include)
  *
  *  Returns:
- *      Nothing.
+ *      BOOLEAN - Successful.
  *
  *  Example:
  *      [(findDisplay 12) displayCtrl 51] call mts_markers_fnc_moveMarkerMouseDown
@@ -18,15 +18,15 @@
  */
 
 params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false, [false]]];
-CHECK(isNull _mapCtrl);
+CHECKRET(isNull _mapCtrl, false);
 
 //get marker prefix
 private _namePrefix = [_mapCtrl, _includeNoEditMarker] call FUNC(getMouseOverMarkerPrefix);
-CHECK(_namePrefix isEqualTo "");
+CHECKRET(_namePrefix isEqualTo "", false);
 
 //get marker set
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
-CHECK(_markerFamily isEqualTo []);
+CHECKRET(_markerFamily isEqualTo [], false);
 
 private _originAlpha = markerAlpha (_markerFamily select 0);
 
@@ -45,3 +45,4 @@ if (is3DEN) then {
     _mapCtrl ctrlMapCursor ["Track", "Move"];
     [FUNC(moveMarkerInProgress), 0, [_namePrefix, _markerFamily, _mapCtrl, _originAlpha]] call CBA_fnc_addPerFrameHandler;
 };
+true
