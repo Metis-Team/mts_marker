@@ -9,7 +9,7 @@
  *      0: STRING - Marker prefix.
  *
  *  Returns:
- *      Nothing.
+ *      BOOLEAN - Successful.
  *
  *  Example:
  *      ["mtsmarker#123/0/1"] call mts_markers_fnc_deleteMarker
@@ -18,14 +18,14 @@
 
 params [["_namePrefix", "", [""]]];
 
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"); false);
 
 //get channel ID from marker prefix
 private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Invalid marker prefix. No MTS marker"));
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Invalid marker prefix. No MTS marker"); false);
 
 //broadcast marker depending on channel ID
 [_namePrefix] remoteExecCall [QFUNC(deleteMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
 
-nil
+true

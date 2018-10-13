@@ -7,6 +7,7 @@
             private _curMapDisplay = call FUNC(getDisplay);
             if (!isNull _curMapDisplay && isNull (findDisplay MAIN_DISPLAY)) then {
                 [_curMapDisplay, getMousePosition] call FUNC(initializeUI);
+                true
             };
         };
     },
@@ -43,6 +44,7 @@
                 private _namePrefix = [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(getMouseOverMarkerPrefix);
                 CHECK(_namePrefix isEqualTo "");
                 [_curMapDisplay, nil, _namePrefix] call FUNC(initializeUI);
+                true
             };
         };
     },
