@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
-        <img src="https://img.shields.io/badge/Version-1.0.0-blue.svg?style=flat-square" alt="Metis Marker Version">
+        <img src="https://img.shields.io/badge/Version-1.1.0-blue.svg?style=flat-square" alt="Metis Marker Version">
     </a>
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
         <img src="https://img.shields.io/github/downloads/Metis-Team/mts_marker/total.svg?style=flat-square&label=Downloads" alt="Metis Marker Downloads">
@@ -31,10 +31,11 @@ It allows to build symbols from components, including frame, icon, first modifie
 - Full customizable marker
 - Moveable marker
 - Editable/non-editable marker
+- Copy & paste marker
 - Build in preview
-- Full 3DEN support (create, move, edit marker)
-- Briefing support (create, move, edit marker)
-- Communication channel support e.g. Global, Side or Group channel 
+- Full 3DEN support
+- Full Briefing support
+- Communication channel support e.g. Global-, Side- or Groupchannel 
 
 ## Customizable marker system
 Our customizable marker system consists of:  
