@@ -165,7 +165,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         if (isMultiplayer) then {
             private _selectedChannel = currentChannel;
             if (_selectedChannel > 5) then {_selectedChannel = 3;};
-            _markerParameter set [6, _selectedChannel];
+            _markerParameter set [5, _selectedChannel];
         };
 
         [_mainDisplay, nil, _mapCtrl, _mousePos] call _setPosAndPrefix;
