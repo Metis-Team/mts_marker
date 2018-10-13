@@ -17,10 +17,15 @@ if (isServer || (!isMultiplayer)) then {
 CHECK(!hasInterface);
 
 #include "initKeybinds.hpp"
+#include "initSettings.hpp"
 #include "initMarkerVariables.hpp"
+
+GVAR(lastSelection) = [];
 
 if (is3DEN) then {
     {
         _x call FUNC(createMarkerLocal);
     } forEach ("Scenario" get3DENMissionAttribute QGVAR(3denData));
 };
+
+GVAR(clipboard) = "";

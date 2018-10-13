@@ -6,6 +6,7 @@ MARKER(red,mod,reconnaissance);
 MARKER(red,mod,signal_unit);
 MARKER(red,mod,anti_armor);
 MARKER(red,mod,rotary_wing);
+MARKER(red,mod,uav);
 MARKER(red,mod,artillery);
 MARKER(red,mod,artillery_sp);
 MARKER(red,mod,mortar);
@@ -24,6 +25,12 @@ MARKER(red,mod,fixed_wing);
 MARKER(red,mod,medical);
 MARKER(red,mod,military_police);
 MARKER(red,mod,military_intelligence);
+MARKER(red,mod,amphibious);
+MARKER(red,mod,joint_fire_support);
+MARKER(red,mod,naval);
+MARKER(red,mod,special_forces);
+MARKER(red,mod,special_operation_forces);
+MARKER(red,mod,combined_arms);
 
 //Redfor Mod1
 MARKER(red,mod,attack);
@@ -32,6 +39,8 @@ MARKER(red,mod,maintenance_top);
 MARKER(red,mod,multiple_rocket_launcher);
 MARKER(red,mod,single_rocket_launcher);
 MARKER(red,mod,sniper);
+MARKER(red,mod,headquarters);
+MARKER(red,mod,naval_top);
 
 //Redfor Mod2
 MARKER(red,mod,airborne);

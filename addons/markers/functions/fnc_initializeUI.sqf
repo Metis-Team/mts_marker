@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /**
- *  Author: Timi007
+ *  Author: PhILoX, Timi007
  *
  *  Description:
  *      Opens the interface.
@@ -107,16 +107,37 @@ if (!isMultiplayer || is3DEN) then {
     } count _channelDropdownArray;
 };
 
-private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
 private _suspectedCbCtrl = _mainDisplay displayCtrl MOD_CHECKBOX;
 private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
 
-if (_namePrefix isEqualTo "") then {
+private _setPosAndPrefix = {
+    params [
+        ["_mainDisplay", displayNull, [displayNull]],
+        ["_namePrefix", "", [""]],
+        ["_mapCtrl", controlNull, [controlNull]],
+        ["_mousePos", [0,0], [[]], 2]
+    ];
+    private "_pos";
+
+    if !(_namePrefix isEqualTo "") then {
+        _pos = getMarkerPos (format["%1_frame", _namePrefix]);
+    };
+    if !(isNull _mapCtrl) then {
+        _pos = _mapCtrl ctrlMapScreenToWorld _mousePos;
+    };
+
+    CHECK(isNil "_pos" || isNull _mainDisplay);
+    private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
+    _okBtnCtrl setVariable [QGVAR(editMarkerNamePrefix), _namePrefix];
+    _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), _pos];
+};
+
+if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     //select the current channel in the dropdown
     if (isMultiplayer) then {
         private _selectedChannel = currentChannel;
-        if (currentChannel > 5) then {_selectedChannel = 3;};
+        if (_selectedChannel > 5) then {_selectedChannel = 3;};
 
         for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
             private _channelID = _channelCtrl lbValue _index;
@@ -127,26 +148,38 @@ if (_namePrefix isEqualTo "") then {
     };
 
     //save future marker position
-    private _pos = _mapCtrl ctrlMapScreenToWorld [(_mousePos select 0), (_mousePos select 1)];
-    _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), _pos];
-    _okBtnCtrl setVariable [QGVAR(editMarkerNamePrefix), ""];
+    [_mainDisplay, nil, _mapCtrl, _mousePos] call _setPosAndPrefix;
 
     //select blufor identity as default & update marker preview
     ["blu"] call FUNC(identityButtonsAction);
 } else {
-    //when editing marker
-    //get marker family parameter & information from namespace
-    private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
-    private _markerParameter = _markerInformation select 1;
+    //when editing marker or saving of last selection is enabled
+    private _markerParameter = [];
+    if (GVAR(saveLastSelection) && (_namePrefix isEqualTo "")) then {
+        if (GVAR(lastSelection) isEqualTo []) then {
+            _markerParameter set [0, ["blu", false]];
+        } else {
+            _markerParameter = GVAR(lastSelection);
+        };
+
+        if (isMultiplayer) then {
+            private _selectedChannel = currentChannel;
+            if (_selectedChannel > 5) then {_selectedChannel = 3;};
+            _markerParameter set [5, _selectedChannel];
+        };
+
+        [_mainDisplay, nil, _mapCtrl, _mousePos] call _setPosAndPrefix;
+    } else {
+        //get marker family parameter & information from namespace
+        private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
+        _markerParameter = _markerInformation select 1;
+
+        [_mainDisplay, _namePrefix] call _setPosAndPrefix;
+    };
     CHECK(_markerParameter isEqualTo []);
 
-    private _pos = getMarkerPos (format["%1_frame", _namePrefix]);
-    _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), [(_pos select 0), (_pos select 1)]];
-    _okBtnCtrl setVariable [QGVAR(editMarkerNamePrefix), _namePrefix];
-
     _markerParameter params [
-        ["_frameshape", "", [""]],
-        ["_dashedFrameshape", false, [false]],
+        ["_frameshape", ["",false], [[]]],
         ["_modifier", [0,0,0], [[]], 3],
         ["_size", [0,false,false], [[]], 3],
         ["_textleft", [], [[]]],
@@ -184,8 +217,8 @@ if (_namePrefix isEqualTo "") then {
     };
 
     //select right identity in the dialog & update preview
-    _suspectedCbCtrl cbSetChecked _dashedFrameshape;
-    [_frameshape] call FUNC(identityButtonsAction);
+    _suspectedCbCtrl cbSetChecked (_frameshape select 1);
+    [(_frameshape select 0)] call FUNC(identityButtonsAction);
 };
 
 //call same ui events that CBA is adding to the map display. Thanks to commy2 for this work-around!

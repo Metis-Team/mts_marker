@@ -1,5 +1,5 @@
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(create_dialog),
     LLSTRING(cba_keybinding_open_window),
     {
@@ -7,6 +7,7 @@
             private _curMapDisplay = call FUNC(getDisplay);
             if (!isNull _curMapDisplay && isNull (findDisplay MAIN_DISPLAY)) then {
                 [_curMapDisplay, getMousePosition] call FUNC(initializeUI);
+                true
             };
         };
     },
@@ -15,7 +16,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(delete_marker),
     LLSTRING(cba_keybinding_delete),
     {
@@ -33,7 +34,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(edit_marker),
     LLSTRING(cba_keybinding_edit),
     {
@@ -43,6 +44,7 @@
                 private _namePrefix = [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(getMouseOverMarkerPrefix);
                 CHECK(_namePrefix isEqualTo "");
                 [_curMapDisplay, nil, _namePrefix] call FUNC(initializeUI);
+                true
             };
         };
     },
@@ -51,7 +53,7 @@
 ] call CBA_fnc_addKeybind;
 
 [
-    LLSTRING(cba_keybinding_categoryName),
+    LLSTRING(cba_category_name),
     QGVAR(move_marker),
     LLSTRING(cba_keybinding_move),
     {
@@ -66,6 +68,38 @@
         GVAR(MarkerMoveInProgress) = false;
     },
     [0xF0, [false, false, true]] //Alt + LMouse
+] call CBA_fnc_addKeybind;
+
+[
+    LLSTRING(cba_category_name),
+    QGVAR(copy_marker),
+    LLSTRING(cba_keybinding_copy),
+    {
+        if (HAS_MAP) then {
+            private _curMapDisplay = call FUNC(getDisplay);
+            if (!isNull _curMapDisplay) then {
+                [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(copyMarker);
+            };
+        };
+    },
+    "",
+    [0x2E, [false, true, false]] //Ctrl + C
+] call CBA_fnc_addKeybind;
+
+[
+    LLSTRING(cba_category_name),
+    QGVAR(paste_marker),
+    LLSTRING(cba_keybinding_paste),
+    {
+        if (HAS_MAP) then {
+            private _curMapDisplay = call FUNC(getDisplay);
+            if (!isNull _curMapDisplay) then {
+                [_curMapDisplay displayCtrl MAP_CTRL, getMousePosition] call FUNC(pasteMarker);
+            };
+        };
+    },
+    "",
+    [0x2F, [false, true, false]] //Ctrl + V
 ] call CBA_fnc_addKeybind;
 
 //add 3DEN key eventhandlers because CBA keybindung doesn't work in 3DEN editor
@@ -90,7 +124,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         };
     }];
 
-    _map3denDisplay displayAddEventHandler ["KeyDown", {
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
         if (_key isEqualTo 0xD3 && !_shift && !_ctrl && !_alt) then { //Delete
             if (IN_3DEN_MAP) then {
@@ -104,7 +138,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         };
     }];
 
-    _map3denDisplay displayAddEventHandler ["KeyDown", {
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
         if (_key isEqualTo 0x12 && _shift && !_ctrl && !_alt) then { //Shift + E
             if (IN_3DEN_MAP) then {
@@ -134,6 +168,30 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
     _map3denDisplay displayAddEventHandler ["MouseButtonUp", {
         if (GVAR(MarkerMoveInProgress)) then {
             GVAR(MarkerMoveInProgress) = false;
+        };
+    }];
+
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
+        params ["_control", "_key", "_shift", "_ctrl", "_alt"];
+        if (_key isEqualTo 0x2E && _shift && !_ctrl && !_alt) then { //Shift + C
+            if (IN_3DEN_MAP) then {
+                private _curMapDisplay = call FUNC(getDisplay);
+                if (!isNull _curMapDisplay) then {
+                    [_curMapDisplay displayCtrl MAP_CTRL] call FUNC(copyMarker);
+                };
+            };
+        };
+
+    }];
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
+        params ["_control", "_key", "_shift", "_ctrl", "_alt"];
+        if (_key isEqualTo 0x2F && _shift && !_ctrl && !_alt) then { //Shift + V
+            if (IN_3DEN_MAP) then {
+                private _curMapDisplay = call FUNC(getDisplay);
+                if (!isNull _curMapDisplay) then {
+                    [_curMapDisplay displayCtrl MAP_CTRL, getMousePosition] call FUNC(pasteMarker);
+                };
+            };
         };
     }];
 };

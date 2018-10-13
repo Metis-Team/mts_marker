@@ -21,15 +21,12 @@ params [["_isForMarkerCreation", true, [true]]];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
-//get frameshape
-private _frameshape = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
-CHECKRET(_frameshape isEqualTo "", ERROR("No frameshape"));
+//get identity
+private _identity = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
+CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
 //check if frameshape is dashed
-private _suspectedCbValue = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
-if (_suspectedCbValue) then {
-    _frameshape = format ["%1dash", _frameshape];
-};
+private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
 
 private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
 private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
@@ -53,8 +50,6 @@ private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
 //chose where the data will be transmited
 scopeName "main";
 if (_isForMarkerCreation) then {
-    private ["_broadcastChannel"];
-
     //get the text that will be to the right of the marker
     private _textright = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
 
@@ -76,15 +71,15 @@ if (_isForMarkerCreation) then {
     private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
     private _pos = _okBtnCtrl getVariable [QGVAR(createMarkerMousePosition), [0,0]];
 
-    call {
+    private _broadcastChannel = call {
         if (is3DEN) exitWith {
-            _broadcastChannel = 0;
+            0
         };
         if !(isMultiplayer) exitWith {
-            _broadcastChannel = currentChannel;
+            -1
         };
         private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
-        _broadcastChannel = _channelCtrl lbValue (lbCurSel _channelCtrl);
+        _channelCtrl lbValue (lbCurSel _channelCtrl)
     };
     setCurrentChannel _broadcastChannel;
 
@@ -94,8 +89,11 @@ if (_isForMarkerCreation) then {
         [_editMarkerNamePrefix] call FUNC(deleteMarker);
     };
 
-    [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
+    if (GVAR(saveLastSelection)) then {
+        GVAR(lastSelection) = [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced]];
+    };
+    [_pos, _broadcastChannel, !is3DEN, [_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
     _mainDisplay closeDisplay 1;
 } else {
-    [_frameshape, _modifier, [_grpsize, _reinforced, _reduced]] call FUNC(setMarkerPreview);
+    [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced]] call FUNC(setMarkerPreview);
 };
