@@ -137,7 +137,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     //select the current channel in the dropdown
     if (isMultiplayer) then {
         private _selectedChannel = currentChannel;
-        if (currentChannel > 5) then {_selectedChannel = 3;};
+        if (_selectedChannel > 5) then {_selectedChannel = 3;};
 
         for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
             private _channelID = _channelCtrl lbValue _index;
@@ -164,7 +164,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
 
         if (isMultiplayer) then {
             private _selectedChannel = currentChannel;
-            if (currentChannel > 5) then {_selectedChannel = 3;};
+            if (_selectedChannel > 5) then {_selectedChannel = 3;};
             _markerParameter set [5, _selectedChannel];
         };
 
