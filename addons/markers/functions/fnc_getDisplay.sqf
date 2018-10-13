@@ -16,19 +16,14 @@
  *
  */
 
-private ["_curMapDisplay"];
-
-call {
-    if (visibleMap && {!isNull (findDisplay MAP_PLAYER_DISPLAY)}) exitWith {
-        _curMapDisplay = findDisplay MAP_PLAYER_DISPLAY;
-    };
-    if (getClientStateNumber in [9,10] && {(!isNull (findDisplay MAP_BRIEFING_CLIENT_DISPLAY)) || (!isNull (findDisplay MAP_BRIEFING_SERVER_DISPLAY))}) exitWith {
-        _curMapDisplay = ([(findDisplay MAP_BRIEFING_CLIENT_DISPLAY), (findDisplay MAP_BRIEFING_SERVER_DISPLAY)] select {!isNull _x}) select 0;
-    };
-    if (is3DEN && {!isNull (findDisplay MAP_3DEN_DISPLAY)}) exitWith {
-        _curMapDisplay = findDisplay MAP_3DEN_DISPLAY;
-    };
-    _curMapDisplay = displayNull;
+if (visibleMap && {!isNull (findDisplay MAP_PLAYER_DISPLAY)}) exitWith {
+    findDisplay MAP_PLAYER_DISPLAY
+};
+if (getClientStateNumber in [9,10] && {(!isNull (findDisplay MAP_BRIEFING_CLIENT_DISPLAY)) || (!isNull (findDisplay MAP_BRIEFING_SERVER_DISPLAY))}) exitWith {
+    ([(findDisplay MAP_BRIEFING_CLIENT_DISPLAY), (findDisplay MAP_BRIEFING_SERVER_DISPLAY)] select {!isNull _x}) select 0
+};
+if (is3DEN && {!isNull (findDisplay MAP_3DEN_DISPLAY)}) exitWith {
+    findDisplay MAP_3DEN_DISPLAY
 };
 
-_curMapDisplay
+displayNull
