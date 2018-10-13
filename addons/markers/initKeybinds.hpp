@@ -122,7 +122,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         };
     }];
 
-    _map3denDisplay displayAddEventHandler ["KeyDown", {
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
         if (_key isEqualTo 0xD3 && !_shift && !_ctrl && !_alt) then { //Delete
             if (IN_3DEN_MAP) then {
@@ -136,7 +136,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         };
     }];
 
-    _map3denDisplay displayAddEventHandler ["KeyDown", {
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
         if (_key isEqualTo 0x12 && _shift && !_ctrl && !_alt) then { //Shift + E
             if (IN_3DEN_MAP) then {
@@ -169,7 +169,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         };
     }];
 
-    _map3denDisplay displayAddEventHandler ["KeyDown", {
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
         if (_key isEqualTo 0x2E && _shift && !_ctrl && !_alt) then { //Shift + C
             if (IN_3DEN_MAP) then {
@@ -181,7 +181,7 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         };
 
     }];
-    _map3denDisplay displayAddEventHandler ["KeyDown", {
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
         params ["_control", "_key", "_shift", "_ctrl", "_alt"];
         if (_key isEqualTo 0x2F && _shift && !_ctrl && !_alt) then { //Shift + V
             if (IN_3DEN_MAP) then {
