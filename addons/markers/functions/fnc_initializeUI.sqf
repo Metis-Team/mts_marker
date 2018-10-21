@@ -178,35 +178,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     };
     CHECK(_markerParameter isEqualTo []);
 
-    _markerParameter params [
-        ["_frameshape", ["",false], [[]]],
-        ["_modifier", [0,0,0], [[]], 3],
-        ["_size", [0,false,false], [[]], 3],
-        ["_textleft", [], [[]]],
-        ["_textright", "", [""]],
-        ["_broadcastChannel", -1, [0]]
-    ];
-
-    //because of the sorting, the index needs to be found with the help of the value
-    {
-        _x params ["_ctrl", "_dropdownArray"];
-
-        CHECK(_ctrl isEqualTo _echelonCtrl);
-
-        for "_index" from 0 to ((count _dropdownArray) -1) step 1 do {
-            private _lbValue = _ctrl lbValue _index;
-            if (_lbValue isEqualTo (_modifier select _forEachIndex)) exitWith {
-                _ctrl lbSetCurSel _index;
-            };
-        };
-    } forEach _ctrlArray;
-
-    _echelonCtrl lbSetCurSel (_size select 0);
-    _reinforcedCbCtrl cbSetChecked (_size select 1);
-    _reducedCbCtrl cbSetChecked (_size select 2);
-
-    (_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText _textright;
-    (_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_textleft joinString "");
+    _markerParameter params ["", "", "", "", "", ["_broadcastChannel", -1, [0]]];
 
     //select the original broadcast channel in dropdown
     for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
@@ -216,9 +188,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         };
     };
 
-    //select right identity in the dialog & update preview
-    _suspectedCbCtrl cbSetChecked (_frameshape select 1);
-    [(_frameshape select 0)] call FUNC(identityButtonsAction);
+    _markerParameter call FUNC(setUIData);
 };
 
 //call same ui events that CBA is adding to the map display. Thanks to commy2 for this work-around!

@@ -21,4 +21,5 @@ PREP(pasteMarker);
 PREP(setMarkerPos);
 PREP(setMarkerPosLocal);
 PREP(setMarkerPreview);
+PREP(setUIData);
 PREP(transmitUIData);
