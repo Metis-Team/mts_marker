@@ -22,4 +22,5 @@ PREP(setMarkerPos);
 PREP(setMarkerPosLocal);
 PREP(setMarkerPreview);
 PREP(setUIData);
+PREP(showPresetsUI);
 PREP(transmitUIData);
