@@ -4,7 +4,7 @@
     [LLSTRING(cba_settings_save_last), LLSTRING(cba_settings_save_last_tooltip)],
     LLSTRING(cba_category_name),
     false,
-    0,
+    2,
     {
         GVAR(lastSelection) = [];
     }
