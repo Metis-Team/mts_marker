@@ -5,6 +5,8 @@ class RscButton;
 class RscCheckBox;
 class RscCombo;
 class RscEdit;
+class RscListBox;
+class RscButtonSearch;
 
 class GVAR(dialog) {
     idd = MAIN_DISPLAY;
@@ -16,7 +18,7 @@ class GVAR(dialog) {
             colorBackground[] = {0.9098, 0.7922, 0.1059, 1};
             x = "SafeZoneX + (672.50 / 1920) * SafeZoneW"; //388 //672.5-388=284.5 //dx=284.5
             y = "SafeZoneY + (381 / 1080) * SafeZoneH"; //255 //381-255=126 //dy=126
-            w = "(575 / 1920) * SafeZoneW";
+            w = "(547 / 1920) * SafeZoneW";
             h = "(25 / 1080) * SafeZoneH";
         };
         class headTXT: RscText {
@@ -229,6 +231,41 @@ class GVAR(dialog) {
             w = "(160 / 1920) * SafeZoneW";
             h = "(160 / 1080) * SafeZoneH";
             text = "";
+        };
+        class presetsHeadBack: IGUIBack {
+            idc = PRESETS_HEAD_BG;
+            colorBackground[] = {0.9098, 0.7922, 0.1059, 1};
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (381 / 1080) * SafeZoneH";
+            w = "(224 / 1920) * SafeZoneW";
+            h = "(25 / 1080) * SafeZoneH";
+        };
+        class presetsBack: IGUIBack {
+            idc = PRESETS_BG;
+            colorBackground[] = {0, 0, 0, 0.6};
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
+            w = "(224 / 1920) * SafeZoneW";
+            h = "(267 / 1080) * SafeZoneH";
+        };
+        class presetsNameTXT: RscText {
+            idc = PRESETS_NAME_TXT;
+            font = "PuristaLight";
+            sizeEx = 0.035;
+            text = CSTRING(ui_general_presetsNameTXT);
+            colorBackground[] = {0, 0, 0, 0.3};
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (636 / 1080) * SafeZoneH";
+            w = "(224 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+        };
+        class deletePresetsBG: IGUIBack {
+            idc = DELETE_PRESETS_BG;
+            colorBackground[] = {0, 0, 0, 0.7};
+            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            w = "(20 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
         };
     };
 
@@ -468,6 +505,125 @@ class GVAR(dialog) {
             colorFocused[] = {0,0,0,0.7};
             style = 0+2;
             action = QUOTE((findDisplay MAIN_DISPLAY) closeDisplay 2;);
+        };
+        class togglePresetsBTN: RscButton {
+            idc = TOGGLE_PRESETS_BUTTON;
+            font = "PuristaMedium";
+            text = "<<";
+            tooltip = CSTRING(ui_general_togglePresetsBTN_tooltip);
+            x = "SafeZoneX + (1222.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (381 / 1080) * SafeZoneH";
+            w = "(25 / 1920) * SafeZoneW";
+            h = "(25 / 1080) * SafeZoneH";
+            colorBackground[] = {0.9098, 0.7922, 0.1059, 1}; //0, 0, 0, 0.7
+            colorFocused[] = {0.9098, 0.7922, 0.1059, 1}; //0, 0, 0, 0.7
+            style = 0+2;
+            action = QUOTE([!ctrlShown ((findDisplay MAIN_DISPLAY) displayCtrl PRESETS_BG)] call FUNC(showPresetsUI););
+        };
+        class savePresetsBTN: RscButton {
+            idc = SAVE_PRESETS_BUTTON;
+            font = "PuristaMedium";
+            text = CSTRING(ui_general_savePresetsBTN);
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            w = "(99 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 0.7};
+            colorFocused[] = {0, 0, 0, 0.7};
+            style = 0+2;
+            action = QUOTE(call FUNC(savePreset););
+        };
+        class loadPresetsBTN: RscButton {
+            idc = LOAD_PRESETS_BUTTON;
+            font = "PuristaMedium";
+            text = CSTRING(ui_general_loadPresetsBTN);
+            x = "SafeZoneX + (1352.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            w = "(99 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 0.7};
+            colorFocused[] = {0, 0, 0, 0.7};
+            style = 0+2;
+            action = QUOTE(call FUNC(loadPreset););
+        };
+        class deletePresetsPic: RscPicture {
+            idc = DELETE_PRESETS_PIC;
+            text = "A3\3den\Data\Displays\Display3DEN\PanelLeft\entityList_delete_ca.paa";
+            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            w = "(20 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+        };
+        class deletePresetsBTN: RscButton {
+            idc = DELETE_PRESETS_BUTTON;
+            tooltip = CSTRING(ui_general_deletePresetsBTN_tooltip);
+            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            w = "(20 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 0};
+            colorBackgroundActive[] = {0, 0, 0, 0};
+            colorBackgroundDisabled[] = {0, 0, 0, 0};
+            colorText[] = {0, 0, 0, 0};
+            period = 0;
+            style = 0+2;
+            onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 1)]);
+            onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 0.7)]);
+            action = QUOTE(call FUNC(deletePreset););
+        };
+        class searchPresetsBTN: RscButtonSearch {
+            idc = SEARCH_PRESETS_BUTTON;
+            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
+            w = "(20 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 0};
+            colorFocused[] = {0, 0, 0, 0};
+            action = QUOTE(call FUNC(updatePresetsList););
+        };
+        class searchPresetsEF: RscEdit {
+            idc = SEARCH_PRESETS_EDIT;
+            type = 2;
+            style = 0+512;
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
+            w = "(204 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 1};
+            sizeEx = 0.035;
+            shadow = 0;
+        };
+        class namePresetsEF: RscEdit {
+            idc = NAME_PRESETS_EDIT;
+            type = 2;
+            style = 0+512;
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (656 / 1080) * SafeZoneH";
+            w = "(204 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 1};
+            sizeEx = 0.035;
+            shadow = 0;
+        };
+        class namePresetsBTN: RscButton {
+            idc = NAME_PRESETS_BUTTON;
+            font = "PuristaMedium";
+            text = "X";
+            tooltip = CSTRING(ui_general_namePresetsBTN_tooltip);
+            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (656 / 1080) * SafeZoneH";
+            w = "(20 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0, 0, 0, 0.7};
+            colorFocused[] = {0, 0, 0, 0.7};
+            action = QUOTE(((findDisplay MAIN_DISPLAY) displayCtrl NAME_PRESETS_EDIT) ctrlSetText '';);
+        };
+        class presetsList: RscListBox {
+            idc = PRESETS_LIST;
+            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (429 / 1080) * SafeZoneH";
+            w = "(224 / 1920) * SafeZoneW";
+            h = "(207 / 1080) * SafeZoneH";
         };
     };
 };
