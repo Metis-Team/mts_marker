@@ -21,41 +21,12 @@ params [["_isForMarkerCreation", true, [true]]];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
-//get identity
-private _identity = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
-CHECKRET(_identity isEqualTo "", ERROR("No identity"));
-
-//check if frameshape is dashed
-private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
-
-private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
-private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
-private _mod2Ctrl = _mainDisplay displayCtrl MOD2_DROPDOWN;
-
-//get values
-private _lbIconValue = _iconCtrl lbValue (lbCurSel _iconCtrl);
-private _lbMod1Value = _mod1Ctrl lbValue (lbCurSel _mod1Ctrl);
-private _lbMod2Value = _mod2Ctrl lbValue (lbCurSel _mod2Ctrl);
-
-//get all modifer
-private _modifier = [_lbIconValue, _lbMod1Value, _lbMod2Value];
-
-//get group size
-private _grpsize = lbCurSel (_mainDisplay displayCtrl ECHELON_DROPDOWN);
-
-//get echelon modifier values
-private _reinforced = cbChecked (_mainDisplay displayCtrl REINFORCED_CHECKBOX);
-private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
+//get all data
+(call FUNC(getUIData)) params ["_frameshape", "_modifier", "_size", "_textleft", "_textright"];
 
 //chose where the data will be transmited
 scopeName "main";
 if (_isForMarkerCreation) then {
-    //get the text that will be to the right of the marker
-    private _textright = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
-
-    //get the left text and check if it is valid
-    private _textleft = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
-
     {
         if !(_x in GVAR(validCharacters)) then {
             //only allow valid characters that are in the array
@@ -90,10 +61,10 @@ if (_isForMarkerCreation) then {
     };
 
     if (GVAR(saveLastSelection)) then {
-        GVAR(lastSelection) = [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced]];
+        GVAR(lastSelection) = [_frameshape, _modifier, _size];
     };
-    [_pos, _broadcastChannel, !is3DEN, [_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
+    [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, _size, _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
     _mainDisplay closeDisplay 1;
 } else {
-    [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced]] call FUNC(setMarkerPreview);
+    [_frameshape, _modifier, _size] call FUNC(setMarkerPreview);
 };

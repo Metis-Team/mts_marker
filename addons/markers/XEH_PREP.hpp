@@ -10,6 +10,7 @@ PREP(getBroadcastTargets);
 PREP(getDisplay);
 PREP(getMarkerFamily);
 PREP(getMouseOverMarkerPrefix);
+PREP(getUIData);
 PREP(identityButtonsAction);
 PREP(initializeUI);
 PREP(isMtsMarker);
