@@ -207,3 +207,26 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
 } forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl];
+
+
+private _presetsList = _mainDisplay displayCtrl PRESETS_LIST;
+private _presets = profileNamespace getVariable [QGVAR(presets), []];
+{
+    _x params ["_markerName", "_UIData"];
+    _UIData params ["_frameshape"];
+
+    private _index = _presetsList lbAdd _markerName;
+    _presetsList lbSetData [_index, str _UIData];
+    _presetsList lbSetPicture [_index, format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _frameshape select 0]];
+} forEach _presets;
+
+call FUNC(storePresetsToList);
+
+_presetsList ctrlAddEventHandler ["LBSelChanged", FUNC(onPresetsLBSelChanged)];
+_presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
+
+private _searchCtrl = _mainDisplay displayctrl SEARCH_PRESETS_EDIT;
+_searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
+_searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
+
+[GVAR(showPresetsUI)] call FUNC(showPresetsUI);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project name="MTS Markers">
     <Package name="mts_markers">
         <Container name="Misc">
@@ -93,6 +93,30 @@
                 <German>ABBRUCH</German>
                 <Chinese>取消</Chinese>
                 <Chinesesimp>取消</Chinesesimp>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_savePresetsBTN">
+                <Original>SAVE</Original>
+                <German>SPEICHERN</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_loadPresetsBTN">
+                <Original>LOAD</Original>
+                <German>LADEN</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_presetsNameTXT">
+                <Original>Preset Name:</Original>
+                <German>Preset Name:</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_namePresetsBTN_tooltip">
+                <Original>Clear name</Original>
+                <German>Name leeren</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_togglePresetsBTN_tooltip">
+                <Original>Open/Close Presets window</Original>
+                <German>Öffne/Schließe Presets Fenster</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_deletePresetsBTN_tooltip">
+                <Original>Delete Preset</Original>
+                <German>Preset löschen</German>
             </Key>
         </Container>
         <Container name="UI_identity">
@@ -559,6 +583,10 @@
                 <German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z und 0-9</German>
                 <Chinese>其它文字備註被輸入錯誤的值! 只允許以下字元: A-Z與0-9</Chinese>
                 <Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
+            </Key>
+            <Key ID="str_mts_markers_ui_hint_marker_name_empty">
+                <Original>Marker Name can't be empty!</Original>
+                <German>Der Marker Name darf nicht leer sein!</German>
             </Key>
         </Container>
         <Container name="CBA">
