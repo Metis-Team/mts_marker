@@ -23,4 +23,6 @@ PREP(setMarkerPosLocal);
 PREP(setMarkerPreview);
 PREP(setUIData);
 PREP(showPresetsUI);
+PREP(storePresetsToList);
 PREP(transmitUIData);
+PREP(updatePresetsList);
