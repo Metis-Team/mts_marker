@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project name="MTS Markers">
     <Package name="mts_markers">
         <Container name="Misc">
@@ -611,6 +611,14 @@
             <Key ID="str_mts_markers_cba_settings_save_last_tooltip">
                 <Original>Enables/Disables the saving of the last selected icon and modifier.</Original>
                 <German>Aktiviert das Speichern der letzten ausgewählten Grundzeichen und Ergänzungszeichen.</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_show_presets_UI">
+                <Original>Show Presets window by default</Original>
+                <German>Zeige das Presets Fenster standardmäßig</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_show_presets_UI_tooltip">
+                <Original>Open Presets window when the marker interface is being opened.</Original>
+                <German>Öffne das Presets Fenster beim Öffnen des Interface.</German>
             </Key>
         </Container>
     </Package>
