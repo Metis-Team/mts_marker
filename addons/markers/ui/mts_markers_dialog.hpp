@@ -172,7 +172,7 @@ class GVAR(dialog) {
             y = "SafeZoneY + (456 / 1080) * SafeZoneH"; //330
             w = "(160 / 1920) * SafeZoneW"; //160
             h = "(160 / 1080) * SafeZoneH"; //160
-            text = QPATHTOF(data\ui\mts_markers_prevBG.paa);
+            text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
         };
         class previewLayerIdentity: RscPicture {
             idc = PREVIEW_LYR_IDENTITY;
@@ -233,7 +233,7 @@ class GVAR(dialog) {
     };
 
     class controls {
-        class fBTNframe: RscPicture {
+        class bluBTNframe: RscPicture {
             idc = FRIENDLY_BTN_FRAME;
             x = "SafeZoneX + (774.50 / 1920) * SafeZoneW"; //490
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
@@ -242,15 +242,15 @@ class GVAR(dialog) {
             style = 64;
             colorText[] = {1,1,1,1};
         };
-        class fBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_fBTN.paa);
+        class bluBTNback: RscPicture {
+            text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
             idc = FRIENDLY_BTN_BACK;
             x = "SafeZoneX + (774.50 / 1920) * SafeZoneW"; //490
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
             w = "(45 / 1920) * SafeZoneW";
             h = "(45 / 1080) * SafeZoneH";
         };
-        class fBTNctrl: RscButton {
+        class bluBTNctrl: RscButton {
             text = "";
             idc = FRIENDLY_BTN_CTRL;
             x = "SafeZoneX + (774.50 / 1920) * SafeZoneW"; //490
@@ -265,7 +265,7 @@ class GVAR(dialog) {
             tooltip = CSTRING(ui_identity_friend);
             action = QUOTE(['blu'] call FUNC(identityButtonsAction););
         };
-        class hBTNframe: RscPicture {
+        class redBTNframe: RscPicture {
             idc = HOSTILE_BTN_FRAME;
             x = "SafeZoneX + (824.50 / 1920) * SafeZoneW"; //540
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
@@ -274,15 +274,15 @@ class GVAR(dialog) {
             style = 64;
             colorText[] = {1,1,1,1};
         };
-        class hBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_hBTN.paa);
+        class redBTNback: RscPicture {
+            text = QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa);
             idc = HOSTILE_BTN_BACK;
             x = "SafeZoneX + (824.50 / 1920) * SafeZoneW"; //540
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
             w = "(45 / 1920) * SafeZoneW";
             h = "(45 / 1080) * SafeZoneH";
         };
-        class hBTNctrl: RscButton {
+        class redBTNctrl: RscButton {
             text = "";
             idc = HOSTILE_BTN_CTRL;
             x = "SafeZoneX + (824.50 / 1920) * SafeZoneW"; //540
@@ -297,7 +297,7 @@ class GVAR(dialog) {
             tooltip = CSTRING(ui_identity_hostile);
             action = QUOTE(['red'] call FUNC(identityButtonsAction););
         };
-        class nBTNframe: RscPicture {
+        class neuBTNframe: RscPicture {
             idc = NEUTRAL_BTN_FRAME;
             x = "SafeZoneX + (874.50 / 1920) * SafeZoneW"; //590
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
@@ -306,15 +306,15 @@ class GVAR(dialog) {
             style = 64;
             colorText[] = {1,1,1,1};
         };
-        class nBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_nBTN.paa);
+        class neuBTNback: RscPicture {
+            text = QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa);
             idc = NEUTRAL_BTN_BACK;
             x = "SafeZoneX + (874.50 / 1920) * SafeZoneW"; //590
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
             w = "(45 / 1920) * SafeZoneW";
             h = "(45 / 1080) * SafeZoneH";
         };
-        class nBTNctrl: RscButton {
+        class neuBTNctrl: RscButton {
             text = "";
             idc = NEUTRAL_BTN_CTRL;
             x = "SafeZoneX + (874.50 / 1920) * SafeZoneW"; //590
@@ -329,7 +329,7 @@ class GVAR(dialog) {
             tooltip = CSTRING(ui_identity_neutral);
             action = QUOTE(['neu'] call FUNC(identityButtonsAction););
         };
-        class uBTNframe: RscPicture {
+        class unkBTNframe: RscPicture {
             idc = UNKNOWN_BTN_FRAME;
             x = "SafeZoneX + (924.50 / 1920) * SafeZoneW"; //640
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
@@ -338,15 +338,15 @@ class GVAR(dialog) {
             style = 64;
             colorText[] = {1,1,1,1};
         };
-        class uBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_uBTN.paa);
+        class unkBTNback: RscPicture {
+            text = QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa);
             idc = UNKNOWN_BTN_BACK;
             x = "SafeZoneX + (924.50 / 1920) * SafeZoneW"; //640
             y = "SafeZoneY + (416 / 1080) * SafeZoneH"; //290
             w = "(45 / 1920) * SafeZoneW";
             h = "(45 / 1080) * SafeZoneH";
         };
-        class uBTNctrl: RscButton {
+        class unkBTNctrl: RscButton {
             text = "";
             idc = UNKNOWN_BTN_CTRL;
             x = "SafeZoneX + (924.50 / 1920) * SafeZoneW"; //640
