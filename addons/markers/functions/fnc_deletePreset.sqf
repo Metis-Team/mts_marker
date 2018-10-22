@@ -28,4 +28,4 @@ profileNamespace setVariable [QGVAR(presets), _presets];
 saveProfileNamespace;
 
 //update the Presets list
-call FUNC(storePresetsToList);
+call FUNC(updatePresetsList);

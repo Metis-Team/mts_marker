@@ -219,9 +219,6 @@ private _presets = profileNamespace getVariable [QGVAR(presets), []];
     _presetsList lbSetData [_index, str _UIData];
     _presetsList lbSetPicture [_index, format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _frameshape select 0]];
 } forEach _presets;
-
-call FUNC(storePresetsToList);
-
 _presetsList ctrlAddEventHandler ["LBSelChanged", FUNC(onPresetsLBSelChanged)];
 _presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
 
