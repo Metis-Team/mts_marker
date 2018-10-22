@@ -300,7 +300,7 @@ class GVAR(dialog) {
             colorText[] = {0,0,0,0};
             period = 0;
             tooltip = CSTRING(ui_identity_friend);
-            action = QUOTE(['blu'] call FUNC(identityButtonsAction););
+            onButtonClick = QUOTE(['blu'] call FUNC(identityButtonsAction););
         };
         class redBTNframe: RscPicture {
             idc = HOSTILE_BTN_FRAME;
@@ -332,7 +332,7 @@ class GVAR(dialog) {
             colorText[] = {0,0,0,0};
             period = 0;
             tooltip = CSTRING(ui_identity_hostile);
-            action = QUOTE(['red'] call FUNC(identityButtonsAction););
+            onButtonClick = QUOTE(['red'] call FUNC(identityButtonsAction););
         };
         class neuBTNframe: RscPicture {
             idc = NEUTRAL_BTN_FRAME;
@@ -364,7 +364,7 @@ class GVAR(dialog) {
             colorText[] = {0,0,0,0};
             period = 0;
             tooltip = CSTRING(ui_identity_neutral);
-            action = QUOTE(['neu'] call FUNC(identityButtonsAction););
+            onButtonClick = QUOTE(['neu'] call FUNC(identityButtonsAction););
         };
         class unkBTNframe: RscPicture {
             idc = UNKNOWN_BTN_FRAME;
@@ -396,7 +396,7 @@ class GVAR(dialog) {
             colorText[] = {0,0,0,0};
             period = 0;
             tooltip = CSTRING(ui_identity_unknown);
-            action = QUOTE(['unk'] call FUNC(identityButtonsAction););
+            onButtonClick = QUOTE(['unk'] call FUNC(identityButtonsAction););
         };
         class modCB: RscCheckBox {
             idc = MOD_CHECKBOX;
@@ -491,7 +491,7 @@ class GVAR(dialog) {
             colorFocused[] = {0,0,0,0.7};
             style = 0+2;
             default = true;
-            action = QUOTE([true] call FUNC(transmitUIData););
+            onButtonClick = QUOTE([true] call FUNC(transmitUIData););
         };
         class cancelBTN: RscButton {
             idc = CANCEL_BUTTON;
@@ -504,7 +504,7 @@ class GVAR(dialog) {
             colorBackground[] = {0,0,0,0.7};
             colorFocused[] = {0,0,0,0.7};
             style = 0+2;
-            action = QUOTE((findDisplay MAIN_DISPLAY) closeDisplay 2;);
+            onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
         };
         class togglePresetsBTN: RscButton {
             idc = TOGGLE_PRESETS_BUTTON;
@@ -518,7 +518,7 @@ class GVAR(dialog) {
             colorBackground[] = {0.9098, 0.7922, 0.1059, 1}; //0, 0, 0, 0.7
             colorFocused[] = {0.9098, 0.7922, 0.1059, 1}; //0, 0, 0, 0.7
             style = 0+2;
-            action = QUOTE([!ctrlShown ((findDisplay MAIN_DISPLAY) displayCtrl PRESETS_BG)] call FUNC(showPresetsUI););
+            onButtonClick = QUOTE([!ctrlShown ((ctrlParent (_this select 0)) displayCtrl PRESETS_BG)] call FUNC(showPresetsUI););
         };
         class savePresetsBTN: RscButton {
             idc = SAVE_PRESETS_BUTTON;
@@ -531,7 +531,7 @@ class GVAR(dialog) {
             colorBackground[] = {0, 0, 0, 0.7};
             colorFocused[] = {0, 0, 0, 0.7};
             style = 0+2;
-            action = QUOTE(call FUNC(savePreset););
+            onButtonClick = QUOTE(call FUNC(savePreset););
         };
         class loadPresetsBTN: RscButton {
             idc = LOAD_PRESETS_BUTTON;
@@ -544,7 +544,7 @@ class GVAR(dialog) {
             colorBackground[] = {0, 0, 0, 0.7};
             colorFocused[] = {0, 0, 0, 0.7};
             style = 0+2;
-            action = QUOTE(call FUNC(loadPreset););
+            onButtonClick = QUOTE(call FUNC(loadPreset););
         };
         class deletePresetsPic: RscPicture {
             idc = DELETE_PRESETS_PIC;
@@ -569,7 +569,7 @@ class GVAR(dialog) {
             style = 0+2;
             onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 1)]);
             onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 0.7)]);
-            action = QUOTE(call FUNC(deletePreset););
+            onButtonClick = QUOTE(call FUNC(deletePreset););
         };
         class searchPresetsBTN: RscButtonSearch {
             idc = SEARCH_PRESETS_BUTTON;
@@ -579,7 +579,7 @@ class GVAR(dialog) {
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0};
             colorFocused[] = {0, 0, 0, 0};
-            action = QUOTE(call FUNC(updatePresetsList););
+            onButtonClick = QUOTE(call FUNC(updatePresetsList););
         };
         class searchPresetsEF: RscEdit {
             idc = SEARCH_PRESETS_EDIT;
@@ -616,7 +616,7 @@ class GVAR(dialog) {
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0.7};
             colorFocused[] = {0, 0, 0, 0.7};
-            action = QUOTE(((findDisplay MAIN_DISPLAY) displayCtrl NAME_PRESETS_EDIT) ctrlSetText '';);
+            onButtonClick = QUOTE(((ctrlParent (_this select 0)) displayCtrl NAME_PRESETS_EDIT) ctrlSetText '';);
         };
         class presetsList: RscListBox {
             idc = PRESETS_LIST;
