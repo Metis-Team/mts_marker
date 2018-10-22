@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Saves a marker preset to the profile & adds it to the list.
+ *      Saves a marker Preset to the profile & adds it to the list.
  *
  *  Parameter(s):
  *      None.
@@ -19,22 +19,29 @@
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _presetsList = _mainDisplay displayctrl PRESETS_LIST;
 
-private _markerName = ctrlText (_mainDisplay displayctrl NAME_PRESETS_EDIT);
-CHECKRET(_markerName isEqualTo "", hint LLSTRING(ui_hint_marker_name_empty));
+//get the name of the Preset
+private _presetName = ctrlText (_mainDisplay displayctrl NAME_PRESETS_EDIT);
+CHECKRET(_presetName isEqualTo "", hint LLSTRING(ui_hint_marker_name_empty));
 
+//get all marker data for the Preset
 private _UIData = call FUNC(getUIData);
 
-private _index = _presetsList lbAdd _markerName;
-_presetsList lbSetData [_index, str _UIData];
-
+//choose the picture according to the identity of the marker
 _UIData params ["_frameshape"];
+private _picture = format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _frameshape select 0];
 
-_presetsList lbSetPicture [_index, format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _frameshape select 0]];
-
+//save name, index, marker data and picture of the Preset to the profile
 private _presets = profileNamespace getVariable [QGVAR(presets), []];
-_presets pushBack [_markerName, _UIData];
+private _namespaceIndex = count _presets;
+_presets pushBack [_presetName, _namespaceIndex, _UIData, _picture];
 profileNamespace setVariable [QGVAR(presets), _presets];
 saveProfileNamespace;
+
+//add the Preset to the list
+private _index = _presetsList lbAdd _presetName;
+_presetsList lbSetValue [_index, _namespaceIndex];
+_presetsList lbSetData [_index, str _UIData];
+_presetsList lbSetPicture [_index, _picture];
 
 //update the Presets list
 call FUNC(updatePresetsList);

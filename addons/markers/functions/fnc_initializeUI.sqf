@@ -208,22 +208,18 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
 } forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl];
 
+//fill the Presets list with saved Presets from the profile
+call FUNC(updatePresetsList);
 
+//add EH for the Preset interaction
 private _presetsList = _mainDisplay displayCtrl PRESETS_LIST;
-private _presets = profileNamespace getVariable [QGVAR(presets), []];
-{
-    _x params ["_markerName", "_UIData"];
-    _UIData params ["_frameshape"];
-
-    private _index = _presetsList lbAdd _markerName;
-    _presetsList lbSetData [_index, str _UIData];
-    _presetsList lbSetPicture [_index, format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _frameshape select 0]];
-} forEach _presets;
 _presetsList ctrlAddEventHandler ["LBSelChanged", FUNC(onPresetsLBSelChanged)];
 _presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
 
+//add EH for the searchbar
 private _searchCtrl = _mainDisplay displayctrl SEARCH_PRESETS_EDIT;
 _searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
 _searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
 
+//open/close the Presets UI (dependend on the CBA Setting)
 [GVAR(showPresetsUI)] call FUNC(showPresetsUI);
