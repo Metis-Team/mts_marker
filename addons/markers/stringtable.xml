@@ -585,8 +585,8 @@
                 <Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
             </Key>
             <Key ID="str_mts_markers_ui_hint_marker_name_empty">
-                <Original>Marker Name can't be empty!</Original>
-                <German>Der Marker Name darf nicht leer sein!</German>
+                <Original>Preset Name can't be empty!</Original>
+                <German>Der Preset Name darf nicht leer sein!</German>
             </Key>
         </Container>
         <Container name="CBA">
