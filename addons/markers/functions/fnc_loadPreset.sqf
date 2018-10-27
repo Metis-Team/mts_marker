@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Loads a marker preset from the list & fills the UI with data.
+ *      Loads a Preset from the list & fills the UI with data.
  *
  *  Parameter(s):
  *      None.

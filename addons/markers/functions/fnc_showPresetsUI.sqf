@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      SHow the window for the marker presets.
+ *      Show the window for the Presets.
  *
  *  Parameter(s):
  *      0: BOOLEAN - Show the window.
