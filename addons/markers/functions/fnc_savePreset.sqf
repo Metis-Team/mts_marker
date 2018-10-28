@@ -31,8 +31,8 @@ private _picture = format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _
 
 //save name, index, marker data and picture of the Preset to the profile
 private _presets = profileNamespace getVariable [QGVAR(presets), []];
-private _namespaceIndex = count _presets;
-_presets pushBack [_presetName, _namespaceIndex, _UIData, _picture];
+private _presetIndex = count _presets;
+_presets pushBack [_presetName, _presetIndex, _UIData, _picture];
 profileNamespace setVariable [QGVAR(presets), _presets];
 saveProfileNamespace;
 
