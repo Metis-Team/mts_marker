@@ -3,12 +3,12 @@
  *  Author: Timi007
  *
  *  Description:
- *      Fills the marker name corresponding to the selected Preset.
+ *      Fills the marker name corresponding to the selected preset.
  *      Function is triggered by an EH.
  *
  *  Parameter(s):
  *      0: CONTROL - Presets listbox
- *      1: NUMBER - Index of the currently selected Preset.
+ *      1: NUMBER - Index of the currently selected preset.
  *
  *  Returns:
  *      Nothing.

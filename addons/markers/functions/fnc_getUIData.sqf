@@ -44,10 +44,10 @@ private _grpsize = lbCurSel (_mainDisplay displayCtrl ECHELON_DROPDOWN);
 private _reinforced = cbChecked (_mainDisplay displayCtrl REINFORCED_CHECKBOX);
 private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
 
-//get the left text that will be to the left of the marker
+//get the left text (unique designation)
 private _textleft = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
 
-//get the text that will be to the right of the marker
+//get the right text (higher formation)
 private _textright = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
 
 

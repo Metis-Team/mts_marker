@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Show the window for the Presets.
+ *      Show the window for the presets.
  *
  *  Parameter(s):
  *      0: BOOLEAN - Show the window.

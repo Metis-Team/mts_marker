@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Loads a Preset from the list & fills the UI with data.
+ *      Loads a preset from the list & fills the UI with data.
  *
  *  Parameter(s):
  *      None.

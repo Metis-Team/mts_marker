@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Deletes the selected Preset from the profile & list.
+ *      Deletes the selected preset from the profile namespace & list.
  *
  *  Parameter(s):
  *      None.

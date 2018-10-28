@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Updates the Presets list after every key event of the searchbar or when called.
+ *      Updates the presets list after every key event of the searchbar or when called.
  *
  *  Parameter(s):
  *      None.

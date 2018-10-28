@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Saves a marker Preset to the profile & adds it to the list.
+ *      Saves a marker preset to the profile & adds it to the list.
  *
  *  Parameter(s):
  *      None.
