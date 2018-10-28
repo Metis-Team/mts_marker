@@ -17,7 +17,6 @@
  */
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
-private _presetsList = _mainDisplay displayctrl PRESETS_LIST;
 
 //get the name of the Preset
 private _presetName = ctrlText (_mainDisplay displayctrl NAME_PRESETS_EDIT);
@@ -36,12 +35,6 @@ private _namespaceIndex = count _presets;
 _presets pushBack [_presetName, _namespaceIndex, _UIData, _picture];
 profileNamespace setVariable [QGVAR(presets), _presets];
 saveProfileNamespace;
-
-//add the Preset to the list
-private _index = _presetsList lbAdd _presetName;
-_presetsList lbSetValue [_index, _namespaceIndex];
-_presetsList lbSetData [_index, str _UIData];
-_presetsList lbSetPicture [_index, _picture];
 
 //update the Presets list
 call FUNC(updatePresetsList);
