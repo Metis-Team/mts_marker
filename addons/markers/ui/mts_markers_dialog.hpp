@@ -605,8 +605,8 @@ class GVAR(dialog) {
             sizeEx = 0.035;
             shadow = 0;
         };
-        class namePresetsBTN: RscButton {
-            idc = NAME_PRESETS_BUTTON;
+        class clearPresetsBTN: RscButton {
+            idc = CLEAR_PRESETS_BUTTON;
             font = "PuristaMedium";
             text = "X";
             tooltip = CSTRING(ui_general_namePresetsBTN_tooltip);
