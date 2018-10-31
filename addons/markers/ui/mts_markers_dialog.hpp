@@ -577,8 +577,8 @@ class GVAR(dialog) {
             y = "SafeZoneY + (409 / 1080) * SafeZoneH";
             w = "(20 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 0};
-            colorFocused[] = {0, 0, 0, 0};
+            colorBackground[] = {0, 0, 0, 0.3};
+            colorFocused[] = {0, 0, 0, 0.7};
             onButtonClick = QUOTE(call FUNC(updatePresetsList););
         };
         class searchPresetsEF: RscEdit {
@@ -614,7 +614,7 @@ class GVAR(dialog) {
             y = "SafeZoneY + (656 / 1080) * SafeZoneH";
             w = "(20 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 0.7};
+            colorBackground[] = {0, 0, 0, 0.3};
             colorFocused[] = {0, 0, 0, 0.7};
             onButtonClick = QUOTE(((ctrlParent (_this select 0)) displayCtrl NAME_PRESETS_EDIT) ctrlSetText '';);
         };
