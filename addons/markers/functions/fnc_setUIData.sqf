@@ -1,0 +1,60 @@
+#include "script_component.hpp"
+/**
+ *  Author: Timi007
+ *
+ *  Description:
+ *      Sets the core data for the UI.
+ *
+ *  Parameter(s):
+ *      0: ARRAY - Frameshape.
+ *      1: ARRAY - Modifer.
+ *      2: ARRAY - Group size.
+ *      3: ARRAY - Left text.
+ *      4: STRING - Right text.
+ *
+ *  Returns:
+ *      Nothing.
+ *
+ *  Example:
+ *      [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_setUIData
+ *
+ */
+
+params [
+    ["_frameshape", ["",false], [[]]],
+    ["_modifier", [0,0,0], [[]], 3],
+    ["_size", [0,false,false], [[]], 3],
+    ["_textleft", [], [[]]],
+    ["_textright", "", [""]]
+];
+
+private _mainDisplay = findDisplay MAIN_DISPLAY;
+
+private _ctrlArray = [
+    [(_mainDisplay displayCtrl ICON_DROPDOWN), GVAR(iconArray)],
+    [(_mainDisplay displayCtrl MOD1_DROPDOWN), GVAR(mod1Array)],
+    [(_mainDisplay displayCtrl MOD2_DROPDOWN), GVAR(mod2Array)]
+];
+
+//because of the sorting, the index needs to be found with the help of the value
+{
+    _x params ["_ctrl", "_dropdownArray"];
+
+    for "_index" from 0 to ((count _dropdownArray) -1) step 1 do {
+        private _lbValue = _ctrl lbValue _index;
+        if (_lbValue isEqualTo (_modifier select _forEachIndex)) exitWith {
+            _ctrl lbSetCurSel _index;
+        };
+    };
+} forEach _ctrlArray;
+
+(_mainDisplay displayCtrl ECHELON_DROPDOWN) lbSetCurSel (_size select 0);
+(_mainDisplay displayCtrl REINFORCED_CHECKBOX) cbSetChecked (_size select 1);
+(_mainDisplay displayCtrl REDUCED_CHECKBOX) cbSetChecked (_size select 2);
+
+(_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_textleft joinString "");
+(_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText _textright;
+
+//select right identity in the dialog & update preview
+(_mainDisplay displayCtrl MOD_CHECKBOX) cbSetChecked (_frameshape select 1);
+[(_frameshape select 0)] call FUNC(identityButtonsAction);

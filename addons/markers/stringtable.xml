@@ -94,6 +94,30 @@
                 <Chinese>取消</Chinese>
                 <Chinesesimp>取消</Chinesesimp>
             </Key>
+            <Key ID="str_mts_markers_ui_general_savePresetsBTN">
+                <Original>SAVE</Original>
+                <German>SPEICHERN</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_loadPresetsBTN">
+                <Original>LOAD</Original>
+                <German>LADEN</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_presetsNameTXT">
+                <Original>Preset Name:</Original>
+                <German>Preset Name:</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_namePresetsBTN_tooltip">
+                <Original>Clear name</Original>
+                <German>Name leeren</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_togglePresetsBTN_tooltip">
+                <Original>Open/Close Presets window</Original>
+                <German>Öffne/Schließe Presets Fenster</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_deletePresetsBTN_tooltip">
+                <Original>Delete Preset</Original>
+                <German>Preset löschen</German>
+            </Key>
         </Container>
         <Container name="UI_identity">
             <Key ID="str_mts_markers_ui_identity_friend">
@@ -560,6 +584,10 @@
                 <Chinese>其它文字備註被輸入錯誤的值! 只允許以下字元: A-Z與0-9</Chinese>
                 <Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
             </Key>
+            <Key ID="str_mts_markers_ui_hint_marker_name_empty">
+                <Original>Preset Name can't be empty!</Original>
+                <German>Der Preset Name darf nicht leer sein!</German>
+            </Key>
         </Container>
         <Container name="CBA">
             <Key ID="str_mts_markers_cba_category_name">
@@ -611,6 +639,14 @@
             <Key ID="str_mts_markers_cba_settings_save_last_tooltip">
                 <Original>Enables/Disables the saving of the last selected icon and modifier.</Original>
                 <German>Aktiviert das Speichern der letzten ausgewählten Grundzeichen und Ergänzungszeichen.</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_show_presets_UI">
+                <Original>Show Presets window by default</Original>
+                <German>Zeige das Presets Fenster standardmäßig</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_show_presets_UI_tooltip">
+                <Original>Open Presets window when the marker interface is being opened.</Original>
+                <German>Öffne das Presets Fenster beim Öffnen des Interface.</German>
             </Key>
         </Container>
     </Package>
