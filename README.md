@@ -32,6 +32,7 @@ It allows to build symbols from components, including frame, icon, first modifie
 - Moveable marker
 - Editable/non-editable marker
 - Copy & paste marker
+- Save & load marker presets
 - Build in preview
 - Full 3DEN support
 - Full Briefing support
