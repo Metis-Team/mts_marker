@@ -64,14 +64,17 @@ Metis Marker is licensed under Arma Public License No Derivatives ([APL-ND](http
     <img src="https://i.imgur.com/ZHi6e4d.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/zhCWJij.jpg" width="1024">
+    <img src="https://i.imgur.com/XVVeHLV.jpg" width="1024">
 </p>
 <p align="center">
     <img src="https://i.imgur.com/KjEGjsM.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/18BRaIO.jpg" width="1024">
+    <img src="https://i.imgur.com/mJfepWT.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/XXuJ28E.jpg" width="1024">
+    <img src="https://i.imgur.com/IzWNkAD.jpg" width="1024">
+</p>
+<p align="center">
+    <img src="https://i.imgur.com/8mWm7oH.jpg" width="1024">
 </p>
