@@ -31,6 +31,7 @@ MARKER(unk,mod,naval);
 MARKER(unk,mod,special_forces);
 MARKER(unk,mod,special_operation_forces);
 MARKER(unk,mod,combined_arms);
+MARKER(unk,mod,radar);
 
 //Unknown Mod1
 MARKER(unk,mod,attack);
@@ -41,6 +42,7 @@ MARKER(unk,mod,single_rocket_launcher);
 MARKER(unk,mod,sniper);
 MARKER(unk,mod,headquarters);
 MARKER(unk,mod,naval_top);
+MARKER(unk,mod,radar_top);
 
 //Unknown Mod2
 MARKER(unk,mod,airborne);
