@@ -112,13 +112,14 @@ if (is3DEN && !(uiNamespace getVariable [QGVAR(added3DENKeyEH), false])) then {
         uiNamespace setVariable [QGVAR(added3DENKeyEH), false];
     }];
 
-    _map3denDisplay displayAddEventHandler ["MouseButtonUp", {
-        params ["_control", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
-        if (_button isEqualTo 0 && _shift && !_ctrl && !_alt) then { //Shift + LMouseUp
+    //open marker interface hotkey
+    _map3denDisplay displayAddEventHandler ["KeyUp", {
+        params ["_control", "_key", "_shift", "_ctrl", "_alt"];
+        if (_key isEqualTo 0xB8 && !_shift && !_ctrl) then { //AltGr
             if (IN_3DEN_MAP) then {
                 private _curMapDisplay = call FUNC(getDisplay);
                 if (!isNull _curMapDisplay && isNull (findDisplay MAIN_DISPLAY)) then {
-                    [_curMapDisplay, [_xPos, _yPos]] call FUNC(initializeUI);
+                    [_curMapDisplay, getMousePosition] call FUNC(initializeUI);
                 };
             };
         };
