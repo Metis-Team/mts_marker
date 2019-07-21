@@ -40,7 +40,8 @@ GVAR(iconArray) = [
     ["combined_arms"],
     ["joint_fire_support"],
     ["special_forces"],
-    ["special_operation_forces"]
+    ["special_operation_forces"],
+    ["radar"]
 ];
 
 GVAR(mod1Array) = [
@@ -52,7 +53,8 @@ GVAR(mod1Array) = [
     ["single_rocket_launcher"],
     ["sniper"],
     ["headquarters"],
-    ["naval_top"]
+    ["naval_top"],
+    ["radar_top"]
 ];
 
 GVAR(mod2Array) = [

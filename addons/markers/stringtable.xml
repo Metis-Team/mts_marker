@@ -394,6 +394,10 @@
                 <Original>Special Operation Forces</Original>
                 <German>Spezialkräfte</German>
             </Key>
+            <Key ID="str_mts_markers_ui_icon_radar">
+                <Original>Radar</Original>
+                <German>Radar</German>
+            </Key>
         </Container>
         <Container name="UI_mod1">
             <Key ID="str_mts_markers_ui_mod1_empty">
@@ -445,6 +449,10 @@
             <Key ID="str_mts_markers_ui_mod1_naval_top">
                 <Original>Naval</Original>
                 <German>Marine-</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_mod1_radar_top">
+                <Original>Radar</Original>
+                <German>Radar</German>
             </Key>
         </Container>
         <Container name="UI_mod2">
