@@ -8,6 +8,10 @@ PREP_RECOMPILE_END;
 
 ADDON = true;
 
+// Print version to rpt log
+private _version = getText (configFile >> "CfgPatches" >> "mts_markers" >> "versionStr");
+INFO_1("Metis Marker version: %1.", _version);
+
 //create namespace
 if (isServer || (!isMultiplayer)) then {
     GVAR(namespace) = true call CBA_fnc_createNamespace;
