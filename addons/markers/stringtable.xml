@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project name="MTS Markers">
     <Package name="mts_markers">
         <Container name="Misc">
@@ -7,6 +7,7 @@
                 <German>Timi007, PhILoX, Bix</German>
                 <Chinese>Timi007，PhILoX，Bix</Chinese>
                 <Chinesesimp>Timi007，PhILoX，Bix</Chinesesimp>
+                <Korean>Timi007，PhILoX，Bix</Korean>
             </Key>
         </Container>
         <Container name="UI_general">
@@ -15,108 +16,128 @@
                 <German>EINHEITEN MARKER</German>
                 <Chinese>軍事單位</Chinese>
                 <Chinesesimp>军事单位</Chinesesimp>
+                <Korean>작전명령 표시기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_previewTXT">
                 <Original>Preview</Original>
                 <German>Vorschau</German>
                 <Chinese>預覽</Chinese>
                 <Chinesesimp>预览</Chinesesimp>
+                <Korean>미리보기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_identityTXT">
                 <Original>Identity:</Original>
                 <German>Identität:</German>
                 <Chinese>身分:</Chinese>
                 <Chinesesimp>身分:</Chinesesimp>
+                <Korean>구분:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_iconTXT">
                 <Original>Icon:</Original>
                 <German>Grundzeichen:</German>
                 <Chinese>圖示:</Chinese>
                 <Chinesesimp>图示:</Chinesesimp>
+                <Korean>종류:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_mod1TXT">
                 <Original>Modifier 1:</Original>
                 <German>Ergänzungsz. 1:</German>
                 <Chinese>修飾符1:</Chinese>
                 <Chinesesimp>修饰符1:</Chinesesimp>
+                <Korean>형태:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_mod2TXT">
                 <Original>Modifier 2:</Original>
                 <German>Ergänzungsz. 2:</German>
                 <Chinese>修飾符2:</Chinese>
                 <Chinesesimp>修饰符2:</Chinesesimp>
+                <Korean>이동:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_echelonTXT">
                 <Original>Echelon:</Original>
                 <German>Größenordnung:</German>
                 <Chinese>編制:</Chinese>
                 <Chinesesimp>编制:</Chinesesimp>
+                <Korean>규모:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_reinforcedTXT">
                 <Original>Reinforced:</Original>
                 <German>Verstärkt:</German>
                 <Chinese>擴編:</Chinese>
                 <Chinesesimp>扩编:</Chinesesimp>
+                <Korean>증원병력:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_reducedTXT">
                 <Original>Reduced:</Original>
                 <German>Vermindert:</German>
                 <Chinese>縮編:</Chinese>
                 <Chinesesimp>缩编:</Chinesesimp>
+                <Korean>축소병력:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_higherTXT">
                 <Original>Higher Formation:</Original>
                 <German>Ü. Führungsebene:</German>
                 <Chinese>上級單位:</Chinese>
                 <Chinesesimp>上级单位:</Chinesesimp>
+                <Korean>내용기록:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_uniqueTXT">
                 <Original>Unique Designation:</Original>
                 <German>Eind. Kennung:</German>
                 <Chinese>其它文字備註:</Chinese>
                 <Chinesesimp>其它文字备注:</Chinesesimp>
+                <Korean>부호표식:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_channelTXT">
                 <Original>Channel:</Original>
                 <German>Kanal:</German>
                 <Chinese>頻道:</Chinese>
                 <Chinesesimp>频道:</Chinesesimp>
+                <Korean>채널:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_okBTN">
                 <Original>OK</Original>
                 <German>OK</German>
                 <Chinese>確認</Chinese>
                 <Chinesesimp>确认</Chinesesimp>
+                <Korean>확인</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_cancelBTN">
                 <Original>CANCEL</Original>
                 <German>ABBRUCH</German>
                 <Chinese>取消</Chinese>
                 <Chinesesimp>取消</Chinesesimp>
+                <Korean>취소</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_savePresetsBTN">
                 <Original>SAVE</Original>
                 <German>SPEICHERN</German>
+                <Korean>저장</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_loadPresetsBTN">
                 <Original>LOAD</Original>
                 <German>LADEN</German>
+                <Korean>불러오기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_presetsNameTXT">
                 <Original>Preset Name:</Original>
                 <German>Preset Name:</German>
+                <Korean>사전설정 이름:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_namePresetsBTN_tooltip">
                 <Original>Clear name</Original>
                 <German>Name leeren</German>
+                <Korean>이름 삭제</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_togglePresetsBTN_tooltip">
                 <Original>Open/Close Presets window</Original>
                 <German>Öffne/Schließe Presets Fenster</German>
+                <Korean>사전설정창 끄기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_deletePresetsBTN_tooltip">
                 <Original>Delete Preset</Original>
                 <German>Preset löschen</German>
+                <Korean>사전설정 삭제</Korean>
             </Key>
         </Container>
         <Container name="UI_identity">
@@ -125,42 +146,49 @@
                 <German>Freund</German>
                 <Chinese>友軍</Chinese>
                 <Chinesesimp>友军</Chinesesimp>
+                <Korean>아군</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_identity_assumed_friend">
                 <Original>Assumed Friend</Original>
                 <German>Vermutlich Freund</German>
                 <Chinese>計劃 / 預期 / 疑似</Chinese>
                 <Chinesesimp>计划 / 预期 / 疑似</Chinesesimp>
+                <Korean>아군추정</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_identity_hostile">
                 <Original>Hostile</Original>
                 <German>Feind</German>
                 <Chinese>敵軍</Chinese>
                 <Chinesesimp>敌军</Chinesesimp>
+                <Korean>적군</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_identity_suspect">
                 <Original>Suspect</Original>
                 <German>Verdächtig</German>
                 <Chinese>計劃 / 預期 / 疑似</Chinese>
                 <Chinesesimp>计划 / 预期 / 疑似</Chinesesimp>
+                <Korean>위협수준</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_identity_neutral">
                 <Original>Neutral</Original>
                 <German>Neutral</German>
                 <Chinese>中立</Chinese>
                 <Chinesesimp>中立</Chinesesimp>
+                <Korean>중립</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_identity_unknown">
                 <Original>Unknown</Original>
                 <German>Unbekannt</German>
                 <Chinese>未知</Chinese>
                 <Chinesesimp>未知</Chinesesimp>
+                <Korean>미확인</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_identity_pending">
                 <Original>Pending</Original>
                 <German>Noch unbestimmt</German>
                 <Chinese>計劃 / 預期 / 疑似</Chinese>
                 <Chinesesimp>计划 / 预期 / 疑似</Chinesesimp>
+                <Korean>의심수준</Korean>
             </Key>
         </Container>
         <Container name="UI_icon">
@@ -169,234 +197,276 @@
                 <German>-Leer-</German>
                 <Chinese>-無-</Chinese>
                 <Chinesesimp>-无-</Chinesesimp>
+                <Korean>-미확인-</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_infantry">
                 <Original>Infantry</Original>
                 <German>Infanterie</German>
                 <Chinese>步兵</Chinese>
                 <Chinesesimp>步兵</Chinesesimp>
+                <Korean>보병</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_infantry_mechanized">
                 <Original>Mechanized Infantry</Original>
                 <German>Mechanisierte Infanterie</German>
                 <Chinese>機械化步兵</Chinese>
                 <Chinesesimp>机械化步兵</Chinesesimp>
+                <Korean>기계화 보병</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_infantry_motorized">
                 <Original>Motorized Infantry</Original>
                 <German>Motorisierte Infanterie</German>
                 <Chinese>摩托化步兵</Chinese>
                 <Chinesesimp>摩托化步兵</Chinesesimp>
+                <Korean>차량화 보병</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_armor">
                 <Original>Armor</Original>
                 <German>Panzer</German>
                 <Chinese>裝甲</Chinese>
                 <Chinesesimp>装甲</Chinesesimp>
+                <Korean>기갑</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_anti_armor">
                 <Original>Anti Armor</Original>
                 <German>Panzerabwehr</German>
                 <Chinese>反裝甲</Chinese>
                 <Chinesesimp>反装甲</Chinesesimp>
+                <Korean>대전차 기갑</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_anti_armor_armored">
                 <Original>Armored Anti Armor</Original>
                 <German>Gepanzerte Panzerabwehr</German>
                 <Chinese>機械化反裝甲</Chinese>
                 <Chinesesimp>机械化反装甲</Chinesesimp>
+                <Korean>대전차 중장갑</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_anti_armor_motorized">
                 <Original>Motorized Anti Armor</Original>
                 <German>Motorisierte Panzerabwehr</German>
                 <Chinese>摩托化反裝甲</Chinese>
                 <Chinesesimp>摩托化反装甲</Chinesesimp>
+                <Korean>대전차 차량</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_maintenance">
                 <Original>Maintenance</Original>
                 <German>Instandsetzung</German>
                 <Chinese>維修保養</Chinese>
                 <Chinesesimp>维修保养</Chinesesimp>
+                <Korean>보수</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_air_defence">
                 <Original>Air Defence</Original>
                 <German>Flugabwehr</German>
                 <Chinese>防空</Chinese>
                 <Chinesesimp>防空</Chinesesimp>
+                <Korean>대공</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_air_defence_missile">
                 <Original>Air Defence Missile</Original>
                 <German>Startgerät Flugabwehrrakete Boden-Luft (SAM)</German>
                 <Chinese>防空導彈</Chinese>
                 <Chinesesimp>防空导弹</Chinesesimp>
+                <Korean>대공 미사일</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_fixed_wing">
                 <Original>Fixed Wing</Original>
                 <German>Starrflügler</German>
                 <Chinese>定翼機</Chinese>
                 <Chinesesimp>定翼机</Chinesesimp>
+                <Korean>항공기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_rotary_wing">
                 <Original>Rotary Wing</Original>
                 <German>Drehflügler</German>
                 <Chinese>旋翼機</Chinese>
                 <Chinesesimp>旋翼机</Chinesesimp>
+                <Korean>헬기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_uav">
                 <Original>Unmanned Systems</Original>
                 <German>Unbemannte Systeme</German>
                 <Chinese>無人載具系統</Chinese>
                 <Chinesesimp>无人载具系统</Chinesesimp>
+                <Korean>무인기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_engineer">
                 <Original>Engineer</Original>
                 <German>Pionier</German>
                 <Chinese>工兵</Chinese>
                 <Chinesesimp>工兵</Chinesesimp>
+                <Korean>정비대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_engineer_armored">
                 <Original>Armored Engineer</Original>
                 <German>Panzerpionier</German>
                 <Chinese>裝甲工兵</Chinese>
                 <Chinesesimp>装甲工兵</Chinesesimp>
+                <Korean>기갑 정비</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_engineer_motorized">
                 <Original>Motorized Engineer</Original>
                 <German>Motorisierte Pioniere</German>
                 <Chinese>摩托化工兵</Chinese>
                 <Chinesesimp>摩托化工兵</Chinesesimp>
+                <Korean>차량 정비</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_artillery">
                 <Original>Field Artillery</Original>
                 <German>Artillerie</German>
                 <Chinese>火炮</Chinese>
                 <Chinesesimp>火炮</Chinesesimp>
+                <Korean>야전포</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_artillery_sp">
                 <Original>Self-Propelled Field Artillery</Original>
                 <German>Panzerartillerie</German>
                 <Chinese>自走炮</Chinese>
                 <Chinesesimp>自走炮</Chinesesimp>
+                <Korean>자주포</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_mortar">
                 <Original>Mortar</Original>
                 <German>Mörser</German>
                 <Chinese>迫擊炮</Chinese>
                 <Chinesesimp>迫击炮</Chinesesimp>
+                <Korean>박격포</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_mortar_armored">
                 <Original>Tracked Mortar</Original>
                 <German>Panzermörser</German>
                 <Chinese>機械化迫擊炮</Chinese>
                 <Chinesesimp>机械化迫击炮</Chinesesimp>
+                <Korean>박격포 장갑차량</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance">
                 <Original>Reconnaissance</Original>
                 <German>Aufklärung</German>
                 <Chinese>偵察</Chinese>
                 <Chinesesimp>侦察</Chinesesimp>
+                <Korean>정찰</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance_armored">
                 <Original>Armored Reconnaissance</Original>
                 <German>Panzeraufklärer</German>
                 <Chinese>裝甲偵察</Chinese>
                 <Chinesesimp>装甲侦察</Chinesesimp>
+                <Korean>기갑 정찰</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_reconnaissance_motorized">
                 <Original>Motorized Reconnaissance</Original>
                 <German>Motorisierte Aufklärung</German>
                 <Chinese>摩托化偵察</Chinese>
                 <Chinesesimp>摩托化侦察</Chinesesimp>
+                <Korean>차량 정찰</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_surface_surface_missile">
                 <Original>Surface-Surface Missile</Original>
                 <German>Startgerät Boden-Boden-Flugkörper</German>
                 <Chinese>面對面導彈</Chinese>
                 <Chinesesimp>面对面导弹</Chinesesimp>
+                <Korean>지대지 미사일</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_cbrn">
                 <Original>CBRN Defence</Original>
                 <German>ABC-Abwehr</German>
                 <Chinese>化生放核防禦</Chinese>
                 <Chinesesimp>化生放核防御</Chinesesimp>
+                <Korean>화생방대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_military_intelligence">
                 <Original>Military Intelligence</Original>
                 <German>Militärisches Nachrichtenwesen</German>
                 <Chinese>軍事情報處</Chinese>
                 <Chinesesimp>军事情报处</Chinesesimp>
+                <Korean>군사 정보</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_military_police">
                 <Original>Military Police</Original>
                 <German>Militärpolizei</German>
                 <Chinese>憲兵</Chinese>
                 <Chinesesimp>宪兵</Chinesesimp>
+                <Korean>군사 경찰</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_signal_unit">
                 <Original>Signal</Original>
                 <German>Führungsunterstützung</German>
                 <Chinese>通訊</Chinese>
                 <Chinesesimp>通讯</Chinesesimp>
+                <Korean>통신</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_combat_service_support">
                 <Original>Combat Service Support</Original>
                 <German>Einsatzunterstützung</German>
                 <Chinese>戰鬥後勤支援</Chinese>
                 <Chinesesimp>战斗后勤支援</Chinesesimp>
+                <Korean>전투 근무 지원</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_medical">
                 <Original>Medical</Original>
                 <German>Sanitätsdienst</German>
                 <Chinese>醫療</Chinese>
                 <Chinesesimp>医疗</Chinesesimp>
+                <Korean>의무</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_supply">
                 <Original>Supply</Original>
                 <German>Nachschub</German>
                 <Chinese>補給</Chinese>
                 <Chinesesimp>补给</Chinesesimp>
+                <Korean>보급</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_transportation">
                 <Original>Transportation</Original>
                 <German>Transport</German>
                 <Chinese>運輸</Chinese>
                 <Chinesesimp>运输</Chinesesimp>
+                <Korean>수송</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_amphibious_infantry">
                 <Original>Amphibious Infantry</Original>
                 <German>Amphibische Infanterie</German>
+                <Korean>상륙 보병대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_amphibious_armor">
                 <Original>Amphibious Armor</Original>
                 <German>Amphibische Panzer</German>
+                <Korean>상륙 기갑대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_amphibious_reconnaissance">
                 <Original>Amphibious Reconnaissance</Original>
                 <German>Amphibische Aufklärung</German>
+                <Korean>상륙 정찰대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_naval">
                 <Original>Naval</Original>
                 <German>Marine</German>
+                <Korean>해군</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_combined_arms">
                 <Original>Combined Arms</Original>
                 <German>Verbundene Kräfte</German>
+                <Korean>제병협동</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_joint_fire_support">
                 <Original>Joint Fire Support</Original>
                 <German>Streitkräftegemeinsame tak. Feuerunterstützung</German>
+                <Korean>합동화력지원</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_special_forces">
                 <Original>Special Forces</Original>
                 <German>Spezialkräfte der Landstreitkräfte</German>
+                <Korean>특수부대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_special_operation_forces">
                 <Original>Special Operation Forces</Original>
                 <German>Spezialkräfte</German>
+                <Korean>특수 작전군</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_icon_radar">
                 <Original>Radar</Original>
                 <German>Radar</German>
+                <Korean>레이더</Korean>
             </Key>
         </Container>
         <Container name="UI_mod1">
@@ -405,54 +475,64 @@
                 <German>-Leer-</German>
                 <Chinese>-無-</Chinese>
                 <Chinesesimp>-无-</Chinesesimp>
+                <Korean>-미확인-</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_air_assault">
                 <Original>Air Assault</Original>
                 <German>Luftgestützt</German>
                 <Chinese>空中突擊</Chinese>
                 <Chinesesimp>空中突击</Chinesesimp>
+                <Korean>공습</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_attack">
                 <Original>Attack</Original>
                 <German>Angriffs-</German>
                 <Chinese>攻擊</Chinese>
                 <Chinesesimp>攻击</Chinesesimp>
+                <Korean>공격</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_maintenance_top">
                 <Original>Maintenance</Original>
                 <German>Instandsetzung</German>
                 <Chinese>維修保養</Chinese>
                 <Chinesesimp>维修保养</Chinesesimp>
+                <Korean>보수</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_multiple_rocket_launcher">
                 <Original>Multiple Rocket Launcher</Original>
                 <German>Mehrfachraketenwerfer</German>
                 <Chinese>多管火箭發射器</Chinese>
                 <Chinesesimp>多管火箭发射器</Chinesesimp>
+                <Korean>다연장 미사일 발사대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_single_rocket_launcher">
                 <Original>Single Rocket Launcher</Original>
                 <German>Einzelraketenwerfer</German>
                 <Chinese>單管火箭發射器</Chinese>
                 <Chinesesimp>单管火箭发射器</Chinesesimp>
+                <Korean>미사일 발사대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_sniper">
                 <Original>Sniper</Original>
                 <German>Scharfschütze</German>
                 <Chinese>狙擊手</Chinese>
                 <Chinesesimp>狙击手</Chinesesimp>
+                <Korean>저격수</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_headquarters">
                 <Original>Headquarters (Element)</Original>
                 <German>Führungseinrichtung/Stab</German>
+                <Korean>본부 (지휘부)</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_naval_top">
                 <Original>Naval</Original>
                 <German>Marine-</German>
+                <Korean>해군</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod1_radar_top">
                 <Original>Radar</Original>
                 <German>Radar</German>
+                <Korean>레이더</Korean>
             </Key>
         </Container>
         <Container name="UI_mod2">
@@ -461,48 +541,56 @@
                 <German>-Leer-</German>
                 <Chinese>-無-</Chinese>
                 <Chinesesimp>-无-</Chinesesimp>
+                <Korean>-미확인-</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_airborne">
                 <Original>Airborne</Original>
                 <German>Luftlande-/Fallschirm-</German>
                 <Chinese>空降</Chinese>
                 <Chinesesimp>空降</Chinesesimp>
+                <Korean>공수</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_heavy">
                 <Original>Heavy</Original>
                 <German>Schwer</German>
                 <Chinese>重型</Chinese>
                 <Chinesesimp>重型</Chinesesimp>
+                <Korean>대규모</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_medium">
                 <Original>Medium</Original>
                 <German>Mittel</German>
                 <Chinese>中型</Chinese>
                 <Chinesesimp>中型</Chinesesimp>
+                <Korean>중규모</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_light">
                 <Original>Light</Original>
                 <German>Leicht</German>
                 <Chinese>輕型</Chinese>
                 <Chinesesimp>轻型</Chinesesimp>
+                <Korean>소규모</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_mountain">
                 <Original>Mountain</Original>
                 <German>Gebirgs-</German>
                 <Chinese>山地</Chinese>
                 <Chinesesimp>山地</Chinesesimp>
+                <Korean>산악</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_vstol">
                 <Original>VSTOL</Original>
                 <German>Senkrecht- oder Kurzstart und -landung</German>
                 <Chinese>垂直/短場起降</Chinese>
                 <Chinesesimp>垂直/短场起降</Chinesesimp>
+                <Korean>수직단거리이착륙</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_mod2_wheeled">
                 <Original>Wheeled</Original>
                 <German>Auf Rädern/Rad-</German>
                 <Chinese>輪式載具</Chinese>
                 <Chinesesimp>轮式载具</Chinesesimp>
+                <Korean>차량</Korean>
             </Key>
         </Container>
         <Container name="UI_echelon">
@@ -511,78 +599,91 @@
                 <German>-Leer-</German>
                 <Chinese>-無-</Chinese>
                 <Chinesesimp>-无-</Chinesesimp>
+                <Korean>-미확인-</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_team">
                 <Original>Team/Crew</Original>
                 <German>Team/Besatzung</German>
                 <Chinese>伍/組</Chinese>
                 <Chinesesimp>伍/组</Chinesesimp>
+                <Korean>화력조</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_squad">
                 <Original>Squad</Original>
                 <German>Trupp</German>
                 <Chinese>班</Chinese>
                 <Chinesesimp>班</Chinesesimp>
+                <Korean>분대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_section">
                 <Original>Section</Original>
                 <German>Gruppe</German>
                 <Chinese>加強班</Chinese>
                 <Chinesesimp>加强班</Chinesesimp>
+                <Korean>단대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_platoon">
                 <Original>Platoon</Original>
                 <German>Zug</German>
                 <Chinese>排</Chinese>
                 <Chinesesimp>排</Chinesesimp>
+                <Korean>소대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_company">
                 <Original>Company/Battery</Original>
                 <German>Kompanie/Batterie</German>
                 <Chinese>連</Chinese>
                 <Chinesesimp>连</Chinesesimp>
+                <Korean>중대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_battalion">
                 <Original>Battalion</Original>
                 <German>Bataillon</German>
                 <Chinese>營</Chinese>
                 <Chinesesimp>营</Chinesesimp>
+                <Korean>대대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_regiment">
                 <Original>Regiment/Group</Original>
                 <German>Regiment/Kampfgruppe</German>
                 <Chinese>團</Chinese>
                 <Chinesesimp>团</Chinesesimp>
+                <Korean>연대</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_brigade">
                 <Original>Brigade</Original>
                 <German>Brigade</German>
                 <Chinese>旅</Chinese>
                 <Chinesesimp>旅</Chinesesimp>
+                <Korean>여단</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_division">
                 <Original>Division</Original>
                 <German>Division</German>
                 <Chinese>師</Chinese>
                 <Chinesesimp>师</Chinesesimp>
+                <Korean>사단</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_corps">
                 <Original>Corps</Original>
                 <German>Korps</German>
                 <Chinese>軍</Chinese>
                 <Chinesesimp>军</Chinesesimp>
+                <Korean>군단</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_army">
                 <Original>Army</Original>
                 <German>Armee</German>
                 <Chinese>集團軍</Chinese>
                 <Chinesesimp>集团军</Chinesesimp>
+                <Korean>야전군</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_echelon_army_group">
                 <Original>Army Group</Original>
                 <German>Armeegruppe</German>
                 <Chinese>方面軍</Chinese>
                 <Chinesesimp>方面军</Chinesesimp>
+                <Korean>집단군</Korean>
             </Key>
         </Container>
         <Container name="UI_hint">
@@ -591,10 +692,12 @@
                 <German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z und 0-9</German>
                 <Chinese>其它文字備註被輸入錯誤的值! 只允許以下字元: A-Z與0-9</Chinese>
                 <Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
+                <Korean>부호표식에는 잘못된 문자가 있습니다! 허용되는 문자 : A-Z 및 0-9</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_hint_marker_name_empty">
                 <Original>Preset Name can't be empty!</Original>
                 <German>Der Preset Name darf nicht leer sein!</German>
+                <Korean>사전설정 이름은 비워둘 수 없습니다!</Korean>
             </Key>
         </Container>
         <Container name="CBA">
@@ -603,6 +706,7 @@
                 <German>Metis Marker</German>
                 <Chinese>Metis軍事符號</Chinese>
                 <Chinesesimp>Metis军事符号</Chinesesimp>
+                <Korean>메티스 마커</Korean>
             </Key>
         </Container>
         <Container name="CBA_Keybinding">
@@ -611,50 +715,60 @@
                 <German>Marker Interface öffnen</German>
                 <Chinese>開啟軍事符號介面</Chinese>
                 <Chinesesimp>开启军事符号介面</Chinesesimp>
+                <Korean>마커창 열기</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_keybinding_delete">
                 <Original>Delete Marker</Original>
                 <German>Marker löschen</German>
                 <Chinese>刪除軍事符號</Chinese>
                 <Chinesesimp>删除军事符号</Chinesesimp>
+                <Korean>마커 삭제</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_keybinding_edit">
                 <Original>Edit Marker</Original>
                 <German>Marker editieren</German>
                 <Chinese>編輯軍事符號</Chinese>
                 <Chinesesimp>编辑军事符号</Chinesesimp>
+                <Korean>마커 편집</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_keybinding_move">
                 <Original>Move Marker</Original>
                 <German>Marker verschieben</German>
                 <Chinese>移動軍事符號</Chinese>
                 <Chinesesimp>移动军事符号</Chinesesimp>
+                <Korean>마커 이동</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_keybinding_copy">
                 <Original>Copy Marker</Original>
                 <German>Marker kopieren</German>
+                <Korean>마커 복사</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_keybinding_paste">
                 <Original>Paste Marker</Original>
                 <German>Marker einfügen</German>
+                <Korean>마커 붙이기</Korean>
             </Key>
         </Container>
         <Container name="CBA_Settings">
             <Key ID="str_mts_markers_cba_settings_save_last">
                 <Original>Save last selection</Original>
                 <German>Letzte Auswahl speichern</German>
+                <Korean>최종 선택 저장</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_settings_save_last_tooltip">
                 <Original>Enables/Disables the saving of the last selected icon and modifier.</Original>
                 <German>Aktiviert das Speichern der letzten ausgewählten Grundzeichen und Ergänzungszeichen.</German>
+                <Korean>마지막으로 선택한 아이콘 및 수정 저장을 활성화/비활성화 합니다.</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_settings_show_presets_UI">
                 <Original>Show Presets window by default</Original>
                 <German>Zeige das Presets Fenster standardmäßig</German>
+                <Korean>기본적으로 사전설정 창표시</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_settings_show_presets_UI_tooltip">
                 <Original>Open Presets window when the marker interface is being opened.</Original>
                 <German>Öffne das Presets Fenster beim Öffnen des Interface.</German>
+                <Korean>마커창이 열려있을 때 사전설정창을 엽니다.</Korean>
             </Key>
         </Container>
     </Package>

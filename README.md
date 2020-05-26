@@ -49,6 +49,10 @@ Our customizable marker system consists of:
     - Higher Formation
     - Unique Designation
 
+## Contributions
+- [GodofMonkeys](https://github.com/GodofMonkeys): Chinese/Simplified Chinese translation
+- [MINPD](https://github.com/MINPD): Korean translation
+
 ## Contributing
 - [Issues & Feature requests](https://github.com/Metis-Team/mts_marker/issues)
 - [Become a developer](https://github.com/Metis-Team/mts_marker/wiki/For-developers)
