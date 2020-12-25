@@ -708,6 +708,14 @@
                 <Chinesesimp>Metis军事符号</Chinesesimp>
                 <Korean>메티스 마커</Korean>
             </Key>
+            <Key ID="str_mts_markers_cba_subcategory_name">
+                <Original>Player Map and Briefing</Original>
+                <German>Spielerkarte und Briefing</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_subcategory_3den_name">
+                <Original>3DEN Editor Map</Original>
+                <German>3DEN Editor Karte</German>
+            </Key>
         </Container>
         <Container name="CBA_Keybinding">
             <Key ID="str_mts_markers_cba_keybinding_open_window">

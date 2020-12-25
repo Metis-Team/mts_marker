@@ -33,4 +33,7 @@
 
 //more readable conditions
 #define HAS_MAP (("ItemMap" in (assignedItems player)) || ("ItemGPS" in (assignedItems player)))
-#define IN_3DEN_MAP ((get3DENActionState "ToggleMap") isEqualTo 1)
+#define IN_3DEN_MAP (is3DEN && {(get3DENActionState "ToggleMap") isEqualTo 1})
+
+// 3DEN Mouse button handler system
+#define MOUSE_OFFSET 0xF0

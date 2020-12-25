@@ -21,6 +21,7 @@ if (isServer || (!isMultiplayer)) then {
 CHECK(!hasInterface);
 
 #include "initKeybinds.hpp"
+#include "init3denKeybinds.hpp"
 #include "initSettings.hpp"
 #include "initMarkerVariables.hpp"
 
