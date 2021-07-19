@@ -17,7 +17,7 @@ class CfgMarkers {
         author = CSTRING(authors);
         scope = 0;
         icon = QPATHTOF(data\blu\mts_markers_blu_frameshape.paa);
-        size = 64;
+        size = 256;
     };
     class mts_bludash_frameshape: mts_blu_frameshape {
         icon = QPATHTOF(data\blu\mts_markers_bludash_frameshape.paa);
