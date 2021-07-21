@@ -80,6 +80,11 @@ private _identityComplete = if (_dashedFrameshape) then {
     _identity
 };
 private _frameshapetype = format ["mts_%1_frameshape", _identityComplete];
+
+if (_identityComplete isEqualTo "blu") then {
+    _frameshapetype = "mts_blu_frameshape_vanilla";
+};
+
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
 _markerFrame setMarkerTypeLocal _frameshapetype;
 _markerFrame setMarkerSizeLocal [_scale, _scale];
@@ -89,6 +94,11 @@ private _markerFamily = [_markerFrame];
 
 //add color to the frameshape
 private _frameshapecolor = format ["mts_%1_color", _identity];
+
+if (_identityComplete isEqualTo "blu") then {
+    _frameshapecolor = "colorBLUFOR";
+};
+
 _markerFrame setMarkerColorLocal _frameshapecolor;
 
 //create group size marker
