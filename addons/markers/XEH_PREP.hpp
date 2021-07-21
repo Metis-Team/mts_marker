@@ -14,6 +14,7 @@ PREP(getDisplay);
 PREP(getMarkerFamily);
 PREP(getMouseOverMarkerPrefix);
 PREP(getUIData);
+PREP(getVanillaColor);
 PREP(identityButtonsAction);
 PREP(initializeUI);
 PREP(isMtsMarker);

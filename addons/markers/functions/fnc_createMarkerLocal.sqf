@@ -14,6 +14,7 @@
  *      3: ARRAY - Frameshape of the marker (For string (deprecated): blu, bludash, red, reddash, neu, unk, unkdash).
  *          0: STRING - Identity (blu, red, neu, unk).
  *          1: BOOLEAN - Dashed (e.g. supect).
+ *          2: BOOLEAN - Use APP-6(C) unit color. If value is false, Arma vanilla colors are used. (Default: use APP-6(C))
  *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
@@ -38,7 +39,7 @@ params [
     ["_namePrefix", "", [""]],
     ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
-    ["_frameshape", ["", false], ["", []]],
+    ["_frameshape", ["", false, true], ["", []]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_textleft", [], [[]]],
@@ -65,7 +66,7 @@ if (_frameshape isEqualType "") then {
 
 CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
-_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
+_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_useAPP6Colors", true, [true]]];
 
 //prevent unscaled markers
 if (_scale <= 0) then {
@@ -79,10 +80,10 @@ private _identityComplete = if (_dashedFrameshape) then {
 } else {
     _identity
 };
-private _frameshapetype = format ["mts_%1_frameshape", _identityComplete];
-
-if (_identityComplete isEqualTo "blu") then {
-    _frameshapetype = "mts_blu_frameshape_vanilla";
+private _frameshapetype = if (_useAPP6Colors) then {
+    format ["mts_%1_frameshape", _identityComplete];
+} else {
+    format ["mts_%1_frameshape_vanilla", _identityComplete];
 };
 
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
@@ -93,10 +94,10 @@ _markerFrame setMarkerSizeLocal [_scale, _scale];
 private _markerFamily = [_markerFrame];
 
 //add color to the frameshape
-private _frameshapecolor = format ["mts_%1_color", _identity];
-
-if (_identityComplete isEqualTo "blu") then {
-    _frameshapecolor = "colorBLUFOR";
+private _frameshapecolor = if (_useAPP6Colors) then {
+    format ["mts_%1_color", _identity];
+} else {
+    [_identity] call FUNC(getVanillaColor);
 };
 
 _markerFrame setMarkerColorLocal _frameshapecolor;
