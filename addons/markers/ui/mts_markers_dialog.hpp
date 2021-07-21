@@ -176,60 +176,79 @@ class GVAR(dialog) {
             h = "(160 / 1080) * SafeZoneH";
             text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
         };
+        /*
+            Preview marker coordinates and dimensions:
+
+            For 256px marker/image:
+                x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
+                y = "SafeZoneY + (456 / 1080) * SafeZoneH";
+                w = "(160 / 1920) * SafeZoneW";
+                h = "(160 / 1080) * SafeZoneH";
+
+            For 1024px marker/image:
+                x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+                y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+                w = "(640 / 1920) * SafeZoneW";
+                h = "(640 / 1080) * SafeZoneH";
+
+                Formula:
+                (x_{256px}, y_{256px}) + 160 / 2 - 160 * 4 / 2 = (x_{1024px}, y_{1024px})
+                (w_{256px}, h_{256px}) * 4 = (w_{1024px}, h_{1024px})
+        */
         class previewLayerIdentity: RscPicture {
             idc = PREVIEW_LYR_IDENTITY;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod1: RscPicture {
             idc = PREVIEW_LYR_MOD_1;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod2: RscPicture {
             idc = PREVIEW_LYR_MOD_2;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod3: RscPicture {
             idc = PREVIEW_LYR_MOD_3;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod4: RscPicture {
             idc = PREVIEW_LYR_MOD_4;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerEchelon: RscPicture {
             idc = PREVIEW_LYR_ECHELON;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerSizeMod: RscPicture {
             idc = PREVIEW_LYR_SIZE_MOD;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class presetsHeadBack: IGUIBack {
