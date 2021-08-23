@@ -66,12 +66,17 @@ if (_frameshape isEqualType "") then {
 
 CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
-_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_useAPP6Colors", true, [true]]];
+_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
+_identity = toLower _identity;
 
 //prevent unscaled markers
 if (_scale <= 0) then {
     WARNING("Negative scale for markers aren't allowed. Reseted marker scale back to default");
     _scale = MARKER_SCALE;
+};
+
+if !(_identity in ["blu", "red", "neu", "unk"]) exitWith {
+    ERROR_1("Unkown Identity %1", _identity);
 };
 
 //create frameshape marker
@@ -80,27 +85,28 @@ private _identityComplete = if (_dashedFrameshape) then {
 } else {
     _identity
 };
-private _frameshapetype = if (_useAPP6Colors) then {
-    format ["mts_%1_frameshape", _identityComplete];
+private _frameshapeType = if (GVAR(useVanillaColors)) then {
+    format ["mts_%1_vanilla_frameshape", _identityComplete]
 } else {
-    format ["mts_%1_frameshape_vanilla", _identityComplete];
+    format ["mts_%1_frameshape", _identityComplete]
 };
 
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
-_markerFrame setMarkerTypeLocal _frameshapetype;
+_markerFrame setMarkerTypeLocal _frameshapeType;
 _markerFrame setMarkerSizeLocal [_scale, _scale];
 
 //create array with every marker name in the set. Minimum is the frameshape
 private _markerFamily = [_markerFrame];
 
 //add color to the frameshape
-private _frameshapecolor = if (_useAPP6Colors) then {
-    format ["mts_%1_color", _identity];
+private _frameshapeColor = if (GVAR(useVanillaColors)) then {
+    GVAR(vanillaColorMap) getOrDefault [_identity, ""]
 } else {
-    [_identity] call FUNC(getVanillaColor);
+    format ["mts_%1_color", _identity]
 };
+CHECKRET(_frameshapeColor isEqualTo "", ERROR_1("Could not get corresponding vanilla color for identity %1.", _identity));
 
-_markerFrame setMarkerColorLocal _frameshapecolor;
+_markerFrame setMarkerColorLocal _frameshapeColor;
 
 //create group size marker
 if (_grpsize > 0) then {
@@ -113,7 +119,7 @@ if (_grpsize > 0) then {
 };
 
 //creates (-),(+),(±) marker
-if ((_reinforced) && !(_reduced)) then {
+if (_reinforced && !_reduced) then {
     private _unitsizeMod = format ["mts_%1_size_reinforced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
@@ -121,7 +127,7 @@ if ((_reinforced) && !(_reduced)) then {
 
     _markerFamily pushBack _markerSizeMod;
 };
-if ((_reduced) && !(_reinforced)) then {
+if (_reduced && !_reinforced) then {
     private _unitsizeMod = format ["mts_%1_size_reduced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
@@ -129,7 +135,7 @@ if ((_reduced) && !(_reinforced)) then {
 
     _markerFamily pushBack _markerSizeMod;
 };
-if ((_reinforced) && (_reduced)) then {
+if (_reinforced && _reduced) then {
     private _unitsizeMod = format ["mts_%1_size_reinforced_reduced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;

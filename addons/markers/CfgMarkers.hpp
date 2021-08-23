@@ -19,11 +19,14 @@ class CfgMarkers {
         icon = QPATHTOF(data\blu\mts_markers_blu_frameshape.paa);
         size = 256;
     };
+    class mts_blu_vanilla_frameshape: mts_blu_frameshape {
+        icon = QPATHTOF(data\blu\mts_markers_blu_vanilla_frameshape.paa);
+    };
     class mts_bludash_frameshape: mts_blu_frameshape {
         icon = QPATHTOF(data\blu\mts_markers_bludash_frameshape.paa);
     };
-    class mts_blu_frameshape_vanilla: mts_blu_frameshape {
-        icon = QPATHTOF(data\blu\mts_markers_blu_frameshape_vanilla.paa);
+    class mts_bludash_vanilla_frameshape: mts_bludash_frameshape {
+        icon = QPATHTOF(data\blu\mts_markers_bludash_vanilla_frameshape.paa);
     };
     class mts_red_frameshape: o_unknown {
         author = CSTRING(authors);
@@ -31,8 +34,14 @@ class CfgMarkers {
         icon = QPATHTOF(data\red\mts_markers_red_frameshape.paa);
         size = 256;
     };
+    class mts_red_vanilla_frameshape: mts_red_frameshape {
+        icon = QPATHTOF(data\red\mts_markers_red_vanilla_frameshape.paa);
+    };
     class mts_reddash_frameshape: mts_red_frameshape {
         icon = QPATHTOF(data\red\mts_markers_reddash_frameshape.paa);
+    };
+    class mts_reddash_vanilla_frameshape: mts_reddash_frameshape {
+        icon = QPATHTOF(data\red\mts_markers_reddash_vanilla_frameshape.paa);
     };
     class mts_neu_frameshape: n_unknown {
         author = CSTRING(authors);
@@ -40,14 +49,23 @@ class CfgMarkers {
         icon = QPATHTOF(data\neu\mts_markers_neu_frameshape.paa);
         size = 256;
     };
+    class mts_neu_vanilla_frameshape: mts_neu_frameshape {
+        icon = QPATHTOF(data\neu\mts_markers_neu_vanilla_frameshape.paa);
+    };
     class mts_unk_frameshape: n_unknown {
         author = CSTRING(authors);
         scope = 0;
         icon = QPATHTOF(data\unk\mts_markers_unk_frameshape.paa);
         size = 256;
     };
+    class mts_unk_vanilla_frameshape: mts_unk_frameshape {
+        icon = QPATHTOF(data\unk\mts_markers_unk_vanilla_frameshape.paa);
+    };
     class mts_unkdash_frameshape: mts_unk_frameshape {
         icon = QPATHTOF(data\unk\mts_markers_unkdash_frameshape.paa);
+    };
+    class mts_unkdash_vanilla_frameshape: mts_unkdash_frameshape {
+        icon = QPATHTOF(data\unk\mts_markers_unkdash_vanilla_frameshape.paa);
     };
 
     class mts_special_textmarker: b_unknown {
