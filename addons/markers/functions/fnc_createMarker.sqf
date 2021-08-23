@@ -36,28 +36,11 @@ params [
     ["_pos", [0,0], [[]], [2,3]],
     ["_broadcastChannel", -1, [0]],
     ["_editable", true, [true]],
-    ["_frameshape", ["",false], ["", []]],
-    ["_modifier", [0,0,0], [[]], 3],
-    ["_size", [0,false,false], [[]], 3],
-    ["_textleft", [], [[]]],
-    ["_textright", "", [""]],
+    ["_markerParameter", [], [[]]],
     ["_scale", MARKER_SCALE, [0]]
 ];
 
 CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
-
-//support old frameshape format
-if (_frameshape isEqualType "") then {
-    private _dashedFrameshape = false;
-
-    if ((count _frameshape) > 3) then {
-        _frameshape = _frameshape select [0, 3];
-        CHECK(_frameshape isEqualTo "neu");
-        _dashedFrameshape = true;
-    };
-
-    _frameshape = [_frameshape, _dashedFrameshape];
-};
 
 CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
@@ -68,6 +51,6 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
 };
 
 private _namePrefix = [_editable, _broadcastChannel, _playerUID] call FUNC(generateUniquePrefix);
-[_namePrefix, _broadcastChannel, _pos, _frameshape, _modifier, _size, _textleft, _textright, _scale] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+[_namePrefix, _broadcastChannel, _pos, _markerParameter, _scale] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
 
 _namePrefix
