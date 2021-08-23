@@ -38,31 +38,21 @@ params [
     ["_namePrefix", "", [""]],
     ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
-    ["_frameshape", ["", false], ["", []]],
+    ["_markerParameter", [], [[]]],
+    ["_scale", MARKER_SCALE, [0]]
+];
+
+_markerParameter params [
+    ["_frameshape", ["", false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
-    ["_textleft", [], [[]]],
-    ["_textright", "", [""]],
-    ["_scale", MARKER_SCALE, [0]]
+    ["_uniqueDesignation", [], [[]]],
+    ["_higherFormation", "", [""]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
 CHECK(!hasInterface);
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
-
-//support old frameshape format
-if (_frameshape isEqualType "") then {
-    private _dashedFrameshape = false;
-
-    if ((count _frameshape) > 3) then {
-        _frameshape = _frameshape select [0, 3];
-        CHECK(_frameshape isEqualTo "neu");
-        _dashedFrameshape = true;
-    };
-
-    _frameshape = [_frameshape, _dashedFrameshape];
-};
-
 CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
@@ -154,47 +144,47 @@ if (_reinforced && _reduced) then {
 } forEach (_modifier call FUNC(getAllModifiers));
 
 //create text marker (right side of marker)
-if !(_textright isEqualTo "") then {
+if !(_higherFormation isEqualTo "") then {
     private _markerText = createMarkerLocal [format ["%1_text", _namePrefix], _pos];
     _markerText setMarkerTypeLocal "mts_special_textmarker";
     _markerText setMarkerSizeLocal [_scale, _scale];
-    _markerText setMarkerTextLocal _textright;
+    _markerText setMarkerTextLocal _higherFormation;
 
     _markerFamily pushBack _markerText;
 };
 
 //create text marker (left side of marker)
-if ((count _textLeft) > 0) then {
+if ((count _uniqueDesignation) > 0) then {
     scopeName "textLeftCreation";
     //only take the first three characters of the left text
-    if ((count _textLeft) > 3) then {
-        _textLeft resize 3;
+    if ((count _uniqueDesignation) > 3) then {
+        _uniqueDesignation resize 3;
     };
 
     //check if all characters are valid & make all characters uppercase
     {
         _x = toUpper _x;
-        _textLeft set [_forEachIndex, _x];
+        _uniqueDesignation set [_forEachIndex, _x];
         if !(_x in GVAR(validCharacters)) then {
             //only allow valid characters that are in the array
             WARNING("Invalid character in marker text left. Creating marker without unique designation");
-            _textLeft = [];
+            _uniqueDesignation = [];
             breakOut "textLeftCreation";
         };
-    } forEach _textleft;
+    } forEach _uniqueDesignation;
 
     //convert special number markers
-    if (_textleft isEqualTo ["1","1"]) then {_textleft = ["11"];};
-    if (_textleft isEqualTo ["1","1","1"]) then {_textleft = ["111"];};
+    if (_uniqueDesignation isEqualTo ["1","1"]) then {_uniqueDesignation = ["11"];};
+    if (_uniqueDesignation isEqualTo ["1","1","1"]) then {_uniqueDesignation = ["111"];};
 
-    if (_textleft isEqualTo ["I","I"]) then {_textleft = ["II"];};
-    if (_textleft isEqualTo ["I","I","I"]) then {_textleft = ["III"];};
+    if (_uniqueDesignation isEqualTo ["I","I"]) then {_uniqueDesignation = ["II"];};
+    if (_uniqueDesignation isEqualTo ["I","I","I"]) then {_uniqueDesignation = ["III"];};
 
     //always write the text from right to left (2 = right, 1 = middle, 0 = left)
     private _numPos = 2;
 
-    for "_numIndex" from ((count _textLeft) -1) to 0 step -1 do {
-        private _num = _textLeft select _numIndex;
+    for "_numIndex" from ((count _uniqueDesignation) -1) to 0 step -1 do {
+        private _num = _uniqueDesignation select _numIndex;
         private _numType = format ["mts_%1_num_%2_%3", _identity, _numPos, _num];
         private _markerNumLeft = createMarkerLocal [format ["%1_num_%2_%3", _namePrefix, _numPos, _num], _pos];
         _markerNumLeft setMarkerTypeLocal _numType;
@@ -209,8 +199,7 @@ if ((count _textLeft) > 0) then {
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save marker parameters for editing purposes
-    private _markerParameter = [_frameshape, _modifier, _size, _textleft, _textright, _broadcastChannel, _scale];
-    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter], true];
+    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel, _scale], true];
 
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute

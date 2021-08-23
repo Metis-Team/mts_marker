@@ -155,6 +155,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
 } else {
     //when editing marker or saving of last selection is enabled
     private _markerParameter = [];
+    private _broadcastChannel = -1;
     if (GVAR(saveLastSelection) && (_namePrefix isEqualTo "")) then {
         if (GVAR(lastSelection) isEqualTo []) then {
             _markerParameter set [0, ["blu", false]];
@@ -165,20 +166,19 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         if (isMultiplayer) then {
             private _selectedChannel = currentChannel;
             if (_selectedChannel > 5) then {_selectedChannel = 3;};
-            _markerParameter set [5, _selectedChannel];
+            _broadcastChannel = _selectedChannel;
         };
 
         [_mainDisplay, nil, _mapCtrl, _mousePos] call _setPosAndPrefix;
     } else {
         //get marker family parameter & information from namespace
         private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
-        _markerParameter = _markerInformation select 1;
+        _markerParameter = _markerInformation param [1, [], [[]]];
+        _broadcastChannel = _markerInformation param [2, -1, [0]];
 
         [_mainDisplay, _namePrefix] call _setPosAndPrefix;
     };
     CHECK(_markerParameter isEqualTo []);
-
-    _markerParameter params ["", "", "", "", "", ["_broadcastChannel", -1, [0]]];
 
     //select the original broadcast channel in dropdown
     for "_index" from 0 to ((lbSize _channelCtrl) -1) do {

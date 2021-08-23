@@ -45,10 +45,10 @@ private _reinforced = cbChecked (_mainDisplay displayCtrl REINFORCED_CHECKBOX);
 private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
 
 //get the left text (unique designation)
-private _textleft = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
+private _uniqueDesignation = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
 
 //get the right text (higher formation)
-private _textright = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
+private _higherFormation = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
 
-
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _textleft, _textright]
+// This will be the marker paramters in createMarker
+[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _higherFormation]
