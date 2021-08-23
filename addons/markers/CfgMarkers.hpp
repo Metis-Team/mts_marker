@@ -17,7 +17,7 @@ class CfgMarkers {
         author = CSTRING(authors);
         scope = 0;
         icon = QPATHTOF(data\blu\mts_markers_blu_frameshape.paa);
-        size = 64;
+        size = 256;
     };
     class mts_bludash_frameshape: mts_blu_frameshape {
         icon = QPATHTOF(data\blu\mts_markers_bludash_frameshape.paa);
@@ -26,7 +26,7 @@ class CfgMarkers {
         author = CSTRING(authors);
         scope = 0;
         icon = QPATHTOF(data\red\mts_markers_red_frameshape.paa);
-        size = 64;
+        size = 256;
     };
     class mts_reddash_frameshape: mts_red_frameshape {
         icon = QPATHTOF(data\red\mts_markers_reddash_frameshape.paa);
@@ -35,13 +35,13 @@ class CfgMarkers {
         author = CSTRING(authors);
         scope = 0;
         icon = QPATHTOF(data\neu\mts_markers_neu_frameshape.paa);
-        size = 64;
+        size = 256;
     };
     class mts_unk_frameshape: n_unknown {
         author = CSTRING(authors);
         scope = 0;
         icon = QPATHTOF(data\unk\mts_markers_unk_frameshape.paa);
-        size = 64;
+        size = 256;
     };
     class mts_unkdash_frameshape: mts_unk_frameshape {
         icon = QPATHTOF(data\unk\mts_markers_unkdash_frameshape.paa);
