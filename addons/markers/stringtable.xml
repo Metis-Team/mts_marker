@@ -783,7 +783,7 @@
                 <German>Nutze Arma Farbschema</German>
             </Key>
             <Key ID="str_mts_markers_cba_settings_use_vanilla_colors_tooltip">
-                <Original>Use Arma colors instead of the APP-6(C) one.</Original>
+                <Original>Use Arma colors instead of APP-6(C) colors.</Original>
                 <German>Nutze Arma Farbschema anstelle des APP-6(C) Farbschemas.</German>
             </Key>
         </Container>
