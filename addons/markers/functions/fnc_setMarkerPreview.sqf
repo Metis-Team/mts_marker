@@ -81,12 +81,12 @@ if (_grpsize > 0) then {
 };
 
 //set echelon modifier to corresponding layer
-if ((_reinforced) && (!_reduced)) then {
+if (_reinforced && !_reduced) then {
     _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced.paa), _identity]);
 };
-if ((_reduced) && (!_reinforced)) then {
+if (_reduced && !_reinforced) then {
     _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reduced.paa), _identity]);
 };
-if ((_reinforced) && (_reduced)) then {
+if (_reinforced && _reduced) then {
     _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced_reduced.paa), _identity]);
 };

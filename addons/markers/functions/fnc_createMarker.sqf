@@ -9,26 +9,27 @@
  *      0: ARRAY - Position where the marker will be placed.
  *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
  *      2: BOOLEAN - Is the marker editable.
- *      3: ARRAY - Frameshape of the marker (For string (deprecated): blu, bludash, red, reddash, neu, unk, unkdash).
- *          0: STRING - Identity (blu, red, neu, unk).
- *          1: BOOLEAN - Dashed (e.g. supect).
- *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
- *          0: NUMBER - Icon (0 for none).
- *          1: NUMBER - Modifier 1 (0 for none).
- *          2: NUMBER - Modifier 2 (0 for none).
- *      5: ARRAY - Group size array. (Optional, default: no echelon)
- *          0: NUMBER - Group size (0 for none).
- *          1: BOOLEAN - Reinforced or (+) symbol.
- *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
- *      6: ARRAY - Marker text left. Can only be max. 3 characters. (Optional, default: no text)
- *      7: STRING - Marker text right. (Optional, default: no text)
- *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
+ *      3: ARRAY - The marker configuration.
+ *          0: ARRAY - Frameshape of the marker.
+ *              0: STRING - Identity (blu, red, neu, unk).
+ *              1: BOOLEAN - Dashed (e.g. supect).
+ *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
+ *              0: NUMBER - Icon (0 for none).
+ *              1: NUMBER - Modifier 1 (0 for none).
+ *              2: NUMBER - Modifier 2 (0 for none).
+ *          2: ARRAY - Group size array. (Optional, default: no echelon)
+ *              0: NUMBER - Group size (0 for none).
+ *              1: BOOLEAN - Reinforced or (+) symbol.
+ *              2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
+ *          3: ARRAY - Marker text left - Unique designation. Can only be max. 3 characters. (Optional, default: no text)
+ *          4: STRING - Marker text right - Higher formation. (Optional, default: no text)
+ *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
  *      STRING - Marker prefix.
  *
  *  Example:
- *     _namePrefix = [[2000,1000], 1, true, ["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarker
+ *     _namePrefix = [[2000,1000], 1, true, [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"]] call mts_markers_fnc_createMarker
  *
  */
 
