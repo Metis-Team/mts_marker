@@ -129,7 +129,7 @@ if ((_reinforced) && (_reduced)) then {
 } forEach (_modifier call FUNC(getAllModifiers));
 
 //create text marker (right side of marker)
-if !(_higherFormation isEqualTo "") then {
+if (_higherFormation isNotEqualTo "") then {
     private _markerText = createMarkerLocal [format ["%1_text", _namePrefix], _pos];
     _markerText setMarkerTypeLocal "mts_special_textmarker";
     _markerText setMarkerSizeLocal [_scale, _scale];
@@ -142,8 +142,8 @@ if !(_higherFormation isEqualTo "") then {
 if ((count _uniqueDesignation) > 0) then {
     scopeName "textLeftCreation";
     //only take the first three characters of the left text
-    if ((count _uniqueDesignation) > 3) then {
-        _uniqueDesignation resize 3;
+    if ((count _uniqueDesignation) > UNIQUE_DESIGNATION_MAX_CHARS) then {
+        _uniqueDesignation resize UNIQUE_DESIGNATION_MAX_CHARS;
     };
 
     //check if all characters are valid & make all characters uppercase
@@ -166,7 +166,7 @@ if ((count _uniqueDesignation) > 0) then {
     if (_uniqueDesignation isEqualTo ["I","I","I"]) then {_uniqueDesignation = ["III"];};
 
     //always write the text from right to left (2 = right, 1 = middle, 0 = left)
-    private _numPos = 2;
+    private _numPos = UNIQUE_DESIGNATION_MAX_CHARS - 1;
 
     for "_numIndex" from ((count _uniqueDesignation) -1) to 0 step -1 do {
         private _num = _uniqueDesignation select _numIndex;

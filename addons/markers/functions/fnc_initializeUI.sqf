@@ -70,7 +70,7 @@ private _ctrlArray = [
     } count _dropdownArray;
 
     //sort icon, mod1 and mod2 dropdowns alphabetically
-    if !(_ctrl isEqualTo _echelonCtrl) then {
+    if (_ctrl isNotEqualTo _echelonCtrl) then {
         lbSort _ctrl;
     };
     _ctrl lbSetCurSel 0;
@@ -120,7 +120,7 @@ private _setPosAndPrefix = {
     ];
     private "_pos";
 
-    if !(_namePrefix isEqualTo "") then {
+    if (_namePrefix isNotEqualTo "") then {
         _pos = getMarkerPos (format["%1_frame", _namePrefix]);
     };
     if !(isNull _mapCtrl) then {

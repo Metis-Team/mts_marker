@@ -32,7 +32,7 @@ lbClear _presetsList;
     _x params ["_presetName", "_namespaceIndex", "_UIData", "_picture"];
 
     //only add Presets to the list which are being searched
-    if !(((toLower _presetName) find _search) isEqualTo -1) then {
+    if (((toLower _presetName) find _search) isNotEqualTo -1) then {
         private _index = _presetsList lbAdd _presetName;
         _presetsList lbSetValue [_index, _namespaceIndex];
         _presetsList lbSetData [_index, str _UIData];
