@@ -22,11 +22,12 @@ params [["_isForMarkerCreation", true, [true]]];
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
 //get all data
-(call FUNC(getUIData)) params ["_frameshape", "_modifier", "_size", "_textleft", "_textright"];
+private _markerParameter = [] call FUNC(getUIData);
 
 //chose where the data will be transmited
 scopeName "main";
 if (_isForMarkerCreation) then {
+    private _uniqueDesignation = _markerParameter param [3, []];
     {
         if !(_x in GVAR(validCharacters)) then {
             //only allow valid characters that are in the array
@@ -37,7 +38,7 @@ if (_isForMarkerCreation) then {
             };
             breakOut "main";
         };
-    } count _textleft;
+    } count _uniqueDesignation;
 
     private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
     private _pos = _okBtnCtrl getVariable [QGVAR(createMarkerMousePosition), [0,0]];
@@ -56,15 +57,16 @@ if (_isForMarkerCreation) then {
 
     //check if marker is being editing, if so delete old marker and create new one
     private _editMarkerNamePrefix = _okBtnCtrl getVariable [QGVAR(editMarkerNamePrefix), ""];
-    if !(_editMarkerNamePrefix isEqualTo "") then {
+    if (_editMarkerNamePrefix isNotEqualTo "") then {
         [_editMarkerNamePrefix] call FUNC(deleteMarker);
     };
 
     if (GVAR(saveLastSelection)) then {
-        GVAR(lastSelection) = [_frameshape, _modifier, _size];
+        // Only save frameshape, modifier and size
+        GVAR(lastSelection) = _markerParameter select [0, 3];
     };
-    [_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, _size, _textleft, _textright, MARKER_SCALE] call FUNC(createMarker);
+    [_pos, _broadcastChannel, !is3DEN, _markerParameter, MARKER_SCALE] call FUNC(createMarker);
     _mainDisplay closeDisplay 1;
 } else {
-    [_frameshape, _modifier, _size] call FUNC(setMarkerPreview);
+    _markerParameter call FUNC(setMarkerPreview);
 };

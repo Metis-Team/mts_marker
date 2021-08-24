@@ -31,6 +31,8 @@
 //default marker scale
 #define MARKER_SCALE 1.3
 
+#define UNIQUE_DESIGNATION_MAX_CHARS 3
+
 //more readable conditions
 #define HAS_MAP (("ItemMap" in (assignedItems player)) || ("ItemGPS" in (assignedItems player)))
 #define IN_3DEN_MAP (is3DEN && {(get3DENActionState "ToggleMap") isEqualTo 1})

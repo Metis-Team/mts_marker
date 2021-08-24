@@ -24,7 +24,7 @@ CHECKRET((GVAR(clipboard) isEqualTo "" || !_params), false);
 private _markerInformation = GVAR(namespace) getVariable [GVAR(clipboard), []];
 CHECKRET(_markerInformation isEqualTo [], false);
 
-(_markerInformation select 1) params ["_frameshape", "_modifier", "_size", "_textLeft", "_textRight", "", "_scale"];
+_markerInformation params ["", "_markerParameter", "", "_scale"];
 
 private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 
@@ -39,5 +39,5 @@ private _broadcastChannel = call {
     if (currentChannel > 5) then {3} else {currentChannel};
 };
 
-[_pos, _broadcastChannel, !is3DEN, _frameshape, _modifier, _size, _textLeft, _textRight, _scale] call FUNC(createMarker);
+[_pos, _broadcastChannel, !is3DEN, _markerParameter, _scale] call FUNC(createMarker);
 true

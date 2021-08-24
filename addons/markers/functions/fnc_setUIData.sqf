@@ -24,9 +24,11 @@ params [
     ["_frameshape", ["",false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
-    ["_textleft", [], [[]]],
-    ["_textright", "", [""]]
+    ["_uniqueDesignation", [], [[]]],
+    ["_higherFormation", "", [""]]
 ];
+_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
+_size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
@@ -48,13 +50,13 @@ private _ctrlArray = [
     };
 } forEach _ctrlArray;
 
-(_mainDisplay displayCtrl ECHELON_DROPDOWN) lbSetCurSel (_size select 0);
-(_mainDisplay displayCtrl REINFORCED_CHECKBOX) cbSetChecked (_size select 1);
-(_mainDisplay displayCtrl REDUCED_CHECKBOX) cbSetChecked (_size select 2);
+(_mainDisplay displayCtrl ECHELON_DROPDOWN) lbSetCurSel _grpsize;
+(_mainDisplay displayCtrl REINFORCED_CHECKBOX) cbSetChecked _reinforced;
+(_mainDisplay displayCtrl REDUCED_CHECKBOX) cbSetChecked _reduced;
 
-(_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_textleft joinString "");
-(_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText _textright;
+(_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_uniqueDesignation joinString "");
+(_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText _higherFormation;
 
 //select right identity in the dialog & update preview
-(_mainDisplay displayCtrl MOD_CHECKBOX) cbSetChecked (_frameshape select 1);
-[(_frameshape select 0)] call FUNC(identityButtonsAction);
+(_mainDisplay displayCtrl MOD_CHECKBOX) cbSetChecked _dashedFrameshape;
+[_identity] call FUNC(identityButtonsAction);
