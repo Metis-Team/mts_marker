@@ -49,7 +49,7 @@ TRACE_1("", _keybindInfo);
 
 private _code = if (_isDownHandler) then {
     _keybindInfo param [3, {}]
-    } else {
+} else {
     _keybindInfo param [4, {}]
 };
 

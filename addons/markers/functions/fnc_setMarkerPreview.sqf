@@ -68,7 +68,7 @@ _previewIdentityCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%2_frames
 
 //set all modifiers to corresponding layer
 private _allModifiers = _modifier call FUNC(getAllModifiers);
-if !(_allModifiers isEqualTo []) then {
+if (_allModifiers isNotEqualTo []) then {
     private _previewModCtrlArray = [_previewMod1Ctrl, _previewMod2Ctrl, _previewMod3Ctrl, _previewMod4Ctrl];
     for "_selectPos" from 0 to ((count _allModifiers) - 1) step 1 do {
         (_previewModCtrlArray select _selectPos) ctrlSetText (format [QPATHTOF(data\%1\mod\mts_markers_%1_mod_%2.paa), _identity, (_allModifiers select _selectPos)]);
