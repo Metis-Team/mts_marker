@@ -14,7 +14,6 @@
  *      3: ARRAY - Frameshape of the marker (For string (deprecated): blu, bludash, red, reddash, neu, unk, unkdash).
  *          0: STRING - Identity (blu, red, neu, unk).
  *          1: BOOLEAN - Dashed (e.g. supect).
- *          2: BOOLEAN - Use APP-6(C) unit color. If value is false, Arma vanilla colors are used. (Default: use APP-6(C))
  *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
@@ -39,7 +38,7 @@ params [
     ["_namePrefix", "", [""]],
     ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
-    ["_frameshape", ["", false, true], ["", []]],
+    ["_frameshape", ["", false], ["", []]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_textleft", [], [[]]],
