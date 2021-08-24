@@ -50,5 +50,5 @@ private _uniqueDesignation = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE
 //get the right text (higher formation)
 private _higherFormation = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
 
-// This will be the marker paramters in createMarker
+// This will be the marker parameters in createMarker
 [[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _higherFormation]
