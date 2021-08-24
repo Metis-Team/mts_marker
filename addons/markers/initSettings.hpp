@@ -19,3 +19,13 @@
     2,
     {}
 ] call CBA_settings_fnc_init;
+
+[
+    QGVAR(useVanillaColors),
+    "CHECKBOX",
+    [LLSTRING(cba_settings_use_vanilla_colors), LLSTRING(cba_settings_use_vanilla_colors_tooltip)],
+    LLSTRING(cba_category_name),
+    false,
+    2,
+    {}
+] call CBA_settings_fnc_init;
