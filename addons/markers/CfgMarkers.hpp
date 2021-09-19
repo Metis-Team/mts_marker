@@ -2,11 +2,15 @@ class CfgMarkers {
     #define MARKERFILE(TYPE,MODIFIER,NAME) mts_markers_##TYPE##_##MODIFIER##_##NAME##.paa
     #define MARKER(TYPE,MODIFIER,NAME) \
     class mts_##TYPE##_##MODIFIER##_##NAME##: mts_##TYPE##_frameshape { \
-        icon = PATHTOF(data\TYPE\MODIFIER\MARKERFILE(TYPE,MODIFIER,NAME)); \
+        icon = QPATHTOF(data\TYPE\MODIFIER\MARKERFILE(TYPE,MODIFIER,NAME)); \
     }
     #define NUMMARKER(TYPE,POSITION,NUMBER) \
     class mts_##TYPE##_num_##POSITION##_##NUMBER##: mts_##TYPE##_frameshape { \
-        icon = PATHTOF(data\TYPE\num\POSITION\MARKERFILE(TYPE,POSITION,NUMBER)); \
+        icon = QPATHTOF(data\TYPE\num\POSITION\MARKERFILE(TYPE,POSITION,NUMBER)); \
+    }
+    #define COMMARKER(MODIFIER,NAME) \
+    class mts_com_##MODIFIER##_##NAME##: mts_blu_frameshape { \
+        icon = QPATHTOF(data\com\MODIFIER\MARKERFILE(com,MODIFIER,NAME)); \
     }
 
     class b_unknown;
@@ -80,4 +84,5 @@ class CfgMarkers {
     #include "CfgMarkersRedfor.hpp"
     #include "CfgMarkersNeutral.hpp"
     #include "CfgMarkersUnknown.hpp"
+    #include "CfgMarkersCommon.hpp"
 };

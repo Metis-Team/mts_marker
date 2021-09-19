@@ -67,11 +67,6 @@ MARKER(neu,size,10);
 MARKER(neu,size,11);
 MARKER(neu,size,12);
 
-//Neutral Sizes Special
-MARKER(neu,size,reinforced);
-MARKER(neu,size,reduced);
-MARKER(neu,size,reinforced_reduced);
-
 //Numbers
 //Left
 NUMMARKER(neu,0,0);

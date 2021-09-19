@@ -109,24 +109,15 @@ if (_grpsize > 0) then {
 };
 
 //creates (-),(+),(±) marker
-if (_reinforced && !_reduced) then {
-    private _unitsizeMod = format ["mts_%1_size_reinforced", _identity];
-    private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
-    _markerSizeMod setMarkerTypeLocal _unitsizeMod;
-    _markerSizeMod setMarkerSizeLocal [_scale, _scale];
+if (_reinforced || _reduced) then {
+    private _unitsizeMod = "mts_com_size";
+    if (_reinforced) then {
+        _unitsizeMod = _unitsizeMod + "_reinforced";
+    };
+    if (_reduced) then {
+        _unitsizeMod = _unitsizeMod + "_reduced";
+    };
 
-    _markerFamily pushBack _markerSizeMod;
-};
-if (_reduced && !_reinforced) then {
-    private _unitsizeMod = format ["mts_%1_size_reduced", _identity];
-    private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
-    _markerSizeMod setMarkerTypeLocal _unitsizeMod;
-    _markerSizeMod setMarkerSizeLocal [_scale, _scale];
-
-    _markerFamily pushBack _markerSizeMod;
-};
-if (_reinforced && _reduced) then {
-    private _unitsizeMod = format ["mts_%1_size_reinforced_reduced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
     _markerSizeMod setMarkerSizeLocal [_scale, _scale];
