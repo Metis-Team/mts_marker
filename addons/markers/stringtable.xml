@@ -9,6 +9,13 @@
                 <Chinesesimp>Timi007，PhILoX，Bix</Chinesesimp>
                 <Korean>Timi007，PhILoX，Bix</Korean>
             </Key>
+            <Key ID="str_mts_markers_URL">
+                <Original>https://github.com/Metis-Team</Original>
+                <German>https://github.com/Metis-Team</German>
+                <Chinese>https://github.com/Metis-Team</Chinese>
+                <Chinesesimp>https://github.com/Metis-Team</Chinesesimp>
+                <Korean>https://github.com/Metis-Team</Korean>
+            </Key>
         </Container>
         <Container name="UI_general">
             <Key ID="str_mts_markers_ui_general_headTXT">
