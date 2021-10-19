@@ -1,0 +1,23 @@
+changelog:
+  exclude:
+    labels:
+      - 'ignore changelog'
+      - 'invalid'
+      - 'tools'
+
+  categories:
+    - title: '**ADDED:**'
+      labels:
+        - 'enhancement'
+    - title: '**FIXED:**'
+      labels:
+        - 'bug fix'
+    - title: '**IMPROVED:**'
+      labels:
+        - 'optimization'
+    - title: '**CHANGED:**'
+      labels:
+        - 'cleanup'
+    - title: '**TRANSLATIONS:**'
+      labels:
+        - 'localization'
