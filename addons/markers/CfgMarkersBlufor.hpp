@@ -67,11 +67,6 @@ MARKER(blu,size,10);
 MARKER(blu,size,11);
 MARKER(blu,size,12);
 
-//Blufor Sizes Special
-MARKER(blu,size,reinforced);
-MARKER(blu,size,reduced);
-MARKER(blu,size,reinforced_reduced);
-
 //Numbers
 //Left
 NUMMARKER(blu,0,0);
