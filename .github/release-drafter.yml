@@ -1,0 +1,39 @@
+# Based on the drafter of ACRE (https://github.com/IDI-Systems/acre2/blob/master/.github/release-drafter.yml)
+
+commitish: 'release'
+
+name-template: 'Version $NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+
+categories:
+  - title: '**ADDED:**'
+    labels:
+      - 'enhancement'
+  - title: '**FIXED:**'
+    labels:
+      - 'bug fix'
+  - title: '**IMPROVED:**'
+    labels:
+      - 'optimization'
+  - title: '**CHANGED:**'
+    labels:
+      - 'cleanup'
+  - title: '**TRANSLATIONS:**'
+    labels:
+      - 'localization'
+
+exclude-labels:
+  - 'ignore changelog'
+  - 'invalid'
+  - 'tools'
+
+change-template: '- $TITLE (#$NUMBER) **$AUTHOR**'
+template: |
+  ## Change Log Summary
+
+  $CHANGES
+
+replacers:
+  # Category titles
+  - search: '/\#\# (\*\*(ADDED|FIXED|IMPROVED|CHANGED|TRANSLATIONS):\*\*)/g'
+    replace: '$1'
