@@ -14,7 +14,7 @@ jobs:
     outputs:
       NAME: ${{ env.NAME }}
       MOD_NAME: ${{ env.MOD_NAME }}
-      MOD_NAME_LOWER: ${{ env.MOD_NAME_LOWER }}
+      PREFIX: ${{ env.PREFIX }}
       MAIN_PREFIX: ${{ env.MAIN_PREFIX }}
       VERSION: ${{ env.VERSION }}
       VERSION_SHORT: ${{ env.VERSION_SHORT }}
@@ -36,21 +36,20 @@ jobs:
         echo "::group::Set Binarize registry path"
         New-Item "HKCU:\\Software\\Bohemia Interactive\\binarize" -Force | New-ItemProperty -Name path -Value "${{ github.workspace }}\ci\binarize"
         echo "::endgroup::"
-        echo "::group::Set env variables"
+        echo "Set env variables"
         echo "NAME=$(.\\ci\\hemtt.exe var name)" >> $env:GITHUB_ENV
         echo "MOD_NAME=$(.\\ci\\hemtt.exe var modname)" >> $env:GITHUB_ENV
-        echo "MOD_NAME_LOWER=$((.\\ci\\hemtt.exe var modname).toLower())" >> $env:GITHUB_ENV
+        echo "PREFIX=$(.\\ci\\hemtt.exe var prefix)" >> $env:GITHUB_ENV
         echo "MAIN_PREFIX=$(.\\ci\\hemtt.exe var mainprefix)" >> $env:GITHUB_ENV
         echo "VERSION=$(.\\ci\\hemtt.exe var version)" >> $env:GITHUB_ENV
         echo "VERSION_SHORT=$(($(.\\ci\\hemtt.exe var version) | Select-String -Pattern '^\d+\.\d+\.\d+').Matches.Value)" >> $env:GITHUB_ENV
         echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $env:GITHUB_ENV
-        echo "::endgroup::"
 
     - name: Setup P-Drive for ArmaScriptCompiler
       run: |
-        echo "Creating P: and linking ${{ env.MAIN_PREFIX }}\${{ env.MOD_NAME_LOWER }}\addons"
+        echo "Creating P: and linking ${{ env.MAIN_PREFIX }}\${{ env.PREFIX }}\addons"
         subst p: include
-        New-Item -ItemType Junction -Path "p:${{ env.MAIN_PREFIX }}\${{ env.MOD_NAME_LOWER }}\addons" -Target "addons"
+        New-Item -ItemType Junction -Path "p:${{ env.MAIN_PREFIX }}\${{ env.PREFIX }}\addons" -Target "addons"
 
     - name: Test Binarize
       run: |
