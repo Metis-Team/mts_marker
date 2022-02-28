@@ -32,7 +32,8 @@ GVAR(lastSelection) = [];
 
 if (is3DEN) then {
     {
-        _x call FUNC(createMarkerLocal);
+        private _args = [_x] call FUNC(convertCreateMarkerParams);
+        _args call FUNC(createMarkerLocal);
     } forEach ("Scenario" get3DENMissionAttribute QGVAR(3denData));
 };
 

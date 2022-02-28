@@ -1,5 +1,6 @@
 PREP(3denKeyHandler);
 PREP(3denMouseHandler);
+PREP(convertCreateMarkerParams);
 PREP(copyMarker);
 PREP(createMarker);
 PREP(createMarkerLocal);
