@@ -68,7 +68,7 @@ _previewIdentityCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%2_frames
 
 //set all modifiers to corresponding layer
 private _allModifiers = _modifier call FUNC(getAllModifiers);
-if !(_allModifiers isEqualTo []) then {
+if (_allModifiers isNotEqualTo []) then {
     private _previewModCtrlArray = [_previewMod1Ctrl, _previewMod2Ctrl, _previewMod3Ctrl, _previewMod4Ctrl];
     for "_selectPos" from 0 to ((count _allModifiers) - 1) step 1 do {
         (_previewModCtrlArray select _selectPos) ctrlSetText (format [QPATHTOF(data\%1\mod\mts_markers_%1_mod_%2.paa), _identity, (_allModifiers select _selectPos)]);
@@ -81,12 +81,14 @@ if (_grpsize > 0) then {
 };
 
 //set echelon modifier to corresponding layer
-if ((_reinforced) && (!_reduced)) then {
-    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced.paa), _identity]);
-};
-if ((_reduced) && (!_reinforced)) then {
-    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reduced.paa), _identity]);
-};
-if ((_reinforced) && (_reduced)) then {
-    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\%1\size\mts_markers_%1_size_reinforced_reduced.paa), _identity]);
+if (_reinforced || _reduced) then {
+    private _sizeModFilename = "mts_markers_com_size";
+    if (_reinforced) then {
+        _sizeModFilename = _sizeModFilename + "_reinforced";
+    };
+    if (_reduced) then {
+        _sizeModFilename = _sizeModFilename + "_reduced";
+    };
+
+    _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\com\size\%1.paa), _sizeModFilename]);
 };

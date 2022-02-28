@@ -25,6 +25,9 @@ CHECK(!hasInterface);
 #include "initSettings.hpp"
 #include "initMarkerVariables.hpp"
 
+// Corresponding vanilla colors for each identity
+GVAR(vanillaColorMap) = createHashMapFromArray [["blu", "colorBLUFOR"], ["red", "colorOPFOR"], ["neu", "colorIndependent"], ["unk", "ColorUNKNOWN"]];
+
 GVAR(lastSelection) = [];
 
 if (is3DEN) then {

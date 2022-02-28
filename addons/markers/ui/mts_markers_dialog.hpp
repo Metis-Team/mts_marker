@@ -52,7 +52,7 @@ class GVAR(dialog) {
             sizeEx = 0.055;
             font = "PuristaMedium";
             text = CSTRING(ui_general_previewTXT);
-            style = 0+2;
+            style = 2;
             x = "SafeZoneX + (1054.50 / 1920) * SafeZoneW";
             y = "SafeZoneY + (416 / 1080) * SafeZoneH";
             w = "(180 / 1920) * SafeZoneW";
@@ -176,60 +176,79 @@ class GVAR(dialog) {
             h = "(160 / 1080) * SafeZoneH";
             text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
         };
+        /*
+            Preview marker coordinates and dimensions:
+
+            For 256px marker/image:
+                x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
+                y = "SafeZoneY + (456 / 1080) * SafeZoneH";
+                w = "(160 / 1920) * SafeZoneW";
+                h = "(160 / 1080) * SafeZoneH";
+
+            For 1024px marker/image:
+                x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+                y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+                w = "(640 / 1920) * SafeZoneW";
+                h = "(640 / 1080) * SafeZoneH";
+
+                Formula:
+                (x_{256px}, y_{256px}) + 160 / 2 - 160 * 4 / 2 = (x_{1024px}, y_{1024px})
+                (w_{256px}, h_{256px}) * 4 = (w_{1024px}, h_{1024px})
+        */
         class previewLayerIdentity: RscPicture {
             idc = PREVIEW_LYR_IDENTITY;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod1: RscPicture {
             idc = PREVIEW_LYR_MOD_1;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod2: RscPicture {
             idc = PREVIEW_LYR_MOD_2;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod3: RscPicture {
             idc = PREVIEW_LYR_MOD_3;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerMod4: RscPicture {
             idc = PREVIEW_LYR_MOD_4;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerEchelon: RscPicture {
             idc = PREVIEW_LYR_ECHELON;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class previewLayerSizeMod: RscPicture {
             idc = PREVIEW_LYR_SIZE_MOD;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
+            w = "(640 / 1920) * SafeZoneW";
+            h = "(640 / 1080) * SafeZoneH";
             text = "";
         };
         class presetsHeadBack: IGUIBack {
@@ -450,7 +469,7 @@ class GVAR(dialog) {
         class higherEF: RscEdit {
             idc = HIGHER_EDIT;
             type = 2;
-            style = 0+512;
+            style = 512;
             x = "SafeZoneX + (834.50 / 1920) * SafeZoneW";
             y = "SafeZoneY + (618 / 1080) * SafeZoneH";
             w = "(175 / 1920) * SafeZoneW";
@@ -462,7 +481,7 @@ class GVAR(dialog) {
         class uniqueEF: RscEdit {
             idc = UNIQUE_EDIT;
             type = 2;
-            style = 0+512;
+            style = 512;
             x = "SafeZoneX + (834.50 / 1920) * SafeZoneW";
             y = "SafeZoneY + (643 / 1080) * SafeZoneH";
             w = "(175 / 1920) * SafeZoneW";
@@ -470,7 +489,7 @@ class GVAR(dialog) {
             colorBackground[] = {0,0,0,1};
             sizeEx = 0.035;
             shadow = 0;
-            maxChars = 3;
+            maxChars = UNIQUE_DESIGNATION_MAX_CHARS;
         };
         class channelDD: RscCombo {
             idc = CHANNEL_DROPDOWN;
@@ -489,8 +508,8 @@ class GVAR(dialog) {
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0,0,0,0.7};
             colorFocused[] = {0,0,0,0.7};
-            style = 0+2;
-            default = true;
+            style = 2;
+            default = 1;
             onButtonClick = QUOTE([true] call FUNC(transmitUIData););
         };
         class cancelBTN: RscButton {
@@ -503,7 +522,7 @@ class GVAR(dialog) {
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0,0,0,0.7};
             colorFocused[] = {0,0,0,0.7};
-            style = 0+2;
+            style = 2;
             onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
         };
         class togglePresetsBTN: RscButton {
@@ -517,7 +536,7 @@ class GVAR(dialog) {
             h = "(25 / 1080) * SafeZoneH";
             colorBackground[] = {0.9098, 0.7922, 0.1059, 1};
             colorFocused[] = {0.9098, 0.7922, 0.1059, 1};
-            style = 0+2;
+            style = 2;
             onButtonClick = QUOTE([!ctrlShown ((ctrlParent (_this select 0)) displayCtrl PRESETS_BG)] call FUNC(showPresetsUI););
         };
         class savePresetsBTN: RscButton {
@@ -530,7 +549,7 @@ class GVAR(dialog) {
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0.7};
             colorFocused[] = {0, 0, 0, 0.7};
-            style = 0+2;
+            style = 2;
             onButtonClick = QUOTE(call FUNC(savePreset););
         };
         class loadPresetsBTN: RscButton {
@@ -543,7 +562,7 @@ class GVAR(dialog) {
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0.7};
             colorFocused[] = {0, 0, 0, 0.7};
-            style = 0+2;
+            style = 2;
             onButtonClick = QUOTE(call FUNC(loadPreset););
         };
         class deletePresetsPic: RscPicture {
@@ -566,7 +585,7 @@ class GVAR(dialog) {
             colorBackgroundDisabled[] = {0, 0, 0, 0};
             colorText[] = {0, 0, 0, 0};
             period = 0;
-            style = 0+2;
+            style = 2;
             onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 1)]);
             onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 0.7)]);
             onButtonClick = QUOTE(call FUNC(deletePreset););
@@ -584,7 +603,7 @@ class GVAR(dialog) {
         class searchPresetsEF: RscEdit {
             idc = SEARCH_PRESETS_EDIT;
             type = 2;
-            style = 0+512;
+            style = 512;
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
             y = "SafeZoneY + (409 / 1080) * SafeZoneH";
             w = "(204 / 1920) * SafeZoneW";
@@ -596,7 +615,7 @@ class GVAR(dialog) {
         class namePresetsEF: RscEdit {
             idc = NAME_PRESETS_EDIT;
             type = 2;
-            style = 0+512;
+            style = 512;
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
             y = "SafeZoneY + (656 / 1080) * SafeZoneH";
             w = "(204 / 1920) * SafeZoneW";

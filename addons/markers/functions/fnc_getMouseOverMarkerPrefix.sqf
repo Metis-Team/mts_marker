@@ -22,7 +22,7 @@ CHECKRET(isNull _mapCtrl, "");
 
 private _mouseOverMarker = ctrlMapMouseOver _mapCtrl;
 private _type = _mouseOverMarker param [0, ""];
-CHECKRET(!(_type isEqualTo "marker"), "");
+CHECKRET(_type isNotEqualTo "marker", "");
 private _markerName = _mouseOverMarker select 1;
 
 private _isMtsMarker = [_markerName] call FUNC(isMtsMarker);

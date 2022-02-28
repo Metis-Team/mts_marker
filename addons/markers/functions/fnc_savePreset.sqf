@@ -26,8 +26,9 @@ CHECKRET(_presetName isEqualTo "", hint LLSTRING(ui_hint_marker_name_empty));
 private _UIData = call FUNC(getUIData);
 
 //choose the picture according to the identity of the marker
-_UIData params ["_frameshape"];
-private _picture = format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _frameshape select 0];
+private _identity = (_UIData param [0, []]) param [0, ""];
+CHECK(_identity isEqualTo "");
+private _picture = format [QPATHTOF(data\ui\mts_markers_ui_%1_frameshape.paa), _identity];
 
 //save name, index, marker data and picture of the Preset to the profile
 private _presets = profileNamespace getVariable [QGVAR(presets), []];

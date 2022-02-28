@@ -9,6 +9,13 @@
                 <Chinesesimp>Timi007，PhILoX，Bix</Chinesesimp>
                 <Korean>Timi007，PhILoX，Bix</Korean>
             </Key>
+            <Key ID="str_mts_markers_URL">
+                <Original>https://github.com/Metis-Team</Original>
+                <German>https://github.com/Metis-Team</German>
+                <Chinese>https://github.com/Metis-Team</Chinese>
+                <Chinesesimp>https://github.com/Metis-Team</Chinesesimp>
+                <Korean>https://github.com/Metis-Team</Korean>
+            </Key>
         </Container>
         <Container name="UI_general">
             <Key ID="str_mts_markers_ui_general_headTXT">
@@ -777,6 +784,14 @@
                 <Original>Open Presets window when the marker interface is being opened.</Original>
                 <German>Öffne das Presets Fenster beim Öffnen des Interface.</German>
                 <Korean>마커창이 열려있을 때 사전설정창을 엽니다.</Korean>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_use_vanilla_colors">
+                <Original>Use Arma colors</Original>
+                <German>Nutze Arma Farbschema</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_use_vanilla_colors_tooltip">
+                <Original>Use Arma colors instead of APP-6(C) colors.</Original>
+                <German>Nutze Arma Farbschema anstelle des APP-6(C) Farbschemas.</German>
             </Key>
         </Container>
     </Package>

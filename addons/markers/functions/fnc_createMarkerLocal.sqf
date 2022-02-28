@@ -11,26 +11,27 @@
  *      0: STRING - Unique marker prefix. Format: mtsmarker#<Random Number>/<Player UID>/<Channel ID>
  *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID)
  *      2: ARRAY - Position where the marker will be placed.
- *      3: ARRAY - Frameshape of the marker (For string (deprecated): blu, bludash, red, reddash, neu, unk, unkdash).
- *          0: STRING - Identity (blu, red, neu, unk).
- *          1: BOOLEAN - Dashed (e.g. supect).
- *      4: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
- *          0: NUMBER - Icon (0 for none).
- *          1: NUMBER - Modifier 1 (0 for none).
- *          2: NUMBER - Modifier 2 (0 for none).
- *      5: ARRAY - Group size array. (Optional, default: no echelon)
- *          0: NUMBER - Group size (0 for none).
- *          1: BOOLEAN - Reinforced or (+) symbol.
- *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
- *      6: ARRAY - Marker text left. Can only be max. 3 characters. (Optional, default: no text)
- *      7: STRING - Marker text right. (Optional, default: no text)
- *      8: NUMBER - Scale of the marker. (Optional, default: 1.3)
+ *      3: ARRAY - The marker configuration.
+ *          0: ARRAY - Frameshape of the marker.
+ *              0: STRING - Identity (blu, red, neu, unk).
+ *              1: BOOLEAN - Dashed (e.g. supect).
+ *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
+ *              0: NUMBER - Icon (0 for none).
+ *              1: NUMBER - Modifier 1 (0 for none).
+ *              2: NUMBER - Modifier 2 (0 for none).
+ *          2: ARRAY - Group size array. (Optional, default: no echelon)
+ *              0: NUMBER - Group size (0 for none).
+ *              1: BOOLEAN - Reinforced or (+) symbol.
+ *              2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
+ *          3: ARRAY - Marker text left - Unique designation. Can only be max. 3 characters. (Optional, default: no text)
+ *          4: STRING - Marker text right - Higher formation. (Optional, default: no text)
+ *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
  *     STRING - Marker prefix.
  *
  *  Example:
- *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], ["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_createMarkerLocal
+ *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"]] call mts_markers_fnc_createMarkerLocal
  *
  */
 
@@ -38,39 +39,34 @@ params [
     ["_namePrefix", "", [""]],
     ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
-    ["_frameshape", ["", false], ["", []]],
+    ["_markerParameter", [], [[]]],
+    ["_scale", MARKER_SCALE, [0]]
+];
+
+_markerParameter params [
+    ["_frameshape", ["", false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
-    ["_textleft", [], [[]]],
-    ["_textright", "", [""]],
-    ["_scale", MARKER_SCALE, [0]]
+    ["_uniqueDesignation", [], [[]]],
+    ["_higherFormation", "", [""]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
 CHECK(!hasInterface);
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
-
-//support old frameshape format
-if (_frameshape isEqualType "") then {
-    private _dashedFrameshape = false;
-
-    if ((count _frameshape) > 3) then {
-        _frameshape = _frameshape select [0, 3];
-        CHECK(_frameshape isEqualTo "neu");
-        _dashedFrameshape = true;
-    };
-
-    _frameshape = [_frameshape, _dashedFrameshape];
-};
-
 CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
+_identity = toLower _identity;
 
 //prevent unscaled markers
 if (_scale <= 0) then {
     WARNING("Negative scale for markers aren't allowed. Reseted marker scale back to default");
     _scale = MARKER_SCALE;
+};
+
+if !(_identity in ["blu", "red", "neu", "unk"]) exitWith {
+    ERROR_1("Unkown Identity %1", _identity);
 };
 
 //create frameshape marker
@@ -79,17 +75,28 @@ private _identityComplete = if (_dashedFrameshape) then {
 } else {
     _identity
 };
-private _frameshapetype = format ["mts_%1_frameshape", _identityComplete];
+private _frameshapeType = if (GVAR(useVanillaColors)) then {
+    format ["mts_%1_vanilla_frameshape", _identityComplete]
+} else {
+    format ["mts_%1_frameshape", _identityComplete]
+};
+
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
-_markerFrame setMarkerTypeLocal _frameshapetype;
+_markerFrame setMarkerTypeLocal _frameshapeType;
 _markerFrame setMarkerSizeLocal [_scale, _scale];
 
 //create array with every marker name in the set. Minimum is the frameshape
 private _markerFamily = [_markerFrame];
 
 //add color to the frameshape
-private _frameshapecolor = format ["mts_%1_color", _identity];
-_markerFrame setMarkerColorLocal _frameshapecolor;
+private _frameshapeColor = if (GVAR(useVanillaColors)) then {
+    GVAR(vanillaColorMap) getOrDefault [_identity, ""]
+} else {
+    format ["mts_%1_color", _identity]
+};
+CHECKRET(_frameshapeColor isEqualTo "", ERROR_1("Could not get corresponding vanilla color for identity %1.", _identity));
+
+_markerFrame setMarkerColorLocal _frameshapeColor;
 
 //create group size marker
 if (_grpsize > 0) then {
@@ -102,24 +109,15 @@ if (_grpsize > 0) then {
 };
 
 //creates (-),(+),(±) marker
-if ((_reinforced) && !(_reduced)) then {
-    private _unitsizeMod = format ["mts_%1_size_reinforced", _identity];
-    private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
-    _markerSizeMod setMarkerTypeLocal _unitsizeMod;
-    _markerSizeMod setMarkerSizeLocal [_scale, _scale];
+if (_reinforced || _reduced) then {
+    private _unitsizeMod = "mts_com_size";
+    if (_reinforced) then {
+        _unitsizeMod = _unitsizeMod + "_reinforced";
+    };
+    if (_reduced) then {
+        _unitsizeMod = _unitsizeMod + "_reduced";
+    };
 
-    _markerFamily pushBack _markerSizeMod;
-};
-if ((_reduced) && !(_reinforced)) then {
-    private _unitsizeMod = format ["mts_%1_size_reduced", _identity];
-    private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
-    _markerSizeMod setMarkerTypeLocal _unitsizeMod;
-    _markerSizeMod setMarkerSizeLocal [_scale, _scale];
-
-    _markerFamily pushBack _markerSizeMod;
-};
-if ((_reinforced) && (_reduced)) then {
-    private _unitsizeMod = format ["mts_%1_size_reinforced_reduced", _identity];
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
     _markerSizeMod setMarkerSizeLocal [_scale, _scale];
@@ -138,47 +136,47 @@ if ((_reinforced) && (_reduced)) then {
 } forEach (_modifier call FUNC(getAllModifiers));
 
 //create text marker (right side of marker)
-if !(_textright isEqualTo "") then {
+if (_higherFormation isNotEqualTo "") then {
     private _markerText = createMarkerLocal [format ["%1_text", _namePrefix], _pos];
     _markerText setMarkerTypeLocal "mts_special_textmarker";
     _markerText setMarkerSizeLocal [_scale, _scale];
-    _markerText setMarkerTextLocal _textright;
+    _markerText setMarkerTextLocal _higherFormation;
 
     _markerFamily pushBack _markerText;
 };
 
 //create text marker (left side of marker)
-if ((count _textLeft) > 0) then {
+if ((count _uniqueDesignation) > 0) then {
     scopeName "textLeftCreation";
     //only take the first three characters of the left text
-    if ((count _textLeft) > 3) then {
-        _textLeft resize 3;
+    if ((count _uniqueDesignation) > UNIQUE_DESIGNATION_MAX_CHARS) then {
+        _uniqueDesignation resize UNIQUE_DESIGNATION_MAX_CHARS;
     };
 
     //check if all characters are valid & make all characters uppercase
     {
         _x = toUpper _x;
-        _textLeft set [_forEachIndex, _x];
+        _uniqueDesignation set [_forEachIndex, _x];
         if !(_x in GVAR(validCharacters)) then {
             //only allow valid characters that are in the array
             WARNING("Invalid character in marker text left. Creating marker without unique designation");
-            _textLeft = [];
+            _uniqueDesignation = [];
             breakOut "textLeftCreation";
         };
-    } forEach _textleft;
+    } forEach _uniqueDesignation;
 
     //convert special number markers
-    if (_textleft isEqualTo ["1","1"]) then {_textleft = ["11"];};
-    if (_textleft isEqualTo ["1","1","1"]) then {_textleft = ["111"];};
+    if (_uniqueDesignation isEqualTo ["1","1"]) then {_uniqueDesignation = ["11"];};
+    if (_uniqueDesignation isEqualTo ["1","1","1"]) then {_uniqueDesignation = ["111"];};
 
-    if (_textleft isEqualTo ["I","I"]) then {_textleft = ["II"];};
-    if (_textleft isEqualTo ["I","I","I"]) then {_textleft = ["III"];};
+    if (_uniqueDesignation isEqualTo ["I","I"]) then {_uniqueDesignation = ["II"];};
+    if (_uniqueDesignation isEqualTo ["I","I","I"]) then {_uniqueDesignation = ["III"];};
 
     //always write the text from right to left (2 = right, 1 = middle, 0 = left)
-    private _numPos = 2;
+    private _numPos = UNIQUE_DESIGNATION_MAX_CHARS - 1;
 
-    for "_numIndex" from ((count _textLeft) -1) to 0 step -1 do {
-        private _num = _textLeft select _numIndex;
+    for "_numIndex" from ((count _uniqueDesignation) -1) to 0 step -1 do {
+        private _num = _uniqueDesignation select _numIndex;
         private _numType = format ["mts_%1_num_%2_%3", _identity, _numPos, _num];
         private _markerNumLeft = createMarkerLocal [format ["%1_num_%2_%3", _namePrefix, _numPos, _num], _pos];
         _markerNumLeft setMarkerTypeLocal _numType;
@@ -193,8 +191,7 @@ if ((count _textLeft) > 0) then {
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save marker parameters for editing purposes
-    private _markerParameter = [_frameshape, _modifier, _size, _textleft, _textright, _broadcastChannel, _scale];
-    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter], true];
+    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel, _scale], true];
 
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute
