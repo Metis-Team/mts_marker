@@ -21,6 +21,7 @@ PREP(loadPreset);
 PREP(moveMarkerInProgress);
 PREP(moveMarkerInProgress3DEN);
 PREP(moveMarkerMouseDown);
+PREP(onBriefingDisplayOpened);
 PREP(onPresetsLBSelChanged);
 PREP(pasteMarker);
 PREP(savePreset);
