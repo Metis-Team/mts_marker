@@ -51,17 +51,21 @@ Our customizable marker system consists of:
 
 ## FAQ
 - Q: Does the mod have to be run on the server?  
- A: Yes
+  A: Yes
 - Q: Can we get the option to draw control measure symbols (e.g. the attack arrow)?  
- A: No. Here's why:
-  1. Arma already provides the ability to draw lines, so you can easily make them.
-  2. Creating such a system would be too complex because CMS are very customizable (they can vary in length, width, curvature, etc.). We would need to create a framework similar to 3DEN shapes (I mean the rectangles, etc.) and still add more (you can't curve 3DEN shapes).
+  A: No. Here's why:
+    1. Arma already provides the ability to draw lines, so you can easily make them.
+    2. Creating such a system would be too complex because CMS are very customizable (they can vary in length, width, curvature, etc.). We would need to create a framework similar to 3DEN shapes (I mean the rectangles, etc.) and still add more (you can't curve 3DEN shapes).
 - Q: Can I draw markers in the 3DEN editor  
- A: Yes, standard keybind applies (default: right alt).
+  A: Yes, standard keybind applies (default: right alt).
 - Q: Can I draw markers in the mission planning screen?  
- A: Yes, standard keybind applies (default: SHIFT + LMB)
+  A: Yes, standard keybind applies (default: SHIFT + LMB)
+- Q: I can't see markers placed in the 3DEN editor when I'm ingame?  
+  A: The mission needs to be saved for the markers to appear ingame.
+- Q: Is there an option to change the color scheme of the markers to the Arma vanilla style?  
+  A: Yes! In the CBA Settings you can set Metis Marker to use Arma colors instead of the APP-6(C) colors.
 - Q: Where can I find more infos about this mod?  
- A: You can read our [Wiki](https://github.com/Metis-Team/mts_marker/wiki)
+  A: You can read our [Wiki](https://github.com/Metis-Team/mts_marker/wiki)
 
 ## Contributions
 - [GodofMonkeys](https://github.com/GodofMonkeys): Chinese/Simplified Chinese translation
