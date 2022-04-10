@@ -73,7 +73,7 @@ def create_image(letter, pos, anchor = 'lb'):
         letter_width -= 1
 
     v_offset = text_v_offset
-    if (anchor == 'l'):
+    if (anchor == 'lb'):
         offset_direction = -1
         v_offset += letter_width
     else:

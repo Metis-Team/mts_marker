@@ -37,7 +37,7 @@ class GVAR(dialog) {
             x = "SafeZoneX + (672.50 / 1920) * SafeZoneW";
             y = "SafeZoneY + (409 / 1080) * SafeZoneH";
             w = "(370 / 1920) * SafeZoneW";
-            h = "(290 / 1080) * SafeZoneH";
+            h = "(315 / 1080) * SafeZoneH";
         };
         class rightBack: IGUIBack {
             idc = RIGHT_BG;
@@ -45,7 +45,7 @@ class GVAR(dialog) {
             x = "SafeZoneX + (1045.50 / 1920) * SafeZoneW";
             y = "SafeZoneY + (409 / 1080) * SafeZoneH";
             w = "(202 / 1920) * SafeZoneW";
-            h = "(267 / 1080) * SafeZoneH";
+            h = "(292 / 1080) * SafeZoneH";
         };
         class previewTXT: RscText {
             idc = PREVIEW_TXT;
@@ -158,13 +158,23 @@ class GVAR(dialog) {
             w = "(150 / 1920) * SafeZoneW";
             h = "(18 / 1080) * SafeZoneH";
         };
+        class additionalTXT: RscText {
+            idc = ADDITIONAL_TXT;
+            font = "PuristaLight";
+            sizeEx = 0.035;
+            text = CSTRING(ui_general_additionalTXT);
+            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (668 / 1080) * SafeZoneH";
+            w = "(150 / 1920) * SafeZoneW";
+            h = "(18 / 1080) * SafeZoneH";
+        };
         class channelTXT: RscText {
             idc = CHANNEL_TXT;
             font = "PuristaLight";
             sizeEx = 0.035;
             text = CSTRING(ui_general_channelTXT);
             x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (673 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (698 / 1080) * SafeZoneH";
             w = "(135 / 1920) * SafeZoneW";
             h = "(18 / 1080) * SafeZoneH";
         };
@@ -265,7 +275,7 @@ class GVAR(dialog) {
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
             y = "SafeZoneY + (409 / 1080) * SafeZoneH";
             w = "(224 / 1920) * SafeZoneW";
-            h = "(267 / 1080) * SafeZoneH";
+            h = "(292 / 1080) * SafeZoneH";
         };
         class presetsNameTXT: RscText {
             idc = PRESETS_NAME_TXT;
@@ -274,7 +284,7 @@ class GVAR(dialog) {
             text = CSTRING(ui_general_presetsNameTXT);
             colorBackground[] = {0, 0, 0, 0.3};
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (636 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (661 / 1080) * SafeZoneH";
             w = "(224 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
         };
@@ -282,7 +292,7 @@ class GVAR(dialog) {
             idc = DELETE_PRESETS_BG;
             colorBackground[] = {0, 0, 0, 0.7};
             x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(20 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
         };
@@ -477,6 +487,7 @@ class GVAR(dialog) {
             colorBackground[] = {0,0,0,1};
             sizeEx = 0.035;
             shadow = 0;
+            maxChars = HIGHER_FORMATION_MAX_CHARS;
         };
         class uniqueEF: RscEdit {
             idc = UNIQUE_EDIT;
@@ -491,10 +502,22 @@ class GVAR(dialog) {
             shadow = 0;
             maxChars = UNIQUE_DESIGNATION_MAX_CHARS;
         };
+        class additionalEF: RscEdit {
+            idc = ADDITIONAL_EDIT;
+            type = 2;
+            style = 512;
+            x = "SafeZoneX + (834.50 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (668 / 1080) * SafeZoneH";
+            w = "(175 / 1920) * SafeZoneW";
+            h = "(20 / 1080) * SafeZoneH";
+            colorBackground[] = {0,0,0,1};
+            sizeEx = 0.035;
+            shadow = 0;
+        };
         class channelDD: RscCombo {
             idc = CHANNEL_DROPDOWN;
             x = "SafeZoneX + (814.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (671 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (696 / 1080) * SafeZoneH";
             w = "(195 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
         };
@@ -503,7 +526,7 @@ class GVAR(dialog) {
             font = "PuristaMedium";
             text = CSTRING(ui_general_okBTN);
             x = "SafeZoneX + (1045.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(100 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0,0,0,0.7};
@@ -517,7 +540,7 @@ class GVAR(dialog) {
             font = "PuristaMedium";
             text = CSTRING(ui_general_cancelBTN);
             x = "SafeZoneX + (1148.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(99 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0,0,0,0.7};
@@ -544,7 +567,7 @@ class GVAR(dialog) {
             font = "PuristaMedium";
             text = CSTRING(ui_general_savePresetsBTN);
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(99 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0.7};
@@ -557,7 +580,7 @@ class GVAR(dialog) {
             font = "PuristaMedium";
             text = CSTRING(ui_general_loadPresetsBTN);
             x = "SafeZoneX + (1352.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(99 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0.7};
@@ -569,7 +592,7 @@ class GVAR(dialog) {
             idc = DELETE_PRESETS_PIC;
             text = "A3\3den\Data\Displays\Display3DEN\PanelLeft\entityList_delete_ca.paa";
             x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(20 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
         };
@@ -577,7 +600,7 @@ class GVAR(dialog) {
             idc = DELETE_PRESETS_BUTTON;
             tooltip = CSTRING(ui_general_deletePresetsBTN_tooltip);
             x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (679 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
             w = "(20 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0};
@@ -617,7 +640,7 @@ class GVAR(dialog) {
             type = 2;
             style = 512;
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (656 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (681 / 1080) * SafeZoneH";
             w = "(204 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 1};
@@ -630,7 +653,7 @@ class GVAR(dialog) {
             text = "X";
             tooltip = CSTRING(ui_general_namePresetsBTN_tooltip);
             x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (656 / 1080) * SafeZoneH";
+            y = "SafeZoneY + (681 / 1080) * SafeZoneH";
             w = "(20 / 1920) * SafeZoneW";
             h = "(20 / 1080) * SafeZoneH";
             colorBackground[] = {0, 0, 0, 0.3};
@@ -642,7 +665,7 @@ class GVAR(dialog) {
             x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
             y = "SafeZoneY + (429 / 1080) * SafeZoneH";
             w = "(224 / 1920) * SafeZoneW";
-            h = "(207 / 1080) * SafeZoneH";
+            h = "(232 / 1080) * SafeZoneH";
         };
     };
 };

@@ -25,13 +25,14 @@
  *              2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
  *          3: ARRAY - Marker text left - Unique designation. Can only be max. 3 characters. (Optional, default: no text)
  *          4: STRING - Marker text right - Higher formation. (Optional, default: no text)
+ *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
  *     STRING - Marker prefix.
  *
  *  Example:
- *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"]] call mts_markers_fnc_createMarkerLocal
+ *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createMarkerLocal
  *
  */
 
@@ -48,7 +49,8 @@ _markerParameter params [
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
-    ["_higherFormation", "", [""]]
+    ["_additionalInfo", "", [""]],
+    ["_higherFormation", [], [[]]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
@@ -136,16 +138,16 @@ if (_reinforced || _reduced) then {
 } forEach (_modifier call FUNC(getAllModifiers));
 
 //create text marker (right side of marker)
-if (_higherFormation isNotEqualTo "") then {
+if (_additionalInfo isNotEqualTo "") then {
     private _markerText = createMarkerLocal [format ["%1_text", _namePrefix], _pos];
     _markerText setMarkerTypeLocal "mts_special_textmarker";
     _markerText setMarkerSizeLocal [_scale, _scale];
-    _markerText setMarkerTextLocal _higherFormation;
+    _markerText setMarkerTextLocal _additionalInfo;
 
     _markerFamily pushBack _markerText;
 };
 
-//create text marker (left side of marker)
+// create text marker (bottom left of marker)
 if ((count _uniqueDesignation) > 0) then {
     scopeName "textLeftCreation";
     //only take the first three characters of the left text
@@ -159,34 +161,59 @@ if ((count _uniqueDesignation) > 0) then {
         _uniqueDesignation set [_forEachIndex, _x];
         if !(_x in GVAR(validCharacters)) then {
             //only allow valid characters that are in the array
-            WARNING("Invalid character in marker text left. Creating marker without unique designation");
+            WARNING("Invalid character in marker text bottom left. Creating marker without unique designation");
             _uniqueDesignation = [];
             breakOut "textLeftCreation";
         };
     } forEach _uniqueDesignation;
 
-    //convert special number markers
-    if (_uniqueDesignation isEqualTo ["1","1"]) then {_uniqueDesignation = ["11"];};
-    if (_uniqueDesignation isEqualTo ["1","1","1"]) then {_uniqueDesignation = ["111"];};
-
-    if (_uniqueDesignation isEqualTo ["I","I"]) then {_uniqueDesignation = ["II"];};
-    if (_uniqueDesignation isEqualTo ["I","I","I"]) then {_uniqueDesignation = ["III"];};
-
     //always write the text from right to left (2 = right, 1 = middle, 0 = left)
-    private _numPos = UNIQUE_DESIGNATION_MAX_CHARS - 1;
+    private _letterPos = 0;
 
-    for "_numIndex" from ((count _uniqueDesignation) -1) to 0 step -1 do {
-        private _num = _uniqueDesignation select _numIndex;
-        private _numType = format ["mts_%1_num_%2_%3", _identity, _numPos, _num];
-        private _markerNumLeft = createMarkerLocal [format ["%1_num_%2_%3", _namePrefix, _numPos, _num], _pos];
-        _markerNumLeft setMarkerTypeLocal _numType;
-        _markerNumLeft setMarkerSizeLocal [_scale, _scale];
+    for "_numIndex" from ((count _uniqueDesignation) - 1) to 0 step -1 do {
+        private _letter = _uniqueDesignation select _numIndex;
+        private _letterType = format ["mts_alphanum_lb_%1_%2", _letterPos, _letter];
+        private _markerUniqueDesignation = createMarkerLocal [format ["%1_alphanum_lb_%2_%3", _namePrefix, _letterPos, _letter], _pos];
+        _markerUniqueDesignation setMarkerTypeLocal _letterType;
+        _markerUniqueDesignation setMarkerSizeLocal [_scale, _scale];
 
-        _markerFamily pushBack _markerNumLeft;
+        _markerFamily pushBack _markerUniqueDesignation;
 
-        _numPos = _numPos - 1;
+        _letterPos = _letterPos + 1;
     };
 };
+
+// create text marker (bottom right of marker)
+if ((count _higherFormation) > 0) then {
+    scopeName "textRightCreation";
+    //only take the first three characters of the left text
+    if ((count _higherFormation) > HIGHER_FORMATION_MAX_CHARS) then {
+        _higherFormation resize HIGHER_FORMATION_MAX_CHARS;
+    };
+
+    //check if all characters are valid & make all characters uppercase
+    {
+        _x = toUpper _x;
+        _higherFormation set [_forEachIndex, _x];
+        if !(_x in GVAR(validCharacters)) then {
+            //only allow valid characters that are in the array
+            WARNING("Invalid character in marker text bottom right. Creating marker without higher formation");
+            _higherFormation = [];
+            breakOut "textRightCreation";
+        };
+    } forEach _higherFormation;
+
+    {
+        private _letter = _x;
+        private _letterType = format ["mts_alphanum_rb_%1_%2", _forEachIndex, _letter];
+        private _markerHigherFormation = createMarkerLocal [format ["%1_alphanum_rb_%2_%3", _namePrefix, _forEachIndex, _letter], _pos];
+        _markerHigherFormation setMarkerTypeLocal _letterType;
+        _markerHigherFormation setMarkerSizeLocal [_scale, _scale];
+
+        _markerFamily pushBack _markerHigherFormation;
+    } forEach _higherFormation;
+};
+
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace

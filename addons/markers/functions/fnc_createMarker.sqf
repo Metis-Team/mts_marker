@@ -21,15 +21,16 @@
  *              0: NUMBER - Group size (0 for none).
  *              1: BOOLEAN - Reinforced or (+) symbol.
  *              2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
- *          3: ARRAY - Marker text left - Unique designation. Can only be max. 3 characters. (Optional, default: no text)
- *          4: STRING - Marker text right - Higher formation. (Optional, default: no text)
+ *          3: ARRAY - Marker text left bottom - Unique designation. Can only be max. 6 characters. (Optional, default: no text)
+ *          4: STRING - Marker text right - Additional information. (Optional, default: no text)
+ *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *
  *  Returns:
  *      STRING - Marker prefix.
  *
  *  Example:
- *     _namePrefix = [[2000,1000], 1, true, [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"]] call mts_markers_fnc_createMarker
+ *     _namePrefix = [[2000,1000], 1, true, [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createMarker
  *
  */
 
@@ -42,8 +43,6 @@ params [
 ];
 
 CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
-
-CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
 
 //get player UID
 private _playerUID = getPlayerUID player;
