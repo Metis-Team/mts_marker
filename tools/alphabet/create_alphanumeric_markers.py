@@ -61,7 +61,7 @@ images_dir = os.path.join(project_dir, 'images')
 font_file = os.path.join(project_dir, 'RobotoMono', 'static', 'RobotoMono-SemiBold.ttf')
 font = ImageFont.truetype(font_file, size=35) # 26pt == 35px
 
-def create_image(letter, pos, orientation = 'l'):
+def create_image(letter, pos, anchor = 'lb'):
     img = Image.new('RGBA', img_size)
 
     letter_size = font.getbbox(letter, anchor='ls')
@@ -73,7 +73,7 @@ def create_image(letter, pos, orientation = 'l'):
         letter_width -= 1
 
     v_offset = text_v_offset
-    if (orientation == 'l'):
+    if (anchor == 'l'):
         offset_direction = -1
         v_offset += letter_width
     else:
@@ -128,7 +128,7 @@ def main(args):
 
     # dev_frame = os.path.join(project_dir, 'frameshapes', 'combined_frameshape.png')
     # dev_img = Image.open(dev_frame)
-    # img = create_image('A', 0, 'l')
+    # img = create_image('A', 0, 'lb')
     # dev_img = Image.alpha_composite(dev_img, img)
     # dev_img.show()
 
@@ -143,14 +143,14 @@ def main(args):
     print('Creating images...')
 
     images = []
-    for orientation in ['l', 'r']:
+    for anchor in ['lb', 'rb']:
         for pos in range(num_of_letters):
-            export_dir = os.path.join(images_dir, orientation, str(pos))
+            export_dir = os.path.join(images_dir, anchor, str(pos))
 
             for letter in alphabet:
-                img = create_image(letter, pos, orientation)
+                img = create_image(letter, pos, anchor)
 
-                file_name = f'mts_markers_com_{orientation}_{pos}_{letter}.png'
+                file_name = f'mts_markers_alphanum_{anchor}_{pos}_{letter}.png'
                 export_file = os.path.join(export_dir, file_name)
 
                 images.append((export_file, img))
@@ -167,6 +167,32 @@ def main(args):
     thread_map(save_image_as_paa, images)
 
     print(f'Exported {len(images)} images')
+
+    print('Creating include files...')
+
+    anchor_includes = []
+    for anchor in ['lb', 'rb']:
+        anchorUpper = anchor.upper()
+        file_name = f'CfgMarkersAlphanumeric{anchorUpper}.hpp'
+        anchor_includes.append(file_name)
+
+        with open(os.path.join(images_dir, file_name), 'w') as f:
+            f.write(f'// Alphanumeric markers for anchor {anchor}\n')
+            f.write(f'// This file is generated and should not be edited\n\n')
+
+            for pos in range(num_of_letters):
+                for letter in alphabet:
+                    f.write(f'ALPHANUMMARKER({anchor},{pos},{letter});\n')
+
+                f.write('\n')
+
+        print(f'Created {file_name}')
+
+    with open(os.path.join(images_dir, 'CfgMarkersAlphanumeric.hpp'), 'w') as f:
+        for include in anchor_includes:
+            f.write(f'#include \"{include}\"\n')
+
+    print('Created CfgMarkersAlphanumeric.hpp')
 
 if __name__ == "__main__":
     main(args)

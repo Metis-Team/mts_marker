@@ -12,6 +12,11 @@ class CfgMarkers {
     class mts_com_##MODIFIER##_##NAME##: mts_blu_frameshape { \
         icon = QPATHTOF(data\com\MODIFIER\MARKERFILE(com,MODIFIER,NAME)); \
     }
+    #define ALPHANUMMARKERFILE(ANCHOR,POSITION,LETTER) mts_markers_alphanum_##ANCHOR##_##POSITION##_##LETTER##.paa
+    #define ALPHANUMMARKER(ANCHOR,POSITION,LETTER) \
+    class mts_alphanum_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
+        icon = QPATHTOF(data\com\alphanum\ANCHOR\POSITION\ALPHANUMMARKERFILE(ANCHOR,POSITION,LETTER)); \
+    }
 
     class b_unknown;
     class o_unknown;
