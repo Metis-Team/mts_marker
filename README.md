@@ -48,6 +48,7 @@ Our customizable marker system consists of:
     - Reinforced or Reduced
     - Higher Formation
     - Unique Designation
+    - Additional Information
 
 ## FAQ
 - Q: Does the mod have to be run on the server?  
