@@ -40,6 +40,19 @@ if (_isForMarkerCreation) then {
         };
     } count _uniqueDesignation;
 
+    private _higherFormation = _markerParameter param [5, []];
+    {
+        if !(_x in GVAR(validCharacters)) then {
+            //only allow valid characters that are in the array
+            if (is3DEN) then {
+                [LLSTRING(ui_hint_character_invalid), 1, 5, true] call BIS_fnc_3DENNotification;
+            } else {
+                hint LLSTRING(ui_hint_character_invalid);
+            };
+            breakOut "main";
+        };
+    } count _higherFormation;
+
     private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
     private _pos = _okBtnCtrl getVariable [QGVAR(createMarkerMousePosition), [0,0]];
 

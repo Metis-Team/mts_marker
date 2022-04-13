@@ -44,11 +44,14 @@ private _grpsize = lbCurSel (_mainDisplay displayCtrl ECHELON_DROPDOWN);
 private _reinforced = cbChecked (_mainDisplay displayCtrl REINFORCED_CHECKBOX);
 private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
 
-//get the left text (unique designation)
+//get the bottom left text (unique designation)
 private _uniqueDesignation = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
 
-//get the right text (higher formation)
-private _higherFormation = ctrlText (_mainDisplay displayCtrl HIGHER_EDIT);
+//get the bottom right text (higher formation)
+private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_EDIT))) splitString "";
+
+//get the right text (additional information)
+private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
 
 // This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _higherFormation]
+[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation]

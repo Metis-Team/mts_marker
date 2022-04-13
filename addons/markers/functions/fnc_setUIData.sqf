@@ -25,7 +25,8 @@ params [
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
-    ["_higherFormation", "", [""]]
+    ["_additionalInfo", "", [""]],
+    ["_higherFormation", [], [[]]]
 ];
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
@@ -55,7 +56,8 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl REDUCED_CHECKBOX) cbSetChecked _reduced;
 
 (_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_uniqueDesignation joinString "");
-(_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText _higherFormation;
+(_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText (_higherFormation joinString "");
+(_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
 
 //select right identity in the dialog & update preview
 (_mainDisplay displayCtrl MOD_CHECKBOX) cbSetChecked _dashedFrameshape;
