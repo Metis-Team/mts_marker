@@ -43,6 +43,7 @@ MARKER(blu,mod,sniper);
 MARKER(blu,mod,headquarters);
 MARKER(blu,mod,naval_top);
 MARKER(blu,mod,radar_top);
+MARKER(blu,mod,brigding);
 
 //Blufor Mod2
 MARKER(blu,mod,airborne);

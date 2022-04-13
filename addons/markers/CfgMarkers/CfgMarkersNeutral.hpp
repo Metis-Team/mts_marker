@@ -43,6 +43,7 @@ MARKER(neu,mod,sniper);
 MARKER(neu,mod,headquarters);
 MARKER(neu,mod,naval_top);
 MARKER(neu,mod,radar_top);
+MARKER(neu,mod,brigding);
 
 //Neutral Mod2
 MARKER(neu,mod,airborne);
