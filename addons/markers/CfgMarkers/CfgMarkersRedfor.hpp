@@ -43,7 +43,7 @@ MARKER(red,mod,sniper);
 MARKER(red,mod,headquarters);
 MARKER(red,mod,naval_top);
 MARKER(red,mod,radar_top);
-MARKER(red,mod,brigding);
+MARKER(red,mod,bridging);
 
 //Redfor Mod2
 MARKER(red,mod,airborne);
