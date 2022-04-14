@@ -545,6 +545,10 @@
                 <German>Radar</German>
                 <Korean>레이더</Korean>
             </Key>
+            <Key ID="str_mts_markers_ui_mod1_bridging">
+                <Original>Bridging</Original>
+                <German>Brückenbau-/Brücken-</German>
+            </Key>
         </Container>
         <Container name="UI_mod2">
             <Key ID="str_mts_markers_ui_mod2_empty">
