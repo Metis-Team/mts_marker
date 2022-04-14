@@ -95,6 +95,10 @@
                 <Chinesesimp>其它文字备注:</Chinesesimp>
                 <Korean>부호표식:</Korean>
             </Key>
+            <Key ID="str_mts_markers_ui_general_additionalTXT">
+                <Original>Additional Info:</Original>
+                <German>Zusatzinformationen:</German>
+            </Key>
             <Key ID="str_mts_markers_ui_general_channelTXT">
                 <Original>Channel:</Original>
                 <German>Kanal:</German>
@@ -540,6 +544,10 @@
                 <Original>Radar</Original>
                 <German>Radar</German>
                 <Korean>레이더</Korean>
+            </Key>
+            <Key ID="str_mts_markers_ui_mod1_bridging">
+                <Original>Bridging</Original>
+                <German>Brückenbau-/Brücken-</German>
             </Key>
         </Container>
         <Container name="UI_mod2">

@@ -31,7 +31,8 @@
 //default marker scale
 #define MARKER_SCALE 1.3
 
-#define UNIQUE_DESIGNATION_MAX_CHARS 3
+#define UNIQUE_DESIGNATION_MAX_CHARS 6
+#define HIGHER_FORMATION_MAX_CHARS 6
 
 //more readable conditions
 #define HAS_MAP (("ItemMap" in (assignedItems player)) || ("ItemGPS" in (assignedItems player)))

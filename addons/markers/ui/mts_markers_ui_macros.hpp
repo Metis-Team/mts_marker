@@ -25,6 +25,7 @@
 #define UNIQUE_TXT 211
 #define CHANNEL_TXT 212
 #define PRESETS_NAME_TXT 213
+#define ADDITIONAL_TXT 214
 
 //Identity Buttons
 #define FRIENDLY_BTN_FRAME 300
@@ -60,6 +61,7 @@
 #define UNIQUE_EDIT 601
 #define SEARCH_PRESETS_EDIT 602
 #define NAME_PRESETS_EDIT 603
+#define ADDITIONAL_EDIT 604
 
 //Buttons
 #define OK_BUTTON 700
