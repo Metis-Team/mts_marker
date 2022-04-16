@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-#######################
-#  MTS Setup Script  #
-#######################
+########################
+#  Metis Setup Script  #
+########################
 
 import os
 import sys
@@ -20,20 +20,21 @@ CBA = "P:\\x\\cba"
 def main():
     FULLDIR = "{}\\{}".format(MAINDIR,PROJECTDIR)
     print("""
-  ######################################
-  # MTS Development Environment Setup  #
-  ######################################
+  #######################################
+  # Metis Development Environment Setup #
+  #######################################
 
-  This script will create your MTS dev environment for you.
+  This script will create your Metis dev environment for you.
 
   Before you run this, you should already have:
+    - The Arma 3 Tools installed properly via Steam
     - A properly set up P-drive
 
   If you have not done those things yet, please abort this script in the next step and do so first.
 
-  This script will create two hard links on your system, both pointing to your MTS project folder:
-    [Arma 3 installation directory]\\{} => MTS project folder
-    P:\\{}                              => MTS project folder
+  This script will create two hard links on your system, both pointing to your Metis project folder:
+    [Arma 3 installation directory]\\{} => Metis project folder
+    P:\\{}                              => Metis project folder
 
   It will also copy the required CBA includes to {}, if you do not have the CBA source code already.""".format(FULLDIR,FULLDIR,CBA))
     print("\n")
@@ -74,9 +75,9 @@ def main():
 
     try:
         if not os.path.exists("P:\\{}".format(MAINDIR)):
-            os.mkdir("P:\\{}".format(MAINDIR))
+            os.makedirs("P:\\{}".format(MAINDIR))
         if not os.path.exists(os.path.join(armapath, MAINDIR)):
-            os.mkdir(os.path.join(armapath, MAINDIR))
+            os.makedirs(os.path.join(armapath, MAINDIR))
 
         subprocess.call(["cmd", "/c", "mklink", "/J", "P:\\{}\\{}".format(MAINDIR,PROJECTDIR), projectpath])
         subprocess.call(["cmd", "/c", "mklink", "/J", os.path.join(armapath, MAINDIR, PROJECTDIR), projectpath])
@@ -95,10 +96,10 @@ def main():
         return -1
 
     try:
-        shutil.copytree(os.path.join(projectpath, "tools", "cba"), CBA)
+        shutil.copytree(os.path.join(projectpath, "include", "x", "cba"), CBA)
     except:
         raise
-        print("Something went wrong while copying CBA includes. Please copy tools\\cba to {} manually.".format(CBA))
+        print("Something went wrong while copying CBA includes. Please copy include\\x\\cba to {} manually.".format(CBA))
         return 7
 
     print("# CBA includes copied successfully to {}.".format(CBA))
@@ -110,7 +111,7 @@ if __name__ == "__main__":
     exitcode = main()
 
     if exitcode > 0:
-        print("\nSomething went wrong during the setup. Make sure you run this script as administrator. If these issues persist, please follow the instructions on the MTS wiki to perform the setup manually.")
+        print("\nSomething went wrong during the setup. Make sure you run this script as administrator. If these issues persist, please follow the instructions on the Metis wiki to perform the setup manually.")
     else:
         print("\nSetup successfully completed.")
 
