@@ -24,6 +24,7 @@ CHECK(!hasInterface);
 #include "init3denKeybinds.hpp"
 #include "initSettings.hpp"
 #include "initMarkerVariables.hpp"
+#include "initCharacterMarkerVariables.hpp"
 
 // Corresponding vanilla colors for each identity
 GVAR(vanillaColorMap) = createHashMapFromArray [["blu", "colorBLUFOR"], ["red", "colorOPFOR"], ["neu", "colorIndependent"], ["unk", "ColorUNKNOWN"]];
