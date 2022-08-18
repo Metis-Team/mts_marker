@@ -17,6 +17,11 @@ class CfgMarkers {
     class mts_alphanum_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
         icon = QPATHTOF(data\alphanum\ANCHOR\POSITION\ALPHANUMMARKERFILE(ANCHOR,POSITION,LETTER)); \
     }
+    #define SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER) mts_markers_special_##ANCHOR##_##POSITION##_##LETTER##.paa
+    #define SPECIALCHARMARKER(ANCHOR,POSITION,LETTER) \
+    class mts_special_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
+        icon = QPATHTOF(data\alphanum\ANCHOR\POSITION\SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER)); \
+    }
 
     class b_unknown;
     class o_unknown;
@@ -90,5 +95,5 @@ class CfgMarkers {
     #include "CfgMarkers\CfgMarkersNeutral.hpp"
     #include "CfgMarkers\CfgMarkersUnknown.hpp"
     #include "CfgMarkers\CfgMarkersCommon.hpp"
-    #include "CfgMarkers\CfgMarkersAlphanumeric.hpp"
+    #include "CfgMarkers\CfgMarkersCharacters.hpp"
 };
