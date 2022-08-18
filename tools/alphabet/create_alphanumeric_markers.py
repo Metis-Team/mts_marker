@@ -14,9 +14,56 @@ if sys.platform == "win32":
     import winreg
 
 # Configuration
-version = '1.0.0'
+version = '1.1.0'
 
-alphabet = string.ascii_uppercase + string.digits
+# Some char cannot used in file names.
+# That's why we need to substitute the char with another string.
+# Keys are the special chars, values is whats used as the file name.
+special_chars = {
+    '#': 'hash',
+    '/': 'slash',
+    '\\': 'backslash',
+    '.': 'dot',
+    '+': 'plus',
+    '-': 'minus',
+    ' ': 'space',
+    '(': 'parenthesesleft',
+    ')': 'parenthesesright',
+    '[': 'bracketsleft',
+    ']': 'bracketsright',
+    '{': 'bracesleft',
+    '}': 'bracesright',
+    '=': 'equal',
+    '~': 'tilde',
+    ':': 'colon',
+    ',': 'comma',
+    '|': 'pipe',
+    '*': 'asterisk',
+    '^': 'circumflex',
+    '_': 'underscore',
+}
+
+def get_alphanum_macro(anchor, pos, letter):
+    return f'ALPHANUMMARKER({anchor},{pos},{letter});'
+
+def get_special_macro(anchor, pos, letter):
+    return f'SPECIALCHARMARKER({anchor},{pos},{letter});'
+
+printable_char_sets = {
+    'alphanum': {
+        'characters': string.ascii_uppercase + string.digits,
+        'substitutions': None,
+        'cfgNamePrefix': 'CfgMarkersAlphanumeric',
+        'get_macro': get_alphanum_macro,
+    },
+    'special': {
+        'characters': ''.join(special_chars.keys()),
+        'substitutions': special_chars,
+        'cfgNamePrefix': 'CfgMarkersSpecialChars',
+        'get_macro': get_special_macro,
+    }
+}
+
 num_of_letters = 6
 img_size = (1024, 1024)
 
@@ -121,6 +168,34 @@ def save_image_as_paa(image_info):
     if delete_png:
         pathlib.Path(path).unlink(missing_ok=True)
 
+def write_translation_table(file):
+    for set_name, alphabet in printable_char_sets.items():
+        if alphabet['substitutions'] is None:
+            continue
+
+        file.write(f'// Variables used for translating special characters into marker names\n')
+        file.write(f'GVAR({set_name}CharactersTranslation) = createHashMapFromArray [\n')
+
+        num_of_chars = len(alphabet['substitutions'].items())
+        for i, (char, substitution) in enumerate(alphabet['substitutions'].items()):
+            comma = ',' if i != (num_of_chars - 1) else '' # Do not append comma when last array element
+            file.write(f'    [\"{char}\", \"{substitution}\"]{comma}\n')
+
+        file.write(f'];\n\n')
+
+def write_valid_characters(file):
+    variables = []
+    for set_name, alphabet in printable_char_sets.items():
+        file.write(f'// Variables used for validating characters\n')
+
+        chars = ', '.join(map(lambda c: f'\"{c}\"', alphabet['characters'])) # '"A", "B", "C", ...'
+        var_name = f'GVAR({set_name}Characters)'
+        variables.append(var_name)
+        file.write(f'{var_name} = [{chars}];\n')
+
+    variables_concat = ' + '.join(variables)
+    file.write(f'GVAR(validCharacters) = {variables_concat};\n\n')
+
 def main(args):
     global image_to_paa
 
@@ -145,15 +220,21 @@ def main(args):
     images = []
     for anchor in ['lb', 'rb']:
         for pos in range(num_of_letters):
-            export_dir = os.path.join(images_dir, anchor, str(pos))
+            for set_name, alphabet in printable_char_sets.items():
+                export_dir = os.path.join(images_dir, set_name, anchor, str(pos))
 
-            for letter in alphabet:
-                img = create_image(letter, pos, anchor)
+                for letter in alphabet['characters']:
+                    img = create_image(letter, pos, anchor)
 
-                file_name = f'mts_markers_alphanum_{anchor}_{pos}_{letter}.png'
-                export_file = os.path.join(export_dir, file_name)
+                    # Some chars are not allowed in file names, so replace them according
+                    # a substitution table if available
+                    if alphabet['substitutions'] is not None:
+                        letter = alphabet['substitutions'].get(letter, letter)
 
-                images.append((export_file, img))
+                    file_name = f'mts_markers_{set_name}_{anchor}_{pos}_{letter}.png'
+                    export_file = os.path.join(export_dir, file_name)
+
+                    images.append((export_file, img))
 
     print('Cleaning export folder:', clean_images)
     if clean_images:
@@ -170,29 +251,44 @@ def main(args):
 
     print('Creating include files...')
 
-    anchor_includes = []
-    for anchor in ['lb', 'rb']:
-        anchorUpper = anchor.upper()
-        file_name = f'CfgMarkersAlphanumeric{anchorUpper}.hpp'
-        anchor_includes.append(file_name)
+    includes = []
+    for alphabet in printable_char_sets.values():
+        for anchor in ['lb', 'rb']:
+            anchorUpper = anchor.upper()
+            cfgPrefix = alphabet['cfgNamePrefix']
+            file_name = f'{cfgPrefix}{anchorUpper}.hpp'
+            includes.append(file_name)
 
-        with open(os.path.join(images_dir, file_name), 'w') as f:
-            f.write(f'// Alphanumeric markers for anchor {anchor}\n')
-            f.write(f'// This file is generated and should not be edited\n\n')
+            with open(os.path.join(images_dir, file_name), 'w') as f:
+                f.write(f'// Character markers for anchor {anchor}\n')
+                f.write(f'// This file is generated and should not be edited\n\n')
 
-            for pos in range(num_of_letters):
-                for letter in alphabet:
-                    f.write(f'ALPHANUMMARKER({anchor},{pos},{letter});\n')
+                for pos in range(num_of_letters):
+                    for letter in alphabet['characters']:
+                        # Same as in the image creating process
+                        if alphabet['substitutions'] is not None:
+                            letter = alphabet['substitutions'].get(letter, letter)
 
-                f.write('\n')
+                        macro = alphabet['get_macro'](anchor, pos, letter)
+                        f.write(macro + '\n')
 
-        print(f'Created {file_name}')
+                    f.write('\n')
 
-    with open(os.path.join(images_dir, 'CfgMarkersAlphanumeric.hpp'), 'w') as f:
-        for include in anchor_includes:
+            print(f'Created {file_name}')
+
+    with open(os.path.join(images_dir, 'CfgMarkersCharacters.hpp'), 'w') as f:
+        for include in includes:
             f.write(f'#include \"{include}\"\n')
 
-    print('Created CfgMarkersAlphanumeric.hpp')
+    print('Created CfgMarkersCharacters.hpp')
+
+    print('Generating SQF substitute tables and character variables...')
+    with open(os.path.join(images_dir, 'initCharacterMarkerVariables.hpp'), 'w') as f:
+        f.write(f'// This file is generated and should not be edited\n\n')
+
+        write_translation_table(f)
+        write_valid_characters(f)
+
 
 if __name__ == "__main__":
     main(args)
