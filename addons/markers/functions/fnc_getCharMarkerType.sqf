@@ -47,6 +47,6 @@ if (_char in GVAR(specialCharacters)) then {
 };
 
 private _type = format ["mts_%1_%2_%3_%4", _charType, _anchor, _pos, _charId];
-private _markerName = format ["%1_%2_%3_%4_%5", _namePrefix, _charType, _anchor, _pos, _charId]
+private _markerName = format ["%1_%2_%3_%4_%5", _namePrefix, _charType, _anchor, _pos, _charId];
 
 [_type, _markerName, [_namePrefix, _charType, _anchor, _pos, _charId]]

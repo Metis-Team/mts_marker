@@ -20,7 +20,7 @@ class CfgMarkers {
     #define SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER) mts_markers_special_##ANCHOR##_##POSITION##_##LETTER##.paa
     #define SPECIALCHARMARKER(ANCHOR,POSITION,LETTER) \
     class mts_special_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
-        icon = QPATHTOF(data\alphanum\ANCHOR\POSITION\SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER)); \
+        icon = QPATHTOF(data\special\ANCHOR\POSITION\SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER)); \
     }
 
     class b_unknown;
