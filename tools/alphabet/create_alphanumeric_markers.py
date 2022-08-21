@@ -112,6 +112,17 @@ font = ImageFont.truetype(font_file, size=35) # 26pt == 35px
 anchors = ['lb', 'rb']
 
 def create_image(letter, pos, anchor = 'lb'):
+    """Creates a image of a character in given position and location (anchor).
+
+    Args:
+        letter (str): The character to print.
+        pos (int): The position of the character. Smaller number means closer to center/frameshape.
+        anchor (str, optional): The location of the character relative to the frameshape. Use 'rb' for right bottom, 'lb' for left bottom. Defaults to 'lb'.
+
+    Returns:
+        Image: An image object representing the character.
+    """
+
     img = Image.new('RGBA', img_size)
 
     letter_size = font.getbbox(letter, anchor='ls')
@@ -138,6 +149,12 @@ def create_image(letter, pos, anchor = 'lb'):
     return img
 
 def create_all_images():
+    """Creates all images for the characters defined in the configuration.
+
+    Returns:
+        list(tuple(str, Image)): A list of image file path and the character image object.
+    """
+
     images = []
     for set_name, alphabet in printable_char_sets.items():
         for anchor in anchors:
@@ -160,6 +177,16 @@ def create_all_images():
     return images
 
 def find_image_to_paa_tool():
+    """Returns the path to the ImageToPAA conversion tool.
+
+    Raises:
+        Exception: Could not find Arma 3 Tools.
+        Exception: Arma 3 Tools are not installed correctly.
+
+    Returns:
+        str: Path to the ImageToPAA conversion tool.
+    """
+
     reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
     try:
         k = winreg.OpenKey(reg, r'Software\bohemia interactive\arma 3 tools')
@@ -176,6 +203,12 @@ def find_image_to_paa_tool():
         raise Exception('BadTools', 'Arma 3 Tools are not installed correctly.')
 
 def save_image_as_paa(image_info):
+    """Exports image to disk.
+    Image will be exported as *.paa unless --png-only flag is set.
+
+    Args:
+        image_info (tuple(str, Image)): Path and image to export.
+    """
     global image_to_paa
 
     path = image_info[0]
@@ -194,6 +227,12 @@ def save_image_as_paa(image_info):
         pathlib.Path(path).unlink(missing_ok=True)
 
 def write_translation_table(file):
+    """Writes the SQF translation table for special characters to given file.
+
+    Args:
+        file (File): The file to write to.
+    """
+
     for set_name, alphabet in printable_char_sets.items():
         if alphabet['substitutions'] is None:
             continue
@@ -209,6 +248,12 @@ def write_translation_table(file):
         file.write(f'];\n\n')
 
 def write_valid_characters(file):
+    """Writes the allowed/valid characters SQF variables to given file.
+
+    Args:
+        file (File): The file to write to.
+    """
+
     variables = []
     for set_name, alphabet in printable_char_sets.items():
         file.write(f'// Variables used for validating characters\n')
@@ -222,6 +267,12 @@ def write_valid_characters(file):
     file.write(f'GVAR(validCharacters) = {variables_concat};\n\n')
 
 def write_include_files(verbose=False):
+    """Writes all marker include files for the exported images.
+
+    Args:
+        verbose (bool, optional): Print additional information to console. Defaults to False.
+    """
+
     includes = []
     for alphabet in printable_char_sets.values():
         for anchor in anchors:
@@ -254,6 +305,15 @@ def write_include_files(verbose=False):
         print('Created CfgMarkersCharacters.hpp\n')
 
 def fract_sec(s):
+    """Gets the days, hours, minutes and seconds from total time elapsed in seconds.
+
+    Args:
+        s (float): Total time elapsed in seconds.
+
+    Returns:
+        int, int, int, float: Days, hours, minutes and seconds.
+    """
+
     temp = float(s) / (60 * 60 * 24)
     d = int(temp)
     temp = (temp - d) * 24
