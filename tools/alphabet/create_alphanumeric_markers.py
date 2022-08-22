@@ -7,16 +7,64 @@ import pathlib
 import subprocess
 import shutil
 import argparse
+import timeit
 from PIL import Image, ImageFont, ImageDraw
 from tqdm.contrib.concurrent import thread_map
 
-if sys.platform == "win32":
+if sys.platform == 'win32':
     import winreg
 
 # Configuration
-version = '1.0.0'
+version = '1.1.0'
 
-alphabet = string.ascii_uppercase + string.digits
+# Some char cannot used in file names.
+# That's why we need to substitute the char with another string.
+# Keys are the special chars, values is whats used as the file name.
+special_chars = {
+    '#': 'hash',
+    '/': 'slash',
+    '\\': 'backslash',
+    '.': 'dot',
+    '+': 'plus',
+    '-': 'minus',
+    ' ': 'space',
+    '(': 'parenthesesleft',
+    ')': 'parenthesesright',
+    '[': 'bracketsleft',
+    ']': 'bracketsright',
+    '{': 'bracesleft',
+    '}': 'bracesright',
+    '=': 'equal',
+    '~': 'tilde',
+    ':': 'colon',
+    ',': 'comma',
+    '|': 'pipe',
+    '*': 'asterisk',
+    '^': 'circumflex',
+    '_': 'underscore',
+}
+
+def get_alphanum_macro(anchor, pos, letter):
+    return f'ALPHANUMMARKER({anchor},{pos},{letter});'
+
+def get_special_macro(anchor, pos, letter):
+    return f'SPECIALCHARMARKER({anchor},{pos},{letter});'
+
+printable_char_sets = {
+    'alphanum': {
+        'characters': string.ascii_uppercase + string.digits,
+        'substitutions': None,
+        'cfg_name_prefix': 'CfgMarkersAlphanumeric',
+        'get_macro': get_alphanum_macro,
+    },
+    'special': {
+        'characters': ''.join(special_chars.keys()),
+        'substitutions': special_chars,
+        'cfg_name_prefix': 'CfgMarkersSpecialChars',
+        'get_macro': get_special_macro,
+    }
+}
+
 num_of_letters = 6
 img_size = (1024, 1024)
 
@@ -61,7 +109,20 @@ images_dir = os.path.join(project_dir, 'images')
 font_file = os.path.join(project_dir, 'RobotoMono', 'static', 'RobotoMono-SemiBold.ttf')
 font = ImageFont.truetype(font_file, size=35) # 26pt == 35px
 
+anchors = ['lb', 'rb']
+
 def create_image(letter, pos, anchor = 'lb'):
+    """Creates a image of a character in given position and location (anchor).
+
+    Args:
+        letter (str): The character to print.
+        pos (int): The position of the character. Smaller number means closer to center/frameshape.
+        anchor (str, optional): The location of the character relative to the frameshape. Use 'rb' for right bottom, 'lb' for left bottom. Defaults to 'lb'.
+
+    Returns:
+        Image: An image object representing the character.
+    """
+
     img = Image.new('RGBA', img_size)
 
     letter_size = font.getbbox(letter, anchor='ls')
@@ -69,11 +130,11 @@ def create_image(letter, pos, anchor = 'lb'):
     letter_height = letter_size[3] - letter_size[1]
 
     # For some reason the width of the letter K is bigger then it should
-    if (letter == 'K'):
+    if letter == 'K':
         letter_width -= 1
 
     v_offset = text_v_offset
-    if (anchor == 'lb'):
+    if anchor == 'lb':
         offset_direction = -1
         v_offset += letter_width
     else:
@@ -87,23 +148,67 @@ def create_image(letter, pos, anchor = 'lb'):
 
     return img
 
+def create_all_images():
+    """Creates all images for the characters defined in the configuration.
+
+    Returns:
+        list(tuple(str, Image)): A list of image file path and the character image object.
+    """
+
+    images = []
+    for set_name, alphabet in printable_char_sets.items():
+        for anchor in anchors:
+            for pos in range(num_of_letters):
+                export_dir = os.path.join(images_dir, set_name, anchor, str(pos))
+
+                for letter in alphabet['characters']:
+                    img = create_image(letter, pos, anchor)
+
+                    # Some chars are not allowed in file names, so replace them according
+                    # a substitution table if available
+                    if alphabet['substitutions'] is not None:
+                        letter = alphabet['substitutions'].get(letter, letter)
+
+                    file_name = f'mts_markers_{set_name}_{anchor}_{pos}_{letter}.png'
+                    export_file = os.path.join(export_dir, file_name)
+
+                    images.append((export_file, img))
+
+    return images
+
 def find_image_to_paa_tool():
+    """Returns the path to the ImageToPAA conversion tool.
+
+    Raises:
+        Exception: Could not find Arma 3 Tools.
+        Exception: Arma 3 Tools are not installed correctly.
+
+    Returns:
+        str: Path to the ImageToPAA conversion tool.
+    """
+
     reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
     try:
-        k = winreg.OpenKey(reg, r"Software\bohemia interactive\arma 3 tools")
-        arma3tools_path = winreg.QueryValueEx(k, "path")[0]
+        k = winreg.OpenKey(reg, r'Software\bohemia interactive\arma 3 tools')
+        arma3tools_path = winreg.QueryValueEx(k, 'path')[0]
         winreg.CloseKey(k)
     except:
-        raise Exception("BadTools","Could not find Arma 3 Tools.")
+        raise Exception('BadTools', 'Could not find Arma 3 Tools.')
 
-    image_to_paa_path = os.path.join(arma3tools_path, "ImageToPAA", "ImageToPAA.exe")
+    image_to_paa_path = os.path.join(arma3tools_path, 'ImageToPAA', 'ImageToPAA.exe')
 
     if os.path.isfile(image_to_paa_path):
         return image_to_paa_path
     else:
-        raise Exception("BadTools", "Arma 3 Tools are not installed correctly.")
+        raise Exception('BadTools', 'Arma 3 Tools are not installed correctly.')
 
 def save_image_as_paa(image_info):
+    """Exports image to disk.
+    Image will be exported as *.paa unless --png-only flag is set.
+
+    Args:
+        image_info (tuple(str, Image)): Path and image to export.
+    """
     global image_to_paa
 
     path = image_info[0]
@@ -115,14 +220,115 @@ def save_image_as_paa(image_info):
     file_name = os.path.basename(path)
     img.save(path)
 
-    if sys.platform == "win32" and not png_only:
+    if sys.platform == 'win32' and not png_only:
         subprocess.run([image_to_paa, path], stdout=subprocess.DEVNULL)
 
     if delete_png:
         pathlib.Path(path).unlink(missing_ok=True)
 
+def write_translation_table(file):
+    """Writes the SQF translation table for special characters to given file.
+
+    Args:
+        file (File): The file to write to.
+    """
+
+    for set_name, alphabet in printable_char_sets.items():
+        if alphabet['substitutions'] is None:
+            continue
+
+        file.write(f'// Variables used for translating special characters into marker names\n')
+        file.write(f'GVAR({set_name}CharactersTranslation) = createHashMapFromArray [\n')
+
+        num_of_chars = len(alphabet['substitutions'].items())
+        for i, (char, substitution) in enumerate(alphabet['substitutions'].items()):
+            comma = ',' if i != (num_of_chars - 1) else '' # Do not append comma when last array element
+            file.write(f'    [\"{char}\", \"{substitution}\"]{comma}\n')
+
+        file.write(f'];\n\n')
+
+def write_valid_characters(file):
+    """Writes the allowed/valid characters SQF variables to given file.
+
+    Args:
+        file (File): The file to write to.
+    """
+
+    variables = []
+    for set_name, alphabet in printable_char_sets.items():
+        file.write(f'// Variables used for validating characters\n')
+
+        chars = ', '.join(map(lambda c: f'\"{c}\"', alphabet['characters'])) # '"A", "B", "C", ...'
+        var_name = f'GVAR({set_name}Characters)'
+        variables.append(var_name)
+        file.write(f'{var_name} = [{chars}];\n')
+
+    variables_concat = ' + '.join(variables)
+    file.write(f'GVAR(validCharacters) = {variables_concat};\n\n')
+
+def write_include_files(verbose=False):
+    """Writes all marker include files for the exported images.
+
+    Args:
+        verbose (bool, optional): Print additional information to console. Defaults to False.
+    """
+
+    includes = []
+    for alphabet in printable_char_sets.values():
+        for anchor in anchors:
+            file_name = f'{alphabet["cfg_name_prefix"]}{anchor.upper()}.hpp'
+            includes.append(file_name)
+
+            with open(os.path.join(images_dir, file_name), 'w') as f:
+                f.write(f'// Character markers for anchor {anchor}\n')
+                f.write(f'// This file is generated and should not be edited\n\n')
+
+                for pos in range(num_of_letters):
+                    for letter in alphabet['characters']:
+                        # Same as in the image creating process
+                        if alphabet['substitutions'] is not None:
+                            letter = alphabet['substitutions'].get(letter, letter)
+
+                        macro = alphabet['get_macro'](anchor, pos, letter)
+                        f.write(macro + '\n')
+
+                    f.write('\n')
+
+            if verbose:
+                print(f'Created {file_name}')
+
+    with open(os.path.join(images_dir, 'CfgMarkersCharacters.hpp'), 'w') as f:
+        for include in includes:
+            f.write(f'#include \"{include}\"\n')
+
+    if verbose:
+        print('Created CfgMarkersCharacters.hpp\n')
+
+def fract_sec(s):
+    """Gets the days, hours, minutes and seconds from total time elapsed in seconds.
+
+    Args:
+        s (float): Total time elapsed in seconds.
+
+    Returns:
+        int, int, int, float: Days, hours, minutes and seconds.
+    """
+
+    temp = float(s) / (60 * 60 * 24)
+    d = int(temp)
+    temp = (temp - d) * 24
+    h = int(temp)
+    temp = (temp - h) * 60
+    m = int(temp)
+    temp = (temp - m) * 60
+    sec = temp
+
+    return d,h,m,sec
+
 def main(args):
     global image_to_paa
+
+    start_time = timeit.default_timer()
 
     print('Using font file:', font_file)
 
@@ -132,7 +338,7 @@ def main(args):
     # dev_img = Image.alpha_composite(dev_img, img)
     # dev_img.show()
 
-    if sys.platform == "win32":
+    if sys.platform == 'win32':
         image_to_paa = find_image_to_paa_tool()
         print('Found ImageToPaa Tool:', image_to_paa)
     else:
@@ -141,58 +347,34 @@ def main(args):
         delete_png = False
 
     print('Creating images...')
-
-    images = []
-    for anchor in ['lb', 'rb']:
-        for pos in range(num_of_letters):
-            export_dir = os.path.join(images_dir, anchor, str(pos))
-
-            for letter in alphabet:
-                img = create_image(letter, pos, anchor)
-
-                file_name = f'mts_markers_alphanum_{anchor}_{pos}_{letter}.png'
-                export_file = os.path.join(export_dir, file_name)
-
-                images.append((export_file, img))
+    images = create_all_images()
 
     print('Cleaning export folder:', clean_images)
     if clean_images:
         shutil.rmtree(pathlib.Path(images_dir))
 
     print('Exporting only PNG files:', png_only)
-
     print('Exporting images...')
-
-    # Multithreading
+    # Convert images to paa with multithreading
     thread_map(save_image_as_paa, images)
-
-    print(f'Exported {len(images)} images')
+    print(f'Exported {len(images)} images\n')
 
     print('Creating include files...')
+    write_include_files(True)
 
-    anchor_includes = []
-    for anchor in ['lb', 'rb']:
-        anchorUpper = anchor.upper()
-        file_name = f'CfgMarkersAlphanumeric{anchorUpper}.hpp'
-        anchor_includes.append(file_name)
+    print('Generating SQF substitute tables and character variables...')
+    with open(os.path.join(images_dir, 'initCharacterMarkerVariables.hpp'), 'w') as f:
+        f.write(f'// This file is generated and should not be edited\n\n')
 
-        with open(os.path.join(images_dir, file_name), 'w') as f:
-            f.write(f'// Alphanumeric markers for anchor {anchor}\n')
-            f.write(f'// This file is generated and should not be edited\n\n')
+        write_translation_table(f)
+        write_valid_characters(f)
 
-            for pos in range(num_of_letters):
-                for letter in alphabet:
-                    f.write(f'ALPHANUMMARKER({anchor},{pos},{letter});\n')
+    print('Created initCharacterMarkerVariables.hpp\n')
 
-                f.write('\n')
+    print('Finished generating character marker files.')
+    d,h,m,s = fract_sec(timeit.default_timer() - start_time)
+    print(f'Total program time elapsed: {h:2}h {m:2}m {s:4.3f}s')
 
-        print(f'Created {file_name}')
-
-    with open(os.path.join(images_dir, 'CfgMarkersAlphanumeric.hpp'), 'w') as f:
-        for include in anchor_includes:
-            f.write(f'#include \"{include}\"\n')
-
-    print('Created CfgMarkersAlphanumeric.hpp')
 
 if __name__ == "__main__":
     main(args)

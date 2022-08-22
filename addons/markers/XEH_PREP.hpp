@@ -11,6 +11,7 @@ PREP(generateUniquePrefix);
 PREP(getAllModifiers);
 PREP(getBroadcastChannel);
 PREP(getBroadcastTargets);
+PREP(getCharMarkerType);
 PREP(getDisplay);
 PREP(getMarkerFamily);
 PREP(getMouseOverMarkerPrefix);

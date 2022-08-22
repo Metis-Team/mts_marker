@@ -20,7 +20,7 @@ def cleanup():
     print("cleaned [{} sqfc files]".format(count))
 
 
-def build(verbose):
+def build(verbose = False):
     compiler_exe = os.path.join(addon_base_path, "ArmaScriptCompiler.exe")
     if not os.path.isfile(compiler_exe):
         print("ArmaScriptCompiler.exe not found in base addon folder, trying ci folder")
@@ -29,7 +29,12 @@ def build(verbose):
             print("Warning: ArmaScriptCompiler.exe not found - skipping compiling")
             return 1
     print("ArmaScriptCompiler.exe found - starting compiling")
-    ret = subprocess.call([compiler_exe], cwd=addon_base_path, stdout=verbose)
+    if verbose:
+        print("\n")
+        ret = subprocess.call([compiler_exe], cwd=addon_base_path)
+        print("\n")
+    else:
+        ret = subprocess.call([compiler_exe], cwd=addon_base_path, stdout=subprocess.DEVNULL)
     print("compiled [ret {}]".format(ret))
     return 0
 

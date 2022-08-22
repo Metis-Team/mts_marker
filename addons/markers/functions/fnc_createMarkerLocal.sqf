@@ -149,11 +149,13 @@ if (_additionalInfo isNotEqualTo "") then {
 
 // create text marker (bottom left of marker)
 if ((count _uniqueDesignation) > 0) then {
+    TRACE_1("uniqueDesignation input", _uniqueDesignation);
     scopeName "textLeftCreation";
     //only take the first three characters of the left text
     if ((count _uniqueDesignation) > UNIQUE_DESIGNATION_MAX_CHARS) then {
         _uniqueDesignation resize UNIQUE_DESIGNATION_MAX_CHARS;
     };
+
 
     //check if all characters are valid & make all characters uppercase
     {
@@ -172,8 +174,11 @@ if ((count _uniqueDesignation) > 0) then {
 
     for "_numIndex" from ((count _uniqueDesignation) - 1) to 0 step -1 do {
         private _letter = _uniqueDesignation select _numIndex;
-        private _letterType = format ["mts_alphanum_lb_%1_%2", _letterPos, _letter];
-        private _markerUniqueDesignation = createMarkerLocal [format ["%1_alphanum_lb_%2_%3", _namePrefix, _letterPos, _letter], _pos];
+
+        ([_namePrefix, "uniqueDesignation", _letterPos, _letter] call FUNC(getCharMarkerType)) params ["_letterType", "_markerName"];
+        TRACE_3("uniqueDesignation", _letter, _letterType, _markerName);
+
+        private _markerUniqueDesignation = createMarkerLocal [_markerName, _pos];
         _markerUniqueDesignation setMarkerTypeLocal _letterType;
         _markerUniqueDesignation setMarkerSizeLocal [_scale, _scale];
 
@@ -185,6 +190,8 @@ if ((count _uniqueDesignation) > 0) then {
 
 // create text marker (bottom right of marker)
 if ((count _higherFormation) > 0) then {
+    TRACE_1("higherFormation input", _higherFormation);
+
     scopeName "textRightCreation";
     //only take the first three characters of the left text
     if ((count _higherFormation) > HIGHER_FORMATION_MAX_CHARS) then {
@@ -205,8 +212,11 @@ if ((count _higherFormation) > 0) then {
 
     {
         private _letter = _x;
-        private _letterType = format ["mts_alphanum_rb_%1_%2", _forEachIndex, _letter];
-        private _markerHigherFormation = createMarkerLocal [format ["%1_alphanum_rb_%2_%3", _namePrefix, _forEachIndex, _letter], _pos];
+
+        ([_namePrefix, "higherFormation", _forEachIndex, _letter] call FUNC(getCharMarkerType)) params ["_letterType", "_markerName"];
+        TRACE_3("higherFormation", _letter, _letterType, _markerName);
+
+        private _markerHigherFormation = createMarkerLocal [_markerName, _pos];
         _markerHigherFormation setMarkerTypeLocal _letterType;
         _markerHigherFormation setMarkerSizeLocal [_scale, _scale];
 
