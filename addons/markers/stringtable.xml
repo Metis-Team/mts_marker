@@ -703,11 +703,8 @@
         </Container>
         <Container name="UI_hint">
             <Key ID="str_mts_markers_ui_hint_character_invalid">
-                <Original>The unique formation has invalid characters! Allowed characters: A-Z and 0-9</Original>
-                <German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z und 0-9</German>
-                <Chinese>其它文字備註被輸入錯誤的值! 只允許以下字元: A-Z與0-9</Chinese>
-                <Chinesesimp>其它文字备注被输入错误的值! 只允许以下字元: A-Z与0-9</Chinesesimp>
-                <Korean>부호표식에는 잘못된 문자가 있습니다! 허용되는 문자 : A-Z 및 0-9</Korean>
+                <Original>The unique formation has invalid characters! Allowed characters: A-Z, 0-9 and #/\.+- ()[]{}=~:,|*^_</Original>
+                <German>Die eindeutige Kennung hat ungültige Zeichen! Gültige Zeichen: A-Z, 0-9 und #/\.+- ()[]{}=~:,|*^_</German>
             </Key>
             <Key ID="str_mts_markers_ui_hint_marker_name_empty">
                 <Original>Preset Name can't be empty!</Original>

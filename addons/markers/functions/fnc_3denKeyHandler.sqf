@@ -42,10 +42,8 @@ switch (true) do {
 };
 
 private _inputModifiers = [_inputShift, _inputCtrl, _inputAlt];
-TRACE_2("", _inputKey, _inputModifiers);
 
 private _keybindInfo = [LLSTRING(cba_category_name), _cbaActionName] call CBA_fnc_getKeybind;
-TRACE_1("", _keybindInfo);
 
 private _code = if (_isDownHandler) then {
     _keybindInfo param [3, {}]

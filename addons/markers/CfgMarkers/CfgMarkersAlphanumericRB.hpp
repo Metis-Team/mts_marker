@@ -1,4 +1,4 @@
-// Alphanumeric markers for anchor rb
+// Character markers for anchor rb
 // This file is generated and should not be edited
 
 ALPHANUMMARKER(rb,0,A);

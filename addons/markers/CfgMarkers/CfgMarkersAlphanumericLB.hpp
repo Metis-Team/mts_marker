@@ -1,4 +1,4 @@
-// Alphanumeric markers for anchor lb
+// Character markers for anchor lb
 // This file is generated and should not be edited
 
 ALPHANUMMARKER(lb,0,A);
