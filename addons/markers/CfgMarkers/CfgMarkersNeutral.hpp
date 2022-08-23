@@ -44,6 +44,7 @@ MARKER(neu,mod,headquarters);
 MARKER(neu,mod,naval_top);
 MARKER(neu,mod,radar_top);
 MARKER(neu,mod,bridging);
+MARKER(neu,mod,medevac);
 
 //Neutral Mod2
 MARKER(neu,mod,airborne);
