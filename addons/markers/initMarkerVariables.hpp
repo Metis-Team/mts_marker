@@ -66,7 +66,8 @@ GVAR(mod2Array) = [
     ["light"],
     ["mountain"],
     ["vstol"],
-    ["wheeled"]
+    ["wheeled"],
+    ["towed"]
 ];
 
 GVAR(echelonArray) = [

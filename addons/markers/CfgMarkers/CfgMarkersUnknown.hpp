@@ -53,6 +53,7 @@ MARKER(unk,mod,medium);
 MARKER(unk,mod,heavy);
 MARKER(unk,mod,vstol);
 MARKER(unk,mod,wheeled);
+MARKER(unk,mod,towed);
 
 //Unknown Sizes
 MARKER(unk,size,1);

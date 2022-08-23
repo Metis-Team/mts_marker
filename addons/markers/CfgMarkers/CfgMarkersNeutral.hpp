@@ -53,6 +53,7 @@ MARKER(neu,mod,medium);
 MARKER(neu,mod,heavy);
 MARKER(neu,mod,vstol);
 MARKER(neu,mod,wheeled);
+MARKER(neu,mod,towed);
 
 //Neutral Sizes
 MARKER(neu,size,1);
