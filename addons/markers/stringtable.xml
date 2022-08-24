@@ -479,6 +479,10 @@
                 <German>Radar</German>
                 <Korean>레이더</Korean>
             </Key>
+            <Key ID="str_mts_markers_ui_icon_field_artillery_observer">
+                <Original>Field Artillery Observer</Original>
+                <German>Artilleriebeobachter</German>
+            </Key>
         </Container>
         <Container name="UI_mod1">
             <Key ID="str_mts_markers_ui_mod1_empty">

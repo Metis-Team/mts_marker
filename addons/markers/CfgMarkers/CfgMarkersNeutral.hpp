@@ -32,6 +32,7 @@ MARKER(neu,mod,special_forces);
 MARKER(neu,mod,special_operation_forces);
 MARKER(neu,mod,combined_arms);
 MARKER(neu,mod,radar);
+MARKER(neu,mod,field_artillery_observer);
 
 //Neutral Mod1
 MARKER(neu,mod,attack);
