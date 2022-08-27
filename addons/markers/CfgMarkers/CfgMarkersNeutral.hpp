@@ -32,6 +32,7 @@ MARKER(neu,mod,special_forces);
 MARKER(neu,mod,special_operation_forces);
 MARKER(neu,mod,combined_arms);
 MARKER(neu,mod,radar);
+MARKER(neu,mod,field_artillery_observer);
 
 //Neutral Mod1
 MARKER(neu,mod,attack);
@@ -44,6 +45,7 @@ MARKER(neu,mod,headquarters);
 MARKER(neu,mod,naval_top);
 MARKER(neu,mod,radar_top);
 MARKER(neu,mod,bridging);
+MARKER(neu,mod,medevac);
 
 //Neutral Mod2
 MARKER(neu,mod,airborne);
@@ -53,6 +55,7 @@ MARKER(neu,mod,medium);
 MARKER(neu,mod,heavy);
 MARKER(neu,mod,vstol);
 MARKER(neu,mod,wheeled);
+MARKER(neu,mod,towed);
 
 //Neutral Sizes
 MARKER(neu,size,1);

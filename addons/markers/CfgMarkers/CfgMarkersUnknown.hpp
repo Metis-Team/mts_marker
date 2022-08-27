@@ -32,6 +32,7 @@ MARKER(unk,mod,special_forces);
 MARKER(unk,mod,special_operation_forces);
 MARKER(unk,mod,combined_arms);
 MARKER(unk,mod,radar);
+MARKER(unk,mod,field_artillery_observer);
 
 //Unknown Mod1
 MARKER(unk,mod,attack);
@@ -44,6 +45,7 @@ MARKER(unk,mod,headquarters);
 MARKER(unk,mod,naval_top);
 MARKER(unk,mod,radar_top);
 MARKER(unk,mod,bridging);
+MARKER(unk,mod,medevac);
 
 //Unknown Mod2
 MARKER(unk,mod,airborne);
@@ -53,6 +55,7 @@ MARKER(unk,mod,medium);
 MARKER(unk,mod,heavy);
 MARKER(unk,mod,vstol);
 MARKER(unk,mod,wheeled);
+MARKER(unk,mod,towed);
 
 //Unknown Sizes
 MARKER(unk,size,1);

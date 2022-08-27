@@ -41,7 +41,8 @@ GVAR(iconArray) = [
     ["joint_fire_support"],
     ["special_forces"],
     ["special_operation_forces"],
-    ["radar"]
+    ["radar"],
+    ["field_artillery_observer"]
 ];
 
 GVAR(mod1Array) = [
@@ -55,7 +56,8 @@ GVAR(mod1Array) = [
     ["headquarters"],
     ["naval_top"],
     ["radar_top"],
-    ["bridging"]
+    ["bridging"],
+    ["medevac"]
 ];
 
 GVAR(mod2Array) = [
@@ -66,7 +68,8 @@ GVAR(mod2Array) = [
     ["light"],
     ["mountain"],
     ["vstol"],
-    ["wheeled"]
+    ["wheeled"],
+    ["towed"]
 ];
 
 GVAR(echelonArray) = [
