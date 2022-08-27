@@ -607,6 +607,10 @@
                 <Chinesesimp>轮式载具</Chinesesimp>
                 <Korean>차량</Korean>
             </Key>
+            <Key ID="str_mts_markers_ui_mod2_towed">
+                <Original>Towed</Original>
+                <German>Geschleppt/Gezogen</German>
+            </Key>
         </Container>
         <Container name="UI_echelon">
             <Key ID="str_mts_markers_ui_echelon_empty">

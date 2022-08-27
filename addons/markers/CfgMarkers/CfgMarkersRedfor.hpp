@@ -53,6 +53,7 @@ MARKER(red,mod,medium);
 MARKER(red,mod,heavy);
 MARKER(red,mod,vstol);
 MARKER(red,mod,wheeled);
+MARKER(red,mod,towed);
 
 //Redfor Sizes
 MARKER(red,size,1);
