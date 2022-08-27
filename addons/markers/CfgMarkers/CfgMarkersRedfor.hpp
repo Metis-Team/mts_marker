@@ -44,6 +44,7 @@ MARKER(red,mod,headquarters);
 MARKER(red,mod,naval_top);
 MARKER(red,mod,radar_top);
 MARKER(red,mod,bridging);
+MARKER(red,mod,medevac);
 
 //Redfor Mod2
 MARKER(red,mod,airborne);

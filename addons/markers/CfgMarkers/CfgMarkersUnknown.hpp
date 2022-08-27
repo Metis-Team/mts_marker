@@ -44,6 +44,7 @@ MARKER(unk,mod,headquarters);
 MARKER(unk,mod,naval_top);
 MARKER(unk,mod,radar_top);
 MARKER(unk,mod,bridging);
+MARKER(unk,mod,medevac);
 
 //Unknown Mod2
 MARKER(unk,mod,airborne);

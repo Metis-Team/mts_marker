@@ -55,7 +55,8 @@ GVAR(mod1Array) = [
     ["headquarters"],
     ["naval_top"],
     ["radar_top"],
-    ["bridging"]
+    ["bridging"],
+    ["medevac"]
 ];
 
 GVAR(mod2Array) = [
