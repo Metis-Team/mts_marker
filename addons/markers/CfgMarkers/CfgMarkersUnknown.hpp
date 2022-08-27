@@ -32,6 +32,7 @@ MARKER(unk,mod,special_forces);
 MARKER(unk,mod,special_operation_forces);
 MARKER(unk,mod,combined_arms);
 MARKER(unk,mod,radar);
+MARKER(unk,mod,field_artillery_observer);
 
 //Unknown Mod1
 MARKER(unk,mod,attack);

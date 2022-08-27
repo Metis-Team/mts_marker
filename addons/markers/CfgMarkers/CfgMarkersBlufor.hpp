@@ -32,6 +32,7 @@ MARKER(blu,mod,special_forces);
 MARKER(blu,mod,special_operation_forces);
 MARKER(blu,mod,combined_arms);
 MARKER(blu,mod,radar);
+MARKER(blu,mod,field_artillery_observer);
 
 //Blufor Mod1
 MARKER(blu,mod,attack);
