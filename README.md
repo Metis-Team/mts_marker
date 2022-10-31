@@ -18,6 +18,9 @@
     <a href="https://github.com/Metis-Team/mts_marker/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/License-APL--ND-red.svg?style=flat-square" alt="APL-ND License">
     </a>
+    <a href="https://github.com/Metis-Team/mts_marker/actions/workflows/release.yml">
+        <img src="https://img.shields.io/github/workflow/status/Metis-Team/mts_marker/Release/release?style=flat-square">
+    </a>
 </p>
 
 <p align="center">
