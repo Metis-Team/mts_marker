@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Returns marker config parameter.
+ *      Returns the configuration of the marker.
  *
  *  Parameter(s):
  *      0: STRING - Marker prefix.
