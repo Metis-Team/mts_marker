@@ -21,7 +21,7 @@ params [["_nonEditable", true, [true]]];
 private _allMarkers = allVariables GVAR(namespace);
 
 if !(_nonEditable) then {
-	_allMarkers = _allMarkers select {[_x] call FUNC(isMtsMarker) isEqualTo 1};
+    _allMarkers = _allMarkers select {[_x] call FUNC(isMtsMarker) isEqualTo 1};
 };
 
 _allMarkers
