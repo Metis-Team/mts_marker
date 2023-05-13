@@ -9,7 +9,7 @@
  *      0: STRING - Marker prefix.
  *
  *  Returns:
- *      STRING - PlayerUID or "-1" if it isn't an editale Metis marker.
+ *      STRING - PlayerUID or "-1" if it isn't an editable Metis marker.
  *
  *  Example:
  *      ["mtsmarker#123/0/1"] call mts_markers_fnc_getPlayerUID
