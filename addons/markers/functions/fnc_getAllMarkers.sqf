@@ -9,7 +9,7 @@
  *      0: BOOLEAN - Include non-editable markers. (Optional, default: true)
  *
  *  Returns:
- *      ARRY - Marker prefixes.
+ *      ARRAY - Marker prefixes.
  *
  *  Example:
  *      [false] call mts_markers_fnc_getAllMarkers
