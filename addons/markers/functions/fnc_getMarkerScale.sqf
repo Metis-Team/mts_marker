@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Returns marker scale. (Same as vanilla getMarkerSize)
+ *      Returns the scale/size of the given marker (similar to Arma's getMarkerSize command).
  *
  *  Parameter(s):
  *      0: STRING - Marker prefix.
