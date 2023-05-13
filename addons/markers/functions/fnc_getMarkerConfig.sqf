@@ -9,7 +9,7 @@
  *      0: STRING - Marker prefix.
  *
  *  Returns:
- *      0: ARRAY - The marker configuration.
+ *      ARRAY - The marker configuration.
  *          0: ARRAY - Frameshape of the marker.
  *              0: STRING - Identity (blu, red, neu, unk).
  *              1: BOOLEAN - Dashed (e.g. supect).
