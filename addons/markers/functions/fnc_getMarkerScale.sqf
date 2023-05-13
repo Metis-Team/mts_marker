@@ -10,7 +10,6 @@
  *
  *  Returns:
  *      NUMBER - Marker size. If marker does not exists, it returns 0.
- *      NUMBER - Marker size.
  *
  *  Example:
  *      ["mtsmarker#123/0/1"] call mts_markers_fnc_getMarkerScale
