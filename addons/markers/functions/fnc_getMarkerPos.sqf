@@ -21,4 +21,4 @@ params [["_namePrefix", "", [""]], ["_preserveElevation", false, [false]]];
 
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
-getMarkerPos [format["%1_frame", _namePrefix], _preserveElevation];
+getMarkerPos [format["%1_frame", _namePrefix], _preserveElevation]
