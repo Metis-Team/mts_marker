@@ -9,7 +9,7 @@
  *      0: STRING - Marker prefix.
  *
  *  Returns:
- *      NUMBER - Marker size
+ *      NUMBER - Marker size.
  *
  *  Example:
  *      ["mtsmarker#123/0/1"] call mts_markers_fnc_getMarkerSize
