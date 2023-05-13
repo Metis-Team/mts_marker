@@ -9,6 +9,7 @@
  *      0: STRING - Marker prefix.
  *
  *  Returns:
+ *      NUMBER - Marker size. If marker does not exists, it returns 0.
  *      NUMBER - Marker size.
  *
  *  Example:

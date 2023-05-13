@@ -10,7 +10,7 @@
  *      1: BOOLEAN - Preserve elevation. (Optional, default: false)
  *
  *  Returns:
- *      ARRAY - format PositionAGL if preserve elevation is true or [x,y,0] if preserve elevation is false
+ *      ARRAY - format PositionAGL if preserve elevation is true or [x,y,0] if preserve elevation is false. If the marker does not exists, it returns [0,0]
  *
  *  Example:
  *      ["mtsmarker#123/0/1"] call mts_markers_fnc_getMarkerPos
