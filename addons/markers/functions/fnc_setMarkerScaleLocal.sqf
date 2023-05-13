@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Sets the new marker scale. (Same as vanilla setMarkerSizeLocal)
+ *      Sets the scale/size of marker. (Same as vanilla setMarkerSizeLocal)
  *      This function has a local effect.
  *
  *  Parameter(s):
