@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Broadcast new marker scale based on channel of origin.
+ *      Broadcast new marker scale/size based on channel of origin.
  *
  *  Parameter(s):
  *      0: STRING - Marker prefix.
