@@ -28,8 +28,9 @@
 //Map Ctrl is same for all 4 displays
 #define MAP_CTRL 51
 
-//default marker scale
+//default marker scale and alpha
 #define MARKER_SCALE 1.3
+#define MARKER_ALPHA 1
 
 #define UNIQUE_DESIGNATION_MAX_CHARS 6
 #define HIGHER_FORMATION_MAX_CHARS 6

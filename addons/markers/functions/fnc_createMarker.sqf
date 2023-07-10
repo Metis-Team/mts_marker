@@ -25,6 +25,7 @@
  *          4: STRING - Marker text right - Additional information. (Optional, default: no text)
  *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
+ *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *
  *  Returns:
  *      STRING - Marker prefix.
@@ -39,7 +40,8 @@ params [
     ["_broadcastChannel", -1, [0]],
     ["_editable", true, [true]],
     ["_markerParameter", [], [[]]],
-    ["_scale", MARKER_SCALE, [0]]
+    ["_scale", MARKER_SCALE, [0]],
+    ["_alpha", MARKER_ALPHA, [0]]
 ];
 
 CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
