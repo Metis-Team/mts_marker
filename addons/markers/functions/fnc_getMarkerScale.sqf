@@ -19,4 +19,4 @@
 params [["_namePrefix", "", [""]]];
 
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
-(GVAR(namespace) getVariable [_namePrefix, []]) param [3, 0]
+(getMarkerSize format ["%1_frame", _namePrefix]) select 0

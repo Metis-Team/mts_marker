@@ -229,7 +229,7 @@ GVAR(localMarkers) insert [[_namePrefix, CBA_missionTime]];
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save marker parameters for editing purposes
-    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel, _scale], true];
+    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel], true];
 
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute
