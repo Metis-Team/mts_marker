@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Returns all editable and non-editable Metis marker on the map.
+ *      Returns all local editable and non-editable Metis marker on the map.
  *
  *  Parameter(s):
  *      0: BOOLEAN - Include non-editable markers. (Optional, default: true)
