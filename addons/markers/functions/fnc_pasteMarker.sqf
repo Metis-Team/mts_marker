@@ -21,10 +21,12 @@ private _params = params [["_mapCtrl", controlNull, [controlNull]], ["_mousepos"
 
 CHECKRET((GVAR(clipboard) isEqualTo "" || !_params), false);
 
-private _markerInformation = GVAR(namespace) getVariable [GVAR(clipboard), []];
+GVAR(clipboard) params ["_namePrefix", "_scale"];
+
+private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 CHECKRET(_markerInformation isEqualTo [], false);
 
-_markerInformation params ["", "_markerParameter", "", "_scale", "_alpha"];
+_markerInformation params ["", "_markerParameter"];
 
 private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 

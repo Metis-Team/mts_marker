@@ -238,11 +238,12 @@ if ((count _higherFormation) > 0) then {
     } forEach _higherFormation;
 };
 
+GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
-    //save marker parameters for editing purposes
-    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel, _scale, _alpha], true];
+    //save inmutable variables of marker
+    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel], true];
 
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute
