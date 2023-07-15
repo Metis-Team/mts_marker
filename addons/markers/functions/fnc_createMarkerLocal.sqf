@@ -224,6 +224,7 @@ if ((count _higherFormation) > 0) then {
     } forEach _higherFormation;
 };
 
+GVAR(localMarkers) insert [[_namePrefix, CBA_missionTime]];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace

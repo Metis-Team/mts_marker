@@ -30,6 +30,8 @@ CHECK(_markerFamily isEqualTo []);
     deleteMarkerLocal _x;
 } count _markerFamily;
 
+GVAR(localMarkers) deleteAt _namePrefix;
+
 if (is3DEN) then {
     //delete 3DEN marker from attribute
     private _3denData = "Scenario" get3DENMissionAttribute QGVAR(3denData);

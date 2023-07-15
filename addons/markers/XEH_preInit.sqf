@@ -39,3 +39,5 @@ if (is3DEN) then {
 };
 
 GVAR(clipboard) = "";
+
+GVAR(localMarkers) = createHashMap;

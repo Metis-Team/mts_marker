@@ -18,7 +18,7 @@
 
 params [["_nonEditable", true, [true]]];
 
-private _allMarkers = allVariables GVAR(namespace);
+private _allMarkers = keys GVAR(localMarkers);
 
 if !(_nonEditable) then {
     _allMarkers = _allMarkers select {[_x] call FUNC(isMtsMarker) isEqualTo 1};
