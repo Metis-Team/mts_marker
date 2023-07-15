@@ -21,7 +21,7 @@ private _params = params [["_mapCtrl", controlNull, [controlNull]], ["_mousepos"
 
 CHECKRET((GVAR(clipboard) isEqualTo "" || !_params), false);
 
-GVAR(clipboard) params ["_namePrefix", "_scale"];
+GVAR(clipboard) params ["_namePrefix", "_scale", "_alpha"];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 CHECKRET(_markerInformation isEqualTo [], false);

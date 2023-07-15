@@ -20,4 +20,4 @@ params [["_namePrefix", "", [""]]];
 
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
 
-(GVAR(namespace) getVariable [_namePrefix, []]) param [4, 0]
+(markerAlpha format ["%1_frame", _namePrefix])
