@@ -19,6 +19,6 @@
         "*.rpt": "log",
         "init*.hpp": "sqf",
     },
-    "sqf.enableACE3": true,
+    "sqf.enableACE3": false,
     "sqf.enableCBA": true,
 }
