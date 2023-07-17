@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Debug",
+            "detail": "Build Arma addon with HEMTT in debug mode.",
+            "type": "process",
+            "command": "hemtt.exe",
+            "args": ["build"],
+            "group": "build",
+            "presentation": {
+                "close": true,
+                "reveal": "always",
+                "showReuseMessage": false
+            }
+        },
+        {
+            "label": "Build Release",
+            "detail": "Build Arma addon with HEMTT for release.",
+            "type": "process",
+            "command": "hemtt.exe",
+            "args": [
+                "build",
+                "--release",
+                "--time",
+                "-f"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Open Latest RPT",
+            "detail": "Open the latest Arma Log RPT in the current window.",
+            "type": "shell",
+            "command": "./.vscode/openLatestRpt.ps1",
+            "group": "build",
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem"
+            }
+        }
+    ]
+}
