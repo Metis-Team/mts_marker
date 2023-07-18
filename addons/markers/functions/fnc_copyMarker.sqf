@@ -23,6 +23,7 @@ private _namePrefix = [_mapCtrl, true] call FUNC(getMouseOverMarkerPrefix);
 CHECKRET(_namePrefix isEqualTo "", false);
 
 private _scale = [_namePrefix] call FUNC(getMarkerScale);
+private _alpha = [_namePrefix] call FUNC(getMarkerAlpha);
 
-GVAR(clipboard) = [_namePrefix, _scale];
+GVAR(clipboard) = [_namePrefix, _scale, _alpha];
 true

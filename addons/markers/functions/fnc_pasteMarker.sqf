@@ -21,7 +21,7 @@ private _params = params [["_mapCtrl", controlNull, [controlNull]], ["_mousepos"
 
 CHECKRET((GVAR(clipboard) isEqualTo "" || !_params), false);
 
-GVAR(clipboard) params ["_namePrefix", "_scale"];
+GVAR(clipboard) params ["_namePrefix", "_scale", "_alpha"];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 CHECKRET(_markerInformation isEqualTo [], false);
@@ -41,5 +41,5 @@ private _broadcastChannel = call {
     if (currentChannel > 5) then {3} else {currentChannel};
 };
 
-[_pos, _broadcastChannel, !is3DEN, _markerParameter, _scale] call FUNC(createMarker);
+[_pos, _broadcastChannel, !is3DEN, _markerParameter, _scale, _alpha] call FUNC(createMarker);
 true
