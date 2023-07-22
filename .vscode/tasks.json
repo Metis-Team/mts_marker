@@ -26,17 +26,6 @@
                 "-f"
             ],
             "group": "build"
-        },
-        {
-            "label": "Open Latest RPT",
-            "detail": "Open the latest Arma Log RPT in the current window.",
-            "type": "shell",
-            "command": "./.vscode/openLatestRpt.ps1",
-            "group": "build",
-            "presentation": {
-                "reveal": "silent",
-                "revealProblems": "onProblem"
-            }
         }
     ]
 }
