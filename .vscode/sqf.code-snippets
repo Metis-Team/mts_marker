@@ -1,0 +1,27 @@
+{
+    "SQF Function header": {
+        "description": "SQF Function header",
+        "prefix": "header",
+        "body": [
+            "#include \"script_component.hpp\"",
+            "/**",
+            " *  Author: ${1:Author}",
+            " *",
+            " *  Description:",
+            " *      ${2:Description}",
+            " *",
+            " *  Parameter(s):",
+            " *      ${3:0: TYPE - Parameter description}",
+            " *",
+            " *  Returns:",
+            " *      ${4:TYPE - Description}",
+            " *",
+            " *  Example:",
+            " *      _this call mts_${TM_DIRECTORY/(.*)addons\\\\(.*)\\\\functions(.*)/$2/}_${TM_FILENAME_BASE}",
+            " *",
+            " */",
+            "",
+            "params [];"
+        ],
+    }
+}
