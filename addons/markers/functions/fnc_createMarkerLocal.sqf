@@ -27,6 +27,7 @@
  *          4: STRING - Marker text right - Higher formation. (Optional, default: no text)
  *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
+ *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *
  *  Returns:
  *     STRING - Marker prefix.
@@ -41,7 +42,8 @@ params [
     ["_broadcastChannel", -1, [0]],
     ["_pos", [0,0], [[]], [2,3]],
     ["_markerParameter", [], [[]]],
-    ["_scale", MARKER_SCALE, [0]]
+    ["_scale", MARKER_SCALE, [0]],
+    ["_alpha", MARKER_ALPHA, [0]]
 ];
 
 _markerParameter params [
@@ -63,8 +65,13 @@ _identity = toLower _identity;
 
 //prevent unscaled markers
 if (_scale <= 0) then {
-    WARNING("Negative scale for markers aren't allowed. Reseted marker scale back to default");
+    WARNING("Negative scale for markers aren't allowed. Reset marker scale back to default.");
     _scale = MARKER_SCALE;
+};
+
+if (_alpha < 0 || _alpha > 1) then {
+    WARNING("Alpha value for marker out of bounds (0-1). Reset marker alpha back to default.");
+    _alpha = MARKER_ALPHA;
 };
 
 if !(_identity in ["blu", "red", "neu", "unk"]) exitWith {
@@ -86,6 +93,7 @@ private _frameshapeType = if (GVAR(useVanillaColors)) then {
 private _markerFrame = createMarkerLocal [format ["%1_frame", _namePrefix], _pos];
 _markerFrame setMarkerTypeLocal _frameshapeType;
 _markerFrame setMarkerSizeLocal [_scale, _scale];
+_markerFrame setMarkerAlphaLocal _alpha;
 
 //create array with every marker name in the set. Minimum is the frameshape
 private _markerFamily = [_markerFrame];
@@ -106,6 +114,7 @@ if (_grpsize > 0) then {
     private _markerSize = createMarkerLocal [format ["%1_size", _namePrefix], _pos];
     _markerSize setMarkerTypeLocal _unitsize;
     _markerSize setMarkerSizeLocal [_scale, _scale];
+    _markerSize setMarkerAlphaLocal _alpha;
 
     _markerFamily pushBack _markerSize;
 };
@@ -123,6 +132,7 @@ if (_reinforced || _reduced) then {
     private _markerSizeMod = createMarkerLocal [format ["%1_size_mod", _namePrefix], _pos];
     _markerSizeMod setMarkerTypeLocal _unitsizeMod;
     _markerSizeMod setMarkerSizeLocal [_scale, _scale];
+    _markerSizeMod setMarkerAlphaLocal _alpha;
 
     _markerFamily pushBack _markerSizeMod;
 };
@@ -133,6 +143,7 @@ if (_reinforced || _reduced) then {
     private _markerMod = createMarkerLocal [format ["%1_%2", _namePrefix, _x], _pos];
     _markerMod setMarkerTypeLocal _markertype;
     _markerMod setMarkerSizeLocal [_scale, _scale];
+    _markerMod setMarkerAlphaLocal _alpha;
 
     _markerFamily pushBack _markerMod;
 } forEach (_modifier call FUNC(getAllModifiers));
@@ -142,6 +153,7 @@ if (_additionalInfo isNotEqualTo "") then {
     private _markerText = createMarkerLocal [format ["%1_text", _namePrefix], _pos];
     _markerText setMarkerTypeLocal "mts_special_textmarker";
     _markerText setMarkerSizeLocal [_scale, _scale];
+    _markerText setMarkerAlphaLocal _alpha;
     _markerText setMarkerTextLocal _additionalInfo;
 
     _markerFamily pushBack _markerText;
@@ -181,6 +193,7 @@ if ((count _uniqueDesignation) > 0) then {
         private _markerUniqueDesignation = createMarkerLocal [_markerName, _pos];
         _markerUniqueDesignation setMarkerTypeLocal _letterType;
         _markerUniqueDesignation setMarkerSizeLocal [_scale, _scale];
+        _markerUniqueDesignation setMarkerAlphaLocal _alpha;
 
         _markerFamily pushBack _markerUniqueDesignation;
 
@@ -219,16 +232,18 @@ if ((count _higherFormation) > 0) then {
         private _markerHigherFormation = createMarkerLocal [_markerName, _pos];
         _markerHigherFormation setMarkerTypeLocal _letterType;
         _markerHigherFormation setMarkerSizeLocal [_scale, _scale];
+        _markerHigherFormation setMarkerAlphaLocal _alpha;
 
         _markerFamily pushBack _markerHigherFormation;
     } forEach _higherFormation;
 };
 
+GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
-    //save marker parameters for editing purposes
-    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel, _scale], true];
+    //save inmutable variables of marker
+    GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel], true];
 
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute
