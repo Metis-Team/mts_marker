@@ -19,11 +19,11 @@
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
 //get identity
-private _identity = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
+private _identity = (_mainDisplay displayCtrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
 CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
 //check if frameshape is dashed
-private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
+private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl SUSPECT_CHECKBOX);
 
 private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
 private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;

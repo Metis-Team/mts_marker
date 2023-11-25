@@ -19,7 +19,7 @@
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
 //get the name of the Preset
-private _presetName = ctrlText (_mainDisplay displayctrl NAME_PRESETS_EDIT);
+private _presetName = ctrlText (_mainDisplay displayCtrl NAME_PRESETS_EDIT);
 CHECKRET(_presetName isEqualTo "", hint LLSTRING(ui_hint_marker_name_empty));
 
 //get all marker data for the Preset

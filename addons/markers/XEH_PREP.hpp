@@ -41,6 +41,5 @@ PREP(setMarkerPreview);
 PREP(setMarkerScale);
 PREP(setMarkerScaleLocal);
 PREP(setUIData);
-PREP(showPresetsUI);
 PREP(transmitUIData);
 PREP(updatePresetsList);

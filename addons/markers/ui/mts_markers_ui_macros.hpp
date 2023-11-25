@@ -1,21 +1,65 @@
-//Main display
+// Style
+#define BG_COLOR {0, 0, 0, 0.7}
+
+// Sizes
+#define MAX_W 40
+#define MAX_H 25
+
+#define PADDING 0.1
+
+#define WIDE_BUTTON_W 5
+#define WIDE_BUTTON_H 1
+
+#define SMALL_BUTTON_W 1
+#define SMALL_BUTTON_H 1
+
+#define HEADER_W MAX_W
+#define HEADER_H 1
+
+#define PREVIEW_W (2 * WIDE_BUTTON_W + 2 * PADDING + SMALL_BUTTON_W)
+#define PREVIEW_H PREVIEW_W
+
+#define PRESETS_W PREVIEW_W
+#define PRESETS_H (MAX_H - HEADER_H - PREVIEW_H - 2 * PADDING)
+
+#define CONFIG_W (MAX_W - PREVIEW_W - PADDING)
+#define CONFIG_H (MAX_H - HEADER_H - WIDE_BUTTON_H - 2 * PADDING)
+
+#define FRAME_BUTTON_W 2
+#define FRAME_BUTTON_H 2
+
+#define FRAME_BUTTONS_GROUP_W (4 * FRAME_BUTTON_W + 5 * PADDING)
+#define FRAME_BUTTONS_GROUP_H FRAME_BUTTON_H
+
+#define PREVIEW_GRID_W 9
+#define PREVIEW_GRID_H 9
+
+#define PREVIEW_LAYER_W (3 * PREVIEW_GRID_W)
+#define PREVIEW_LAYER_H (3 * PREVIEW_GRID_H)
+
+// IDCs
+// Main display
 #define MAIN_DISPLAY 5000
 
-//Backgrounds
-#define HEAD_BG 100
-#define LEFT_BG 101
-#define RIGHT_BG 102
-#define PREVIEW_BG 103
-#define PRESETS_HEAD_BG 104
-#define PRESETS_BG 105
-#define DELETE_PRESETS_BG 106
+// Control Groups
+#define CONFIG_GROUP 50
+#define PREVIEW_GROUP 51
+#define PRESETS_GROUP 52
+#define IDENTITY_BUTTON_GROUP 53
 
-//Text
+// Backgrounds
+#define HEAD_BG 100
+#define CONFIG_BG 101
+#define FRAME_BG 102
+#define PREVIEW_BG 103
+#define PRESETS_BG 104
+#define DELETE_PRESETS_BG 105
+
+// Text
 #define HEAD_TXT 200
-#define PREVIEW_TXT 201
 #define IDENTITY_TXT 202
 #define ICON_TXT 203
-#define CHECKBOX_TXT 204
+#define SUSPECT_TXT 204
 #define MOD1_TXT 205
 #define MOD2_TXT 206
 #define ECHELON_TXT 207
@@ -27,43 +71,43 @@
 #define PRESETS_NAME_TXT 213
 #define ADDITIONAL_TXT 214
 
-//Identity Buttons
+// Identity Buttons
 #define FRIENDLY_BTN_FRAME 300
-#define FRIENDLY_BTN_BACK 301
+#define FRIENDLY_BTN_ICON 301
 #define FRIENDLY_BTN_CTRL 302
 
 #define HOSTILE_BTN_FRAME 310
-#define HOSTILE_BTN_BACK 311
+#define HOSTILE_BTN_ICON 311
 #define HOSTILE_BTN_CTRL 312
 
 #define NEUTRAL_BTN_FRAME 320
-#define NEUTRAL_BTN_BACK 321
+#define NEUTRAL_BTN_ICON 321
 #define NEUTRAL_BTN_CTRL 322
 
 #define UNKNOWN_BTN_FRAME 330
-#define UNKNOWN_BTN_BACK 331
+#define UNKNOWN_BTN_ICON 331
 #define UNKNOWN_BTN_CTRL 332
 
-//Checkboxes
-#define MOD_CHECKBOX 400
+// Checkboxes
+#define SUSPECT_CHECKBOX 400
 #define REINFORCED_CHECKBOX 401
 #define REDUCED_CHECKBOX 402
 
-//Dropdowns
+// Dropdowns
 #define ICON_DROPDOWN 500
 #define MOD1_DROPDOWN 501
 #define MOD2_DROPDOWN 502
 #define ECHELON_DROPDOWN 503
 #define CHANNEL_DROPDOWN 504
 
-//Edit Boxes
+// Edit Boxes
 #define HIGHER_EDIT 600
 #define UNIQUE_EDIT 601
 #define SEARCH_PRESETS_EDIT 602
 #define NAME_PRESETS_EDIT 603
 #define ADDITIONAL_EDIT 604
 
-//Buttons
+// Buttons
 #define OK_BUTTON 700
 #define CANCEL_BUTTON 701
 #define TOGGLE_PRESETS_BUTTON 703
@@ -73,7 +117,7 @@
 #define CLEAR_PRESETS_BUTTON 707
 #define DELETE_PRESETS_BUTTON 708
 
-//Preview Layers
+// Preview Layers
 #define PREVIEW_LYR_IDENTITY 800
 #define PREVIEW_LYR_MOD_1 801
 #define PREVIEW_LYR_MOD_2 802
@@ -81,9 +125,10 @@
 #define PREVIEW_LYR_MOD_4 804
 #define PREVIEW_LYR_ECHELON 805
 #define PREVIEW_LYR_SIZE_MOD 806
+#define PREVIEW_GRID 807
 
-//Pictures
-#define DELETE_PRESETS_PIC 900
+// Icons
+#define DELETE_PRESETS_ICON 900
 
-//List Boxes
+// List Boxes
 #define PRESETS_LIST 1000

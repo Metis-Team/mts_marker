@@ -24,4 +24,4 @@ private _mainDisplay = ctrlParent _presetsList;
 
 private _markername = _presetsList lbText _selectedIndex;
 
-(_mainDisplay displayctrl NAME_PRESETS_EDIT) ctrlSetText _markername;
+(_mainDisplay displayCtrl NAME_PRESETS_EDIT) ctrlSetText _markername;

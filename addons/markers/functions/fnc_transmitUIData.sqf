@@ -53,7 +53,7 @@ if (_isForMarkerCreation) then {
         };
     } count _higherFormation;
 
-    private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
+    private _okBtnCtrl = _mainDisplay displayCtrl OK_BUTTON;
     private _pos = _okBtnCtrl getVariable [QGVAR(createMarkerMousePosition), [0,0]];
 
     private _broadcastChannel = call {

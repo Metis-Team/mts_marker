@@ -25,13 +25,6 @@
                 <Chinesesimp>军事单位</Chinesesimp>
                 <Korean>작전명령 표시기</Korean>
             </Key>
-            <Key ID="str_mts_markers_ui_general_previewTXT">
-                <Original>Preview</Original>
-                <German>Vorschau</German>
-                <Chinese>預覽</Chinese>
-                <Chinesesimp>预览</Chinesesimp>
-                <Korean>미리보기</Korean>
-            </Key>
             <Key ID="str_mts_markers_ui_general_identityTXT">
                 <Original>Identity:</Original>
                 <German>Identität:</German>
@@ -48,14 +41,14 @@
             </Key>
             <Key ID="str_mts_markers_ui_general_mod1TXT">
                 <Original>Modifier 1:</Original>
-                <German>Ergänzungsz. 1:</German>
+                <German>Ergänzungszeichen 1:</German>
                 <Chinese>修飾符1:</Chinese>
                 <Chinesesimp>修饰符1:</Chinesesimp>
                 <Korean>형태:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_mod2TXT">
                 <Original>Modifier 2:</Original>
-                <German>Ergänzungsz. 2:</German>
+                <German>Ergänzungszeichen 2:</German>
                 <Chinese>修飾符2:</Chinese>
                 <Chinesesimp>修饰符2:</Chinesesimp>
                 <Korean>이동:</Korean>
@@ -68,18 +61,18 @@
                 <Korean>규모:</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_reinforcedTXT">
-                <Original>Reinforced:</Original>
-                <German>Verstärkt:</German>
-                <Chinese>擴編:</Chinese>
-                <Chinesesimp>扩编:</Chinesesimp>
-                <Korean>증원병력:</Korean>
+                <Original>Reinforced</Original>
+                <German>Verstärkt</German>
+                <Chinese>擴編</Chinese>
+                <Chinesesimp>扩编</Chinesesimp>
+                <Korean>증원병력</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_reducedTXT">
-                <Original>Reduced:</Original>
-                <German>Vermindert:</German>
-                <Chinese>縮編:</Chinese>
-                <Chinesesimp>缩编:</Chinesesimp>
-                <Korean>축소병력:</Korean>
+                <Original>Reduced</Original>
+                <German>Vermindert</German>
+                <Chinese>縮編</Chinese>
+                <Chinesesimp>缩编</Chinesesimp>
+                <Korean>축소병력</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_higherTXT">
                 <Original>Higher Formation:</Original>
@@ -90,7 +83,7 @@
             </Key>
             <Key ID="str_mts_markers_ui_general_uniqueTXT">
                 <Original>Unique Designation:</Original>
-                <German>Eind. Kennung:</German>
+                <German>Eindeutige Kennung:</German>
                 <Chinese>其它文字備註:</Chinese>
                 <Chinesesimp>其它文字备注:</Chinesesimp>
                 <Korean>부호표식:</Korean>
@@ -105,20 +98,6 @@
                 <Chinese>頻道:</Chinese>
                 <Chinesesimp>频道:</Chinesesimp>
                 <Korean>채널:</Korean>
-            </Key>
-            <Key ID="str_mts_markers_ui_general_okBTN">
-                <Original>OK</Original>
-                <German>OK</German>
-                <Chinese>確認</Chinese>
-                <Chinesesimp>确认</Chinesesimp>
-                <Korean>확인</Korean>
-            </Key>
-            <Key ID="str_mts_markers_ui_general_cancelBTN">
-                <Original>CANCEL</Original>
-                <German>ABBRUCH</German>
-                <Chinese>取消</Chinese>
-                <Chinesesimp>取消</Chinesesimp>
-                <Korean>취소</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_savePresetsBTN">
                 <Original>SAVE</Original>
@@ -139,11 +118,6 @@
                 <Original>Clear name</Original>
                 <German>Name leeren</German>
                 <Korean>이름 삭제</Korean>
-            </Key>
-            <Key ID="str_mts_markers_ui_general_togglePresetsBTN_tooltip">
-                <Original>Open/Close Presets window</Original>
-                <German>Öffne/Schließe Presets Fenster</German>
-                <Korean>사전설정창 끄기</Korean>
             </Key>
             <Key ID="str_mts_markers_ui_general_deletePresetsBTN_tooltip">
                 <Original>Delete Preset</Original>
@@ -791,16 +765,6 @@
                 <Original>Enables/Disables the saving of the last selected icon and modifier.</Original>
                 <German>Aktiviert das Speichern der letzten ausgewählten Grundzeichen und Ergänzungszeichen.</German>
                 <Korean>마지막으로 선택한 아이콘 및 수정 저장을 활성화/비활성화 합니다.</Korean>
-            </Key>
-            <Key ID="str_mts_markers_cba_settings_show_presets_UI">
-                <Original>Show Presets window by default</Original>
-                <German>Zeige das Presets Fenster standardmäßig</German>
-                <Korean>기본적으로 사전설정 창표시</Korean>
-            </Key>
-            <Key ID="str_mts_markers_cba_settings_show_presets_UI_tooltip">
-                <Original>Open Presets window when the marker interface is being opened.</Original>
-                <German>Öffne das Presets Fenster beim Öffnen des Interface.</German>
-                <Korean>마커창이 열려있을 때 사전설정창을 엽니다.</Korean>
             </Key>
             <Key ID="str_mts_markers_cba_settings_use_vanilla_colors">
                 <Original>Use Arma colors</Original>
