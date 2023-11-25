@@ -4,8 +4,9 @@
 
 //#define DEBUG_MODE_FULL
 //#define DISABLE_COMPILE_CACHE
-#include "\a3\ui_f\hpp\defineCommonGrids.inc"
 //#define CBA_DEBUG_SYNCHRONOUS
+
+#include "\a3\ui_f\hpp\defineCommonGrids.inc"
 
 #ifdef DEBUG_ENABLED_MARKERS
     #define DEBUG_MODE_FULL
