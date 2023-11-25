@@ -60,5 +60,5 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
 
 //select right identity in the dialog & update preview
-(_mainDisplay displayCtrl MOD_CHECKBOX) cbSetChecked _dashedFrameshape;
+(_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;
 [_identity] call FUNC(identityButtonsAction);

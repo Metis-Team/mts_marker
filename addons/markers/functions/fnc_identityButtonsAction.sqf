@@ -25,8 +25,8 @@ private _friendlyBtnCtrl = _mainDisplay displayCtrl FRIENDLY_BTN_FRAME;
 private _hostileBtnCtrl = _mainDisplay displayCtrl HOSTILE_BTN_FRAME;
 private _neutralBtnCtrl = _mainDisplay displayCtrl NEUTRAL_BTN_FRAME;
 private _unknownBtnCtrl = _mainDisplay displayCtrl UNKNOWN_BTN_FRAME;
-private _suspectedCbCtrl = _mainDisplay displayCtrl MOD_CHECKBOX;
-private _checkboxTxtCtrl = _mainDisplay displayCtrl CHECKBOX_TXT;
+private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
+private _checkboxTxtCtrl = _mainDisplay displayCtrl SUSPECT_TXT;
 
 private _ctrlsToHide = [];
 call {

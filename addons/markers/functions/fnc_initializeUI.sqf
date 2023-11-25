@@ -23,7 +23,7 @@
 params [["_curMapDisplay", displayNull, [displayNull]], ["_mousePos", [0,0], [[]], 2], ["_namePrefix", "", [""]]];
 
 //Open interface
-private _displayCheck = _curMapDisplay createDisplay QGVAR(dialog);
+private _displayCheck = _curMapDisplay createDisplay QGVAR(Dialog);
 CHECKRET(isNull _displayCheck, ERROR("Failed to create dialog"));
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
@@ -107,7 +107,7 @@ if (!isMultiplayer || is3DEN) then {
     } count _channelDropdownArray;
 };
 
-private _suspectedCbCtrl = _mainDisplay displayCtrl MOD_CHECKBOX;
+private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
 private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
 
@@ -220,6 +220,3 @@ _presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
 private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
 _searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
 _searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
-
-//open/close the Presets UI (dependend on the CBA Setting)
-[GVAR(showPresetsUI)] call FUNC(showPresetsUI);
