@@ -12,6 +12,7 @@ class RscButtonSearch;
 class RscControlsGroupNoScrollbars;
 class RscTitle;
 class RscFrame;
+class RscXSliderH;
 
 class GVAR(RscTransparentButton): RscButton {
     colorBackground[] = {0, 0, 0, 0};
@@ -330,6 +331,44 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             x = QPOS_W(CONFIG_W - 7.5 - 0.5);
             y = QPOS_H(12);
             maxChars = HIGHER_FORMATION_MAX_CHARS;
+        };
+
+        class AlphaText: GVAR(RscText) {
+            idc = ALPHA_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_alphaTXT);
+        };
+        class AlphaSlider: RscXSliderH {
+            idc = ALPHA_SLIDER;
+            x = QPOS_W(0.5);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            tooltip = CSTRING(ui_general_resetSlider_tooltip);
+            sliderPosition = MARKER_ALPHA;
+            sliderRange[] = {MIN_ALPHA, MAX_ALPHA};
+        };
+
+        class ScaleText: GVAR(RscText) {
+            idc = SCALE_TXT;
+            x = QPOS_W((CONFIG_W - 8.8) / 2);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_scaleTXT);
+        };
+        class ScaleSlider: RscXSliderH {
+            idc = SCALE_SLIDER;
+            x = QPOS_W((CONFIG_W - 8.8) / 2);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            tooltip = CSTRING(ui_general_resetSlider_tooltip);
+            sliderPosition = MARKER_SCALE;
+            sliderRange[] = {MIN_SCALE, MAX_SCALE};
         };
 
         class ChannelText: GVAR(RscText) {

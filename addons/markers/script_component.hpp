@@ -47,6 +47,11 @@
 #define UNIQUE_DESIGNATION_MAX_CHARS 6
 #define HIGHER_FORMATION_MAX_CHARS 6
 
+#define MIN_SCALE 0.5
+#define MAX_SCALE 2
+#define MIN_ALPHA 0.1
+#define MAX_ALPHA 1
+
 // More readable conditions
 #define HAS_MAP (("ItemMap" in (assignedItems player)) || ("ItemGPS" in (assignedItems player)))
 #define IN_3DEN_MAP (is3DEN && {(get3DENActionState "ToggleMap") isEqualTo 1})
