@@ -21,12 +21,12 @@
 params [["_identity", "", [""]]];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
-private _friendlyBtnCtrl = _mainDisplay displayctrl FRIENDLY_BTN_FRAME;
-private _hostileBtnCtrl = _mainDisplay displayctrl HOSTILE_BTN_FRAME;
-private _neutralBtnCtrl = _mainDisplay displayctrl NEUTRAL_BTN_FRAME;
-private _unknownBtnCtrl = _mainDisplay displayctrl UNKNOWN_BTN_FRAME;
-private _suspectedCbCtrl = _mainDisplay displayctrl MOD_CHECKBOX;
-private _checkboxTxtCtrl = _mainDisplay displayctrl CHECKBOX_TXT;
+private _friendlyBtnCtrl = _mainDisplay displayCtrl FRIENDLY_BTN_FRAME;
+private _hostileBtnCtrl = _mainDisplay displayCtrl HOSTILE_BTN_FRAME;
+private _neutralBtnCtrl = _mainDisplay displayCtrl NEUTRAL_BTN_FRAME;
+private _unknownBtnCtrl = _mainDisplay displayCtrl UNKNOWN_BTN_FRAME;
+private _suspectedCbCtrl = _mainDisplay displayCtrl MOD_CHECKBOX;
+private _checkboxTxtCtrl = _mainDisplay displayCtrl CHECKBOX_TXT;
 
 private _ctrlsToHide = [];
 call {

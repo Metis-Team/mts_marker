@@ -19,7 +19,7 @@
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
 //get identity
-private _identity = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
+private _identity = (_mainDisplay displayCtrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
 CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
 //check if frameshape is dashed

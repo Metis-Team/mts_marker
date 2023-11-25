@@ -80,11 +80,11 @@ private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
 if (!isMultiplayer || is3DEN) then {
     //hide channel dropdown in singleplayer and 3DEN editor
     _channelCtrl ctrlShow false;
-    (_mainDisplay displayctrl CHANNEL_TXT) ctrlShow false;
+    (_mainDisplay displayCtrl CHANNEL_TXT) ctrlShow false;
 } else {
     //fill the channel combobox & select current channel
     _channelCtrl ctrlShow true;
-    (_mainDisplay displayctrl CHANNEL_TXT) ctrlShow true;
+    (_mainDisplay displayCtrl CHANNEL_TXT) ctrlShow true;
 
     private _channelDropdownArray = [
         ["str_channel_global", 0, "colorGlobalChannel"],
@@ -128,7 +128,7 @@ private _setPosAndPrefix = {
     };
 
     CHECK(isNil "_pos" || isNull _mainDisplay);
-    private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
+    private _okBtnCtrl = _mainDisplay displayCtrl OK_BUTTON;
     _okBtnCtrl setVariable [QGVAR(editMarkerNamePrefix), _namePrefix];
     _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), _pos];
 };
@@ -217,7 +217,7 @@ _presetsList ctrlAddEventHandler ["LBSelChanged", FUNC(onPresetsLBSelChanged)];
 _presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
 
 //add EH for the searchbar
-private _searchCtrl = _mainDisplay displayctrl SEARCH_PRESETS_EDIT;
+private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
 _searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
 _searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
 
