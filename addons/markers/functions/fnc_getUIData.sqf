@@ -22,8 +22,9 @@ private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _identity = (_mainDisplay displayCtrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
 CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
-//check if frameshape is dashed
+// Check if frameshape is dashed or HQ
 private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl SUSPECT_CHECKBOX);
+private _isHq = cbChecked (_mainDisplay displayCtrl HQ_CHECKBOX);
 
 private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
 private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
@@ -54,4 +55,4 @@ private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_E
 private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
 
 // This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation]
+[[_identity, _dashedFrameshape, _isHq], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation]

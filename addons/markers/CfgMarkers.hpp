@@ -42,6 +42,9 @@ class CfgMarkers {
     class mts_bludash_vanilla_frameshape: mts_bludash_frameshape {
         icon = QPATHTOF(data\blu\mts_markers_bludash_vanilla_frameshape.paa);
     };
+    class mts_blu_hq: mts_blu_frameshape {
+        icon = QPATHTOF(data\blu\mts_markers_blu_hq.paa);
+    };
     class mts_red_frameshape: o_unknown {
         author = CSTRING(authors);
         scope = 0;
@@ -57,6 +60,9 @@ class CfgMarkers {
     class mts_reddash_vanilla_frameshape: mts_reddash_frameshape {
         icon = QPATHTOF(data\red\mts_markers_reddash_vanilla_frameshape.paa);
     };
+    class mts_red_hq: mts_red_frameshape {
+        icon = QPATHTOF(data\red\mts_markers_red_hq.paa);
+    };
     class mts_neu_frameshape: n_unknown {
         author = CSTRING(authors);
         scope = 0;
@@ -65,6 +71,9 @@ class CfgMarkers {
     };
     class mts_neu_vanilla_frameshape: mts_neu_frameshape {
         icon = QPATHTOF(data\neu\mts_markers_neu_vanilla_frameshape.paa);
+    };
+    class mts_neu_hq: mts_neu_frameshape {
+        icon = QPATHTOF(data\neu\mts_markers_neu_hq.paa);
     };
     class mts_unk_frameshape: n_unknown {
         author = CSTRING(authors);
@@ -80,6 +89,9 @@ class CfgMarkers {
     };
     class mts_unkdash_vanilla_frameshape: mts_unkdash_frameshape {
         icon = QPATHTOF(data\unk\mts_markers_unkdash_vanilla_frameshape.paa);
+    };
+    class mts_unk_hq: mts_unk_frameshape {
+        icon = QPATHTOF(data\unk\mts_markers_unk_hq.paa);
     };
 
     class mts_special_textmarker: b_unknown {

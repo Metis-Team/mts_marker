@@ -69,6 +69,9 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
             h = QPOS_H(PREVIEW_LAYER_H);
             text = "";
         };
+        class HQ: Identity {
+            idc = PREVIEW_LYR_HQ;
+        };
         class Mod1: Identity {
             idc = PREVIEW_LYR_MOD_1;
         };
@@ -331,6 +334,23 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             x = QPOS_W(CONFIG_W - 7.5 - 0.5);
             y = QPOS_H(12);
             maxChars = HIGHER_FORMATION_MAX_CHARS;
+        };
+        
+        class HQText: GVAR(RscText) {
+            idc = HQ_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(15);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_headquatersTXT);
+            style = 1;
+        };
+        class HQCheckbox: GVAR(RscCheckBoxSound) {
+            idc = HQ_CHECKBOX;
+            x = QPOS_W(0.5 + 6.5);
+            y = QPOS_H(15);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
         };
 
         class AlphaText: GVAR(RscText) {

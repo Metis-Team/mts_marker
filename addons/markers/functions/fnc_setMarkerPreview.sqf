@@ -9,6 +9,7 @@
  *      0: ARRAY - Frameshape.
  *          0: STRING - Identity (blu, red, neu, unk).
  *          1: BOOLEAN - Dashed (e.g. supect).
+ *          2: BOOLEAN - HQ.
  *      1: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
  *          0: NUMBER - Icon (0 for none).
  *          1: NUMBER - Modifier 1 (0 for none).
@@ -22,7 +23,7 @@
  *      Nothing.
  *
  *  Example:
- *      [["blu", false], [4,0,0], [5, false, true]] call mts_markers_fnc_setMarkerPreview
+ *      [["blu", false, false], [4,0,0], [5, false, true]] call mts_markers_fnc_setMarkerPreview
  *
  */
 
@@ -33,7 +34,8 @@ params [
 ];
 _frameshape params [
     ["_identity", "", [""]],
-    ["_dashedFrameshape", false, [false]]
+    ["_dashedFrameshape", false, [false]],
+    ["_isHq", false, [false]]
 ];
 _size params [
     ["_grpsize", 0, [0]],
@@ -45,6 +47,7 @@ CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _previewIdentityCtrl = _mainDisplay displayCtrl PREVIEW_LYR_IDENTITY;
+private _previewHqCtrl = _mainDisplay displayCtrl PREVIEW_LYR_HQ;
 private _previewMod1Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_1;
 private _previewMod2Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_2;
 private _previewMod3Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_3;
@@ -55,7 +58,16 @@ private _previewSizeModCtrl = _mainDisplay displayCtrl PREVIEW_LYR_SIZE_MOD;
 //clear all layers
 {
     _x ctrlSetText "";
-} count [_previewIdentityCtrl, _previewMod1Ctrl, _previewMod2Ctrl, _previewMod3Ctrl, _previewMod4Ctrl, _previewEchelonCtrl, _previewSizeModCtrl];
+} count [
+    _previewIdentityCtrl,
+    _previewHqCtrl,
+    _previewMod1Ctrl,
+    _previewMod2Ctrl,
+    _previewMod3Ctrl,
+    _previewMod4Ctrl,
+    _previewEchelonCtrl,
+    _previewSizeModCtrl
+];
 
 private _identityComplete = if (_dashedFrameshape) then {
     format ["%1dash", _identity]
@@ -65,6 +77,10 @@ private _identityComplete = if (_dashedFrameshape) then {
 
 //set selected identity to corresponding layer
 _previewIdentityCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%2_frameshape_preview.paa), _identity, _identityComplete]);
+
+if (_isHq) then {
+    _previewHqCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%1_hq.paa), _identity]);
+};
 
 //set all modifiers to corresponding layer
 private _allModifiers = _modifier call FUNC(getAllModifiers);
