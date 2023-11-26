@@ -29,7 +29,11 @@
 params [
     ["_frameshape", ["",false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
-    ["_size", [0,false,false], [[]], 3]
+    ["_size", [0,false,false], [[]], 3],
+    "",
+    "",
+    "",
+    ["_operationalCondition", OC_FULLY_CAPABLE, [0]]
 ];
 _frameshape params [
     ["_identity", "", [""]],
@@ -51,11 +55,21 @@ private _previewMod3Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_3;
 private _previewMod4Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_4;
 private _previewEchelonCtrl = _mainDisplay displayCtrl PREVIEW_LYR_ECHELON;
 private _previewSizeModCtrl = _mainDisplay displayCtrl PREVIEW_LYR_SIZE_MOD;
+private _previewOpCondCtrl = _mainDisplay displayCtrl PREVIEW_LYR_OPERATIONAL_CONDITION;
 
 //clear all layers
 {
     _x ctrlSetText "";
-} count [_previewIdentityCtrl, _previewMod1Ctrl, _previewMod2Ctrl, _previewMod3Ctrl, _previewMod4Ctrl, _previewEchelonCtrl, _previewSizeModCtrl];
+} count [
+    _previewIdentityCtrl,
+    _previewMod1Ctrl,
+    _previewMod2Ctrl,
+    _previewMod3Ctrl,
+    _previewMod4Ctrl,
+    _previewEchelonCtrl,
+    _previewSizeModCtrl,
+    _previewOpCondCtrl
+];
 
 private _identityComplete = if (_dashedFrameshape) then {
     format ["%1dash", _identity]
@@ -91,4 +105,16 @@ if (_reinforced || _reduced) then {
     };
 
     _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\com\size\%1.paa), _sizeModFilename]);
+};
+
+if (_operationalCondition > 0) then {
+    private _opCondFilename = "mts_markers_com_opcond";
+    if (_operationalCondition isEqualTo OC_DAMAGED) then {
+        _opCondFilename = _opCondFilename + "_damaged";
+    };
+    if (_operationalCondition isEqualTo OC_DESTROYED) then {
+        _opCondFilename = _opCondFilename + "_destroyed";
+    };
+
+    _previewOpCondCtrl ctrlSetText (format [QPATHTOF(data\com\opcond\%1.paa), _opCondFilename]);
 };

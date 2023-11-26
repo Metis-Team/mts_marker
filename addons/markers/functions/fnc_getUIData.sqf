@@ -53,5 +53,14 @@ private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_E
 //get the right text (additional information)
 private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
 
+// Operational condition
+private _operationalCondition = OC_FULLY_CAPABLE;
+if (cbChecked (_mainDisplay displayCtrl DAMAGED_CHECKBOX)) then {
+    _operationalCondition = OC_DAMAGED;
+};
+if (cbChecked (_mainDisplay displayCtrl DESTROYED_CHECKBOX)) then {
+    _operationalCondition = OC_DESTROYED;
+};
+
 // This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation]
+[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _operationalCondition]

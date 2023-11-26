@@ -92,6 +92,14 @@
                 <Original>Additional Info:</Original>
                 <German>Zusatzinformationen:</German>
             </Key>
+            <Key ID="str_mts_markers_ui_general_damagedTXT">
+                <Original>Damaged/Rendered Ineffective</Original>
+                <German>Bekämpft</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_destroyedTXT">
+                <Original>Destroyed</Original>
+                <German>Vernichtet</German>
+            </Key>
             <Key ID="str_mts_markers_ui_general_channelTXT">
                 <Original>Channel:</Original>
                 <German>Kanal:</German>

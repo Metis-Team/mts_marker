@@ -86,6 +86,9 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
         class Size: Identity {
             idc = PREVIEW_LYR_SIZE_MOD;
         };
+        class OperationalCondition: Identity {
+            idc = PREVIEW_LYR_OPERATIONAL_CONDITION;
+        };
     };
 };
 
@@ -284,11 +287,11 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
         };
         class ReducedCheckbox: ReinforcedCheckbox {
             idc = REDUCED_CHECKBOX;
-            y = QPOS_H(4 + 1);
+            y = QPOS_H(5);
         };
         class ReducedText: ReinforcedText {
             idc = REDUCED_TXT;
-            y = QPOS_H(4 + 1);
+            y = QPOS_H(5);
             text = CSTRING(ui_general_reducedTXT);
         };
 
@@ -330,6 +333,31 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             x = QPOS_W(CONFIG_W - 7.5 - 0.5);
             y = QPOS_H(12);
             maxChars = HIGHER_FORMATION_MAX_CHARS;
+        };
+
+        class DamagedCheckbox: GVAR(RscCheckBoxSound) {
+            idc = DAMAGED_CHECKBOX;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(14);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+        class DamagedText: GVAR(RscText) {
+            idc = DAMAGED_TXT;
+            x = QPOS_W((CONFIG_W - 10) / 2 + 1);
+            y = QPOS_H(14);
+            w = QPOS_W(9);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_damagedTXT);
+        };
+        class DestroyedCheckbox: DamagedCheckbox {
+            idc = DESTROYED_CHECKBOX;
+            y = QPOS_H(15);
+        };
+        class DestroyedText: DamagedText {
+            idc = DESTROYED_TXT;
+            y = QPOS_H(15);
+            text = CSTRING(ui_general_destroyedTXT);
         };
 
         class ChannelText: GVAR(RscText) {

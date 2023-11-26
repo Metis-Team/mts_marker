@@ -30,6 +30,7 @@ PREP(moveMarkerInProgress);
 PREP(moveMarkerInProgress3DEN);
 PREP(moveMarkerMouseDown);
 PREP(onBriefingDisplayOpened);
+PREP(onOperationalConditionChanged);
 PREP(onPresetsLBSelChanged);
 PREP(pasteMarker);
 PREP(savePreset);

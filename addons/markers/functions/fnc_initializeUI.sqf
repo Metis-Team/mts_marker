@@ -111,6 +111,10 @@ private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
 private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
 
+// Operational Condition
+private _damagedCbCtrl = _mainDisplay displayCtrl DAMAGED_CHECKBOX;
+private _destroyedCbCtrl = _mainDisplay displayCtrl DESTROYED_CHECKBOX;
+
 private _setPosAndPrefix = {
     params [
         ["_mainDisplay", displayNull, [displayNull]],
@@ -206,7 +210,7 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl];
+} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl, _damagedCbCtrl, _destroyedCbCtrl];
 
 //fill the Presets list with saved Presets from the profile
 call FUNC(updatePresetsList);
@@ -220,3 +224,7 @@ _presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
 private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
 _searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
 _searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
+
+{
+    _x ctrlAddEventHandler ["CheckedChanged", LINKFUNC(onOperationalConditionChanged)];
+} forEach [_damagedCbCtrl, _destroyedCbCtrl];
