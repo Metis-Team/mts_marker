@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Makes the operational condition checkboxes to radio buttons.
+ *      Simulate radio button behavior for the operational condition checkboxes.
  *
  *  Parameter(s):
  *      0: CONTROL - Checkbox.
