@@ -6,23 +6,13 @@
  *      Adds the right picture to the different preview picture layers for comboboxes.
  *
  *  Parameter(s):
- *      0: ARRAY - Frameshape.
- *          0: STRING - Identity (blu, red, neu, unk).
- *          1: BOOLEAN - Dashed (e.g. supect).
- *      1: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
- *          0: NUMBER - Icon (0 for none).
- *          1: NUMBER - Modifier 1 (0 for none).
- *          2: NUMBER - Modifier 2 (0 for none).
- *      2: ARRAY - Group size array. (Optional, default: no echelon)
- *          0: NUMBER - Group size (0 for none).
- *          1: BOOLEAN - Reinforced or (+) symbol.
- *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
+ *      Same marker configuration as in createMarkerLocal.
  *
  *  Returns:
  *      Nothing.
  *
  *  Example:
- *      [["blu", false], [4,0,0], [5, false, true]] call mts_markers_fnc_setMarkerPreview
+ *      _markerParameters call mts_markers_fnc_setMarkerPreview
  *
  */
 
@@ -30,9 +20,9 @@ params [
     ["_frameshape", ["",false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
-    "",
-    "",
-    "",
+    "", // unique designation (we do not display text marker in the preview, so ignore them)
+    "", // additional information
+    "", // higher formation
     ["_operationalCondition", OC_FULLY_CAPABLE, [0]]
 ];
 _frameshape params [
