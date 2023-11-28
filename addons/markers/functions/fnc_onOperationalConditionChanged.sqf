@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Mimic radio button behavior.
+ *      Makes the operational condition checkboxes to radio buttons.
  *
  *  Parameter(s):
  *      0: CONTROL - Checkbox.
