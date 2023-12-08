@@ -228,8 +228,8 @@ _presetsList ctrlAddEventHandler ["LBDblClick", LINKFUNC(loadPreset)];
 
 //add EH for the searchbar
 private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
-_searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
-_searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
+_searchCtrl ctrlAddEventHandler ["KeyDown", LINKFUNC(updatePresetsList)];
+_searchCtrl ctrlAddEventHandler ["KeyUp", LINKFUNC(updatePresetsList)];
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", LINKFUNC(onOperationalConditionChanged)];
