@@ -844,8 +844,8 @@ class GVAR(DTGDialog) {
             idc = DTG_CANCEL_BUTTON;
             x = QPOS_X((MAX_W - DTG_W) / 2);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
-            w = QPOS_W(LARGE_BUTTON_W);
-            h = QPOS_H(LARGE_BUTTON_H);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
             onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
         };
 
@@ -853,8 +853,8 @@ class GVAR(DTGDialog) {
             idc = DTG_OK_BUTTON;
             x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - LARGE_BUTTON_W);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
-            w = QPOS_W(LARGE_BUTTON_W);
-            h = QPOS_H(LARGE_BUTTON_H);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
             default = 1;
             onButtonClick = QUOTE([[] call FUNC(getDTGUIData)] call FUNC(saveAndDisplayDTG); (ctrlParent (_this select 0)) closeDisplay 1;);
         };
