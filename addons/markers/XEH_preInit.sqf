@@ -73,7 +73,7 @@ GVAR(monthAbbreviations) = createHashMapFromArray [
     [9, "sep"],
     [10, "oct"],
     [11, "nov"],
-    [12, "dez"]
+    [12, "dec"]
 ];
 
 GVAR(lastSelection) = [];
