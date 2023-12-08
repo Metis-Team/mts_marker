@@ -31,6 +31,7 @@ private _day = _dateDayCtrl lbValue (lbCurSel _dateDayCtrl);
 private _hours = parseNumber (ctrlText (_dtgDisplay displayCtrl DTG_HOURS_EDIT));
 private _minutes = parseNumber (ctrlText (_dtgDisplay displayCtrl DTG_MINUTES_EDIT));
 
-private _timeZone = _timeZoneCtrl lbValue (lbCurSel _timeZoneCtrl);
+private _timeZoneId = _timeZoneCtrl lbValue (lbCurSel _timeZoneCtrl);
+private _timeZone = GVAR(alphanumCharacters) select _timeZoneId;
 
 [[_year, _month, _day, _hours, _minutes], _timeZone]

@@ -840,7 +840,7 @@ class GVAR(DTGDialog) {
             h = QPOS_H(DTG_H);
         };
 
-        class CancelButton: RscButtonMenu {
+        class CancelButton: RscButtonMenuCancel {
             idc = DTG_CANCEL_BUTTON;
             x = QPOS_X((MAX_W - DTG_W) / 2);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
@@ -849,14 +849,14 @@ class GVAR(DTGDialog) {
             onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
         };
 
-        class OkButton: RscButtonMenu {
+        class OkButton: RscButtonMenuOK {
             idc = DTG_OK_BUTTON;
             x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - LARGE_BUTTON_W);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
             w = QPOS_W(LARGE_BUTTON_W);
             h = QPOS_H(LARGE_BUTTON_H);
             default = 1;
-            onButtonClick = QUOTE(call FUNC(saveDTG); (ctrlParent (_this select 0)) closeDisplay 1;);
+            onButtonClick = QUOTE([[] call FUNC(getDTGUIData)] call FUNC(saveAndDisplayDTG); (ctrlParent (_this select 0)) closeDisplay 1;);
         };
     };
 };

@@ -20,6 +20,7 @@
  */
 
 params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]]];
+TRACE_2("params", _date, _timeZone);
 
 CHECKRET((_date isEqualTo []) || (count _timeZone != 1), []);
 

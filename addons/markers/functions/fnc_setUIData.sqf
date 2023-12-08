@@ -70,8 +70,7 @@ if (_operationalCondition isEqualTo OC_DESTROYED) then {
     (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
 };
 
-_dateTimeGroup call FUNC(setDTGUIData);
-(_mainDisplay displayCtrl HIGHER_EDIT) setVariable [QGVAR(dateTimeGroup), _dateTimeGroup];
+[_dateTimeGroup] call FUNC(saveAndDisplayDTG);
 
 // Select right identity in the dialog & update preview
 (_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;

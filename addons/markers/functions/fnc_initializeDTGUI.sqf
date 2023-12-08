@@ -53,8 +53,11 @@ private _currentTimeZone = [systemTime, systemTimeUTC] call FUNC(getTimeZoneIden
     // because lbSetValue only allows intergers.
     private _timeZoneId = GVAR(alphanumCharacters) findIf {_x isEqualTo _timeZone};
     _timeZoneCtrl lbSetValue [_index, _timeZoneId];
-    _timeZoneCtrl lbSetTextRight [_index, _timeZone];
     _timeZoneCtrl lbSetTooltip [_index, _tooltip];
+
+    // Set transparent picture to the right this will be the padding right for the test right
+    _timeZoneCtrl lbSetPictureRight [_index, "#(argb,8,8,3)color(0,0,0,0)"];
+    _timeZoneCtrl lbSetTextRight [_index, _timeZone];
 } forEach [
     [LLSTRING(ui_dtg_localTime), "J", LLSTRING(ui_dtg_localTime_tooltip)],
     [LLSTRING(ui_dtg_systemTime), _currentTimeZone, LLSTRING(ui_dtg_systemTime_tooltip)],
@@ -85,5 +88,10 @@ _timeSliderCtrl ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onDTGTimeSlide
     [DTG_MINUTES_EDIT, floor (_currentValue / 60 % 60)]
 ];
 
-// Set local Arma time as default
-[date] call FUNC(setDTGUIData);
+private _dateTimeGroup = (_parentDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
+if (_dateTimeGroup isEqualTo []) then {
+    // Set local Arma time as default
+    [date] call FUNC(setDTGUIData);
+} else {
+    _dateTimeGroup call FUNC(setDTGUIData);
+};

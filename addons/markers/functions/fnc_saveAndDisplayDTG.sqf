@@ -3,23 +3,22 @@
  *  Author: Timi007
  *
  *  Description:
- *      Gets the UI data of the Date-Time Group and saves them in the DTG button for later processing.
+ *      Saves and displays the Date-Time Group UI data in the DTG button for later processing.
  *
  *  Parameter(s):
- *      None.
+ *      0: ARRAY - Date-Time Group information.
  *
  *  Returns:
  *      Nothing.
  *
  *  Example:
- *      call mts_markers_fnc_saveDTG
+ *      [_dateTimeGroup] call mts_markers_fnc_saveAndDisplayDTG
  *
  */
 
-private _mainDisplay = findDisplay MAIN_DISPLAY;
-private _dtgButton = _mainDisplay displayCtrl DTG_BUTTON;
+params ["_dateTimeGroup"];
 
-private _dateTimeGroup = [] call FUNC(getDTGUIData);
+private _dtgButton = (findDisplay MAIN_DISPLAY) displayCtrl DTG_BUTTON;
 
 private _dtgChars = _dateTimeGroup call FUNC(toDTGCharaters);
 _dtgButton ctrlSetText (_dtgChars joinString "");

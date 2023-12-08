@@ -45,7 +45,7 @@ PREP(onPresetsLBSelChanged);
 PREP(onScaleSliderMouseButtonUp);
 PREP(onScaleSliderPosChanged);
 PREP(pasteMarker);
-PREP(saveDTG);
+PREP(saveAndDisplayDTG);
 PREP(savePreset);
 PREP(setDTGUIData);
 PREP(setDTGUIToSystemTime);
