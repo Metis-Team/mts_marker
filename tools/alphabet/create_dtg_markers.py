@@ -21,7 +21,7 @@ img_size = (1024, 1024)
 text_v_offset = 66 # px left/right from center
 text_h_offset = 55 # px up from center
 
-alphabet: list[str | list[str]] = [
+alphabets: list[str | list[str]] = [
     '0123', # Day
     string.digits, # Day
     '012', # Hour
@@ -68,7 +68,7 @@ def create_image(font: FreeTypeFont, letter: str, pos: int):
 
     return image
 
-def create_all_images(alphabet: list[str | list[str]], font: FreeTypeFont):
+def create_all_images(alphabets: list[str | list[str]], font: FreeTypeFont):
     """Creates all images for the characters defined.
 
     Args:
@@ -80,9 +80,13 @@ def create_all_images(alphabet: list[str | list[str]], font: FreeTypeFont):
     """
 
     images: list[tuple[ImageType, pathlib.Path]] = []
-    offset: int = 0
-    for pos, alphabet in enumerate(reversed(alphabet)):
+    offset: int = -len(alphabets[-1][-1])
+    for pos, alphabet in enumerate(reversed(alphabets)):
         image_dir = pathlib.Path('dtg', str(pos))
+
+        # In this case we assume that each letter in the current alphabet
+        # has the same length, i.e. either 1 or 3 for months.
+        offset += len(alphabet[-1])
 
         for letter in alphabet:
             image = create_image(font, letter, offset)
@@ -91,10 +95,6 @@ def create_all_images(alphabet: list[str | list[str]], font: FreeTypeFont):
             export_file = image_dir / file_name
 
             images.append((image, export_file))
-
-        # In this case we assume that each letter in the current alphabet
-        # has the same length, i.e. either 1 or 3 for months.
-        offset += len(alphabet[-1])
 
     return images
 
@@ -132,7 +132,7 @@ def debug_create_marker(date: datetime, timezone: str, font: FreeTypeFont):
     dev_img = Image.open(str(dev_frame))
 
     day = f'{date.day:02d}'
-    month = alphabet[7][date.month - 1]
+    month = alphabets[7][date.month - 1]
     year = f'{date.year:04d}'
     hour = f'{date.hour:02d}'
     min = f'{date.min:02d}'
@@ -166,7 +166,7 @@ def main(args: argparse.Namespace):
     print('Found ImageToPaa Tool:', image_to_paa)
 
     print('Creating images...')
-    images = create_all_images(alphabet, font)
+    images = create_all_images(alphabets, font)
 
     print('Cleaning export folder:', clean_images)
     if clean_images:
@@ -181,7 +181,7 @@ def main(args: argparse.Namespace):
 
     print('Creating include file...')
     include_file = args.output_dir / 'CfgMarkersDateTimeGroup.hpp'
-    write_include_file(include_file, alphabet)
+    write_include_file(include_file, alphabets)
     print(f'Created \"{include_file.name}\"')
 
     print('Finished generating character marker files.')
