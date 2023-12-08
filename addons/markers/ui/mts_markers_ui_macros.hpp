@@ -70,6 +70,8 @@
 #define CHANNEL_TXT 212
 #define PRESETS_NAME_TXT 213
 #define ADDITIONAL_TXT 214
+#define ALPHA_TXT 215
+#define SCALE_TXT 216
 
 // Identity Buttons
 #define FRIENDLY_BTN_FRAME 300
@@ -132,3 +134,7 @@
 
 // List Boxes
 #define PRESETS_LIST 1000
+
+// Slider
+#define ALPHA_SLIDER 1100
+#define SCALE_SLIDER 1101
