@@ -12,6 +12,7 @@ class RscButtonSearch;
 class RscControlsGroupNoScrollbars;
 class RscTitle;
 class RscFrame;
+class RscXSliderH;
 
 class GVAR(RscTransparentButton): RscButton {
     colorBackground[] = {0, 0, 0, 0};
@@ -67,6 +68,9 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
             w = QPOS_W(PREVIEW_LAYER_W);
             h = QPOS_H(PREVIEW_LAYER_H);
             text = "";
+        };
+        class HQ: Identity {
+            idc = PREVIEW_LYR_HQ;
         };
         class Mod1: Identity {
             idc = PREVIEW_LYR_MOD_1;
@@ -333,6 +337,61 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             x = QPOS_W(CONFIG_W - 7.5 - 0.5);
             y = QPOS_H(12);
             maxChars = HIGHER_FORMATION_MAX_CHARS;
+        };
+        
+        class HQText: GVAR(RscText) {
+            idc = HQ_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(15);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_headquatersTXT);
+            style = 1;
+        };
+        class HQCheckbox: GVAR(RscCheckBoxSound) {
+            idc = HQ_CHECKBOX;
+            x = QPOS_W(0.5 + 6.5);
+            y = QPOS_H(15);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+
+        class AlphaText: GVAR(RscText) {
+            idc = ALPHA_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_alphaTXT);
+        };
+        class AlphaSlider: RscXSliderH {
+            idc = ALPHA_SLIDER;
+            x = QPOS_W(0.5);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            tooltip = CSTRING(ui_general_resetSlider_tooltip);
+            sliderPosition = MARKER_ALPHA;
+            sliderRange[] = {MIN_ALPHA, MAX_ALPHA};
+        };
+
+        class ScaleText: GVAR(RscText) {
+            idc = SCALE_TXT;
+            x = QPOS_W((CONFIG_W - 8.8) / 2);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_scaleTXT);
+        };
+        class ScaleSlider: RscXSliderH {
+            idc = SCALE_SLIDER;
+            x = QPOS_W((CONFIG_W - 8.8) / 2);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            tooltip = CSTRING(ui_general_resetSlider_tooltip);
+            sliderPosition = MARKER_SCALE;
+            sliderRange[] = {MIN_SCALE, MAX_SCALE};
         };
 
         class DamagedCheckbox: GVAR(RscCheckBoxSound) {

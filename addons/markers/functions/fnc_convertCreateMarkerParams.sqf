@@ -38,7 +38,7 @@ if (_frameshape isEqualType "") then {
         _dashedFrameshape = true;
     };
 
-    _markerParameter set [0, [_frameshape, _dashedFrameshape]];
+    _markerParameter set [0, [_frameshape, _dashedFrameshape, false]];
 };
 
 TRACE_2("Converted createMarker params", _params, _createMarkerParams);

@@ -15,6 +15,7 @@
  *          0: ARRAY - Frameshape of the marker.
  *              0: STRING - Identity (blu, red, neu, unk).
  *              1: BOOLEAN - Dashed (e.g. supect).
+ *              2: BOOLEAN - Headquaters.
  *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *              0: NUMBER - Icon (0 for none).
  *              1: NUMBER - Modifier 1 (0 for none).
@@ -34,7 +35,7 @@
  *     STRING - Marker prefix.
  *
  *  Example:
- *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createMarkerLocal
+ *      _namePrefix = ["mtsmarker#123/0/1", 1, [2000,1000], [["blu", false, false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createMarkerLocal
  *
  */
 
@@ -48,7 +49,7 @@ params [
 ];
 
 _markerParameter params [
-    ["_frameshape", ["", false], [[]]],
+    ["_frameshape", ["", false, false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
@@ -60,9 +61,9 @@ _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced"
 
 CHECK(!hasInterface);
 CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
-CHECKRET(!(_frameshape isEqualTypeParams [ARR_2("", false)]) || ((_frameshape select 0) isEqualTo ""), ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN]"));
+CHECKRET((_frameshape select 0) isEqualTo "", ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN, BOOLEAN]"));
 
-_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
+_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
 _identity = toLower _identity;
 
 //prevent unscaled markers
@@ -111,6 +112,15 @@ private _frameshapeColor = if (GVAR(useVanillaColors)) then {
 CHECKRET(_frameshapeColor isEqualTo "", ERROR_1("Could not get corresponding vanilla color for identity %1.", _identity));
 
 _markerFrame setMarkerColorLocal _frameshapeColor;
+
+if (_isHq) then {
+    private _markerHq = createMarkerLocal [format ["%1_hq", _namePrefix], _pos];
+    _markerHq setMarkerTypeLocal format ["mts_%1_hq", _identity];
+    _markerHq setMarkerSizeLocal [_scale, _scale];
+    _markerHq setMarkerAlphaLocal _alpha;
+
+    _markerFamily pushBack _markerHq;
+};
 
 //create group size marker
 if (_grpsize > 0) then {

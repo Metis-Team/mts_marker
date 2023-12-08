@@ -92,6 +92,10 @@
                 <Original>Additional Info:</Original>
                 <German>Zusatzinformationen:</German>
             </Key>
+            <Key ID="str_mts_markers_ui_general_headquatersTXT">
+                <Original>Headquaters</Original>
+                <German>Führungseinrichtung</German>
+            </Key>
             <Key ID="str_mts_markers_ui_general_damagedTXT">
                 <Original>Damaged/Rendered Ineffective</Original>
                 <German>Bekämpft</German>
@@ -106,6 +110,18 @@
                 <Chinese>頻道:</Chinese>
                 <Chinesesimp>频道:</Chinesesimp>
                 <Korean>채널:</Korean>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_alphaTXT">
+                <Original>Opacity: %1</Original>
+                <German>Deckkraft: %1</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_scaleTXT">
+                <Original>Scale: %1</Original>
+                <German>Skalierung: %1</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_resetSlider_tooltip">
+                <Original>Press RMB to reset</Original>
+                <German>Rechte Maustaste zum Zurücksetzen</German>
             </Key>
             <Key ID="str_mts_markers_ui_general_savePresetsBTN">
                 <Original>SAVE</Original>
