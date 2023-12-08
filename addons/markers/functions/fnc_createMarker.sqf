@@ -26,6 +26,9 @@
  *          4: STRING - Marker text right - Additional information. (Optional, default: no text)
  *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
  *          6: NUMBER - Operational condition of the unit. (0 = fully capable, 1 = damaged, 2 = destroyed)
+ *          7: ARRAY - Date-Time Group.
+ *              0: ARRAY - Date in format [year, month, day, hour, minute] (all NUMBER).
+ *              1: STRING - Time zone identifier.
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *
