@@ -72,6 +72,7 @@
 #define ADDITIONAL_TXT 214
 #define ALPHA_TXT 215
 #define SCALE_TXT 216
+#define HQ_TXT 217
 
 // Identity Buttons
 #define FRIENDLY_BTN_FRAME 300
@@ -94,6 +95,7 @@
 #define SUSPECT_CHECKBOX 400
 #define REINFORCED_CHECKBOX 401
 #define REDUCED_CHECKBOX 402
+#define HQ_CHECKBOX 403
 
 // Dropdowns
 #define ICON_DROPDOWN 500
@@ -128,6 +130,7 @@
 #define PREVIEW_LYR_ECHELON 805
 #define PREVIEW_LYR_SIZE_MOD 806
 #define PREVIEW_GRID 807
+#define PREVIEW_LYR_HQ 808
 
 // Icons
 #define DELETE_PRESETS_ICON 900

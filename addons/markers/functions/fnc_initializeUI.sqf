@@ -110,6 +110,7 @@ if (!isMultiplayer || is3DEN) then {
 private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
 private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
+private _hqCbCtrl = _mainDisplay displayCtrl HQ_CHECKBOX;
 
 private _markerScale = MARKER_SCALE;
 private _markerAlpha = MARKER_ALPHA;
@@ -211,7 +212,7 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl];
+} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl, _hqCbCtrl];
 
 //fill the Presets list with saved Presets from the profile
 call FUNC(updatePresetsList);
