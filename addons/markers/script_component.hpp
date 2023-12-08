@@ -7,6 +7,7 @@
 //#define CBA_DEBUG_SYNCHRONOUS
 
 #include "\a3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\defineResincl.inc"
 
 #ifdef DEBUG_ENABLED_MARKERS
     #define DEBUG_MODE_FULL

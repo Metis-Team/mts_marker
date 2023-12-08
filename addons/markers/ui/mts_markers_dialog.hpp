@@ -601,18 +601,18 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             text = "$STR_3DEN_Environment_Attribute_Date_Displayname";
         };
         class YearCombo: RscCombo {
-            idc = YEAR_DROPDOWN;
+            idc = DTG_YEAR_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W);
             y = QPOS_H(1);
             w = QPOS_W(DTG_DATE_COMBO_W);
             h = QPOS_H(1);
         };
         class MonthCombo: YearCombo {
-            idc = MONTH_DROPDOWN;
+            idc = DTG_MONTH_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W + DTG_DATE_COMBO_W);
         };
         class DayCombo: YearCombo {
-            idc = DAY_DROPDOWN;
+            idc = DTG_DAY_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W + 2 * DTG_DATE_COMBO_W);
         };
 
@@ -657,7 +657,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             y = QPOS_H(2 + DTG_PADDING);
             w = QPOS_W(DTG_TIME_FRAME_W / 2);
             h = QPOS_H(1);
-            style = ST_CENTER + ST_NO_RECT;
+            style = QUOTE(ST_CENTER + ST_NO_RECT);
             tooltip = "$STR_3DEN_Attributes_SliderTime_Hour_tooltip";
             font = "EtelkaMonospaceProBold";
             sizeEx = QPOS_H(0.9);
@@ -669,7 +669,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + 2);
         };
         class TimezoneCombo: RscCombo {
-            idc = TIMEZONE_DROPDOWN;
+            idc = DTG_TIMEZONE_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + DTG_TIME_FRAME_W);
             y = QPOS_H(2 + DTG_PADDING);
             w = QPOS_W(DTG_DATE_COMBO_W);
@@ -698,7 +698,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             x = QPOS_W(DTG_TEXT_W + 2 * (DTG_BUTTON_W + PADDING));
             text = CSTRING(ui_dtg_systemUTCTime);
             tooltip = CSTRING(ui_dtg_systemUTCTime_tooltip);
-            onButtonClick = QUOTE([systemTimeUTC, 'Z'] call FUNC(setUIDateTime););
+            onButtonClick = QUOTE([ARR_2(systemTimeUTC, 'Z')] call FUNC(setUIDateTime););
         };
     };
 };
