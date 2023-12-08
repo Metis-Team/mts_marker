@@ -115,6 +115,10 @@ private _hqCbCtrl = _mainDisplay displayCtrl HQ_CHECKBOX;
 private _markerScale = MARKER_SCALE;
 private _markerAlpha = MARKER_ALPHA;
 
+// Operational Condition
+private _damagedCbCtrl = _mainDisplay displayCtrl DAMAGED_CHECKBOX;
+private _destroyedCbCtrl = _mainDisplay displayCtrl DESTROYED_CHECKBOX;
+
 private _setPosAndPrefix = {
     params [
         ["_mainDisplay", displayNull, [displayNull]],
@@ -212,7 +216,7 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl, _hqCbCtrl];
+} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl, _hqCbCtrl, _damagedCbCtrl, _destroyedCbCtrl];
 
 //fill the Presets list with saved Presets from the profile
 call FUNC(updatePresetsList);
@@ -226,6 +230,10 @@ _presetsList ctrlAddEventHandler ["LBDblClick", LINKFUNC(loadPreset)];
 private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
 _searchCtrl ctrlAddEventHandler ["KeyDown", LINKFUNC(updatePresetsList)];
 _searchCtrl ctrlAddEventHandler ["KeyUp", LINKFUNC(updatePresetsList)];
+
+{
+    _x ctrlAddEventHandler ["CheckedChanged", LINKFUNC(onOperationalConditionChanged)];
+} forEach [_damagedCbCtrl, _destroyedCbCtrl];
 
 private _scaleSlider = _mainDisplay displayCtrl SCALE_SLIDER;
 _scaleSlider sliderSetPosition _markerScale;

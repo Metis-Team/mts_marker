@@ -6,31 +6,24 @@
  *      Adds the right picture to the different preview picture layers for comboboxes.
  *
  *  Parameter(s):
- *      0: ARRAY - Frameshape.
- *          0: STRING - Identity (blu, red, neu, unk).
- *          1: BOOLEAN - Dashed (e.g. supect).
- *          2: BOOLEAN - HQ.
- *      1: ARRAY - Composition of modifier for the marker. (Optional, default: no modifiers)
- *          0: NUMBER - Icon (0 for none).
- *          1: NUMBER - Modifier 1 (0 for none).
- *          2: NUMBER - Modifier 2 (0 for none).
- *      2: ARRAY - Group size array. (Optional, default: no echelon)
- *          0: NUMBER - Group size (0 for none).
- *          1: BOOLEAN - Reinforced or (+) symbol.
- *          2: BOOLEAN - Reduced or (-) symbol (if both are true it will show (±)).
+ *      Same marker configuration as in createMarkerLocal.
  *
  *  Returns:
  *      Nothing.
  *
  *  Example:
- *      [["blu", false, false], [4,0,0], [5, false, true]] call mts_markers_fnc_setMarkerPreview
+ *      _markerParameters call mts_markers_fnc_setMarkerPreview
  *
  */
 
 params [
-    ["_frameshape", ["",false], [[]]],
-    ["_modifier", [0,0,0], [[]], 3],
-    ["_size", [0,false,false], [[]], 3]
+    ["_frameshape", ["", false, false], [[]]],
+    ["_modifier", [0, 0, 0], [[]], 3],
+    ["_size", [0, false, false], [[]], 3],
+    "", // unique designation (we do not display text marker in the preview, so ignore them)
+    "", // additional information
+    "", // higher formation
+    ["_operationalCondition", OC_FULLY_CAPABLE, [0]]
 ];
 _frameshape params [
     ["_identity", "", [""]],
@@ -54,6 +47,7 @@ private _previewMod3Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_3;
 private _previewMod4Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_4;
 private _previewEchelonCtrl = _mainDisplay displayCtrl PREVIEW_LYR_ECHELON;
 private _previewSizeModCtrl = _mainDisplay displayCtrl PREVIEW_LYR_SIZE_MOD;
+private _previewOpCondCtrl = _mainDisplay displayCtrl PREVIEW_LYR_OPERATIONAL_CONDITION;
 
 //clear all layers
 {
@@ -66,7 +60,8 @@ private _previewSizeModCtrl = _mainDisplay displayCtrl PREVIEW_LYR_SIZE_MOD;
     _previewMod3Ctrl,
     _previewMod4Ctrl,
     _previewEchelonCtrl,
-    _previewSizeModCtrl
+    _previewSizeModCtrl,
+    _previewOpCondCtrl
 ];
 
 private _identityComplete = if (_dashedFrameshape) then {
@@ -107,4 +102,16 @@ if (_reinforced || _reduced) then {
     };
 
     _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\com\size\%1.paa), _sizeModFilename]);
+};
+
+if (_operationalCondition > 0) then {
+    private _opCondFilename = "mts_markers_com_opcond";
+    if (_operationalCondition isEqualTo OC_DAMAGED) then {
+        _opCondFilename = _opCondFilename + "_damaged";
+    };
+    if (_operationalCondition isEqualTo OC_DESTROYED) then {
+        _opCondFilename = _opCondFilename + "_destroyed";
+    };
+
+    _previewOpCondCtrl ctrlSetText (format [QPATHTOF(data\com\opcond\%1.paa), _opCondFilename]);
 };

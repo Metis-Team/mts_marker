@@ -32,6 +32,7 @@ PREP(moveMarkerMouseDown);
 PREP(onAlphaSliderMouseButtonUp);
 PREP(onAlphaSliderPosChanged);
 PREP(onBriefingDisplayOpened);
+PREP(onOperationalConditionChanged);
 PREP(onPresetsLBSelChanged);
 PREP(onScaleSliderMouseButtonUp);
 PREP(onScaleSliderPosChanged);

@@ -27,6 +27,7 @@
  *          3: ARRAY - Marker text left - Unique designation. Can only be max. 3 characters. (Optional, default: no text)
  *          4: STRING - Marker text right - Higher formation. (Optional, default: no text)
  *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
+ *          6: NUMBER - Operational condition of the unit. (0 = fully capable, 1 = damaged, 2 = destroyed)
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *
@@ -53,7 +54,8 @@ _markerParameter params [
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
-    ["_higherFormation", [], [[]]]
+    ["_higherFormation", [], [[]]],
+    ["_operationalCondition", OC_FULLY_CAPABLE, [0]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
@@ -78,6 +80,8 @@ if (_alpha < 0 || _alpha > 1) then {
 if !(_identity in ["blu", "red", "neu", "unk"]) exitWith {
     ERROR_1("Unkown Identity %1", _identity);
 };
+
+CHECKRET(_operationalCondition < 0 || _operationalCondition > 2, ERROR("Operational condition must be a number between 0 and 2."));
 
 //create frameshape marker
 private _identityComplete = if (_dashedFrameshape) then {
@@ -246,6 +250,23 @@ if ((count _higherFormation) > 0) then {
 
         _markerFamily pushBack _markerHigherFormation;
     } forEach _higherFormation;
+};
+
+if (_operationalCondition > 0) then {
+    private _opCondAmplifier = "mts_com_opcond";
+    if (_operationalCondition isEqualTo OC_DAMAGED) then {
+        _opCondAmplifier = _opCondAmplifier + "_damaged";
+    };
+    if (_operationalCondition isEqualTo OC_DESTROYED) then {
+        _opCondAmplifier = _opCondAmplifier + "_destroyed";
+    };
+
+    private _markerOpCond = createMarkerLocal [format ["%1_opcond", _namePrefix], _pos];
+    _markerOpCond setMarkerTypeLocal _opCondAmplifier;
+    _markerOpCond setMarkerSizeLocal [_scale, _scale];
+    _markerOpCond setMarkerAlphaLocal _alpha;
+
+    _markerFamily pushBack _markerOpCond;
 };
 
 GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];

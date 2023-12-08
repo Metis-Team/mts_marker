@@ -26,7 +26,8 @@ params [
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
-    ["_higherFormation", [], [[]]]
+    ["_higherFormation", [], [[]]],
+    ["_operationalCondition", 0, [0]]
 ];
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
@@ -60,6 +61,13 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
 
 (_mainDisplay displayCtrl HQ_CHECKBOX) cbSetChecked _isHq;
+
+if (_operationalCondition isEqualTo OC_DAMAGED) then {
+    (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked true;
+};
+if (_operationalCondition isEqualTo OC_DESTROYED) then {
+    (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
+};
 
 // Select right identity in the dialog & update preview
 (_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;

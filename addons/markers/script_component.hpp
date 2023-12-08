@@ -58,3 +58,8 @@
 
 // 3DEN Mouse button handler system
 #define MOUSE_OFFSET 0xF0
+
+// Operational condition
+#define OC_FULLY_CAPABLE 0
+#define OC_DAMAGED 1
+#define OC_DESTROYED 2
