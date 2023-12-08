@@ -156,6 +156,10 @@
                 <Original>Remove Date-Time Group</Original>
                 <German>Datum/Zeit-Gruppe entfernen</German>
             </Key>
+            <Key ID="str_mts_markers_ui_general_dtgBTN_tooltip">
+                <Original>Set Date-Time Group (DDHHMMZmmmYY)</Original>
+                <German>Datum/Zeit-Gruppe setzen (DDHHMMZmmmYY)</German>
+            </Key>
         </Container>
         <Container name="UI_dtg">
             <Key ID="str_mts_markers_ui_dtg">

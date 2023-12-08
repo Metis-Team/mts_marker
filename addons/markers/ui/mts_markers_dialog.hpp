@@ -275,6 +275,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             w = QPOS_W(6.5);
             h = QPOS_H(1);
             text = "";
+            tooltip = CSTRING(ui_general_dtgBTN_tooltip);
             style = ST_CENTER;
             onButtonClick = QUOTE([ctrlParent (_this select 0)] call FUNC(initializeDTGUI));
             class Attributes
