@@ -52,7 +52,8 @@ _markerParameter params [
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
-    ["_higherFormation", [], [[]]]
+    ["_higherFormation", [], [[]]],
+    ["_dateTimeGroup", [], [[]]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
@@ -206,7 +207,7 @@ if ((count _higherFormation) > 0) then {
     TRACE_1("higherFormation input", _higherFormation);
 
     scopeName "textRightCreation";
-    //only take the first three characters of the left text
+    //only take the first n characters of the left text
     if ((count _higherFormation) > HIGHER_FORMATION_MAX_CHARS) then {
         _higherFormation resize HIGHER_FORMATION_MAX_CHARS;
     };
@@ -236,6 +237,33 @@ if ((count _higherFormation) > 0) then {
 
         _markerFamily pushBack _markerHigherFormation;
     } forEach _higherFormation;
+};
+
+// Create Date-Time Group markers
+if ((count _dateTimeGroup) > 0) then {
+    // Returns array in format [D, D, H, H, M, M, Z, mmm, Y, Y].
+    private _dtgCharacters = _dateTimeGroup call FUNC(toDTGCharaters);
+
+    CHECKRET(_dtgCharacters isEqualTo [], WARNING_1("Date-Time Group is invalid. Will not create DTG markers. DTG: %1", _dateTimeGroup));
+
+    // Iterate revered because char pos starts closest to frameshape, meaning with the year.
+    //             DDHHMMZmmmYY ┌───────┐
+    // Positions:  98765432  10 │       │
+    //                          └───────┘
+    private _letterPos = 0;
+    {
+        private _markerName = format ["%1_dtg_%2_%3", _namePrefix, _letterPos, _x];
+        private _markerType = format ["mts_dtg_%1_%2", _letterPos, _x];
+
+        private _dtgMarker = createMarkerLocal [_markerName, _pos];
+        _dtgMarker setMarkerTypeLocal _markerType;
+        _dtgMarker setMarkerSizeLocal [_scale, _scale];
+        _dtgMarker setMarkerAlphaLocal _alpha;
+
+        _markerFamily pushBack _dtgMarker;
+
+        _letterPos = _letterPos + 1;
+    } forEachReversed _dtgCharacters;
 };
 
 GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];

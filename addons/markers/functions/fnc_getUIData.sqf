@@ -53,5 +53,8 @@ private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_E
 //get the right text (additional information)
 private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
 
+// Get the Date-Time Group saved in the button
+private _dateTimeGroup = (_mainDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
+
 // This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation]
+[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _dateTimeGroup]

@@ -53,3 +53,6 @@
 
 // 3DEN Mouse button handler system
 #define MOUSE_OFFSET 0xF0
+
+#define MIN_YEAR 1900
+#define MAX_YEAR 2050

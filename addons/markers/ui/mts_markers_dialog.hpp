@@ -237,6 +237,43 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             h = QPOS_H(1);
         };
 
+        class DTGText: GVAR(RscText) {
+            idc = DTG_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(4);
+            w = QPOS_W(7.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_dtgTXT);
+        };
+        class DTGButton: RscButtonMenu {
+            idc = DTG_BUTTON;
+            x = QPOS_W(0.5);
+            y = QPOS_H(5);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = "";
+            onButtonClick = QUOTE(call FUNC(initializeDTGUI));
+            class Attributes
+            {
+                font = "RobotoCondensed";
+                color = "#E5E5E5";
+                align = "center";
+                shadow = "true";
+            };
+        };
+        class ClearDTGButton: RscButton {
+            idc = CLEAR_DTG_BUTTON;
+            x = QPOS_W(7);
+            y = QPOS_H(5);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            colorBackground[] = {0, 0, 0, 0.3};
+            colorFocused[] = {0, 0, 0, 0.7};
+            text = "X";
+            tooltip = CSTRING(ui_general_clearDtgBTN_tooltip);
+            onButtonClick = QUOTE(call FUNC(clearDTG));
+        };
+
         class Mod1Text: EchelonText {
             idc = MOD1_TXT;
             y = QPOS_H(7);
@@ -536,6 +573,187 @@ class GVAR(Dialog) {
             h = QPOS_H(WIDE_BUTTON_H);
             default = 1;
             onButtonClick = QUOTE([true] call FUNC(transmitUIData););
+        };
+    };
+};
+
+// -----------------------------------------------------------------------------------
+// --------------------------------- Date-Time Group ---------------------------------
+// -----------------------------------------------------------------------------------
+class GVAR(DTG): RscControlsGroupNoScrollbars {
+    class controls {
+        class Background: RscText {
+            idc = DTG_BG;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_H);
+            colorBackground[] = BG_COLOR;
+        };
+
+        class DateText: GVAR(RscText) {
+            idc = DTG_DATE_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(1);
+            w = QPOS_W(DTG_TEXT_W);
+            h = QPOS_H(1);
+            style = ST_RIGHT;
+            text = "$STR_3DEN_Environment_Attribute_Date_Displayname";
+        };
+        class YearCombo: RscCombo {
+            idc = YEAR_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(1);
+            w = QPOS_W(DTG_DATE_COMBO_W);
+            h = QPOS_H(1);
+        };
+        class MonthCombo: YearCombo {
+            idc = MONTH_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + DTG_DATE_COMBO_W);
+        };
+        class DayCombo: YearCombo {
+            idc = DAY_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + 2 * DTG_DATE_COMBO_W);
+        };
+
+        class TimeText: GVAR(RscText) {
+            idc = DTG_TIME_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TEXT_W);
+            h = QPOS_H(1);
+            style = ST_RIGHT;
+            text = "$STR_3DEN_Environment_Attribute_Daytime_Displayname";
+        };
+        class TimeSlider: RscXSliderH {
+            idc = DTG_TIME_SLIDER;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_SLIDER_W);
+            h = QPOS_H(1);
+        };
+        class Frame: RscFrame {
+            idc = DTG_TIME_FRAME;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W);
+            h = QPOS_H(1);
+        };
+        class Separator: RscText {
+            idc = DTG_TIME_SEPARATOR;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W);
+            h = QPOS_H(1);
+            style = ST_CENTER;
+            text = ":";
+            font = "EtelkaMonospaceProBold";
+            sizeEx = QPOS_H(1);
+            colorBackground[] = {0, 0, 0, 0.2};
+        };
+        class Hours: RscEdit {
+            idc = DTG_HOURS_EDIT;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W / 2);
+            h = QPOS_H(1);
+            style = ST_CENTER + ST_NO_RECT;
+            tooltip = "$STR_3DEN_Attributes_SliderTime_Hour_tooltip";
+            font = "EtelkaMonospaceProBold";
+            sizeEx = QPOS_H(0.9);
+            maxChars = 2;
+        };
+        class Minutes: Hours {
+            idc = DTG_MINUTES_EDIT;
+            tooltip = "$STR_3DEN_Attributes_SliderTime_Minute_tooltip";
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + 2);
+        };
+        class TimezoneCombo: RscCombo {
+            idc = TIMEZONE_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + DTG_TIME_FRAME_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_DATE_COMBO_W);
+            h = QPOS_H(1);
+        };
+
+        class SetLocalTimeButton: RscButtonMenu {
+            idc = DTG_LOCALTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(3 + 2 * DTG_PADDING);
+            w = QPOS_W(DTG_BUTTON_W);
+            h = QPOS_H(1);
+            text = CSTRING(ui_dtg_localTime);
+            tooltip = CSTRING(ui_dtg_localTime_tooltip);
+            onButtonClick = QUOTE([date] call FUNC(setUIDateTime););
+        };
+        class SetSystemTimeButton: SetLocalTimeButton {
+            idc = DTG_SYSTEMTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W + DTG_BUTTON_W + PADDING);
+            text = CSTRING(ui_dtg_systemTime);
+            tooltip = CSTRING(ui_dtg_systemTime_tooltip);
+            onButtonClick = QUOTE(call FUNC(setDTGUIToSystemTime););
+        };
+        class SetSystemUTCTimeButtonButton: SetLocalTimeButton {
+            idc = DTG_SYSTEMUTCTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W + 2 * (DTG_BUTTON_W + PADDING));
+            text = CSTRING(ui_dtg_systemUTCTime);
+            tooltip = CSTRING(ui_dtg_systemUTCTime_tooltip);
+            onButtonClick = QUOTE([systemTimeUTC, 'Z'] call FUNC(setUIDateTime););
+        };
+    };
+};
+
+class GVAR(DTGDialog) {
+    idd = DTG_DISPLAY;
+
+    class controls {
+        class HeaderBackground: RscText {
+            idc = DTG_HEAD_BG;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_HEADER_H);
+            colorBackground[] = {
+                "profileNamespace getVariable ['GUI_BCG_RGB_R',0.77]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_G',0.51]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_B',0.08]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_A',0.8]"
+            };
+        };
+        class HeaderTitle: RscTitle {
+            idc = DTG_HEAD_TXT;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_HEADER_H);
+            text = CSTRING(ui_dtg);
+        };
+
+        class DTG: GVAR(DTG) {
+            idc = DTG_GROUP;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + PADDING);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_H);
+        };
+
+        class CancelButton: RscButtonMenuCancel {
+            idc = DTG_CANCEL_BUTTON;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
+            w = QPOS_W(LARGE_BUTTON_W);
+            h = QPOS_H(LARGE_BUTTON_H);
+            onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
+        };
+
+        class OkButton: RscButtonMenuOK {
+            idc = DTG_OK_BUTTON;
+            x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - LARGE_BUTTON_W);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
+            w = QPOS_W(LARGE_BUTTON_W);
+            h = QPOS_H(LARGE_BUTTON_H);
+            default = 1;
+            onButtonClick = QUOTE(call FUNC(saveDTG); (ctrlParent (_this select 0)) closeDisplay 1;);
         };
     };
 };

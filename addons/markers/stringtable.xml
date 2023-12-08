@@ -124,6 +124,44 @@
                 <German>Preset löschen</German>
                 <Korean>사전설정 삭제</Korean>
             </Key>
+            <Key ID="str_mts_markers_ui_general_dtgTXT">
+                <Original>Date-Time Group:</Original>
+                <German>Datum/Zeit-Gruppe:</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_general_clearDtgBTN_tooltip">
+                <Original>Remove Date-Time Group</Original>
+                <German>Datum/Zeit-Gruppe entfernen</German>
+            </Key>
+        </Container>
+        <Container name="UI_dtg">
+            <Key ID="str_mts_markers_ui_dtg">
+                <Original>Date-Time Group</Original>
+                <German>Datum/Zeit-Gruppe</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_localTime">
+                <Original>Local Time</Original>
+                <German>Lokalzeit</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_localTime_tooltip">
+                <Original>Set the time to the current local Arma time</Original>
+                <German>Setzt die Zeit auf die derzeitige Arma Lokalzeit</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_systemTime">
+                <Original>System Time</Original>
+                <German>Systemzeit</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_systemTime_tooltip">
+                <Original>Set the time to the current time of your system</Original>
+                <German>Setzt die Zeit auf die derzeitige Zeit deines Systems</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_systemUTCTime">
+                <Original>System Time (UTC)</Original>
+                <German>Systemzeit (UTC)</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_systemUTCTime_tooltip">
+                <Original>Set the time to the current UTC time of your system</Original>
+                <German>Setzt die Zeit auf die derzeitige UTC Zeit deines Systems</German>
+            </Key>
         </Container>
         <Container name="UI_identity">
             <Key ID="str_mts_markers_ui_identity_friend">

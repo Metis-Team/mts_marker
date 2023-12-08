@@ -22,6 +22,11 @@ class CfgMarkers {
     class mts_special_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
         icon = QPATHTOF(data\special\ANCHOR\POSITION\SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER)); \
     }
+    #define DTGMARKERFILE(POSITION,LETTER) mts_markers_dtg_##POSITION##_##LETTER##.paa
+    #define DTGMARKER(POSITION,LETTER) \
+    class mts_dtg_##POSITION##_##LETTER##: mts_blu_frameshape { \
+        icon = QPATHTOF(data\dtg\POSITION\DTGMARKERFILE(POSITION,LETTER)); \
+    }
 
     class b_unknown;
     class o_unknown;
@@ -96,4 +101,5 @@ class CfgMarkers {
     #include "CfgMarkers\CfgMarkersUnknown.hpp"
     #include "CfgMarkers\CfgMarkersCommon.hpp"
     #include "CfgMarkers\CfgMarkersCharacters.hpp"
+    #include "CfgMarkers\CfgMarkersDateTimeGroup.hpp"
 };

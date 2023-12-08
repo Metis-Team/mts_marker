@@ -26,7 +26,8 @@ params [
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
-    ["_higherFormation", [], [[]]]
+    ["_higherFormation", [], [[]]],
+    ["_dateTimeGroup", [], [[]]],
 ];
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
@@ -58,6 +59,9 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl UNIQUE_EDIT) ctrlSetText (_uniqueDesignation joinString "");
 (_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText (_higherFormation joinString "");
 (_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
+
+_dateTimeGroup call FUNC(setDTGUIData);
+(_mainDisplay displayCtrl HIGHER_EDIT) setVariable [QGVAR(dateTimeGroup), _dateTimeGroup];
 
 //select right identity in the dialog & update preview
 (_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;
