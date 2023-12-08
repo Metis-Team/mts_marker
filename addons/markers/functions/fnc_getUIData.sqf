@@ -22,8 +22,9 @@ private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _identity = (_mainDisplay displayCtrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
 CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
-//check if frameshape is dashed
+// Check if frameshape is dashed or HQ
 private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl SUSPECT_CHECKBOX);
+private _isHq = cbChecked (_mainDisplay displayCtrl HQ_CHECKBOX);
 
 private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
 private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
@@ -53,8 +54,17 @@ private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_E
 //get the right text (additional information)
 private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
 
+// Operational condition
+private _operationalCondition = OC_FULLY_CAPABLE;
+if (cbChecked (_mainDisplay displayCtrl DAMAGED_CHECKBOX)) then {
+    _operationalCondition = OC_DAMAGED;
+};
+if (cbChecked (_mainDisplay displayCtrl DESTROYED_CHECKBOX)) then {
+    _operationalCondition = OC_DESTROYED;
+};
+
 // Get the Date-Time Group saved in the button
 private _dateTimeGroup = (_mainDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
 
 // This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _dateTimeGroup]
+[[_identity, _dashedFrameshape, _isHq], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _operationalCondition, _dateTimeGroup]

@@ -13,6 +13,7 @@
  *          0: ARRAY - Frameshape of the marker.
  *              0: STRING - Identity (blu, red, neu, unk).
  *              1: BOOLEAN - Dashed (e.g. supect).
+ *              2: BOOLEAN - Headquaters.
  *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *              0: NUMBER - Icon (0 for none).
  *              1: NUMBER - Modifier 1 (0 for none).
@@ -24,6 +25,7 @@
  *          3: ARRAY - Marker text left bottom - Unique designation. Can only be max. 6 characters. (Optional, default: no text)
  *          4: STRING - Marker text right - Additional information. (Optional, default: no text)
  *          5: ARRAY - Marker text right bottom - Higher formation. Can only be max. 6 characters. (Optional, default: no text)
+ *          6: NUMBER - Operational condition of the unit. (0 = fully capable, 1 = damaged, 2 = destroyed)
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *
@@ -31,7 +33,7 @@
  *      STRING - Marker prefix.
  *
  *  Example:
- *     _namePrefix = [[2000,1000], 1, true, [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createMarker
+ *     _namePrefix = [[2000,1000], 1, true, [["blu", false, false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createMarker
  *
  */
 

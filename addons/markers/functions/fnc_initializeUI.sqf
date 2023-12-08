@@ -110,6 +110,14 @@ if (!isMultiplayer || is3DEN) then {
 private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
 private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
+private _hqCbCtrl = _mainDisplay displayCtrl HQ_CHECKBOX;
+
+private _markerScale = MARKER_SCALE;
+private _markerAlpha = MARKER_ALPHA;
+
+// Operational Condition
+private _damagedCbCtrl = _mainDisplay displayCtrl DAMAGED_CHECKBOX;
+private _destroyedCbCtrl = _mainDisplay displayCtrl DESTROYED_CHECKBOX;
 
 private _setPosAndPrefix = {
     params [
@@ -175,6 +183,8 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
         _markerParameter = _markerInformation param [1, [], [[]]];
         _broadcastChannel = _markerInformation param [2, -1, [0]];
+        _markerScale = [_namePrefix] call FUNC(getMarkerScale);
+        _markerAlpha = [_namePrefix] call FUNC(getMarkerAlpha);
 
         [_mainDisplay, _namePrefix] call _setPosAndPrefix;
     };
@@ -206,17 +216,33 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl];
+} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl, _hqCbCtrl, _damagedCbCtrl, _destroyedCbCtrl];
 
 //fill the Presets list with saved Presets from the profile
 call FUNC(updatePresetsList);
 
 //add EH for the Preset interaction
 private _presetsList = _mainDisplay displayCtrl PRESETS_LIST;
-_presetsList ctrlAddEventHandler ["LBSelChanged", FUNC(onPresetsLBSelChanged)];
-_presetsList ctrlAddEventHandler ["LBDblClick", FUNC(loadPreset)];
+_presetsList ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onPresetsLBSelChanged)];
+_presetsList ctrlAddEventHandler ["LBDblClick", LINKFUNC(loadPreset)];
 
 //add EH for the searchbar
 private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
-_searchCtrl ctrlAddEventHandler ["KeyDown", FUNC(updatePresetsList)];
-_searchCtrl ctrlAddEventHandler ["KeyUp", FUNC(updatePresetsList)];
+_searchCtrl ctrlAddEventHandler ["KeyDown", LINKFUNC(updatePresetsList)];
+_searchCtrl ctrlAddEventHandler ["KeyUp", LINKFUNC(updatePresetsList)];
+
+{
+    _x ctrlAddEventHandler ["CheckedChanged", LINKFUNC(onOperationalConditionChanged)];
+} forEach [_damagedCbCtrl, _destroyedCbCtrl];
+
+private _scaleSlider = _mainDisplay displayCtrl SCALE_SLIDER;
+_scaleSlider sliderSetPosition _markerScale;
+[_scaleSlider, _markerScale] call FUNC(onScaleSliderPosChanged);
+_scaleSlider ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onScaleSliderPosChanged)];
+_scaleSlider ctrlAddEventHandler ["MouseButtonUp", LINKFUNC(onScaleSliderMouseButtonUp)];
+
+private _alphaSlider = _mainDisplay displayCtrl ALPHA_SLIDER;
+_alphaSlider sliderSetPosition _markerAlpha;
+[_alphaSlider, _markerAlpha] call FUNC(onAlphaSliderPosChanged);
+_alphaSlider ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onAlphaSliderPosChanged)];
+_alphaSlider ctrlAddEventHandler ["MouseButtonUp", LINKFUNC(onAlphaSliderMouseButtonUp)];

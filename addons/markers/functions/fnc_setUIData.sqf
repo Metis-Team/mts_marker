@@ -16,20 +16,21 @@
  *      Nothing.
  *
  *  Example:
- *      [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_setUIData
+ *      [["blu", false, false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_setUIData
  *
  */
 
 params [
-    ["_frameshape", ["",false], [[]]],
+    ["_frameshape", ["",false,false], [[]]],
     ["_modifier", [0,0,0], [[]], 3],
     ["_size", [0,false,false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
     ["_higherFormation", [], [[]]],
-    ["_dateTimeGroup", [], [[]]],
+    ["_operationalCondition", 0, [0]],
+    ["_dateTimeGroup", [], [[]]]
 ];
-_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
+_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
@@ -40,7 +41,7 @@ private _ctrlArray = [
     [(_mainDisplay displayCtrl MOD2_DROPDOWN), GVAR(mod2Array)]
 ];
 
-//because of the sorting, the index needs to be found with the help of the value
+// Because of the sorting, the index needs to be found with the help of the value
 {
     _x params ["_ctrl", "_dropdownArray"];
 
@@ -60,9 +61,18 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText (_higherFormation joinString "");
 (_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
 
+(_mainDisplay displayCtrl HQ_CHECKBOX) cbSetChecked _isHq;
+
+if (_operationalCondition isEqualTo OC_DAMAGED) then {
+    (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked true;
+};
+if (_operationalCondition isEqualTo OC_DESTROYED) then {
+    (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
+};
+
 _dateTimeGroup call FUNC(setDTGUIData);
 (_mainDisplay displayCtrl HIGHER_EDIT) setVariable [QGVAR(dateTimeGroup), _dateTimeGroup];
 
-//select right identity in the dialog & update preview
+// Select right identity in the dialog & update preview
 (_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;
 [_identity] call FUNC(identityButtonsAction);

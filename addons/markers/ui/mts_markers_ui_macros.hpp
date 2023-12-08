@@ -84,6 +84,11 @@
 #define CHANNEL_TXT 212
 #define PRESETS_NAME_TXT 213
 #define ADDITIONAL_TXT 214
+#define ALPHA_TXT 215
+#define SCALE_TXT 216
+#define HQ_TXT 217
+#define DAMAGED_TXT 218
+#define DESTROYED_TXT 219
 #define DTG_TXT 220
 
 // Identity Buttons
@@ -107,6 +112,9 @@
 #define SUSPECT_CHECKBOX 400
 #define REINFORCED_CHECKBOX 401
 #define REDUCED_CHECKBOX 402
+#define HQ_CHECKBOX 403
+#define DAMAGED_CHECKBOX 404
+#define DESTROYED_CHECKBOX 405
 
 // Dropdowns
 #define ICON_DROPDOWN 500
@@ -143,6 +151,8 @@
 #define PREVIEW_LYR_ECHELON 805
 #define PREVIEW_LYR_SIZE_MOD 806
 #define PREVIEW_GRID 807
+#define PREVIEW_LYR_HQ 808
+#define PREVIEW_LYR_OPERATIONAL_CONDITION 809
 
 // Icons
 #define DELETE_PRESETS_ICON 900
@@ -150,6 +160,9 @@
 // List Boxes
 #define PRESETS_LIST 1000
 
+// Slider
+#define ALPHA_SLIDER 1100
+#define SCALE_SLIDER 1101
 
 // ------------------------------
 // ---- Date-Time Group IDCs ----
