@@ -5,7 +5,6 @@ class RscButtonMenu;
 class RscButtonMenuOK;
 class RscButtonMenuCancel;
 class RscCheckBox;
-class RscCombo;
 class RscEdit;
 class RscListBox;
 class RscButtonSearch;
@@ -13,6 +12,9 @@ class RscControlsGroupNoScrollbars;
 class RscTitle;
 class RscFrame;
 class RscXSliderH;
+class RscCombo {
+    class ComboScrollBar;
+};
 
 class GVAR(RscTransparentButton): RscButton {
     colorBackground[] = {0, 0, 0, 0};
@@ -39,6 +41,20 @@ class GVAR(RscCheckBoxSound): RscCheckBox {
     soundPush[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundPush", 0.090000004, 1};
     soundClick[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundClick", 0.090000004, 1};
     soundEscape[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundEscape", 0.090000004, 1};
+};
+
+class GVAR(RscCombo): RscCombo {
+    colorTextRight[] = {1, 1, 1, 0.6};
+
+    arrowFull = "\a3\3DEN\Data\Controls\ctrlCombo\arrowFull_ca.paa";
+    arrowEmpty = "\a3\3DEN\Data\Controls\ctrlCombo\arrowEmpty_ca.paa";
+
+    class ComboScrollBar: ComboScrollBar {
+        thumb = "\a3\3DEN\Data\Controls\ctrlDefault\thumb_ca.paa";
+        border = "\a3\3DEN\Data\Controls\ctrlDefault\border_ca.paa";
+        arrowFull = "\a3\3DEN\Data\Controls\ctrlDefault\arrowFull_ca.paa";
+        arrowEmpty = "\a3\3DEN\Data\Controls\ctrlDefault\arrowEmpty_ca.paa";
+    };
 };
 
 class GVAR(RscPreview): RscControlsGroupNoScrollbars {
@@ -236,7 +252,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             h = QPOS_H(1);
             text = CSTRING(ui_general_echelonTXT);
         };
-        class EchelonCombo: RscCombo {
+        class EchelonCombo: GVAR(RscCombo) {
             idc = ECHELON_DROPDOWN;
             x = QPOS_W((CONFIG_W - 10) / 2);
             y = QPOS_H(5);
@@ -464,7 +480,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             h = QPOS_H(1);
             text = CSTRING(ui_general_channelTXT);
         };
-        class ChannelCombo: RscCombo {
+        class ChannelCombo: GVAR(RscCombo) {
             idc = CHANNEL_DROPDOWN;
             x = QPOS_W(CONFIG_W - 8.8 - 0.5);
             y = QPOS_H(CONFIG_H - 1 - 0.5);
@@ -687,7 +703,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             style = ST_RIGHT;
             text = "$STR_3DEN_Environment_Attribute_Date_Displayname";
         };
-        class YearCombo: RscCombo {
+        class YearCombo: GVAR(RscCombo) {
             idc = DTG_YEAR_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W);
             y = QPOS_H(1);
@@ -755,11 +771,11 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             tooltip = "$STR_3DEN_Attributes_SliderTime_Minute_tooltip";
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + 2);
         };
-        class TimezoneCombo: RscCombo {
+        class TimezoneCombo: GVAR(RscCombo) {
             idc = DTG_TIMEZONE_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + DTG_TIME_FRAME_W);
             y = QPOS_H(2 + DTG_PADDING);
-            w = QPOS_W(DTG_DATE_COMBO_W);
+            w = QPOS_W(DTG_TIMEZONE_COMBO_W);
             h = QPOS_H(1);
         };
 
@@ -770,22 +786,22 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             w = QPOS_W(DTG_BUTTON_W);
             h = QPOS_H(1);
             text = CSTRING(ui_dtg_localTime);
-            tooltip = CSTRING(ui_dtg_localTime_tooltip);
-            onButtonClick = QUOTE([date] call FUNC(setUIDateTime););
+            tooltip = CSTRING(ui_dtg_setLocalTime_tooltip);
+            onButtonClick = QUOTE([date] call FUNC(setDTGUIData););
         };
         class SetSystemTimeButton: SetLocalTimeButton {
             idc = DTG_SYSTEMTIME_BUTTON;
             x = QPOS_W(DTG_TEXT_W + DTG_BUTTON_W + PADDING);
             text = CSTRING(ui_dtg_systemTime);
-            tooltip = CSTRING(ui_dtg_systemTime_tooltip);
+            tooltip = CSTRING(ui_dtg_setSystemTime_tooltip);
             onButtonClick = QUOTE(call FUNC(setDTGUIToSystemTime););
         };
         class SetSystemUTCTimeButtonButton: SetLocalTimeButton {
             idc = DTG_SYSTEMUTCTIME_BUTTON;
             x = QPOS_W(DTG_TEXT_W + 2 * (DTG_BUTTON_W + PADDING));
             text = CSTRING(ui_dtg_systemUTCTime);
-            tooltip = CSTRING(ui_dtg_systemUTCTime_tooltip);
-            onButtonClick = QUOTE([ARR_2(systemTimeUTC, 'Z')] call FUNC(setUIDateTime););
+            tooltip = CSTRING(ui_dtg_setSystemUTCTime_tooltip);
+            onButtonClick = QUOTE([ARR_2(systemTimeUTC, 'Z')] call FUNC(setDTGUIData););
         };
     };
 };
@@ -824,7 +840,7 @@ class GVAR(DTGDialog) {
             h = QPOS_H(DTG_H);
         };
 
-        class CancelButton: RscButtonMenuCancel {
+        class CancelButton: RscButtonMenu {
             idc = DTG_CANCEL_BUTTON;
             x = QPOS_X((MAX_W - DTG_W) / 2);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
@@ -833,7 +849,7 @@ class GVAR(DTGDialog) {
             onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
         };
 
-        class OkButton: RscButtonMenuOK {
+        class OkButton: RscButtonMenu {
             idc = DTG_OK_BUTTON;
             x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - LARGE_BUTTON_W);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);

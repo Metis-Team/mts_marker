@@ -19,9 +19,9 @@
 params ["_editCtrl"];
 
 private _dtgDisplay = ctrlParent _editCtrl;
-private _timeSliderCtrl = _controlsGroup displayCtrl DTG_TIME_SLIDER;
-private _timeHoursCtrl = _controlsGroup displayCtrl DTG_HOURS_EDIT;
-private _timeMinutesCtrl = _controlsGroup displayCtrl DTG_MINUTES_EDIT;
+private _timeSliderCtrl = _dtgDisplay displayCtrl DTG_TIME_SLIDER;
+private _timeHoursCtrl = _dtgDisplay displayCtrl DTG_HOURS_EDIT;
+private _timeMinutesCtrl = _dtgDisplay displayCtrl DTG_MINUTES_EDIT;
 
 private _value = round (parseNumber ctrlText _timeHoursCtrl * 3600 + parseNumber ctrlText _timeMinutesCtrl * 60);
 _timeSliderCtrl sliderSetPosition _value;

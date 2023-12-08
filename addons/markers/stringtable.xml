@@ -167,6 +167,10 @@
                 <German>Lokalzeit</German>
             </Key>
             <Key ID="str_mts_markers_ui_dtg_localTime_tooltip">
+                <Original>Arma local ingame time</Original>
+                <German>Arma Ingame Lokalzeit</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_setLocalTime_tooltip">
                 <Original>Set the time to the current local Arma time</Original>
                 <German>Setzt die Zeit auf die derzeitige Arma Lokalzeit</German>
             </Key>
@@ -175,16 +179,24 @@
                 <German>Systemzeit</German>
             </Key>
             <Key ID="str_mts_markers_ui_dtg_systemTime_tooltip">
-                <Original>Set the time to the current time of your system</Original>
-                <German>Setzt die Zeit auf die derzeitige Zeit deines Systems</German>
+                <Original>Time zone of the system</Original>
+                <German>Zeitzone des Systems</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_setSystemTime_tooltip">
+                <Original>Set the time to the current time of the system</Original>
+                <German>Setzt die Zeit auf die derzeitige Zeit des Systems</German>
             </Key>
             <Key ID="str_mts_markers_ui_dtg_systemUTCTime">
-                <Original>System Time (UTC)</Original>
-                <German>Systemzeit (UTC)</German>
+                <Original>UTC</Original>
+                <German>UTC</German>
             </Key>
             <Key ID="str_mts_markers_ui_dtg_systemUTCTime_tooltip">
-                <Original>Set the time to the current UTC time of your system</Original>
-                <German>Setzt die Zeit auf die derzeitige UTC Zeit deines Systems</German>
+                <Original>UTC or Zulu time of the system</Original>
+                <German>UTC- oder Zulu-Zeit des Systems</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_setSystemUTCTime_tooltip">
+                <Original>Set the time to the current UTC time of the system</Original>
+                <German>Setzt die Zeit auf die derzeitige UTC Zeit des Systems</German>
             </Key>
         </Container>
         <Container name="UI_identity">

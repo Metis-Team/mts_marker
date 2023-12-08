@@ -46,18 +46,22 @@ for "_month" from 1 to 12 step 1 do {
 
 private _currentTimeZone = [systemTime, systemTimeUTC] call FUNC(getTimeZoneIdentifier);
 {
-    _x params ["_text", "_timeZone"];
+    _x params ["_text", "_timeZone", "_tooltip"];
 
-    private _index = _timeZoneCtrl lbAdd _x;
-    _timeZoneCtrl lbSetValue [_index, _timeZone];
-    _timeZoneCtrl lbSetTextRight [_index, _timeZone]
-
+    private _index = _timeZoneCtrl lbAdd _text;
+    // Encode the current time zone into a zero-based index of the letter in the alphabet
+    // because lbSetValue only allows intergers.
+    private _timeZoneId = GVAR(alphanumCharacters) findIf {_x isEqualTo _timeZone};
+    _timeZoneCtrl lbSetValue [_index, _timeZoneId];
+    _timeZoneCtrl lbSetTextRight [_index, _timeZone];
+    _timeZoneCtrl lbSetTooltip [_index, _tooltip];
 } forEach [
-    [LLSTRING(ui_dtg_localTime), "J"],
-    [LLSTRING(ui_dtg_systemTime), _currentTimeZone],
-    [LLSTRING(ui_dtg_systemUTCTime), "Z"]
+    [LLSTRING(ui_dtg_localTime), "J", LLSTRING(ui_dtg_localTime_tooltip)],
+    [LLSTRING(ui_dtg_systemTime), _currentTimeZone, LLSTRING(ui_dtg_systemTime_tooltip)],
+    [LLSTRING(ui_dtg_systemUTCTime), "Z", LLSTRING(ui_dtg_systemUTCTime_tooltip)]
 ];
 
+_dateYearCtrl ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onDTGMonthSelChanged)];
 _dateMonthCtrl ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onDTGMonthSelChanged)];
 
 private _min = 0;
@@ -82,4 +86,4 @@ _timeSliderCtrl ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onDTGTimeSlide
 ];
 
 // Set local Arma time as default
-[date] call FUNC(setUIDateTime);
+[date] call FUNC(setDTGUIData);

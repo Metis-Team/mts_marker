@@ -4,10 +4,10 @@
  *
  *  Description:
  *      Updates the Date-Time Group days dropdown to only include valid days.
- *      Triggered when selecting a month in the dropdown.
+ *      Triggered when selecting a year or month in the dropdown.
  *
  *  Parameter(s):
- *      0: CONTROL - Month dropdown.
+ *      0: CONTROL - Year/Month dropdown.
  *
  *  Returns:
  *      Nothing.
@@ -17,10 +17,11 @@
  *
  */
 
-params ["_dateMonthCtrl"];
+params ["_ctrl"];
 
-private _dtgDisplay = ctrlParent _dateMonthCtrl;
+private _dtgDisplay = ctrlParent _ctrl;
 private _dateYearCtrl = _dtgDisplay displayCtrl DTG_YEAR_DROPDOWN;
+private _dateMonthCtrl = _dtgDisplay displayCtrl DTG_MONTH_DROPDOWN;
 private _dateDayCtrl = _dtgDisplay displayCtrl DTG_DAY_DROPDOWN;
 
 private _year = _dateYearCtrl lbValue (lbCurSel _dateYearCtrl);

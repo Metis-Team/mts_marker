@@ -21,4 +21,4 @@ private _nowUTC = systemTimeUTC;
 
 private _timeZone = [_now, _nowUTC] call FUNC(getTimeZoneIdentifier);
 
-[_now, _timeZone] call FUNC(setUIDateTime);
+[_now, _timeZone] call FUNC(setDTGUIData);

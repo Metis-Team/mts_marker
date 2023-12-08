@@ -19,6 +19,7 @@
  */
 
 params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]]];
+TRACE_1("params", _this);
 
 CHECK(_data isEqualTo []);
 
@@ -38,9 +39,10 @@ if (_year > MAX_YEAR) then {
 (_dtgDisplay displayCtrl DTG_DAY_DROPDOWN) lbSetCurSel (_day - 1);
 
 private _timeZoneCtrl = (_dtgDisplay displayCtrl DTG_TIMEZONE_DROPDOWN);
+private _timeZoneId = GVAR(alphanumCharacters) findIf {_x isEqualTo _timeZone};
 for "_index" from 0 to ((lbSize _timeZoneCtrl) - 1) step 1 do {
     private _lbValue = _timeZoneCtrl lbValue _index;
-    if (_lbValue isEqualTo (_modifier select _forEachIndex)) exitWith {
+    if (_lbValue isEqualTo _timeZoneId) exitWith {
         _timeZoneCtrl lbSetCurSel _index;
     };
 };
