@@ -3,7 +3,6 @@
 import sys
 import string
 import pathlib
-import subprocess
 import shutil
 import argparse
 import timeit
@@ -12,13 +11,8 @@ from io import TextIOWrapper
 from PIL import Image, ImageFont, ImageDraw
 from PIL.Image import Image as ImageType
 from PIL.ImageFont import FreeTypeFont
-import tqdm
-import joblib
 
 import helper.util as util
-
-if sys.platform == 'win32':
-    import winreg
 
 # Configuration
 version = '1.2.0'
@@ -117,7 +111,7 @@ def create_image(font: FreeTypeFont, letter: str, pos: int, anchor: str = 'lb'):
     return image
 
 def create_all_images(char_sets: dict[str, dict[str]], anchors: list[str], font: FreeTypeFont):
-    """Creates all images for the characters defined in the configuration.
+    """Creates all images for the characters defined in given sets.
 
     Args:
         char_sets (dict[str, dict[str]]): Character sets to create.
@@ -149,52 +143,6 @@ def create_all_images(char_sets: dict[str, dict[str]], anchors: list[str], font:
 
     return images
 
-def find_image_to_paa_tool():
-    """Returns the path to the ImageToPAA conversion tool.
-
-    Raises:
-        Exception: Could not find Arma 3 Tools.
-        Exception: Arma 3 Tools are not installed correctly.
-
-    Returns:
-        Path: Path to the ImageToPAA conversion tool.
-    """
-
-    reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
-    try:
-        k = winreg.OpenKey(reg, r'Software\bohemia interactive\arma 3 tools')
-        arma3tools_path = pathlib.Path(winreg.QueryValueEx(k, 'path')[0])
-        winreg.CloseKey(k)
-    except Exception:
-        raise Exception('BadTools', 'Could not find Arma 3 Tools.')
-
-    paa_tool_path = arma3tools_path / 'ImageToPAA' / 'ImageToPAA.exe'
-
-    if not paa_tool_path.exists():
-        raise Exception('BadTools', f'Arma 3 Tools are not installed correctly. \"{paa_tool_path}\" does not exist.')
-
-    return paa_tool_path
-
-def export_image(image: ImageType, path: pathlib.Path, image_to_paa: pathlib.Path,
-                 png_only: bool = False):
-    """
-    Exports image to disk.
-    Image will be exported as *.paa unless png_only flag is set.
-
-    Args:
-        image (Image): Image to export.
-        path (Path): Full export path of the image.
-        image_to_paa (Path): Path to the ImageToPAA conversion tool.
-        png_only (bool): Only export as PNG.
-    """
-    path.parent.mkdir(parents=True, exist_ok=True)
-    image.save(path)
-
-    if not png_only:
-        subprocess.run([image_to_paa, str(path)], stdout=subprocess.DEVNULL)
-        # Delete PNG file afterwards
-        path.unlink(missing_ok=True)
-
 def write_translation_table(file: TextIOWrapper, char_sets: dict[str, dict[str]]):
     """Writes the SQF translation table for special characters to given file.
 
@@ -221,6 +169,7 @@ def write_valid_characters(file: TextIOWrapper, char_sets: dict[str, dict[str]])
 
     Args:
         file (File): The file to write to.
+        char_sets (dict[str, dict[str]]): Character sets created.
     """
 
     variables: list[str] = []
@@ -239,6 +188,8 @@ def write_include_files(output_dir: pathlib.Path, char_sets: dict[str, dict[str]
     """Writes all marker include files for the exported images.
 
     Args:
+        output_dir (Path): Path to the output directory.
+        char_sets (dict[str, dict[str]]): Character sets created.
         verbose (bool, optional): Print additional information to console. Defaults to False.
     """
 
@@ -249,8 +200,8 @@ def write_include_files(output_dir: pathlib.Path, char_sets: dict[str, dict[str]
             includes.append(file_name)
 
             with open(output_dir / file_name, 'w') as f:
-                f.write(f'// Character markers for anchor {anchor}\n')
-                f.write(f'// This file is generated and should not be edited\n\n')
+                comment = util.get_generated_comment_lines(f'Character markers for anchor {anchor}')
+                f.writelines(comment)
 
                 for pos in range(num_of_letters):
                     for letter in alphabet['characters']:
@@ -276,9 +227,8 @@ def write_include_files(output_dir: pathlib.Path, char_sets: dict[str, dict[str]
 def write_marker_variables(output_dir: pathlib.Path, char_sets: dict[str, dict[str]]):
     path = output_dir / 'initCharacterMarkerVariables.hpp'
     with open(path, 'w') as f:
-        f.write(f'// ------------------------------------------------\n')
-        f.write(f'// This file is generated and should not be edited!\n')
-        f.write(f'// ------------------------------------------------\n\n')
+        comment = util.get_generated_comment_lines()
+        f.writelines(comment)
 
         write_translation_table(f, char_sets)
         write_valid_characters(f, char_sets)
@@ -298,8 +248,8 @@ def main(args: argparse.Namespace):
     font = ImageFont.truetype(str(args.font_file), size=35) # 26pt == 35px
     print('Using font:', font.getname())
 
-    image_to_paa = find_image_to_paa_tool()
-    print('Found ImageToPaa Tool:', image_to_paa)
+    image_to_paa = util.find_image_to_paa_tool()
+    print(f'Found ImageToPaa tool: \"{image_to_paa}\"')
 
     print('Creating images...')
     images = create_all_images(printable_char_sets, anchors, font)
@@ -311,9 +261,7 @@ def main(args: argparse.Namespace):
     print('Exporting only PNG files:', png_only)
 
     # Export images in parallel
-    with util.tqdm_joblib(tqdm.tqdm(desc='Exporting images', total=len(images))) as pbar:
-        with joblib.Parallel(n_jobs=args.workers) as parallel:
-            parallel(joblib.delayed(export_image)(image, args.output_dir / path, image_to_paa, png_only) for image, path in images)
+    util.export_images(images, args.output_dir, args.workers, image_to_paa=image_to_paa, png_only=png_only)
 
     print(f'Exported {len(images)} images.\n')
 

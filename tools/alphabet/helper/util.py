@@ -1,6 +1,14 @@
 import contextlib
+import pathlib
+import subprocess
+import sys
+
+from PIL.Image import Image as ImageType
 import tqdm
 import joblib
+
+if sys.platform == 'win32':
+    import winreg
 
 def fract_sec(s):
     """Gets the days, hours, minutes and seconds from total time elapsed in seconds.
@@ -39,3 +47,81 @@ def tqdm_joblib(tqdm_object: tqdm.tqdm):
     finally:
         joblib.parallel.BatchCompletionCallBack = old_batch_callback
         tqdm_object.close()
+
+
+def find_image_to_paa_tool():
+    """Returns the path to the ImageToPAA conversion tool.
+
+    Raises:
+        Exception: Could not find Arma 3 Tools.
+        Exception: Arma 3 Tools are not installed correctly.
+
+    Returns:
+        Path: Path to the ImageToPAA conversion tool.
+    """
+
+    reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
+    try:
+        k = winreg.OpenKey(reg, r'Software\bohemia interactive\arma 3 tools')
+        arma3tools_path = pathlib.Path(winreg.QueryValueEx(k, 'path')[0])
+        winreg.CloseKey(k)
+    except Exception:
+        raise Exception('BadTools', 'Could not find Arma 3 Tools.')
+
+    paa_tool_path = arma3tools_path / 'ImageToPAA' / 'ImageToPAA.exe'
+
+    if not paa_tool_path.exists():
+        raise Exception('BadTools', f'Arma 3 Tools are not installed correctly. \"{paa_tool_path}\" does not exist.')
+
+    return paa_tool_path
+
+
+def export_images(images: list[tuple[ImageType, pathlib.Path]], output_dir: pathlib.Path, workers: int = -1, **kwargs):
+    with tqdm_joblib(tqdm.tqdm(desc='Exporting images', total=len(images))) as pbar:
+        with joblib.Parallel(n_jobs=workers) as parallel:
+            parallel(joblib.delayed(export_image)(image, output_dir / path, **kwargs) for image, path in images)
+
+
+def export_image(image: ImageType, path: pathlib.Path, image_to_paa: pathlib.Path,
+                 png_only: bool = False):
+    """
+    Exports image to disk.
+    Image will be exported as *.paa unless png_only flag is set.
+
+    Args:
+        image (Image): Image to export.
+        path (Path): Full export path of the image.
+        image_to_paa (Path): Path to the ImageToPAA conversion tool.
+        png_only (bool): Only export as PNG.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.save(path)
+
+    if not png_only:
+        subprocess.run([image_to_paa, str(path)], stdout=subprocess.DEVNULL)
+        # Delete PNG file afterwards
+        path.unlink(missing_ok=True)
+
+def get_generated_comment_lines(additional_comment: str = None):
+    """
+    Returns the a SQF comment stating that the file is generated and should not be changed.
+    An additional comment can be passed which is displayed above the warning.
+
+    Args:
+        additional_comment (str, optional): An additional comment displayed above the warning. Defaults to None.
+
+    Returns:
+        list[str]: SQF comment as list of lines.
+    """
+    lines: list[str] = []
+
+    generate_message = 'This file is generated and should not be edited!'
+    dashes = '-' * len(generate_message)
+
+    lines.append(f'// {dashes}\n')
+    if additional_comment:
+        lines.append(f'// {additional_comment}\n')
+    lines.append(f'// {generate_message}\n')
+    lines.append(f'// {dashes}\n\n')
+
+    return lines
