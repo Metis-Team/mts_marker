@@ -252,7 +252,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             w = QPOS_W(6.5);
             h = QPOS_H(1);
             text = "";
-            onButtonClick = QUOTE(call FUNC(initializeDTGUI));
+            onButtonClick = QUOTE([ctrlParent (_this select 0)] call FUNC(initializeDTGUI));
             class Attributes
             {
                 font = "RobotoCondensed";
