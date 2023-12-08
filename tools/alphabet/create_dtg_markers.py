@@ -6,7 +6,7 @@ import pathlib
 import shutil
 import argparse
 import timeit
-from io import TextIOWrapper
+from datetime import datetime
 
 from PIL import Image, ImageFont, ImageDraw
 from PIL.Image import Image as ImageType
@@ -22,11 +22,11 @@ text_v_offset = 66 # px left/right from center
 text_h_offset = 55 # px up from center
 
 alphabet: list[str | list[str]] = [
+    '0123', # Day
     string.digits, # Day
-    string.digits, # Day
+    '012', # Hour
     string.digits, # Hour
-    string.digits, # Hour
-    string.digits, # Minute
+    '012345', # Minute
     string.digits, # Minute
     string.ascii_uppercase, # Time zones
     ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'], # Months
@@ -44,7 +44,6 @@ def create_image(font: FreeTypeFont, letter: str, pos: int):
         font (FreeTypeFont): Character font.
         letter (str): The character(s) to print.
         pos (int): The position of the character. Smaller number means closer to center/frameshape.
-        anchor (str, optional): The location of the character relative to the frameshape. Use 'rb' for right bottom, 'lb' for left bottom. Defaults to 'lb'.
 
     Returns:
         Image: An image object representing the character.
@@ -52,8 +51,8 @@ def create_image(font: FreeTypeFont, letter: str, pos: int):
 
     image = Image.new('RGBA', img_size)
 
-    letter_size = font.getbbox(letter, anchor='ls')
-    letter_width = letter_size[2] - letter_size[0]
+    left, top, right, bottom = font.getbbox(letter, anchor='ls')
+    letter_width = (right - left) // len(letter)
 
     # For some reason the width of the letter K is bigger then it should
     if letter == 'K':
@@ -81,16 +80,21 @@ def create_all_images(alphabet: list[str | list[str]], font: FreeTypeFont):
     """
 
     images: list[tuple[ImageType, pathlib.Path]] = []
+    offset: int = 0
     for pos, alphabet in enumerate(reversed(alphabet)):
         image_dir = pathlib.Path('dtg', str(pos))
 
         for letter in alphabet:
-            image = create_image(font, letter, pos)
+            image = create_image(font, letter, offset)
 
             file_name = f'mts_markers_dtg_{pos}_{letter}.png'
             export_file = image_dir / file_name
 
             images.append((image, export_file))
+
+        # In this case we assume that each letter in the current alphabet
+        # has the same length, i.e. either 1 or 3 for months.
+        offset += len(alphabet[-1])
 
     return images
 
@@ -112,6 +116,38 @@ def write_include_file(path: pathlib.Path, alphabet: list[str | list[str]]):
                 f.write(macro + '\n')
 
             f.write('\n')
+
+
+def debug_create_marker(date: datetime, timezone: str, font: FreeTypeFont):
+    """Debugging function used to create sample DTG marker.
+
+    Args:
+        date (datetime): Date and time.
+        timezone (str): Timezone
+        font (FreeTypeFont): Font.
+
+    Example usage: `debug_create_marker(datetime.now(), 'A', font)`
+    """
+    dev_frame = pathlib.Path('frameshapes', 'combined_frameshape.png')
+    dev_img = Image.open(str(dev_frame))
+
+    day = f'{date.day:02d}'
+    month = alphabet[7][date.month - 1]
+    year = f'{date.year:04d}'
+    hour = f'{date.hour:02d}'
+    min = f'{date.min:02d}'
+
+    dtg = [day[0], day[1], hour[0], hour[1], min[0], min[1], timezone, month, year[2], year[3]]
+
+    offset: int = 0
+    for letter in reversed(dtg):
+        offset += len(letter)
+        img = create_image(font, letter, offset)
+        dev_img = Image.alpha_composite(dev_img, img)
+
+    dev_img.show()
+    dev_img.close()
+
 
 def main(args: argparse.Namespace):
     start_time = timeit.default_timer()

@@ -3,7 +3,9 @@ import pathlib
 import subprocess
 import sys
 
+from PIL import Image, ImageDraw
 from PIL.Image import Image as ImageType
+from PIL.ImageFont import FreeTypeFont
 import tqdm
 import joblib
 
@@ -83,7 +85,7 @@ def export_images(images: list[tuple[ImageType, pathlib.Path]], output_dir: path
 
 
 def export_image(image: ImageType, path: pathlib.Path, image_to_paa: pathlib.Path,
-                 png_only: bool = False):
+                 png_only: bool = False, keep_png: bool = False):
     """
     Exports image to disk.
     Image will be exported as *.paa unless png_only flag is set.
@@ -93,6 +95,7 @@ def export_image(image: ImageType, path: pathlib.Path, image_to_paa: pathlib.Pat
         path (Path): Full export path of the image.
         image_to_paa (Path): Path to the ImageToPAA conversion tool.
         png_only (bool): Only export as PNG.
+        keep_png (bool): Keep the PNG after converting to PAA.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path)
@@ -100,7 +103,8 @@ def export_image(image: ImageType, path: pathlib.Path, image_to_paa: pathlib.Pat
     if not png_only:
         subprocess.run([image_to_paa, str(path)], stdout=subprocess.DEVNULL)
         # Delete PNG file afterwards
-        path.unlink(missing_ok=True)
+        if not keep_png:
+            path.unlink(missing_ok=True)
 
 def get_generated_comment_lines(additional_comment: str = None):
     """
