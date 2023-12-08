@@ -23,7 +23,8 @@ params [
     "", // unique designation (we do not display text marker in the preview, so ignore them)
     "", // additional information
     "", // higher formation
-    ["_operationalCondition", OC_FULLY_CAPABLE, [0]]
+    ["_operationalCondition", OC_FULLY_CAPABLE, [0]],
+    ""  // Date-Time Group
 ];
 _frameshape params [
     ["_identity", "", [""]],
