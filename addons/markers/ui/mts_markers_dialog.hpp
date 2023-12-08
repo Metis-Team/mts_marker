@@ -375,7 +375,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             y = QPOS_H(12);
             maxChars = HIGHER_FORMATION_MAX_CHARS;
         };
-        
+
         class HQText: GVAR(RscText) {
             idc = HQ_TXT;
             x = QPOS_W(0.5);
@@ -383,7 +383,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             w = QPOS_W(6.5);
             h = QPOS_H(1);
             text = CSTRING(ui_general_headquatersTXT);
-            style = 1;
+            style = ST_RIGHT;
         };
         class HQCheckbox: GVAR(RscCheckBoxSound) {
             idc = HQ_CHECKBOX;
