@@ -17,9 +17,9 @@
  */
 
 params [
-    ["_frameshape", ["",false], [[]]],
-    ["_modifier", [0,0,0], [[]], 3],
-    ["_size", [0,false,false], [[]], 3],
+    ["_frameshape", ["", false, false], [[]]],
+    ["_modifier", [0, 0, 0], [[]], 3],
+    ["_size", [0, false, false], [[]], 3],
     "", // unique designation (we do not display text marker in the preview, so ignore them)
     "", // additional information
     "", // higher formation
