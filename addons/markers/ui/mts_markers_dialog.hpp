@@ -23,7 +23,7 @@ class GVAR(RscTransparentButton): RscButton {
 
 class GVAR(RscEdit): RscEdit {
     type = 2;
-    style = 512;
+    style = ST_NO_RECT;
     colorBackground[] = {0, 0, 0, 1};
     sizeEx = QUOTE(POS_H(0.8));
     shadow = 0;
@@ -133,7 +133,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                     y = QPOS_H(0);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
-                    style = 64;
+                    style = ST_FRAME;
                     colorText[] = {1,1,1,1};
                 };
                 class BluButtonIcon: RscPicture {
