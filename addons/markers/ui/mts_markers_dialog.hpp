@@ -275,6 +275,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             w = QPOS_W(6.5);
             h = QPOS_H(1);
             text = "";
+            style = ST_CENTER;
             onButtonClick = QUOTE([ctrlParent (_this select 0)] call FUNC(initializeDTGUI));
             class Attributes
             {
@@ -851,7 +852,7 @@ class GVAR(DTGDialog) {
 
         class OkButton: RscButtonMenuOK {
             idc = DTG_OK_BUTTON;
-            x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - LARGE_BUTTON_W);
+            x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - WIDE_BUTTON_W);
             y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
             w = QPOS_W(WIDE_BUTTON_W);
             h = QPOS_H(WIDE_BUTTON_H);

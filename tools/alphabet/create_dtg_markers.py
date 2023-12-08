@@ -18,8 +18,8 @@ import helper.util as util
 version = '1.0.0'
 
 img_size = (1024, 1024)
-text_v_offset = 66 # px left/right from center
-text_h_offset = 55 # px up from center
+text_v_offset = 66 # px left from center
+text_h_offset = 32 # px up from center
 
 alphabets: list[str | list[str]] = [
     '0123', # Day
