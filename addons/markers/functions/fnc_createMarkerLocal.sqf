@@ -31,6 +31,7 @@
  *          7: ARRAY - Date-Time Group.
  *              0: ARRAY - Date in format [year, month, day, hour, minute] (all NUMBER).
  *              1: STRING - Time zone identifier.
+ *          8: STRING - Direction of Movement Arrow (N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW). Empty string for no direction.
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *
@@ -59,7 +60,8 @@ _markerParameter params [
     ["_additionalInfo", "", [""]],
     ["_higherFormation", [], [[]]],
     ["_operationalCondition", OC_FULLY_CAPABLE, [0]],
-    ["_dateTimeGroup", [], [[]]]
+    ["_dateTimeGroup", [], [[]]],
+    ["_direction", "", [""]]
 ];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
@@ -82,10 +84,15 @@ if (_alpha < 0 || _alpha > 1) then {
 };
 
 if !(_identity in ["blu", "red", "neu", "unk"]) exitWith {
-    ERROR_1("Unkown Identity %1", _identity);
+    ERROR_1("Unknown Identity %1", _identity);
 };
 
 CHECKRET(_operationalCondition < 0 || _operationalCondition > 2, ERROR("Operational condition must be a number between 0 and 2."));
+
+_direction = toUpper _direction;
+if (_direction isNotEqualTo "" && {!(_direction in GVAR(directions))}) exitWith {
+    ERROR_2("Unknown direction of movement %1. Allowed values: %2", _direction, GVAR(directions) joinString ", ");
+};
 
 //create frameshape marker
 private _identityComplete = if (_dashedFrameshape) then {
@@ -117,13 +124,30 @@ CHECKRET(_frameshapeColor isEqualTo "", ERROR_1("Could not get corresponding van
 
 _markerFrame setMarkerColorLocal _frameshapeColor;
 
-if (_isHq) then {
+// Headquaters
+// This is adding standalone HQ marker.
+// If direction is given, the HQ marker will be replaced by direction.
+if (_direction isEqualTo "" && _isHq) then {
     private _markerHq = createMarkerLocal [format ["%1_hq", _namePrefix], _pos];
     _markerHq setMarkerTypeLocal format ["mts_%1_hq", _identity];
     _markerHq setMarkerSizeLocal [_scale, _scale];
     _markerHq setMarkerAlphaLocal _alpha;
 
     _markerFamily pushBack _markerHq;
+};
+
+// Direction of Movement Arrow
+if (_direction isNotEqualTo "") then {
+    private _mod = if (_isHq) then { "dir_hq" } else { "dir" };
+    private _markerName = format ["%1_%2_%3", _namePrefix, _mod, _direction];
+    private _markerType = format ["mts_%1_%2_%3", _identity, _mod, _direction];
+
+    private _markerDir = createMarkerLocal [_markerName, _pos];
+    _markerDir setMarkerTypeLocal _markerType;
+    _markerDir setMarkerSizeLocal [_scale, _scale];
+    _markerDir setMarkerAlphaLocal _alpha;
+
+    _markerFamily pushBack _markerDir;
 };
 
 //create group size marker
@@ -256,6 +280,7 @@ if ((count _higherFormation) > 0) then {
     } forEach _higherFormation;
 };
 
+// Operational condition marker
 if (_operationalCondition > 0) then {
     private _opCondAmplifier = "mts_com_opcond";
     if (_operationalCondition isEqualTo OC_DAMAGED) then {
@@ -289,12 +314,12 @@ if ((count _dateTimeGroup) > 0) then {
         private _markerName = format ["%1_dtg_%2_%3", _namePrefix, _letterPos, _x];
         private _markerType = format ["mts_dtg_%1_%2", _letterPos, _x];
 
-        private _dtgMarker = createMarkerLocal [_markerName, _pos];
-        _dtgMarker setMarkerTypeLocal _markerType;
-        _dtgMarker setMarkerSizeLocal [_scale, _scale];
-        _dtgMarker setMarkerAlphaLocal _alpha;
+        private _markerDtg = createMarkerLocal [_markerName, _pos];
+        _markerDtg setMarkerTypeLocal _markerType;
+        _markerDtg setMarkerSizeLocal [_scale, _scale];
+        _markerDtg setMarkerAlphaLocal _alpha;
 
-        _markerFamily pushBack _dtgMarker;
+        _markerFamily pushBack _markerDtg;
 
         _letterPos = _letterPos + 1;
     } forEachReversed _dtgCharacters;

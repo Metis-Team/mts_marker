@@ -76,6 +76,27 @@ GVAR(monthAbbreviations) = createHashMapFromArray [
     [12, "dec"]
 ];
 
+// Cardinal and ordinal moving directions
+GVAR(directions) = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+GVAR(directionLocalization) = [
+    "str_q_north",
+    LSTRING(ui_direction_nne),
+    "str_q_north_east",
+    LSTRING(ui_direction_ene),
+    "str_q_east",
+    LSTRING(ui_direction_ese),
+    "str_q_south_east",
+    LSTRING(ui_direction_sse),
+    "str_q_south",
+    LSTRING(ui_direction_ssw),
+    "str_q_south_west",
+    LSTRING(ui_direction_wsw),
+    "str_q_west",
+    LSTRING(ui_direction_wnw),
+    "str_q_north_west",
+    LSTRING(ui_direction_nnw)
+];
+
 GVAR(lastSelection) = [];
 
 if (is3DEN) then {

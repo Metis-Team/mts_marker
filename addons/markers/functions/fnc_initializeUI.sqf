@@ -76,6 +76,19 @@ private _ctrlArray = [
     _ctrl lbSetCurSel 0;
 } forEach _ctrlArray;
 
+// Direction of Movement
+private _directionCtrl = _mainDisplay displayCtrl DIRECTION_DROPDOWN;
+private _directionIndex = _directionCtrl lbAdd LLSTRING(ui_direction_empty);
+_directionCtrl lbSetPicture [_directionIndex, "#(argb,8,8,3)color(0,0,0,0)"];
+
+{
+    private _index = _directionCtrl lbAdd (localize _x);
+    private _picturePath = format [QPATHTOF(data\ui\dir\mts_markers_ui_dir_%1.paa), GVAR(directions) select _forEachIndex];
+    _directionCtrl lbSetPicture [_index, _picturePath];
+} forEach GVAR(directionLocalization);
+_directionCtrl lbSetCurSel 0;
+
+// Channel
 private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
 if (!isMultiplayer || is3DEN) then {
     //hide channel dropdown in singleplayer and 3DEN editor
@@ -212,11 +225,23 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
 //add EH for marker preview updating
 {
     _x ctrlAddEventHandler ["LBSelChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [_iconCtrl, _mod1Ctrl, _mod2Ctrl, _echelonCtrl];
+} forEach [
+    _iconCtrl,
+    _mod1Ctrl,
+    _mod2Ctrl,
+    _echelonCtrl,
+    _directionCtrl];
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [_suspectedCbCtrl, _reinforcedCbCtrl, _reducedCbCtrl, _hqCbCtrl, _damagedCbCtrl, _destroyedCbCtrl];
+} forEach [
+    _suspectedCbCtrl,
+    _reinforcedCbCtrl,
+    _reducedCbCtrl,
+    _hqCbCtrl,
+    _damagedCbCtrl,
+    _destroyedCbCtrl
+];
 
 //fill the Presets list with saved Presets from the profile
 call FUNC(updatePresetsList);
@@ -233,7 +258,10 @@ _searchCtrl ctrlAddEventHandler ["KeyUp", LINKFUNC(updatePresetsList)];
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", LINKFUNC(onOperationalConditionChanged)];
-} forEach [_damagedCbCtrl, _destroyedCbCtrl];
+} forEach [
+    _damagedCbCtrl,
+    _destroyedCbCtrl
+];
 
 private _scaleSlider = _mainDisplay displayCtrl SCALE_SLIDER;
 _scaleSlider sliderSetPosition _markerScale;
