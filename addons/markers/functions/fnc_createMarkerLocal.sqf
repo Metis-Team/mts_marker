@@ -280,7 +280,7 @@ if ((count _dateTimeGroup) > 0) then {
 
     CHECKRET(_dtgCharacters isEqualTo [], WARNING_1("Date-Time Group is invalid. Will not create DTG markers. DTG: %1", _dateTimeGroup));
 
-    // Iterate revered because char pos starts closest to frameshape, meaning with the year.
+    // Iterate reversed because char pos starts closest to frameshape, meaning with the year.
     //             DDHHMMZmmmYY ┌───────┐
     // Positions:  98765432  10 │       │
     //                          └───────┘

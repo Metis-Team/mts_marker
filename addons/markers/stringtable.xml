@@ -171,8 +171,8 @@
                 <German>Lokalzeit</German>
             </Key>
             <Key ID="str_mts_markers_ui_dtg_localTime_tooltip">
-                <Original>Arma local ingame time</Original>
-                <German>Arma Ingame Lokalzeit</German>
+                <Original>Arma ingame time</Original>
+                <German>Arma Ingamezeit</German>
             </Key>
             <Key ID="str_mts_markers_ui_dtg_setLocalTime_tooltip">
                 <Original>Set the time to the current local Arma time</Original>

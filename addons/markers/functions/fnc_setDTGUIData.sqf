@@ -21,7 +21,7 @@
 params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]]];
 TRACE_1("params", _this);
 
-CHECK(_data isEqualTo []);
+CHECK(_date isEqualTo []);
 
 _date params ["_year", "_month", "_day", "_hour", "_minute"];
 
