@@ -37,9 +37,24 @@
 #define PREVIEW_LAYER_W (3 * PREVIEW_GRID_W)
 #define PREVIEW_LAYER_H (3 * PREVIEW_GRID_H)
 
+// Date Time Group Dialog
+#define DTG_PADDING (5 * PADDING)
+#define DTG_HEADER_H 1
+
+#define DTG_W 30
+#define DTG_H 6
+
+#define DTG_TEXT_W 5
+#define DTG_TIME_FRAME_W 4
+#define DTG_DATE_COMBO_W 7
+#define DTG_TIMEZONE_COMBO_W 8
+#define DTG_SLIDER_W (3 * DTG_DATE_COMBO_W - DTG_TIME_FRAME_W - DTG_TIMEZONE_COMBO_W)
+#define DTG_BUTTON_W ((3 * DTG_DATE_COMBO_W - 2 * PADDING) / 3)
+
 // IDCs
 // Main display
 #define MAIN_DISPLAY 5000
+#define DTG_DISPLAY 5001
 
 // Control Groups
 #define CONFIG_GROUP 50
@@ -75,6 +90,7 @@
 #define HQ_TXT 217
 #define DAMAGED_TXT 218
 #define DESTROYED_TXT 219
+#define DTG_TXT 220
 
 // Identity Buttons
 #define FRIENDLY_BTN_FRAME 300
@@ -124,6 +140,8 @@
 #define SEARCH_PRESETS_BUTTON 706
 #define CLEAR_PRESETS_BUTTON 707
 #define DELETE_PRESETS_BUTTON 708
+#define DTG_BUTTON 709
+#define CLEAR_DTG_BUTTON 710
 
 // Preview Layers
 #define PREVIEW_LYR_IDENTITY 800
@@ -146,3 +164,40 @@
 // Slider
 #define ALPHA_SLIDER 1100
 #define SCALE_SLIDER 1101
+
+// ------------------------------
+// ---- Date-Time Group IDCs ----
+// ------------------------------
+// Control Groups
+#define DTG_GROUP 50
+
+// Backgrounds
+#define DTG_HEAD_BG 100
+#define DTG_BG 101
+#define DTG_TIME_FRAME 102
+
+// Text
+#define DTG_HEAD_TXT 200
+#define DTG_DATE_TXT 201
+#define DTG_TIME_TXT 202
+#define DTG_TIME_SEPARATOR 203
+
+// Dropdowns
+#define DTG_YEAR_DROPDOWN 500
+#define DTG_MONTH_DROPDOWN 501
+#define DTG_DAY_DROPDOWN 502
+#define DTG_TIMEZONE_DROPDOWN 503
+
+// Edit Boxes
+#define DTG_HOURS_EDIT 600
+#define DTG_MINUTES_EDIT 601
+
+// Buttons
+#define DTG_OK_BUTTON 700
+#define DTG_CANCEL_BUTTON 701
+#define DTG_LOCALTIME_BUTTON 702
+#define DTG_SYSTEMTIME_BUTTON 703
+#define DTG_SYSTEMUTCTIME_BUTTON 704
+
+// Slider
+#define DTG_TIME_SLIDER 1100

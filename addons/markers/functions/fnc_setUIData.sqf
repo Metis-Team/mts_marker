@@ -27,7 +27,8 @@ params [
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
     ["_higherFormation", [], [[]]],
-    ["_operationalCondition", 0, [0]]
+    ["_operationalCondition", 0, [0]],
+    ["_dateTimeGroup", [], [[]]]
 ];
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
@@ -68,6 +69,8 @@ if (_operationalCondition isEqualTo OC_DAMAGED) then {
 if (_operationalCondition isEqualTo OC_DESTROYED) then {
     (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
 };
+
+[_dateTimeGroup] call FUNC(saveAndDisplayDTG);
 
 // Select right identity in the dialog & update preview
 (_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;

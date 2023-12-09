@@ -7,6 +7,7 @@
 //#define CBA_DEBUG_SYNCHRONOUS
 
 #include "\a3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\defineResincl.inc"
 
 #ifdef DEBUG_ENABLED_MARKERS
     #define DEBUG_MODE_FULL
@@ -63,3 +64,7 @@
 #define OC_FULLY_CAPABLE 0
 #define OC_DAMAGED 1
 #define OC_DESTROYED 2
+
+// DTG
+#define MIN_YEAR 1900
+#define MAX_YEAR 2050

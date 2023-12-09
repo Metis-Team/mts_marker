@@ -63,5 +63,8 @@ if (cbChecked (_mainDisplay displayCtrl DESTROYED_CHECKBOX)) then {
     _operationalCondition = OC_DESTROYED;
 };
 
+// Get the Date-Time Group saved in the button
+private _dateTimeGroup = (_mainDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
+
 // This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape, _isHq], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _operationalCondition]
+[[_identity, _dashedFrameshape, _isHq], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _operationalCondition, _dateTimeGroup]

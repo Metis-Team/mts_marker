@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 
-import os
 import sys
 import string
 import pathlib
-import subprocess
 import shutil
 import argparse
 import timeit
-from PIL import Image, ImageFont, ImageDraw
-from tqdm.contrib.concurrent import thread_map
+from io import TextIOWrapper
 
-if sys.platform == 'win32':
-    import winreg
+from PIL import Image, ImageFont, ImageDraw
+from PIL.Image import Image as ImageType
+from PIL.ImageFont import FreeTypeFont
+
+import helper.util as util
 
 # Configuration
-version = '1.1.0'
+version = '1.2.0'
 
 # Some char cannot used in file names.
 # That's why we need to substitute the char with another string.
@@ -71,50 +71,13 @@ img_size = (1024, 1024)
 text_v_offset = 66 # px left/right from center
 text_h_offset = 55 # px down from center
 
-# Parse args
-parser = argparse.ArgumentParser(
-    description='Creates alphanumeric markers used for the unique designation and higher formation and exports them as *.paa files.'
-)
-parser.add_argument(
-    '-png', '--png-only',
-    action='store_true',
-    dest='png_only',
-    help='Exports markers as *.png files',
-)
-parser.add_argument(
-    '-nc', '--no-clean',
-    action='store_true',
-    dest='no_clean',
-    help='Does not remove all files and directories in the export directory before creating the markers'
-)
-parser.add_argument(
-    '-v', '--version',
-    action='version',
-    version=version,
-    help='Displays the current version of the script'
-)
-
-args = parser.parse_args()
-
-# Globals
-png_only = args.png_only
-delete_png = not args.png_only
-clean_images = not args.no_clean
-
-image_to_paa = ''
-
-project_dir = os.path.dirname(__file__)
-images_dir = os.path.join(project_dir, 'images')
-
-font_file = os.path.join(project_dir, 'RobotoMono', 'static', 'RobotoMono-SemiBold.ttf')
-font = ImageFont.truetype(font_file, size=35) # 26pt == 35px
-
 anchors = ['lb', 'rb']
 
-def create_image(letter, pos, anchor = 'lb'):
+def create_image(font: FreeTypeFont, letter: str, pos: int, anchor: str = 'lb'):
     """Creates a image of a character in given position and location (anchor).
 
     Args:
+        font (FreeTypeFont): Character font.
         letter (str): The character to print.
         pos (int): The position of the character. Smaller number means closer to center/frameshape.
         anchor (str, optional): The location of the character relative to the frameshape. Use 'rb' for right bottom, 'lb' for left bottom. Defaults to 'lb'.
@@ -123,11 +86,10 @@ def create_image(letter, pos, anchor = 'lb'):
         Image: An image object representing the character.
     """
 
-    img = Image.new('RGBA', img_size)
+    image = Image.new('RGBA', img_size)
 
     letter_size = font.getbbox(letter, anchor='ls')
     letter_width = letter_size[2] - letter_size[0]
-    letter_height = letter_size[3] - letter_size[1]
 
     # For some reason the width of the letter K is bigger then it should
     if letter == 'K':
@@ -140,29 +102,34 @@ def create_image(letter, pos, anchor = 'lb'):
     else:
         offset_direction = 1
 
-    x = img.size[0] / 2 + offset_direction * (v_offset + pos * letter_width)
-    y = img.size[1] / 2 + text_h_offset
+    x = image.size[0] / 2 + offset_direction * (v_offset + pos * letter_width)
+    y = image.size[1] / 2 + text_h_offset
 
-    draw = ImageDraw.Draw(img)
+    draw = ImageDraw.Draw(image)
     draw.text((x, y), letter, fill=(0, 0, 0), font=font, anchor='ls')
 
-    return img
+    return image
 
-def create_all_images():
-    """Creates all images for the characters defined in the configuration.
+def create_all_images(char_sets: dict[str, dict[str]], anchors: list[str], font: FreeTypeFont):
+    """Creates all images for the characters defined in given sets.
+
+    Args:
+        char_sets (dict[str, dict[str]]): Character sets to create.
+        anchors (list[str]): The locations of the character relative to the frameshape to create.
+        font (FreeTypeFont): Character font.
 
     Returns:
-        list(tuple(str, Image)): A list of image file path and the character image object.
+        list(tuple(Image, Path)): A list of character image object and relative file path to the output directory.
     """
 
-    images = []
-    for set_name, alphabet in printable_char_sets.items():
+    images: list[tuple[ImageType, pathlib.Path]] = []
+    for set_name, alphabet in char_sets.items():
         for anchor in anchors:
             for pos in range(num_of_letters):
-                export_dir = os.path.join(images_dir, set_name, anchor, str(pos))
+                image_dir = pathlib.Path(set_name, anchor, str(pos))
 
                 for letter in alphabet['characters']:
-                    img = create_image(letter, pos, anchor)
+                    image = create_image(font, letter, pos, anchor)
 
                     # Some chars are not allowed in file names, so replace them according
                     # a substitution table if available
@@ -170,70 +137,20 @@ def create_all_images():
                         letter = alphabet['substitutions'].get(letter, letter)
 
                     file_name = f'mts_markers_{set_name}_{anchor}_{pos}_{letter}.png'
-                    export_file = os.path.join(export_dir, file_name)
+                    export_file = image_dir / file_name
 
-                    images.append((export_file, img))
+                    images.append((image, export_file))
 
     return images
 
-def find_image_to_paa_tool():
-    """Returns the path to the ImageToPAA conversion tool.
-
-    Raises:
-        Exception: Could not find Arma 3 Tools.
-        Exception: Arma 3 Tools are not installed correctly.
-
-    Returns:
-        str: Path to the ImageToPAA conversion tool.
-    """
-
-    reg = winreg.ConnectRegistry(None, winreg.HKEY_CURRENT_USER)
-    try:
-        k = winreg.OpenKey(reg, r'Software\bohemia interactive\arma 3 tools')
-        arma3tools_path = winreg.QueryValueEx(k, 'path')[0]
-        winreg.CloseKey(k)
-    except:
-        raise Exception('BadTools', 'Could not find Arma 3 Tools.')
-
-    image_to_paa_path = os.path.join(arma3tools_path, 'ImageToPAA', 'ImageToPAA.exe')
-
-    if os.path.isfile(image_to_paa_path):
-        return image_to_paa_path
-    else:
-        raise Exception('BadTools', 'Arma 3 Tools are not installed correctly.')
-
-def save_image_as_paa(image_info):
-    """Exports image to disk.
-    Image will be exported as *.paa unless --png-only flag is set.
-
-    Args:
-        image_info (tuple(str, Image)): Path and image to export.
-    """
-    global image_to_paa
-
-    path = image_info[0]
-    img = image_info[1]
-
-    file_dir = os.path.dirname(path)
-    pathlib.Path(file_dir).mkdir(parents=True, exist_ok=True)
-
-    file_name = os.path.basename(path)
-    img.save(path)
-
-    if sys.platform == 'win32' and not png_only:
-        subprocess.run([image_to_paa, path], stdout=subprocess.DEVNULL)
-
-    if delete_png:
-        pathlib.Path(path).unlink(missing_ok=True)
-
-def write_translation_table(file):
+def write_translation_table(file: TextIOWrapper, char_sets: dict[str, dict[str]]):
     """Writes the SQF translation table for special characters to given file.
 
     Args:
         file (File): The file to write to.
     """
 
-    for set_name, alphabet in printable_char_sets.items():
+    for set_name, alphabet in char_sets.items():
         if alphabet['substitutions'] is None:
             continue
 
@@ -247,15 +164,16 @@ def write_translation_table(file):
 
         file.write(f'];\n\n')
 
-def write_valid_characters(file):
+def write_valid_characters(file: TextIOWrapper, char_sets: dict[str, dict[str]]):
     """Writes the allowed/valid characters SQF variables to given file.
 
     Args:
         file (File): The file to write to.
+        char_sets (dict[str, dict[str]]): Character sets created.
     """
 
-    variables = []
-    for set_name, alphabet in printable_char_sets.items():
+    variables: list[str] = []
+    for set_name, alphabet in char_sets.items():
         file.write(f'// Variables used for validating characters\n')
 
         chars = ', '.join(map(lambda c: f'\"{c}\"', alphabet['characters'])) # '"A", "B", "C", ...'
@@ -266,22 +184,24 @@ def write_valid_characters(file):
     variables_concat = ' + '.join(variables)
     file.write(f'GVAR(validCharacters) = {variables_concat};\n\n')
 
-def write_include_files(verbose=False):
+def write_include_files(output_dir: pathlib.Path, char_sets: dict[str, dict[str]], verbose: bool = False):
     """Writes all marker include files for the exported images.
 
     Args:
+        output_dir (Path): Path to the output directory.
+        char_sets (dict[str, dict[str]]): Character sets created.
         verbose (bool, optional): Print additional information to console. Defaults to False.
     """
 
-    includes = []
-    for alphabet in printable_char_sets.values():
+    includes: list[str] = []
+    for alphabet in char_sets.values():
         for anchor in anchors:
             file_name = f'{alphabet["cfg_name_prefix"]}{anchor.upper()}.hpp'
             includes.append(file_name)
 
-            with open(os.path.join(images_dir, file_name), 'w') as f:
-                f.write(f'// Character markers for anchor {anchor}\n')
-                f.write(f'// This file is generated and should not be edited\n\n')
+            with open(output_dir / file_name, 'w') as f:
+                comment = util.get_generated_comment_lines(f'Character markers for anchor {anchor}')
+                f.writelines(comment)
 
                 for pos in range(num_of_letters):
                     for letter in alphabet['characters']:
@@ -295,86 +215,114 @@ def write_include_files(verbose=False):
                     f.write('\n')
 
             if verbose:
-                print(f'Created {file_name}')
+                print(f'Created \"{file_name}\"')
 
-    with open(os.path.join(images_dir, 'CfgMarkersCharacters.hpp'), 'w') as f:
+    with open(output_dir / 'CfgMarkersCharacters.hpp', 'w') as f:
         for include in includes:
             f.write(f'#include \"{include}\"\n')
 
     if verbose:
-        print('Created CfgMarkersCharacters.hpp\n')
+        print('Created \"CfgMarkersCharacters.hpp\"\n')
 
-def fract_sec(s):
-    """Gets the days, hours, minutes and seconds from total time elapsed in seconds.
+def write_marker_variables(output_dir: pathlib.Path, char_sets: dict[str, dict[str]]):
+    path = output_dir / 'initCharacterMarkerVariables.hpp'
+    with open(path, 'w') as f:
+        comment = util.get_generated_comment_lines()
+        f.writelines(comment)
 
-    Args:
-        s (float): Total time elapsed in seconds.
+        write_translation_table(f, char_sets)
+        write_valid_characters(f, char_sets)
 
-    Returns:
-        int, int, int, float: Days, hours, minutes and seconds.
-    """
+    return path
 
-    temp = float(s) / (60 * 60 * 24)
-    d = int(temp)
-    temp = (temp - d) * 24
-    h = int(temp)
-    temp = (temp - h) * 60
-    m = int(temp)
-    temp = (temp - m) * 60
-    sec = temp
-
-    return d,h,m,sec
-
-def main(args):
-    global image_to_paa
-
+def main(args: argparse.Namespace):
     start_time = timeit.default_timer()
 
-    print('Using font file:', font_file)
+    if sys.platform != 'win32':
+        print('This tool is not support on non-windows devices due to missing Arma Tools.')
+        sys.exit(2)
 
-    # dev_frame = os.path.join(project_dir, 'frameshapes', 'combined_frameshape.png')
-    # dev_img = Image.open(dev_frame)
-    # img = create_image('A', 0, 'lb')
-    # dev_img = Image.alpha_composite(dev_img, img)
-    # dev_img.show()
+    png_only = args.png_only
+    clean_images = not args.no_clean
 
-    if sys.platform == 'win32':
-        image_to_paa = find_image_to_paa_tool()
-        print('Found ImageToPaa Tool:', image_to_paa)
-    else:
-        print('Cannot find ImageToPaa on non-windows platform.')
-        print('Images will not be converted.')
-        delete_png = False
+    font = ImageFont.truetype(str(args.font_file), size=35) # 26pt == 35px
+    print('Using font:', font.getname())
+
+    image_to_paa = util.find_image_to_paa_tool()
+    print(f'Found ImageToPaa tool: \"{image_to_paa}\"')
 
     print('Creating images...')
-    images = create_all_images()
+    images = create_all_images(printable_char_sets, anchors, font)
 
     print('Cleaning export folder:', clean_images)
     if clean_images:
-        shutil.rmtree(pathlib.Path(images_dir))
+        shutil.rmtree(args.output_dir)
 
     print('Exporting only PNG files:', png_only)
-    print('Exporting images...')
-    # Convert images to paa with multithreading
-    thread_map(save_image_as_paa, images)
-    print(f'Exported {len(images)} images\n')
+
+    # Export images in parallel
+    util.export_images(images, args.output_dir, args.workers, image_to_paa=image_to_paa, png_only=png_only)
+
+    print(f'Exported {len(images)} images.\n')
 
     print('Creating include files...')
-    write_include_files(True)
+    write_include_files(args.output_dir, printable_char_sets, verbose=True)
 
     print('Generating SQF substitute tables and character variables...')
-    with open(os.path.join(images_dir, 'initCharacterMarkerVariables.hpp'), 'w') as f:
-        f.write(f'// This file is generated and should not be edited\n\n')
-
-        write_translation_table(f)
-        write_valid_characters(f)
-
-    print('Created initCharacterMarkerVariables.hpp\n')
+    path = write_marker_variables(args.output_dir, printable_char_sets)
+    print(f'Created \"{path.name}\"\n')
 
     print('Finished generating character marker files.')
-    d,h,m,s = fract_sec(timeit.default_timer() - start_time)
+    d,h,m,s = util.fract_sec(timeit.default_timer() - start_time)
     print(f'Total program time elapsed: {h:2}h {m:2}m {s:4.3f}s')
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description='Creates alphanumeric markers used for the unique designation and higher formation and exports them as *.paa files.'
+    )
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version=version,
+        help='Displays the current version of the script.'
+    )
+    parser.add_argument(
+        '-png', '--png-only',
+        action='store_true',
+        dest='png_only',
+        help='Exports markers as *.png files.',
+    )
+    parser.add_argument(
+        '-nc', '--no-clean',
+        action='store_true',
+        dest='no_clean',
+        help='Does not remove all files and directories in the export directory before creating the markers.'
+    )
+    parser.add_argument(
+        '-o', '--output',
+        dest='output_dir',
+        type=pathlib.Path,
+        required=True,
+        help='Output directory where all files will be exported to.'
+    )
+    parser.add_argument(
+        '-f', '--font',
+        dest='font_file',
+        type=pathlib.Path,
+        default=(pathlib.Path(__file__).parent / 'RobotoMono' / 'static' / 'RobotoMono-SemiBold.ttf'),
+        help='Path to the font to use.'
+    )
+    parser.add_argument(
+        '--workers',
+        dest='workers',
+        type=int,
+        default=-1,
+        help='Number of workers for parallel execution. -1 for all CPUs.'
+    )
+
+    args = parser.parse_args()
+
     main(args)
+
+# python create_alphanumeric_markers.py -o ./images

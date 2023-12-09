@@ -5,7 +5,6 @@ class RscButtonMenu;
 class RscButtonMenuOK;
 class RscButtonMenuCancel;
 class RscCheckBox;
-class RscCombo;
 class RscEdit;
 class RscListBox;
 class RscButtonSearch;
@@ -13,6 +12,9 @@ class RscControlsGroupNoScrollbars;
 class RscTitle;
 class RscFrame;
 class RscXSliderH;
+class RscCombo {
+    class ComboScrollBar;
+};
 
 class GVAR(RscTransparentButton): RscButton {
     colorBackground[] = {0, 0, 0, 0};
@@ -24,7 +26,7 @@ class GVAR(RscTransparentButton): RscButton {
 
 class GVAR(RscEdit): RscEdit {
     type = 2;
-    style = 512;
+    style = ST_NO_RECT;
     colorBackground[] = {0, 0, 0, 1};
     sizeEx = QUOTE(POS_H(0.8));
     shadow = 0;
@@ -39,6 +41,20 @@ class GVAR(RscCheckBoxSound): RscCheckBox {
     soundPush[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundPush", 0.090000004, 1};
     soundClick[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundClick", 0.090000004, 1};
     soundEscape[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundEscape", 0.090000004, 1};
+};
+
+class GVAR(RscCombo): RscCombo {
+    colorTextRight[] = {1, 1, 1, 0.6};
+
+    arrowFull = "\a3\3DEN\Data\Controls\ctrlCombo\arrowFull_ca.paa";
+    arrowEmpty = "\a3\3DEN\Data\Controls\ctrlCombo\arrowEmpty_ca.paa";
+
+    class ComboScrollBar: ComboScrollBar {
+        thumb = "\a3\3DEN\Data\Controls\ctrlDefault\thumb_ca.paa";
+        border = "\a3\3DEN\Data\Controls\ctrlDefault\border_ca.paa";
+        arrowFull = "\a3\3DEN\Data\Controls\ctrlDefault\arrowFull_ca.paa";
+        arrowEmpty = "\a3\3DEN\Data\Controls\ctrlDefault\arrowEmpty_ca.paa";
+    };
 };
 
 class GVAR(RscPreview): RscControlsGroupNoScrollbars {
@@ -140,7 +156,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                     y = QPOS_H(0);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
-                    style = 64;
+                    style = ST_FRAME;
                     colorText[] = {1,1,1,1};
                 };
                 class BluButtonIcon: RscPicture {
@@ -236,12 +252,51 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             h = QPOS_H(1);
             text = CSTRING(ui_general_echelonTXT);
         };
-        class EchelonCombo: RscCombo {
+        class EchelonCombo: GVAR(RscCombo) {
             idc = ECHELON_DROPDOWN;
             x = QPOS_W((CONFIG_W - 10) / 2);
             y = QPOS_H(5);
             w = QPOS_W(10);
             h = QPOS_H(1);
+        };
+
+        class DTGText: GVAR(RscText) {
+            idc = DTG_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(4);
+            w = QPOS_W(7.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_dtgTXT);
+        };
+        class DTGButton: RscButtonMenu {
+            idc = DTG_BUTTON;
+            x = QPOS_W(0.5);
+            y = QPOS_H(5);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = "";
+            tooltip = CSTRING(ui_general_dtgBTN_tooltip);
+            style = ST_CENTER;
+            onButtonClick = QUOTE([ctrlParent (_this select 0)] call FUNC(initializeDTGUI));
+            class Attributes
+            {
+                font = "RobotoCondensed";
+                color = "#E5E5E5";
+                align = "center";
+                shadow = "true";
+            };
+        };
+        class ClearDTGButton: RscButton {
+            idc = CLEAR_DTG_BUTTON;
+            x = QPOS_W(7);
+            y = QPOS_H(5);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            colorBackground[] = {0, 0, 0, 0.3};
+            colorFocused[] = {0, 0, 0, 0.7};
+            text = "X";
+            tooltip = CSTRING(ui_general_clearDtgBTN_tooltip);
+            onButtonClick = QUOTE(call FUNC(clearDTG));
         };
 
         class Mod1Text: EchelonText {
@@ -338,7 +393,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             y = QPOS_H(12);
             maxChars = HIGHER_FORMATION_MAX_CHARS;
         };
-        
+
         class HQText: GVAR(RscText) {
             idc = HQ_TXT;
             x = QPOS_W(0.5);
@@ -346,7 +401,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             w = QPOS_W(6.5);
             h = QPOS_H(1);
             text = CSTRING(ui_general_headquatersTXT);
-            style = 1;
+            style = ST_RIGHT;
         };
         class HQCheckbox: GVAR(RscCheckBoxSound) {
             idc = HQ_CHECKBOX;
@@ -427,7 +482,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             h = QPOS_H(1);
             text = CSTRING(ui_general_channelTXT);
         };
-        class ChannelCombo: RscCombo {
+        class ChannelCombo: GVAR(RscCombo) {
             idc = CHANNEL_DROPDOWN;
             x = QPOS_W(CONFIG_W - 8.8 - 0.5);
             y = QPOS_H(CONFIG_H - 1 - 0.5);
@@ -623,6 +678,187 @@ class GVAR(Dialog) {
             h = QPOS_H(WIDE_BUTTON_H);
             default = 1;
             onButtonClick = QUOTE([true] call FUNC(transmitUIData););
+        };
+    };
+};
+
+// -----------------------------------------------------------------------------------
+// --------------------------------- Date-Time Group ---------------------------------
+// -----------------------------------------------------------------------------------
+class GVAR(DTG): RscControlsGroupNoScrollbars {
+    class controls {
+        class Background: RscText {
+            idc = DTG_BG;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_H);
+            colorBackground[] = BG_COLOR;
+        };
+
+        class DateText: GVAR(RscText) {
+            idc = DTG_DATE_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(1);
+            w = QPOS_W(DTG_TEXT_W);
+            h = QPOS_H(1);
+            style = ST_RIGHT;
+            text = "$STR_3DEN_Environment_Attribute_Date_Displayname";
+        };
+        class YearCombo: GVAR(RscCombo) {
+            idc = DTG_YEAR_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(1);
+            w = QPOS_W(DTG_DATE_COMBO_W);
+            h = QPOS_H(1);
+        };
+        class MonthCombo: YearCombo {
+            idc = DTG_MONTH_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + DTG_DATE_COMBO_W);
+        };
+        class DayCombo: YearCombo {
+            idc = DTG_DAY_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + 2 * DTG_DATE_COMBO_W);
+        };
+
+        class TimeText: GVAR(RscText) {
+            idc = DTG_TIME_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TEXT_W);
+            h = QPOS_H(1);
+            style = ST_RIGHT;
+            text = "$STR_3DEN_Environment_Attribute_Daytime_Displayname";
+        };
+        class TimeSlider: RscXSliderH {
+            idc = DTG_TIME_SLIDER;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_SLIDER_W);
+            h = QPOS_H(1);
+        };
+        class Frame: RscFrame {
+            idc = DTG_TIME_FRAME;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W);
+            h = QPOS_H(1);
+        };
+        class Separator: RscText {
+            idc = DTG_TIME_SEPARATOR;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W);
+            h = QPOS_H(1);
+            style = ST_CENTER;
+            text = ":";
+            font = "EtelkaMonospaceProBold";
+            sizeEx = QPOS_H(1);
+            colorBackground[] = {0, 0, 0, 0.2};
+        };
+        class Hours: RscEdit {
+            idc = DTG_HOURS_EDIT;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W / 2);
+            h = QPOS_H(1);
+            style = QUOTE(ST_CENTER + ST_NO_RECT);
+            tooltip = "$STR_3DEN_Attributes_SliderTime_Hour_tooltip";
+            font = "EtelkaMonospaceProBold";
+            sizeEx = QPOS_H(0.9);
+            maxChars = 2;
+        };
+        class Minutes: Hours {
+            idc = DTG_MINUTES_EDIT;
+            tooltip = "$STR_3DEN_Attributes_SliderTime_Minute_tooltip";
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + 2);
+        };
+        class TimezoneCombo: GVAR(RscCombo) {
+            idc = DTG_TIMEZONE_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + DTG_TIME_FRAME_W);
+            y = QPOS_H(2 + DTG_PADDING);
+            w = QPOS_W(DTG_TIMEZONE_COMBO_W);
+            h = QPOS_H(1);
+        };
+
+        class SetLocalTimeButton: RscButtonMenu {
+            idc = DTG_LOCALTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(3 + 2 * DTG_PADDING);
+            w = QPOS_W(DTG_BUTTON_W);
+            h = QPOS_H(1);
+            text = CSTRING(ui_dtg_localTime);
+            tooltip = CSTRING(ui_dtg_setLocalTime_tooltip);
+            onButtonClick = QUOTE([date] call FUNC(setDTGUIData););
+        };
+        class SetSystemTimeButton: SetLocalTimeButton {
+            idc = DTG_SYSTEMTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W + DTG_BUTTON_W + PADDING);
+            text = CSTRING(ui_dtg_systemTime);
+            tooltip = CSTRING(ui_dtg_setSystemTime_tooltip);
+            onButtonClick = QUOTE(call FUNC(setDTGUIToSystemTime););
+        };
+        class SetSystemUTCTimeButtonButton: SetLocalTimeButton {
+            idc = DTG_SYSTEMUTCTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W + 2 * (DTG_BUTTON_W + PADDING));
+            text = CSTRING(ui_dtg_systemUTCTime);
+            tooltip = CSTRING(ui_dtg_setSystemUTCTime_tooltip);
+            onButtonClick = QUOTE([ARR_2(systemTimeUTC, 'Z')] call FUNC(setDTGUIData););
+        };
+    };
+};
+
+class GVAR(DTGDialog) {
+    idd = DTG_DISPLAY;
+
+    class controls {
+        class HeaderBackground: RscText {
+            idc = DTG_HEAD_BG;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_HEADER_H);
+            colorBackground[] = {
+                "profileNamespace getVariable ['GUI_BCG_RGB_R',0.77]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_G',0.51]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_B',0.08]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_A',0.8]"
+            };
+        };
+        class HeaderTitle: RscTitle {
+            idc = DTG_HEAD_TXT;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_HEADER_H);
+            text = CSTRING(ui_dtg);
+        };
+
+        class DTG: GVAR(DTG) {
+            idc = DTG_GROUP;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + PADDING);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_H);
+        };
+
+        class CancelButton: RscButtonMenuCancel {
+            idc = DTG_CANCEL_BUTTON;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
+        };
+
+        class OkButton: RscButtonMenuOK {
+            idc = DTG_OK_BUTTON;
+            x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - WIDE_BUTTON_W);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            default = 1;
+            onButtonClick = QUOTE([[] call FUNC(getDTGUIData)] call FUNC(saveAndDisplayDTG); (ctrlParent (_this select 0)) closeDisplay 1;);
         };
     };
 };
