@@ -25,4 +25,7 @@ private _timeZone = [_time, _timeUtc] call FUNC(getTimeZone); // _timeDiffH hour
 // Do not consider the minutes
 _timeZone params ["_diffHours"];
 
+// Clamp hours betweem -12...+12
+_diffHours = -12 max (_diffHours min 12);
+
 GVAR(standardTimeZones) getOrDefault [_diffHours, ""]

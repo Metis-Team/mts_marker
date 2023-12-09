@@ -27,12 +27,7 @@ _date params ["_year", "_month", "_day", "_hour", "_minute"];
 
 private _dtgDisplay = findDisplay DTG_DISPLAY;
 
-if (_year < MIN_YEAR) then {
-    _year = MIN_YEAR;
-};
-if (_year > MAX_YEAR) then {
-    _year = MAX_YEAR;
-};
+_year = MIN_YEAR max (_year min MAX_YEAR);
 
 (_dtgDisplay displayCtrl DTG_YEAR_DROPDOWN) lbSetCurSel (_year - MIN_YEAR);
 (_dtgDisplay displayCtrl DTG_MONTH_DROPDOWN) lbSetCurSel (_month - 1);
