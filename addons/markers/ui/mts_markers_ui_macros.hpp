@@ -34,8 +34,8 @@
 #define PREVIEW_GRID_W 9
 #define PREVIEW_GRID_H 9
 
-#define PREVIEW_LAYER_W (3 * PREVIEW_GRID_W)
-#define PREVIEW_LAYER_H (3 * PREVIEW_GRID_H)
+#define PREVIEW_LAYER_W (2.5 * PREVIEW_GRID_W)
+#define PREVIEW_LAYER_H (2.5 * PREVIEW_GRID_H)
 
 // Date Time Group Dialog
 #define DTG_PADDING (5 * PADDING)
