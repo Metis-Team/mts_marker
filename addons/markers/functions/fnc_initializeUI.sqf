@@ -82,9 +82,15 @@ private _directionIndex = _directionCtrl lbAdd LLSTRING(ui_direction_empty);
 _directionCtrl lbSetPicture [_directionIndex, "#(argb,8,8,3)color(0,0,0,0)"];
 
 {
-    private _index = _directionCtrl lbAdd (localize _x);
+    _x params ["_dir", "_dirShort"];
+
+    private _index = _directionCtrl lbAdd (localize _dir);
     private _picturePath = format [QPATHTOF(data\ui\dir\mts_markers_ui_dir_%1.paa), GVAR(directions) select _forEachIndex];
     _directionCtrl lbSetPicture [_index, _picturePath];
+
+    // Set transparent picture to the right this will be the padding right for the test right
+    _directionCtrl lbSetPictureRight [_index, "#(argb,8,8,3)color(0,0,0,0)"];
+    _directionCtrl lbSetTextRight [_index, localize _dirShort];
 } forEach GVAR(directionLocalization);
 _directionCtrl lbSetCurSel 0;
 

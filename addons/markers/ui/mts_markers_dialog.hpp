@@ -44,7 +44,7 @@ class GVAR(RscCheckBoxSound): RscCheckBox {
 };
 
 class GVAR(RscCombo): RscCombo {
-    colorTextRight[] = {1, 1, 1, 0.6};
+    colorTextRight[] = {1, 1, 1, 0.5};
 
     arrowFull = "\a3\3DEN\Data\Controls\ctrlCombo\arrowFull_ca.paa";
     arrowEmpty = "\a3\3DEN\Data\Controls\ctrlCombo\arrowEmpty_ca.paa";
