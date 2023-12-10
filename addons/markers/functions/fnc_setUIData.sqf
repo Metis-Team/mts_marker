@@ -28,7 +28,8 @@ params [
     ["_additionalInfo", "", [""]],
     ["_higherFormation", [], [[]]],
     ["_operationalCondition", 0, [0]],
-    ["_dateTimeGroup", [], [[]]]
+    ["_dateTimeGroup", [], [[]]],
+    ["_direction", "", [""]]
 ];
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
@@ -62,6 +63,9 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
 
 (_mainDisplay displayCtrl HQ_CHECKBOX) cbSetChecked _isHq;
+
+private _directionIndex = (GVAR(directions) findIf {_x isEqualTo _direction}) + 1; // +1 because no direction is 0
+(_mainDisplay displayCtrl DIRECTION_DROPDOWN) lbSetCurSel _directionIndex;
 
 if (_operationalCondition isEqualTo OC_DAMAGED) then {
     (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked true;

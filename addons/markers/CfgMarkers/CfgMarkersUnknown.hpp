@@ -70,3 +70,6 @@ MARKER(unk,size,9);
 MARKER(unk,size,10);
 MARKER(unk,size,11);
 MARKER(unk,size,12);
+
+//Unknown Direction of Movement
+#include "CfgMarkersUnknownDir.hpp"

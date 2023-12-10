@@ -44,7 +44,7 @@ class GVAR(RscCheckBoxSound): RscCheckBox {
 };
 
 class GVAR(RscCombo): RscCombo {
-    colorTextRight[] = {1, 1, 1, 0.6};
+    colorTextRight[] = {1, 1, 1, 0.5};
 
     arrowFull = "\a3\3DEN\Data\Controls\ctrlCombo\arrowFull_ca.paa";
     arrowEmpty = "\a3\3DEN\Data\Controls\ctrlCombo\arrowEmpty_ca.paa";
@@ -87,6 +87,9 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
         };
         class HQ: Identity {
             idc = PREVIEW_LYR_HQ;
+        };
+        class Direction: Identity {
+            idc = PREVIEW_LYR_DIRECTION;
         };
         class Mod1: Identity {
             idc = PREVIEW_LYR_MOD_1;
@@ -411,6 +414,47 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             h = QPOS_H(1);
         };
 
+        class DamagedCheckbox: GVAR(RscCheckBoxSound) {
+            idc = DAMAGED_CHECKBOX;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(14);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+        class DamagedText: GVAR(RscText) {
+            idc = DAMAGED_TXT;
+            x = QPOS_W((CONFIG_W - 10) / 2 + 1);
+            y = QPOS_H(14);
+            w = QPOS_W(9);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_damagedTXT);
+        };
+        class DestroyedCheckbox: DamagedCheckbox {
+            idc = DESTROYED_CHECKBOX;
+            y = QPOS_H(15);
+        };
+        class DestroyedText: DamagedText {
+            idc = DESTROYED_TXT;
+            y = QPOS_H(15);
+            text = CSTRING(ui_general_destroyedTXT);
+        };
+
+        class DirectionText: GVAR(RscText) {
+            idc = DIRECTION_TXT;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(17);
+            w = QPOS_W(10);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_directionTXT);
+        };
+        class DirectionCombo: GVAR(RscCombo) {
+            idc = DIRECTION_DROPDOWN;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(18);
+            w = QPOS_W(10);
+            h = QPOS_H(1);
+        };
+
         class AlphaText: GVAR(RscText) {
             idc = ALPHA_TXT;
             x = QPOS_W(0.5);
@@ -447,31 +491,6 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             tooltip = CSTRING(ui_general_resetSlider_tooltip);
             sliderPosition = MARKER_SCALE;
             sliderRange[] = {MIN_SCALE, MAX_SCALE};
-        };
-
-        class DamagedCheckbox: GVAR(RscCheckBoxSound) {
-            idc = DAMAGED_CHECKBOX;
-            x = QPOS_W((CONFIG_W - 10) / 2);
-            y = QPOS_H(14);
-            w = QPOS_W(1);
-            h = QPOS_H(1);
-        };
-        class DamagedText: GVAR(RscText) {
-            idc = DAMAGED_TXT;
-            x = QPOS_W((CONFIG_W - 10) / 2 + 1);
-            y = QPOS_H(14);
-            w = QPOS_W(9);
-            h = QPOS_H(1);
-            text = CSTRING(ui_general_damagedTXT);
-        };
-        class DestroyedCheckbox: DamagedCheckbox {
-            idc = DESTROYED_CHECKBOX;
-            y = QPOS_H(15);
-        };
-        class DestroyedText: DamagedText {
-            idc = DESTROYED_TXT;
-            y = QPOS_H(15);
-            text = CSTRING(ui_general_destroyedTXT);
         };
 
         class ChannelText: GVAR(RscText) {

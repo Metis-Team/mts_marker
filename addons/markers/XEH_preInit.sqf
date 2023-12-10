@@ -76,6 +76,27 @@ GVAR(monthAbbreviations) = createHashMapFromArray [
     [12, "dec"]
 ];
 
+// Cardinal and ordinal moving directions
+GVAR(directions) = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+GVAR(directionLocalization) = [
+    ["str_q_north", LSTRING(ui_direction_n_short)],
+    [LSTRING(ui_direction_nne), LSTRING(ui_direction_nne_short)],
+    ["str_q_north_east", LSTRING(ui_direction_ne_short)],
+    [LSTRING(ui_direction_ene), LSTRING(ui_direction_ene_short)],
+    ["str_q_east", LSTRING(ui_direction_e_short)],
+    [LSTRING(ui_direction_ese), LSTRING(ui_direction_ese_short)],
+    ["str_q_south_east", LSTRING(ui_direction_se_short)],
+    [LSTRING(ui_direction_sse), LSTRING(ui_direction_sse_short)],
+    ["str_q_south", LSTRING(ui_direction_s_short)],
+    [LSTRING(ui_direction_ssw), LSTRING(ui_direction_ssw_short)],
+    ["str_q_south_west", LSTRING(ui_direction_sw_short)],
+    [LSTRING(ui_direction_wsw), LSTRING(ui_direction_wsw_short)],
+    ["str_q_west", LSTRING(ui_direction_w_short)],
+    [LSTRING(ui_direction_wnw), LSTRING(ui_direction_wnw_short)],
+    ["str_q_north_west", LSTRING(ui_direction_nw_short)],
+    [LSTRING(ui_direction_nnw), LSTRING(ui_direction_nnw_short)]
+];
+
 GVAR(lastSelection) = [];
 
 if (is3DEN) then {

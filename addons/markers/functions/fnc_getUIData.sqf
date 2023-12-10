@@ -66,5 +66,23 @@ if (cbChecked (_mainDisplay displayCtrl DESTROYED_CHECKBOX)) then {
 // Get the Date-Time Group saved in the button
 private _dateTimeGroup = (_mainDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
 
-// This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape, _isHq], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation, _operationalCondition, _dateTimeGroup]
+// Get direction of movement
+private _directionSelIndex = lbCurSel (_mainDisplay displayCtrl DIRECTION_DROPDOWN);
+// Direction index 0 is no direction, 1 is N, 2 is NNE, ...
+private _direction = "";
+if (_directionSelIndex > 0 && _directionSelIndex < (count GVAR(directions) + 1)) then {
+    _direction = GVAR(directions) select (_directionSelIndex - 1);
+};
+
+// These will be the marker parameters in createMarker
+[
+    [_identity, _dashedFrameshape, _isHq],
+    _modifier,
+    [_grpsize, _reinforced, _reduced],
+    _uniqueDesignation,
+    _additionalInfo,
+    _higherFormation,
+    _operationalCondition,
+    _dateTimeGroup,
+    _direction
+]

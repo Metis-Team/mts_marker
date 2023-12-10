@@ -29,6 +29,7 @@
  *          7: ARRAY - Date-Time Group.
  *              0: ARRAY - Date in format [year, month, day, hour, minute] (all NUMBER).
  *              1: STRING - Time zone identifier.
+ *          8: STRING - Direction of Movement (N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW). Empty string for no direction.
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
  *

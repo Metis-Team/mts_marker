@@ -169,7 +169,7 @@ def main(args: argparse.Namespace):
     images = create_all_images(alphabets, font)
 
     print('Cleaning export folder:', clean_images)
-    if clean_images:
+    if clean_images and args.output_dir.exists():
         shutil.rmtree(args.output_dir)
 
     print('Exporting only PNG files:', png_only)

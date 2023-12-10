@@ -55,7 +55,7 @@ private _currentTimeZone = [systemTime, systemTimeUTC] call FUNC(getTimeZoneIden
     _timeZoneCtrl lbSetValue [_index, _timeZoneId];
     _timeZoneCtrl lbSetTooltip [_index, _tooltip];
 
-    // Set transparent picture to the right this will be the padding right for the test right
+    // Set transparent picture to the right this will be the padding right for the text right
     _timeZoneCtrl lbSetPictureRight [_index, "#(argb,8,8,3)color(0,0,0,0)"];
     _timeZoneCtrl lbSetTextRight [_index, _timeZone];
 } forEach [

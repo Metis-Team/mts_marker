@@ -160,6 +160,10 @@
                 <Original>Set Date-Time Group (DDHHMMZmmmYY)</Original>
                 <German>Datum/Zeit-Gruppe setzen (DDHHMMZmmmYY)</German>
             </Key>
+            <Key ID="str_mts_markers_ui_general_directionTXT">
+                <Original>Direction of Movement:</Original>
+                <German>Bewegungsrichtung:</German>
+            </Key>
         </Container>
         <Container name="UI_dtg">
             <Key ID="str_mts_markers_ui_dtg">
@@ -201,6 +205,111 @@
             <Key ID="str_mts_markers_ui_dtg_setSystemUTCTime_tooltip">
                 <Original>Set the time to the current UTC time of the system</Original>
                 <German>Setzt die Zeit auf die derzeitige UTC Zeit des Systems</German>
+            </Key>
+        </Container>
+        <Container name="UI_direction">
+            <Key ID="str_mts_markers_ui_direction_empty">
+                <Original>-Empty-</Original>
+                <German>-Leer-</German>
+                <Chinese>-無-</Chinese>
+                <Chinesesimp>-无-</Chinesesimp>
+                <Korean>-미확인-</Korean>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_nne">
+                <Original>North-northeast</Original>
+                <German>Nordnordost</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ene">
+                <Original>East-northeast</Original>
+                <German>Ostnordost</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ese">
+                <Original>East-southeast</Original>
+                <German>Ostsüdost</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_sse">
+                <Original>South-southeast</Original>
+                <German>Südsüdost</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ssw">
+                <Original>South-southwest</Original>
+                <German>Südsüdwest</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_wsw">
+                <Original>West-southwest</Original>
+                <German>Westsüdwest</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_wnw">
+                <Original>West-northwest</Original>
+                <German>Westnordwest</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_nnw">
+                <Original>North-northwest</Original>
+                <German>Nordnordwest</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_n_short">
+                <Original>N</Original>
+                <German>N</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_nne_short">
+                <Original>NNE</Original>
+                <German>NNO</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ne_short">
+                <Original>NE</Original>
+                <German>NO</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ene_short">
+                <Original>ENE</Original>
+                <German>ONO</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_e_short">
+                <Original>E</Original>
+                <German>O</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ese_short">
+                <Original>ESE</Original>
+                <German>OSO</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_se_short">
+                <Original>SE</Original>
+                <German>SO</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_sse_short">
+                <Original>SSE</Original>
+                <German>SSO</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_s_short">
+                <Original>S</Original>
+                <German>S</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_ssw_short">
+                <Original>SSW</Original>
+                <German>SSW</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_sw_short">
+                <Original>SW</Original>
+                <German>SW</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_wsw_short">
+                <Original>WSW</Original>
+                <German>WSW</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_w_short">
+                <Original>W</Original>
+                <German>W</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_wnw_short">
+                <Original>WNW</Original>
+                <German>WNW</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_nw_short">
+                <Original>NW</Original>
+                <German>NW</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_direction_nnw_short">
+                <Original>NNW</Original>
+                <German>NNW</German>
             </Key>
         </Container>
         <Container name="UI_identity">

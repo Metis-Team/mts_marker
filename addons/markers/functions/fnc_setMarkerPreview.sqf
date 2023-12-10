@@ -24,7 +24,8 @@ params [
     "", // additional information
     "", // higher formation
     ["_operationalCondition", OC_FULLY_CAPABLE, [0]],
-    ""  // Date-Time Group
+    "", // Date-Time Group
+    ["_direction", "", [""]]
 ];
 _frameshape params [
     ["_identity", "", [""]],
@@ -42,6 +43,7 @@ CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _previewIdentityCtrl = _mainDisplay displayCtrl PREVIEW_LYR_IDENTITY;
 private _previewHqCtrl = _mainDisplay displayCtrl PREVIEW_LYR_HQ;
+private _previewDirectionCtrl = _mainDisplay displayCtrl PREVIEW_LYR_DIRECTION;
 private _previewMod1Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_1;
 private _previewMod2Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_2;
 private _previewMod3Ctrl = _mainDisplay displayCtrl PREVIEW_LYR_MOD_3;
@@ -56,6 +58,7 @@ private _previewOpCondCtrl = _mainDisplay displayCtrl PREVIEW_LYR_OPERATIONAL_CO
 } count [
     _previewIdentityCtrl,
     _previewHqCtrl,
+    _previewDirectionCtrl,
     _previewMod1Ctrl,
     _previewMod2Ctrl,
     _previewMod3Ctrl,
@@ -74,8 +77,19 @@ private _identityComplete = if (_dashedFrameshape) then {
 //set selected identity to corresponding layer
 _previewIdentityCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%2_frameshape_preview.paa), _identity, _identityComplete]);
 
-if (_isHq) then {
+// This is adding standalone HQ picture.
+// If direction is given, the HQ picture will be replaced by direction.
+if (_direction isEqualTo "" && _isHq) then {
     _previewHqCtrl ctrlSetText (format [QPATHTOF(data\%1\mts_markers_%1_hq.paa), _identity]);
+};
+
+// Set direction of movement arrow to corresponding layer
+if (_direction isNotEqualTo "") then {
+    if (_isHq) then {
+        _previewDirectionCtrl ctrlSetText (format [QPATHTOF(data\%1\dir\hq\mts_markers_%1_dir_hq_%2.paa), _identity, _direction]);
+    } else {
+        _previewDirectionCtrl ctrlSetText (format [QPATHTOF(data\%1\dir\mts_markers_%1_dir_%2.paa), _identity, _direction]);
+    };
 };
 
 //set all modifiers to corresponding layer
@@ -105,6 +119,7 @@ if (_reinforced || _reduced) then {
     _previewSizeModCtrl ctrlSetText (format [QPATHTOF(data\com\size\%1.paa), _sizeModFilename]);
 };
 
+// Set operational condition to corresponding layer
 if (_operationalCondition > 0) then {
     private _opCondFilename = "mts_markers_com_opcond";
     if (_operationalCondition isEqualTo OC_DAMAGED) then {
