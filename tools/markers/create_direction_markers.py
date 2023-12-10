@@ -21,46 +21,49 @@ icon_size = (32, 32)
 
 directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
 
-min_line_len = 80
+# Used to estimate arrow length
+base_line_length = 75
+line_width = 7
+arrow_head = (22, 22)
 offsets = {
     'blu': {
         'default': {
-            'offset': (-1, 49),
+            'offset': (0, 49),
             'line': 80,
         },
         'hq': {
-            'offset': (-60, 49),
+            'offset': (-57, 49),
             'line': 80,
         },
     },
     'red': {
         'default': {
-            'offset': (-1, 62),
-            'line': 80,
+            'offset': (0, 62),
+            'line': 67,
         },
         'hq': {
-            'offset': (-58, 10),
-            'line': 132, # 101
+            'offset': (-56, 10),
+            'line': 119,
         },
     },
     'neu': {
         'default': {
             'offset': (0, 54),
-            'line': 80, # 70
+            'line': 75,
         },
         'hq': {
-            'offset': (-43, 54),
-            'line': 80, # 70
+            'offset': (-42, 54),
+            'line': 75,
         },
     },
     'unk': {
         'default': {
             'offset': (0, 64),
-            'line': 80, # 50
+            'line': 65,
         },
         'hq': {
-            'offset': (-53, 9),
-            'line': 135, # 105
+            'offset': (-52, 9),
+            'line': 120,
         },
     },
 }
@@ -83,22 +86,21 @@ class Point(NamedTuple):
     y: float
 
 
-def create_image(angle: float, offset: tuple[int, int], line_len: int = 80, line_w: int = 5, min_line_len: int = 80):
+def create_dir_image(angle: float, offset: tuple[int, int], line_len: int):
     # Work on image double the size because it will be resized at the last step to have antialiasing.
     scale = 2
     image = Image.new('RGBA', (img_size[0] * scale, img_size[1] * scale))
 
     offset = (offset[0] * scale, offset[1] * scale)
     line_len *= scale
-    line_w *= scale
 
     # Rotate angle so arrow points up.
     # Reminder: In the image coordinate system y goes down.
     angle = math.radians(angle - 90)
 
     color = (0, 0, 0)
-    arrow_head_w, arrow_head_h = (20 * scale, 20 * scale)
-    arrow_len = 0.9 * (min_line_len * scale - arrow_head_h)
+    arrow_head_w, arrow_head_h = (arrow_head[0] * scale, arrow_head[1] * scale)
+    arrow_len = 0.9 * (base_line_length * scale - arrow_head_h)
 
     center = Point(image.size[0] / 2, image.size[1] / 2)
 
@@ -117,8 +119,31 @@ def create_image(angle: float, offset: tuple[int, int], line_len: int = 80, line
 
     draw = ImageDraw.Draw(image)
 
-    draw.line([top, arrow_start, arrow_end], fill=color, width=line_w, joint='curve')
+    draw.line([top, arrow_start, arrow_end], fill=color, width=(line_width * scale), joint='curve')
     draw.polygon([arrow_head_end, vtx0, vtx1], fill=color)
+
+    image = image.resize(img_size, resample=Image.LANCZOS)
+
+    return image
+
+def create_hq_image(offset: tuple[int, int], line_len: int):
+    # Work on image double the size because it will be resized at the last step to have antialiasing.
+    scale = 2
+    image = Image.new('RGBA', (img_size[0] * scale, img_size[1] * scale))
+
+    offset = (offset[0] * scale, offset[1] * scale)
+    line_len *= scale
+
+    color = (0, 0, 0)
+
+    center = Point(image.size[0] / 2, image.size[1] / 2)
+
+    top = Point(center.x + offset[0], center.y + offset[1])
+    bottom = Point(top.x, top.y + line_len)
+
+    draw = ImageDraw.Draw(image)
+
+    draw.line([top, bottom], fill=color, width=(line_width * scale))
 
     image = image.resize(img_size, resample=Image.LANCZOS)
 
@@ -155,12 +180,11 @@ def create_ui_icon(angle: float):
 
     return image
 
-def create_all_images(offsets: dict[str, dict[str, dict[str]]], min_line_len: int):
+def create_all_images(offsets: dict[str, dict[str, dict[str]]]):
     """Creates all images for the characters defined.
 
     Args:
         offsets (dict[str, dict[str, dict[str]]]): Markers to create. Contains the offsets and line lengths for direction and HQ direction markers.
-        min_line_len (int): Minimum line length all markers should have.
 
     Returns:
         tuple(list(tuple(Image, Path))): A list of character image object and relative file path to the output directory. A list of UI icons.
@@ -169,6 +193,10 @@ def create_all_images(offsets: dict[str, dict[str, dict[str]]], min_line_len: in
     images: list[tuple[ImageType, pathlib.Path]] = []
     for identity, identity_config in offsets.items():
         direction_dir = pathlib.Path(identity, 'dir')
+
+        hq_image = create_hq_image(identity_config['hq']['offset'], identity_config['hq']['line'])
+        hq_file = pathlib.Path(identity, f'mts_markers_{identity}_hq.png')
+        images.append((hq_image, hq_file))
 
         for mod, mode_config in identity_config.items():
             for direction in directions:
@@ -183,11 +211,10 @@ def create_all_images(offsets: dict[str, dict[str, dict[str]]], min_line_len: in
                 line_len = mode_config['line']
                 angle = 360 / len(directions) * directions.index(direction)
 
-                image = create_image(angle, offset, line_len, line_w=5, min_line_len=min_line_len)
+                image = create_dir_image(angle, offset, line_len)
 
                 export_file = image_dir / file_name
                 images.append((image, export_file))
-
 
     ui_dir = pathlib.Path('ui', 'dir')
     icons: list[tuple[ImageType, pathlib.Path]] = []
@@ -225,17 +252,20 @@ def write_include_files(output_dir: pathlib.Path, offsets: dict[str, dict[str, d
 
 
 def debug_create_marker(direction: str, identity: str = 'blu', hq: bool = False):
+    direction = direction.upper()
+    assert identity in offsets
+    assert direction in directions
+
     dev_frame = pathlib.Path('frameshapes', f'{identity}_frameshape.png')
     with Image.open(dev_frame) as dev_img:
-        direction = direction.upper()
         angle = 360 / len(directions) * directions.index(direction)
 
         config = offsets[identity]['hq' if hq else 'default']
 
-        img = create_image(angle, x_offset=config['offset'][0], y_offset=config['offset'][1], line_len=config['line'])
+        img = create_dir_image(angle, offset=config['offset'], line_len=config['line'])
         dev_img = Image.alpha_composite(dev_img, img)
 
-        dev_img.save(pathlib.Path('frameshapes', 'test.png'))
+        dev_img.save(pathlib.Path('frameshapes', f'debug_{identity}_{direction}_{hq}.png'))
         dev_img.show()
 
 
@@ -246,23 +276,24 @@ def main(args: argparse.Namespace):
         print('This tool is not support on non-windows devices due to missing Arma Tools.')
         sys.exit(2)
 
-    png_only = args.png_only
+    # debug_create_marker('E', 'blu', hq=True)
+    # return
 
     image_to_paa = util.find_image_to_paa_tool()
     print('Found ImageToPaa Tool:', image_to_paa)
 
     print('Creating images and icons...')
-    images, icons = create_all_images(offsets, min_line_len)
+    images, icons = create_all_images(offsets)
 
     print('Cleaning export folder:', args.clean)
     if args.clean and args.output_dir.exists():
         shutil.rmtree(args.output_dir)
 
-    print('Exporting only PNG files:', png_only)
+    print('Exporting only PNG files:', args.png_only)
 
     # Export images in parallel
     all_images = images + icons
-    util.export_images(all_images, args.output_dir, args.workers, image_to_paa=image_to_paa, png_only=png_only)
+    util.export_images(all_images, args.output_dir, args.workers, image_to_paa=image_to_paa, png_only=args.png_only)
 
     print(f'Exported {len(all_images)} images.\n')
 
