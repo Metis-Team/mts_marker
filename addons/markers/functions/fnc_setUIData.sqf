@@ -6,24 +6,20 @@
  *      Sets the core data for the UI.
  *
  *  Parameter(s):
- *      0: ARRAY - Frameshape.
- *      1: ARRAY - Modifer.
- *      2: ARRAY - Group size.
- *      3: ARRAY - Left text.
- *      4: STRING - Right text.
+ *      Same marker configuration as in createMarkerLocal.
  *
  *  Returns:
  *      Nothing.
  *
  *  Example:
- *      [["blu", false, false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_setUIData
+ *      _markerParameter call mts_markers_fnc_setUIData
  *
  */
 
 params [
-    ["_frameshape", ["",false,false], [[]]],
-    ["_modifier", [0,0,0], [[]], 3],
-    ["_size", [0,false,false], [[]], 3],
+    ["_frameshape", ["", false, false], [[]]],
+    ["_modifier", [0, 0, 0], [[]], 3],
+    ["_size", [0, false, false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
     ["_higherFormation", [], [[]]],
@@ -31,8 +27,16 @@ params [
     ["_dateTimeGroup", [], [[]]],
     ["_direction", "", [""]]
 ];
-_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
-_size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
+_frameshape params [
+    ["_identity", "", [""]],
+    ["_dashedFrameshape", false, [false]],
+    ["_isHq", false, [false]]
+];
+_size params [
+    ["_grpsize", 0, [0]],
+    ["_reinforced", false, [false]],
+    ["_reduced", false, [false]]
+];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
