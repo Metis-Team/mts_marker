@@ -242,9 +242,6 @@ def main(args: argparse.Namespace):
         print('This tool is not support on non-windows devices due to missing Arma Tools.')
         sys.exit(2)
 
-    png_only = args.png_only
-    clean_images = not args.no_clean
-
     font = ImageFont.truetype(str(args.font_file), size=35) # 26pt == 35px
     print('Using font:', font.getname())
 
@@ -254,14 +251,14 @@ def main(args: argparse.Namespace):
     print('Creating images...')
     images = create_all_images(printable_char_sets, anchors, font)
 
-    print('Cleaning export folder:', clean_images)
-    if clean_images and args.output_dir.exists():
+    print('Cleaning export folder:', args.clean)
+    if args.clean and args.output_dir.exists():
         shutil.rmtree(args.output_dir)
 
-    print('Exporting only PNG files:', png_only)
+    print('Exporting only PNG files:', args.png_only)
 
     # Export images in parallel
-    util.export_images(images, args.output_dir, args.workers, image_to_paa=image_to_paa, png_only=png_only)
+    util.export_images(images, args.output_dir, args.workers, image_to_paa=image_to_paa, png_only=args.png_only)
 
     print(f'Exported {len(images)} images.\n')
 
@@ -294,10 +291,10 @@ if __name__ == "__main__":
         help='Exports markers as *.png files.',
     )
     parser.add_argument(
-        '-nc', '--no-clean',
+        '-c', '--clean',
         action='store_true',
-        dest='no_clean',
-        help='Does not remove all files and directories in the export directory before creating the markers.'
+        dest='clean',
+        help='Remove all files and directories in the export directory before creating the markers.'
     )
     parser.add_argument(
         '-o', '--output',
@@ -325,4 +322,4 @@ if __name__ == "__main__":
 
     main(args)
 
-# python create_alphanumeric_markers.py -o ./images
+# python create_alphanumeric_markers.py -o ./images --clean

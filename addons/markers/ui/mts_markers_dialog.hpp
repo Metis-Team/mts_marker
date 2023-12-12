@@ -65,7 +65,7 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
             y = QPOS_H(0);
             w = QPOS_W(PREVIEW_W);
             h = QPOS_H(PREVIEW_H);
-            colorBackground[] = BG_COLOR;
+            colorBackground[] = {BG_COLOR};
         };
 
         class Grid: RscPicture {
@@ -124,7 +124,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             y = QPOS_H(0);
             w = QPOS_W(CONFIG_W);
             h = QPOS_H(CONFIG_H);
-            colorBackground[] = BG_COLOR;
+            colorBackground[] = {BG_COLOR};
         };
 
         class FrameBackground: RscPicture {
@@ -519,7 +519,7 @@ class GVAR(RscPresets): RscControlsGroupNoScrollbars {
             y = QPOS_H(0);
             w = QPOS_W(PRESETS_W);
             h = QPOS_H(PRESETS_H - (SMALL_BUTTON_H + PADDING));
-            colorBackground[] = BG_COLOR;
+            colorBackground[] = {BG_COLOR};
         };
         class DeleteButtonBackground: RscText {
             idc = DELETE_PRESETS_BG;
@@ -527,7 +527,7 @@ class GVAR(RscPresets): RscControlsGroupNoScrollbars {
             y = QPOS_H(PRESETS_H - SMALL_BUTTON_W);
             w = QPOS_W(SMALL_BUTTON_W);
             h = QPOS_H(SMALL_BUTTON_H);
-            colorBackground[] = BG_COLOR;
+            colorBackground[] = {BG_COLOR};
         };
 
         class SearchEdit: GVAR(RscEdit) {
@@ -622,8 +622,8 @@ class GVAR(RscPresets): RscControlsGroupNoScrollbars {
             w = QPOS_W(SMALL_BUTTON_W);
             h = QPOS_H(SMALL_BUTTON_H);
             tooltip = CSTRING(ui_general_deletePresetsBTN_tooltip);
-            onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 1)]);
-            onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 0.7)]);
+            onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0,0,0,1)]);
+            onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [BG_COLOR]);
             onButtonClick = QUOTE(call FUNC(deletePreset););
         };
     };
@@ -712,7 +712,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             y = QPOS_H(0);
             w = QPOS_W(DTG_W);
             h = QPOS_H(DTG_H);
-            colorBackground[] = BG_COLOR;
+            colorBackground[] = {BG_COLOR};
         };
 
         class DateText: GVAR(RscText) {
@@ -822,7 +822,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             x = QPOS_W(DTG_TEXT_W + 2 * (DTG_BUTTON_W + PADDING));
             text = CSTRING(ui_dtg_systemUTCTime);
             tooltip = CSTRING(ui_dtg_setSystemUTCTime_tooltip);
-            onButtonClick = QUOTE([ARR_2(systemTimeUTC, 'Z')] call FUNC(setDTGUIData););
+            onButtonClick = QUOTE([ARR_2(systemTimeUTC,'Z')] call FUNC(setDTGUIData););
         };
     };
 };

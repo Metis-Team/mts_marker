@@ -1,5 +1,5 @@
 // Style
-#define BG_COLOR {0, 0, 0, 0.7}
+#define BG_COLOR 0,0,0,0.7
 
 // Sizes
 #define MAX_W 40

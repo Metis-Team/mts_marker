@@ -6,11 +6,12 @@
  *      Returns the standard time zone for the given time.
  *
  *  Parameter(s):
- *      0: ARRAY - Hours and minutes (e.g. from systemTime).
- *      1: ARRAY - UTC hours and minutes (e.g. from systemTimeUTC).
+ *      0: ARRAY - Hours and minutes or return value from systemTime command.
+ *      1: ARRAY - UTC hours and minutes or return value from systemTimeUTC command.
  *
  *  Returns:
  *      ARRAY - Standard time zone in the format [diffHours, diffMinutes].
+ *              Emtpy array on error.
  *              diffHours is in range -12 ... +12.
  *              E.g. [-9, 30] => UTC-09:30; [1, 0] => UTC+01:00
  *
@@ -19,9 +20,9 @@
  *
  */
 
-params [["_time", [], [[]]], ["_timeUtc", [], [[]]]];
+params [["_time", [], [[]], [2, 7]], ["_timeUtc", [], [[]], [2, 7]]];
 
-CHECK((_time isEqualTo []) || (_timeUtc isEqualTo []));
+CHECKRET((_time isEqualTo []) || (_timeUtc isEqualTo []), []);
 
 // time is passed from systemTime command
 if ((count _time) isEqualTo 7) then {

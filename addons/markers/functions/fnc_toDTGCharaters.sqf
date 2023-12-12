@@ -6,7 +6,7 @@
  *      Constructs and returns the Date-Time Group charaters.
  *
  *  Parameter(s):
- *      0: ARRAY - Year, month, day, hours, minutes.
+ *      0: ARRAY - Year, month, day, hours, minutes from date, systemTime or systemTimeUTC command.
  *      1: STRING - Standard time zone identifier (one character).
  *
  *  Returns:
