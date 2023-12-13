@@ -24,7 +24,7 @@
     <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases/latest">CBA A3</a>.</sup></strong>
 </p>
 
-**Metis Marker** brings you the opportunity to create NATO joint military symbols according to *APP-6(C)*.  
+**Metis Marker** brings you the opportunity to create NATO joint military symbols according to *APP-6(E)*.  
 It allows to build symbols from components, including frame, icon, first modifier, second modifier and amplifiers, rather than pre-define all possible symbols.
 
 ## Features:
@@ -49,6 +49,10 @@ Our customizable marker system consists of:
     - Higher Formation
     - Unique Designation
     - Additional Information
+    - Date-Time Group (DTG)
+    - Operational Condition 
+    - Direction of Movement Arrow
+    - Headquarters Staff Indicator
 
 ## FAQ
 - Q: Does the mod have to be run on the server?  
@@ -64,7 +68,7 @@ Our customizable marker system consists of:
 - Q: I can't see markers placed in the 3DEN editor when I'm ingame?  
   A: The mission needs to be saved for the markers to appear ingame.
 - Q: Is there an option to change the color scheme of the markers to the Arma vanilla style?  
-  A: Yes! In the CBA Settings you can set Metis Marker to use Arma colors instead of the APP-6(C) colors.
+  A: Yes! In the CBA Settings you can set Metis Marker to use Arma colors instead of the APP-6 colors.
 - Q: Where can I find more infos about this mod?  
   A: You can read our [Wiki](https://github.com/Metis-Team/mts_marker/wiki)
 
