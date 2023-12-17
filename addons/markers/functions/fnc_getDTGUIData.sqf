@@ -9,7 +9,7 @@
  *      None.
  *
  *  Returns:
- *      ARRAY - Date-Time information in format [[year, month, day, hours, minutes], timezone].
+ *      ARRAY - Date-Time information in format [[year, month, day, hours, minutes], timezone, short].
  *              The date elements are numbers; timeZone is a character.
  *
  *  Example:
@@ -34,4 +34,6 @@ private _minutes = parseNumber (ctrlText (_dtgDisplay displayCtrl DTG_MINUTES_ED
 private _timeZoneId = _timeZoneCtrl lbValue (lbCurSel _timeZoneCtrl);
 private _timeZone = GVAR(alphanumCharacters) select _timeZoneId;
 
-[[_year, _month, _day, _hours, _minutes], _timeZone]
+private _displayShort = cbChecked (_dtgDisplay displayCtrl DTG_SHORT_FORMAT_CHECKBOX);
+
+[[_year, _month, _day, _hours, _minutes], _timeZone, _displayShort]

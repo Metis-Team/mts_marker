@@ -9,6 +9,7 @@
  *      0: ARRAY - Date-Time information in format [year, month, day, hours, minutes].
  *                 The date elements must be numbers.
  *      1: STRING - Time zone identifier as a single character.
+ *      2: BOOLEAN - Display in short format (Default is that format is not changed from selected one).
  *
  *  Returns:
  *      Nothing.
@@ -18,7 +19,7 @@
  *
  */
 
-params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]]];
+params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]], ["_displayShort", nil, [false]]];
 TRACE_1("params", _this);
 
 CHECK(_date isEqualTo []);
@@ -45,3 +46,7 @@ for "_index" from 0 to ((lbSize _timeZoneCtrl) - 1) step 1 do {
 (_dtgDisplay displayCtrl DTG_TIME_SLIDER) sliderSetPosition (round (_hour * 3600 + _minute * 60));
 (_dtgDisplay displayCtrl DTG_HOURS_EDIT) ctrlSetText ([_hour, 2] call CBA_fnc_formatNumber);
 (_dtgDisplay displayCtrl DTG_MINUTES_EDIT) ctrlSetText ([_minute, 2] call CBA_fnc_formatNumber);
+
+if (!isNil "_displayShort") then {
+    (_dtgDisplay displayCtrl DTG_SHORT_FORMAT_CHECKBOX) cbSetChecked _displayShort;
+};

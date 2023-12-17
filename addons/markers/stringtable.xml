@@ -157,8 +157,8 @@
                 <German>Datum/Zeit-Gruppe entfernen</German>
             </Key>
             <Key ID="str_mts_markers_ui_general_dtgBTN_tooltip">
-                <Original>Set Date-Time Group (DDHHMMZmmmYY)</Original>
-                <German>Datum/Zeit-Gruppe setzen (DDHHMMZmmmYY)</German>
+                <Original>Set Date-Time Group (DDHHMMZmmmYY/HHMMZ)</Original>
+                <German>Datum/Zeit-Gruppe setzen (DDHHMMZmmmYY/HHMMZ)</German>
             </Key>
             <Key ID="str_mts_markers_ui_general_directionTXT">
                 <Original>Direction of Movement:</Original>
@@ -205,6 +205,10 @@
             <Key ID="str_mts_markers_ui_dtg_setSystemUTCTime_tooltip">
                 <Original>Set the time to the current UTC time of the system</Original>
                 <German>Setzt die Zeit auf die derzeitige UTC Zeit des Systems</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_dtg_shortFormat">
+                <Original>Display in short format (HHMMZ)</Original>
+                <German>Zeige in Kurzform (HHMMZ) an</German>
             </Key>
         </Container>
         <Container name="UI_direction">
@@ -960,6 +964,14 @@
             <Key ID="str_mts_markers_cba_settings_use_vanilla_colors_tooltip">
                 <Original>Use Arma colors instead of APP-6(C) colors.</Original>
                 <German>Nutze Arma Farbschema anstelle des APP-6(C) Farbschemas.</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_default_short_dtg">
+                <Original>Use short DTG format</Original>
+                <German>Nutze kurzes DTG Format</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_default_short_dtg_tooltip">
+                <Original>Use the short Date-Time Group display format (HHMMZ) as default.</Original>
+                <German>Nutze das kurze Datum/Zeit-Gruppe Anzeigeformat (HHMMZ) standardmäßig.</German>
             </Key>
         </Container>
     </Package>

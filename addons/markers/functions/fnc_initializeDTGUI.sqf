@@ -91,7 +91,7 @@ _timeSliderCtrl ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onDTGTimeSlide
 private _dateTimeGroup = (_parentDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
 if (_dateTimeGroup isEqualTo []) then {
     // Set local Arma time as default
-    [date] call FUNC(setDTGUIData);
+    [date, "J", GVAR(displayShortDTG)] call FUNC(setDTGUIData);
 } else {
     _dateTimeGroup call FUNC(setDTGUIData);
 };
