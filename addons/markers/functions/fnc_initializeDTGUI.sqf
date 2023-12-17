@@ -68,7 +68,7 @@ _dateYearCtrl ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onDTGMonthSelChanged
 _dateMonthCtrl ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onDTGMonthSelChanged)];
 
 private _min = 0;
-private _max = 86400; // seconds in a day
+private _max = 86400 - 1; // seconds in a day
 private _range = _max - _min;
 private _currentValue = 0;
 
