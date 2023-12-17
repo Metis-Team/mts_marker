@@ -71,11 +71,19 @@ private _ctrlArray = [
 private _directionIndex = (GVAR(directions) findIf {_x isEqualTo _direction}) + 1; // +1 because no direction is 0
 (_mainDisplay displayCtrl DIRECTION_DROPDOWN) lbSetCurSel _directionIndex;
 
-if (_operationalCondition isEqualTo OC_DAMAGED) then {
-    (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked true;
-};
-if (_operationalCondition isEqualTo OC_DESTROYED) then {
-    (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
+switch (_operationalCondition) do {
+    case OC_DAMAGED: {
+        (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked true;
+        (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked false;
+    };
+    case OC_DESTROYED: {
+        (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked false;
+        (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
+    };
+    default {
+        (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked false;
+        (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked false;
+    };
 };
 
 [_dateTimeGroup] call FUNC(saveAndDisplayDTG);
