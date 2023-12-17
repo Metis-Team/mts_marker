@@ -156,7 +156,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                 class BluButtonFrame: RscPicture {
                     idc = FRIENDLY_BTN_FRAME;
                     x = QPOS_W(PADDING);
-                    y = QPOS_H(0);
+                    y = QPOS_H(PADDING);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
                     style = ST_FRAME;
@@ -165,7 +165,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                 class BluButtonIcon: RscPicture {
                     idc = FRIENDLY_BTN_ICON;
                     x = QPOS_W(PADDING);
-                    y = QPOS_H(0);
+                    y = QPOS_H(PADDING);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
                     text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
@@ -173,7 +173,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                 class BluButton: GVAR(RscTransparentButton) {
                     idc = FRIENDLY_BTN_CTRL;
                     x = QPOS_W(PADDING);
-                    y = QPOS_H(0);
+                    y = QPOS_H(PADDING);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
                     text = "";
