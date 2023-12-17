@@ -68,7 +68,7 @@ _dateYearCtrl ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onDTGMonthSelChanged
 _dateMonthCtrl ctrlAddEventHandler ["LBSelChanged", LINKFUNC(onDTGMonthSelChanged)];
 
 private _min = 0;
-private _max = 86400; // seconds in a day
+private _max = 86400 - 1; // seconds in a day
 private _range = _max - _min;
 private _currentValue = 0;
 
@@ -91,7 +91,7 @@ _timeSliderCtrl ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onDTGTimeSlide
 private _dateTimeGroup = (_parentDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
 if (_dateTimeGroup isEqualTo []) then {
     // Set local Arma time as default
-    [date] call FUNC(setDTGUIData);
+    [date, "J", GVAR(displayShortDTG)] call FUNC(setDTGUIData);
 } else {
     _dateTimeGroup call FUNC(setDTGUIData);
 };

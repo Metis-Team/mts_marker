@@ -156,7 +156,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                 class BluButtonFrame: RscPicture {
                     idc = FRIENDLY_BTN_FRAME;
                     x = QPOS_W(PADDING);
-                    y = QPOS_H(0);
+                    y = QPOS_H(PADDING);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
                     style = ST_FRAME;
@@ -165,7 +165,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                 class BluButtonIcon: RscPicture {
                     idc = FRIENDLY_BTN_ICON;
                     x = QPOS_W(PADDING);
-                    y = QPOS_H(0);
+                    y = QPOS_H(PADDING);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
                     text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
@@ -173,7 +173,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                 class BluButton: GVAR(RscTransparentButton) {
                     idc = FRIENDLY_BTN_CTRL;
                     x = QPOS_W(PADDING);
-                    y = QPOS_H(0);
+                    y = QPOS_H(PADDING);
                     w = QPOS_W(FRAME_BUTTON_W);
                     h = QPOS_H(FRAME_BUTTON_H);
                     text = "";
@@ -715,10 +715,26 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
             colorBackground[] = {BG_COLOR};
         };
 
+        class ShortFormatCheckbox: GVAR(RscCheckBoxSound) {
+            idc = DTG_SHORT_FORMAT_CHECKBOX;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(DTG_PADDING);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+        class ShortFormatText: GVAR(RscText) {
+            idc = DTG_SHORT_FORMAT_TXT;
+            x = QPOS_W(DTG_TEXT_W + 1);
+            y = QPOS_H(DTG_PADDING);
+            w = QPOS_W(3 * DTG_DATE_COMBO_W - 1);
+            h = QPOS_H(1);
+            text = CSTRING(ui_dtg_shortFormat);
+        };
+
         class DateText: GVAR(RscText) {
             idc = DTG_DATE_TXT;
             x = QPOS_W(0);
-            y = QPOS_H(1);
+            y = QPOS_H(2);
             w = QPOS_W(DTG_TEXT_W);
             h = QPOS_H(1);
             style = ST_RIGHT;
@@ -727,7 +743,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
         class YearCombo: GVAR(RscCombo) {
             idc = DTG_YEAR_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W);
-            y = QPOS_H(1);
+            y = QPOS_H(2);
             w = QPOS_W(DTG_DATE_COMBO_W);
             h = QPOS_H(1);
         };
@@ -743,7 +759,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
         class TimeText: GVAR(RscText) {
             idc = DTG_TIME_TXT;
             x = QPOS_W(0);
-            y = QPOS_H(2 + DTG_PADDING);
+            y = QPOS_H(3 + DTG_PADDING);
             w = QPOS_W(DTG_TEXT_W);
             h = QPOS_H(1);
             style = ST_RIGHT;
@@ -752,21 +768,21 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
         class TimeSlider: RscXSliderH {
             idc = DTG_TIME_SLIDER;
             x = QPOS_W(DTG_TEXT_W);
-            y = QPOS_H(2 + DTG_PADDING);
+            y = QPOS_H(3 + DTG_PADDING);
             w = QPOS_W(DTG_SLIDER_W);
             h = QPOS_H(1);
         };
         class Frame: RscFrame {
             idc = DTG_TIME_FRAME;
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
-            y = QPOS_H(2 + DTG_PADDING);
+            y = QPOS_H(3 + DTG_PADDING);
             w = QPOS_W(DTG_TIME_FRAME_W);
             h = QPOS_H(1);
         };
         class Separator: RscText {
             idc = DTG_TIME_SEPARATOR;
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
-            y = QPOS_H(2 + DTG_PADDING);
+            y = QPOS_H(3 + DTG_PADDING);
             w = QPOS_W(DTG_TIME_FRAME_W);
             h = QPOS_H(1);
             style = ST_CENTER;
@@ -778,7 +794,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
         class Hours: RscEdit {
             idc = DTG_HOURS_EDIT;
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
-            y = QPOS_H(2 + DTG_PADDING);
+            y = QPOS_H(3 + DTG_PADDING);
             w = QPOS_W(DTG_TIME_FRAME_W / 2);
             h = QPOS_H(1);
             style = QUOTE(ST_CENTER + ST_NO_RECT);
@@ -795,7 +811,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
         class TimezoneCombo: GVAR(RscCombo) {
             idc = DTG_TIMEZONE_DROPDOWN;
             x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + DTG_TIME_FRAME_W);
-            y = QPOS_H(2 + DTG_PADDING);
+            y = QPOS_H(3 + DTG_PADDING);
             w = QPOS_W(DTG_TIMEZONE_COMBO_W);
             h = QPOS_H(1);
         };
@@ -803,7 +819,7 @@ class GVAR(DTG): RscControlsGroupNoScrollbars {
         class SetLocalTimeButton: RscButtonMenu {
             idc = DTG_LOCALTIME_BUTTON;
             x = QPOS_W(DTG_TEXT_W);
-            y = QPOS_H(3 + 2 * DTG_PADDING);
+            y = QPOS_H(4 + 2 * DTG_PADDING);
             w = QPOS_W(DTG_BUTTON_W);
             h = QPOS_H(1);
             text = CSTRING(ui_dtg_localTime);

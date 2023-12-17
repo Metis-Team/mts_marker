@@ -21,7 +21,7 @@ img_size = (1024, 1024)
 text_v_offset = 66 # px left from center
 text_h_offset = 32 # px up from center
 
-alphabets: list[str | list[str]] = [
+long_format_alphabets: list[str | list[str]] = [
     '0123', # Day
     string.digits, # Day
     '012', # Hour
@@ -29,10 +29,22 @@ alphabets: list[str | list[str]] = [
     '012345', # Minute
     string.digits, # Minute
     string.ascii_uppercase, # Time zones
+    [], # Months
+    [], # Months
     ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'], # Months
     string.digits, # Year
     string.digits, # Year
 ]
+
+short_format_alphabets: list[str | list[str]] = [
+    '012', # Hour
+    string.digits, # Hour
+    '012345', # Minute
+    string.digits, # Minute
+    string.ascii_uppercase, # Time zones
+]
+
+formats = [long_format_alphabets, short_format_alphabets]
 
 def get_dtg_macro(pos, letter):
     return f'DTGMARKER({pos},{letter});'
@@ -68,11 +80,11 @@ def create_image(font: FreeTypeFont, letter: str, pos: int):
 
     return image
 
-def create_all_images(alphabets: list[str | list[str]], font: FreeTypeFont):
+def create_all_images(alphabets: list[list[str]], font: FreeTypeFont):
     """Creates all images for the characters defined.
 
     Args:
-        alphabet (dict[str, dict[str]]): Character sets to create.
+        alphabet (list[list[str]]): Character sets to create.
         font (FreeTypeFont): Character font.
 
     Returns:
@@ -80,16 +92,11 @@ def create_all_images(alphabets: list[str | list[str]], font: FreeTypeFont):
     """
 
     images: list[tuple[ImageType, pathlib.Path]] = []
-    offset: int = -len(alphabets[-1][-1])
     for pos, alphabet in enumerate(reversed(alphabets)):
         image_dir = pathlib.Path('dtg', str(pos))
 
-        # In this case we assume that each letter in the current alphabet
-        # has the same length, i.e. either 1 or 3 for months.
-        offset += len(alphabet[-1])
-
         for letter in alphabet:
-            image = create_image(font, letter, offset)
+            image = create_image(font, letter, pos + len(letter) - 1)
 
             file_name = f'mts_markers_dtg_{pos}_{letter}.png'
             export_file = image_dir / file_name
@@ -98,12 +105,12 @@ def create_all_images(alphabets: list[str | list[str]], font: FreeTypeFont):
 
     return images
 
-def write_include_file(path: pathlib.Path, alphabet: list[str | list[str]]):
+def write_include_file(path: pathlib.Path, alphabet: list[list[str]]):
     """Writes all marker into an include file.
 
     Args:
         path (Path): Path to the include file.
-        markers (list[str | list[str]]): Character sets created.
+        markers (list[list[str]]): Character sets created.
     """
 
     with open(path, 'w') as f:
@@ -116,6 +123,24 @@ def write_include_file(path: pathlib.Path, alphabet: list[str | list[str]]):
                 f.write(macro + '\n')
 
             f.write('\n')
+
+
+def merge_alphabets(formats: list[list[str | list[str]]]):
+    longest_format_len = max([len(f) for f in formats])
+
+    alphabets: list[list[str]] = []
+    for i in range(1, longest_format_len + 1):
+        distinct_alphabet: set[str] = set()
+
+        for format in formats:
+            if i < (len(format) + 1):
+                distinct_alphabet.update(set(format[-i]))
+
+        alphabets.append(sorted(distinct_alphabet))
+
+    assert len(alphabets) == longest_format_len
+
+    return list(reversed(alphabets))
 
 
 def debug_create_marker(date: datetime, timezone: str, font: FreeTypeFont):
@@ -132,7 +157,7 @@ def debug_create_marker(date: datetime, timezone: str, font: FreeTypeFont):
     dev_img = Image.open(str(dev_frame))
 
     day = f'{date.day:02d}'
-    month = alphabets[7][date.month - 1]
+    month = long_format_alphabets[7][date.month - 1]
     year = f'{date.year:04d}'
     hour = f'{date.hour:02d}'
     min = f'{date.min:02d}'
@@ -163,6 +188,7 @@ def main(args: argparse.Namespace):
     print('Found ImageToPaa Tool:', image_to_paa)
 
     print('Creating images...')
+    alphabets = merge_alphabets(formats)
     images = create_all_images(alphabets, font)
 
     print('Cleaning export folder:', args.clean)

@@ -29,7 +29,7 @@
 #define FRAME_BUTTON_H 2
 
 #define FRAME_BUTTONS_GROUP_W (4 * FRAME_BUTTON_W + 5 * PADDING)
-#define FRAME_BUTTONS_GROUP_H FRAME_BUTTON_H
+#define FRAME_BUTTONS_GROUP_H (FRAME_BUTTON_H + 2 * PADDING)
 
 #define PREVIEW_GRID_W 9
 #define PREVIEW_GRID_H 9
@@ -42,7 +42,7 @@
 #define DTG_HEADER_H 1
 
 #define DTG_W 30
-#define DTG_H 6
+#define DTG_H 7
 
 #define DTG_TEXT_W 5
 #define DTG_TIME_FRAME_W 4
@@ -184,6 +184,10 @@
 #define DTG_DATE_TXT 201
 #define DTG_TIME_TXT 202
 #define DTG_TIME_SEPARATOR 203
+#define DTG_SHORT_FORMAT_TXT 204
+
+// Checkboxes
+#define DTG_SHORT_FORMAT_CHECKBOX 400
 
 // Dropdowns
 #define DTG_YEAR_DROPDOWN 500

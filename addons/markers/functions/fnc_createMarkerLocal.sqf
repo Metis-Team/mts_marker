@@ -31,6 +31,7 @@
  *          7: ARRAY - Date-Time Group.
  *              0: ARRAY - Date in format [year, month, day, hour, minute] (all NUMBER).
  *              1: STRING - Time zone identifier.
+ *              2: BOOLEAN - Display in short format (HHMMZ).
  *          8: STRING - Direction of Movement Arrow (N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW). Empty string for no direction.
  *      4: NUMBER - Scale of the marker. (Optional, default: 1.3)
  *      5: NUMBER - Alpha of the marker. (Optional, default: 1)
@@ -307,7 +308,10 @@ if ((count _dateTimeGroup) > 0) then {
 
     // Iterate reversed because char pos starts closest to frameshape, meaning with the year.
     //             DDHHMMZmmmYY ┌───────┐
-    // Positions:  98765432  10 │       │
+    // Positions:  ..98765  210 │       │
+    //                          └───────┘
+    //                    HHMMZ ┌───────┐
+    // Positions:         43210 │       │
     //                          └───────┘
     private _letterPos = 0;
     {
@@ -321,7 +325,7 @@ if ((count _dateTimeGroup) > 0) then {
 
         _markerFamily pushBack _markerDtg;
 
-        _letterPos = _letterPos + 1;
+        _letterPos = _letterPos + (count _x);
     } forEachReversed _dtgCharacters;
 };
 
