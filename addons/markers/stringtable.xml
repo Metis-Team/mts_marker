@@ -164,6 +164,10 @@
                 <Original>Direction of Movement:</Original>
                 <German>Bewegungsrichtung:</German>
             </Key>
+            <Key ID="str_mts_markers_ui_general_helpTXT">
+                <Original>Help</Original>
+                <German>Hilfe</German>
+            </Key>
         </Container>
         <Container name="UI_dtg">
             <Key ID="str_mts_markers_ui_dtg">

@@ -9,6 +9,7 @@ class RscEdit;
 class RscListBox;
 class RscButtonSearch;
 class RscControlsGroupNoScrollbars;
+class RscStructuredText;
 class RscTitle;
 class RscFrame;
 class RscXSliderH;
@@ -651,9 +652,26 @@ class GVAR(Dialog) {
             idc = HEAD_TXT;
             x = QPOS_X(0);
             y = QPOS_Y(0);
-            w = QPOS_W(HEADER_W);
+            w = QPOS_W(HEADER_W / 2);
             h = QPOS_H(HEADER_H);
             text = CSTRING(ui_general_headTXT);
+        };
+        class Help: RscStructuredText {
+            idc = HEAD_HELP_TXT;
+            x = QPOS_X(HEADER_W / 2);
+            y = QPOS_Y(0);
+            w = QPOS_W(HEADER_W / 2);
+            h = QPOS_H(HEADER_H);
+            text = CSTRING(ui_general_helpTXT);
+            class Attributes
+            {
+                font = "RobotoCondensed";
+                color = "#ffffff";
+                colorLink = "#ffffff";
+                align = "right";
+                shadow = 1;
+                href = "https://github.com/Metis-Team/mts_marker/wiki/User-Manuel";
+            };
         };
 
         class Preview: GVAR(RscPreview) {
