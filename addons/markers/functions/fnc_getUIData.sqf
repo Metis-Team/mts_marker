@@ -19,11 +19,12 @@
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
 //get identity
-private _identity = (_mainDisplay displayctrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
+private _identity = (_mainDisplay displayCtrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
 CHECKRET(_identity isEqualTo "", ERROR("No identity"));
 
-//check if frameshape is dashed
-private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl MOD_CHECKBOX);
+// Check if frameshape is dashed or HQ
+private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl SUSPECT_CHECKBOX);
+private _isHq = cbChecked (_mainDisplay displayCtrl HQ_CHECKBOX);
 
 private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
 private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
@@ -53,5 +54,35 @@ private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_E
 //get the right text (additional information)
 private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
 
-// This will be the marker parameters in createMarker
-[[_identity, _dashedFrameshape], _modifier, [_grpsize, _reinforced, _reduced], _uniqueDesignation, _additionalInfo, _higherFormation]
+// Operational condition
+private _operationalCondition = OC_FULLY_CAPABLE;
+if (cbChecked (_mainDisplay displayCtrl DAMAGED_CHECKBOX)) then {
+    _operationalCondition = OC_DAMAGED;
+};
+if (cbChecked (_mainDisplay displayCtrl DESTROYED_CHECKBOX)) then {
+    _operationalCondition = OC_DESTROYED;
+};
+
+// Get the Date-Time Group saved in the button
+private _dateTimeGroup = (_mainDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
+
+// Get direction of movement
+private _directionSelIndex = lbCurSel (_mainDisplay displayCtrl DIRECTION_DROPDOWN);
+// Direction index 0 is no direction, 1 is N, 2 is NNE, ...
+private _direction = "";
+if (_directionSelIndex > 0 && _directionSelIndex < (count GVAR(directions) + 1)) then {
+    _direction = GVAR(directions) select (_directionSelIndex - 1);
+};
+
+// These will be the marker parameters in createMarker
+[
+    [_identity, _dashedFrameshape, _isHq],
+    _modifier,
+    [_grpsize, _reinforced, _reduced],
+    _uniqueDesignation,
+    _additionalInfo,
+    _higherFormation,
+    _operationalCondition,
+    _dateTimeGroup,
+    _direction
+]

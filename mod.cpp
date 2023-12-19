@@ -7,5 +7,5 @@ logoOver = "mts_logo_over_small.paa";
 tooltip = "Metis Marker";
 tooltipOwned = "Metis Marker owned";
 picture = "mts_picture.paa";
-overview = "Metis Marker brings you the opportunity to create NATO joint military symbols after the APP-6(C) regulation. It allows to build symbols from components, including frame, icon, first modifier, second modifier and amplifiers, rather than pre-define all possible symbols.";
+overview = "Metis Marker brings you the opportunity to create NATO joint military symbols after the APP-6(E) regulation. It allows to build symbols from components, including frame, icon, first modifier, second modifier and amplifiers, rather than pre-define all possible symbols.";
 author = "Bix, PhILoX, Timi007";

@@ -4,14 +4,14 @@ class CfgMarkers {
     class mts_##TYPE##_##MODIFIER##_##NAME##: mts_##TYPE##_frameshape { \
         icon = QPATHTOF(data\TYPE\MODIFIER\MARKERFILE(TYPE,MODIFIER,NAME)); \
     }
-    #define NUMMARKER(TYPE,POSITION,NUMBER) \
-    class mts_##TYPE##_num_##POSITION##_##NUMBER##: mts_##TYPE##_frameshape { \
-        icon = QPATHTOF(data\TYPE\num\POSITION\MARKERFILE(TYPE,POSITION,NUMBER)); \
-    }
+
+    // Common markers
     #define COMMARKER(MODIFIER,NAME) \
     class mts_com_##MODIFIER##_##NAME##: mts_blu_frameshape { \
         icon = QPATHTOF(data\com\MODIFIER\MARKERFILE(com,MODIFIER,NAME)); \
     }
+
+    // Character markers
     #define ALPHANUMMARKERFILE(ANCHOR,POSITION,LETTER) mts_markers_alphanum_##ANCHOR##_##POSITION##_##LETTER##.paa
     #define ALPHANUMMARKER(ANCHOR,POSITION,LETTER) \
     class mts_alphanum_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
@@ -21,6 +21,25 @@ class CfgMarkers {
     #define SPECIALCHARMARKER(ANCHOR,POSITION,LETTER) \
     class mts_special_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
         icon = QPATHTOF(data\special\ANCHOR\POSITION\SPECIALCHARMARKERFILE(ANCHOR,POSITION,LETTER)); \
+    }
+
+    // Date-Time Group markers
+    #define DTGMARKERFILE(POSITION,LETTER) mts_markers_dtg_##POSITION##_##LETTER##.paa
+    #define DTGMARKER(POSITION,LETTER) \
+    class mts_dtg_##POSITION##_##LETTER##: mts_blu_frameshape { \
+        icon = QPATHTOF(data\dtg\POSITION\DTGMARKERFILE(POSITION,LETTER)); \
+    }
+
+    // Direction of Movement markers
+    #define DIRMARKERFILE(TYPE,DIRECTION) mts_markers_##TYPE##_dir_##DIRECTION##.paa
+    #define DIRMARKER(TYPE,DIRECTION) \
+    class mts_##TYPE##_dir_##DIRECTION##: mts_##TYPE##_frameshape { \
+        icon = QPATHTOF(data\TYPE\dir\DIRMARKERFILE(TYPE,DIRECTION)); \
+    }
+    #define ALTDIRMARKERFILE(TYPE,MOD,DIRECTION) mts_markers_##TYPE##_dir_##MOD##_##DIRECTION##.paa
+    #define ALTDIRMARKER(TYPE,MOD,DIRECTION) \
+    class mts_##TYPE##_dir_##MOD##_##DIRECTION##: mts_##TYPE##_frameshape { \
+        icon = QPATHTOF(data\TYPE\dir\MOD\ALTDIRMARKERFILE(TYPE,MOD,DIRECTION)); \
     }
 
     class b_unknown;
@@ -42,6 +61,9 @@ class CfgMarkers {
     class mts_bludash_vanilla_frameshape: mts_bludash_frameshape {
         icon = QPATHTOF(data\blu\mts_markers_bludash_vanilla_frameshape.paa);
     };
+    class mts_blu_hq: mts_blu_frameshape {
+        icon = QPATHTOF(data\blu\mts_markers_blu_hq.paa);
+    };
     class mts_red_frameshape: o_unknown {
         author = CSTRING(authors);
         scope = 0;
@@ -57,6 +79,9 @@ class CfgMarkers {
     class mts_reddash_vanilla_frameshape: mts_reddash_frameshape {
         icon = QPATHTOF(data\red\mts_markers_reddash_vanilla_frameshape.paa);
     };
+    class mts_red_hq: mts_red_frameshape {
+        icon = QPATHTOF(data\red\mts_markers_red_hq.paa);
+    };
     class mts_neu_frameshape: n_unknown {
         author = CSTRING(authors);
         scope = 0;
@@ -65,6 +90,9 @@ class CfgMarkers {
     };
     class mts_neu_vanilla_frameshape: mts_neu_frameshape {
         icon = QPATHTOF(data\neu\mts_markers_neu_vanilla_frameshape.paa);
+    };
+    class mts_neu_hq: mts_neu_frameshape {
+        icon = QPATHTOF(data\neu\mts_markers_neu_hq.paa);
     };
     class mts_unk_frameshape: n_unknown {
         author = CSTRING(authors);
@@ -81,6 +109,9 @@ class CfgMarkers {
     class mts_unkdash_vanilla_frameshape: mts_unkdash_frameshape {
         icon = QPATHTOF(data\unk\mts_markers_unkdash_vanilla_frameshape.paa);
     };
+    class mts_unk_hq: mts_unk_frameshape {
+        icon = QPATHTOF(data\unk\mts_markers_unk_hq.paa);
+    };
 
     class mts_special_textmarker: b_unknown {
         author = CSTRING(authors);
@@ -96,4 +127,5 @@ class CfgMarkers {
     #include "CfgMarkers\CfgMarkersUnknown.hpp"
     #include "CfgMarkers\CfgMarkersCommon.hpp"
     #include "CfgMarkers\CfgMarkersCharacters.hpp"
+    #include "CfgMarkers\CfgMarkersDateTimeGroup.hpp"
 };

@@ -1,671 +1,918 @@
 class RscText;
-class IGUIBack;
 class RscPicture;
 class RscButton;
+class RscButtonMenu;
+class RscButtonMenuOK;
+class RscButtonMenuCancel;
 class RscCheckBox;
-class RscCombo;
 class RscEdit;
 class RscListBox;
 class RscButtonSearch;
+class RscControlsGroupNoScrollbars;
+class RscStructuredText;
+class RscTitle;
+class RscFrame;
+class RscXSliderH;
+class RscCombo {
+    class ComboScrollBar;
+};
 
-class GVAR(dialog) {
-    idd = MAIN_DISPLAY;
-    movingEnable = 0;
+class GVAR(RscTransparentButton): RscButton {
+    colorBackground[] = {0, 0, 0, 0};
+    colorBackgroundActive[] = {0, 0, 0, 0};
+    colorBackgroundDisabled[] = {0, 0, 0, 0};
+    colorText[] = {0, 0, 0, 0};
+    period = 0;
+};
 
-    class controlsBackground {
-        class headBack: IGUIBack {
-            idc = HEAD_BG;
-            colorBackground[] = {0.9098, 0.7922, 0.1059, 1};
-            x = "SafeZoneX + (672.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (381 / 1080) * SafeZoneH";
-            w = "(547 / 1920) * SafeZoneW";
-            h = "(25 / 1080) * SafeZoneH";
-        };
-        class headTXT: RscText {
-            idc = HEAD_TXT;
-            sizeEx = 0.05;
-            font = "PuristaMedium";
-            text = CSTRING(ui_general_headTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (377.5 / 1080) * SafeZoneH";
-            w = "(254 / 1920) * SafeZoneW";
-            h = "(31 / 1080) * SafeZoneH";
-        };
-        class leftBack: IGUIBack {
-            idc = LEFT_BG;
-            colorBackground[] = {0, 0, 0, 0.7};
-            x = "SafeZoneX + (672.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
-            w = "(370 / 1920) * SafeZoneW";
-            h = "(315 / 1080) * SafeZoneH";
-        };
-        class rightBack: IGUIBack {
-            idc = RIGHT_BG;
-            colorBackground[] = {0, 0, 0, 0.7};
-            x = "SafeZoneX + (1045.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
-            w = "(202 / 1920) * SafeZoneW";
-            h = "(292 / 1080) * SafeZoneH";
-        };
-        class previewTXT: RscText {
-            idc = PREVIEW_TXT;
-            sizeEx = 0.055;
-            font = "PuristaMedium";
-            text = CSTRING(ui_general_previewTXT);
-            style = 2;
-            x = "SafeZoneX + (1054.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(180 / 1920) * SafeZoneW";
-            h = "(30 / 1080) * SafeZoneH";
-        };
-        class identityTXT: RscText {
-            idc = IDENTITY_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_identityTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (428 / 1080) * SafeZoneH";
-            w = "(90 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class iconTXT: RscText {
-            idc = ICON_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_iconTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (493 / 1080) * SafeZoneH";
-            w = "(135 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class cbTXT: RscText {
-            idc = CHECKBOX_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = "";
-            x = "SafeZoneX + (797.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (466 / 1080) * SafeZoneH";
-            w = "(200 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class mod1TXT: RscText {
-            idc = MOD1_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_mod1TXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (518 / 1080) * SafeZoneH";
-            w = "(135 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class mod2TXT: RscText {
-            idc = MOD2_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_mod2TXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (543 / 1080) * SafeZoneH";
-            w = "(135 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class echelonTXT: RscText {
-            idc = ECHELON_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_echelonTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (568 / 1080) * SafeZoneH";
-            w = "(135 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class reinforcedTXT: RscText {
-            idc = REINFORCED_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_reinforcedTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (593 / 1080) * SafeZoneH";
-            w = "(100 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class reducedTXT: RscText {
-            idc = REDUCED_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_reducedTXT);
-            x = "SafeZoneX + (829.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (593 / 1080) * SafeZoneH";
-            w = "(100/ 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class higherTXT: RscText {
-            idc = HIGHER_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_higherTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (618 / 1080) * SafeZoneH";
-            w = "(150 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class uniqueTXT: RscText {
-            idc = UNIQUE_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_uniqueTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (643 / 1080) * SafeZoneH";
-            w = "(150 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class additionalTXT: RscText {
-            idc = ADDITIONAL_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_additionalTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (668 / 1080) * SafeZoneH";
-            w = "(150 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class channelTXT: RscText {
-            idc = CHANNEL_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_channelTXT);
-            x = "SafeZoneX + (674.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (698 / 1080) * SafeZoneH";
-            w = "(135 / 1920) * SafeZoneW";
-            h = "(18 / 1080) * SafeZoneH";
-        };
-        class previewBackground: RscPicture {
+class GVAR(RscEdit): RscEdit {
+    type = 2;
+    style = ST_NO_RECT;
+    colorBackground[] = {0, 0, 0, 1};
+    sizeEx = QUOTE(POS_H(0.8));
+    shadow = 0;
+};
+
+class GVAR(RscText): RscText {
+    sizeEx = QUOTE(POS_H(0.9));
+};
+
+class GVAR(RscCheckBoxSound): RscCheckBox {
+    soundEnter[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundEnter", 0.090000004, 1};
+    soundPush[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundPush", 0.090000004, 1};
+    soundClick[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundClick", 0.090000004, 1};
+    soundEscape[] = {"\a3\ui_f\data\Sound\RscButtonMenu\soundEscape", 0.090000004, 1};
+};
+
+class GVAR(RscCombo): RscCombo {
+    colorTextRight[] = {1, 1, 1, 0.5};
+
+    arrowFull = "\a3\3DEN\Data\Controls\ctrlCombo\arrowFull_ca.paa";
+    arrowEmpty = "\a3\3DEN\Data\Controls\ctrlCombo\arrowEmpty_ca.paa";
+
+    class ComboScrollBar: ComboScrollBar {
+        thumb = "\a3\3DEN\Data\Controls\ctrlDefault\thumb_ca.paa";
+        border = "\a3\3DEN\Data\Controls\ctrlDefault\border_ca.paa";
+        arrowFull = "\a3\3DEN\Data\Controls\ctrlDefault\arrowFull_ca.paa";
+        arrowEmpty = "\a3\3DEN\Data\Controls\ctrlDefault\arrowEmpty_ca.paa";
+    };
+};
+
+class GVAR(RscPreview): RscControlsGroupNoScrollbars {
+    class controls {
+        class Background: RscText {
             idc = PREVIEW_BG;
-            x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-            w = "(160 / 1920) * SafeZoneW";
-            h = "(160 / 1080) * SafeZoneH";
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(PREVIEW_W);
+            h = QPOS_H(PREVIEW_H);
+            colorBackground[] = {BG_COLOR};
+        };
+
+        class Grid: RscPicture {
+            idc = PREVIEW_GRID;
+            x = QPOS_W((PREVIEW_W - PREVIEW_GRID_W) / 2);
+            y = QPOS_H((PREVIEW_H - PREVIEW_GRID_H) / 2);
+            w = QPOS_W(PREVIEW_GRID_W);
+            h = QPOS_H(PREVIEW_GRID_H);
             text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
         };
-        /*
-            Preview marker coordinates and dimensions:
 
-            For 256px marker/image:
-                x = "SafeZoneX + (1066.50 / 1920) * SafeZoneW";
-                y = "SafeZoneY + (456 / 1080) * SafeZoneH";
-                w = "(160 / 1920) * SafeZoneW";
-                h = "(160 / 1080) * SafeZoneH";
-
-            For 1024px marker/image:
-                x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-                y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-                w = "(640 / 1920) * SafeZoneW";
-                h = "(640 / 1080) * SafeZoneH";
-
-                Formula:
-                (x_{256px}, y_{256px}) + 160 / 2 - 160 * 4 / 2 = (x_{1024px}, y_{1024px})
-                (w_{256px}, h_{256px}) * 4 = (w_{1024px}, h_{1024px})
-        */
-        class previewLayerIdentity: RscPicture {
+        class Identity: RscPicture {
             idc = PREVIEW_LYR_IDENTITY;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
+            x = QPOS_W((PREVIEW_W - PREVIEW_LAYER_W) / 2);
+            y = QPOS_H((PREVIEW_H - PREVIEW_LAYER_H) / 2);
+            w = QPOS_W(PREVIEW_LAYER_W);
+            h = QPOS_H(PREVIEW_LAYER_H);
             text = "";
         };
-        class previewLayerMod1: RscPicture {
+        class HQ: Identity {
+            idc = PREVIEW_LYR_HQ;
+        };
+        class Direction: Identity {
+            idc = PREVIEW_LYR_DIRECTION;
+        };
+        class Mod1: Identity {
             idc = PREVIEW_LYR_MOD_1;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
-            text = "";
         };
-        class previewLayerMod2: RscPicture {
+        class Mod2: Identity {
             idc = PREVIEW_LYR_MOD_2;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
-            text = "";
         };
-        class previewLayerMod3: RscPicture {
+        class Mod3: Identity {
             idc = PREVIEW_LYR_MOD_3;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
-            text = "";
         };
-        class previewLayerMod4: RscPicture {
+        class Mod4: Identity {
             idc = PREVIEW_LYR_MOD_4;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
-            text = "";
         };
-        class previewLayerEchelon: RscPicture {
+        class Echelon: Identity {
             idc = PREVIEW_LYR_ECHELON;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
-            text = "";
         };
-        class previewLayerSizeMod: RscPicture {
+        class Size: Identity {
             idc = PREVIEW_LYR_SIZE_MOD;
-            x = "SafeZoneX + (826.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (216 / 1080) * SafeZoneH";
-            w = "(640 / 1920) * SafeZoneW";
-            h = "(640 / 1080) * SafeZoneH";
-            text = "";
         };
-        class presetsHeadBack: IGUIBack {
-            idc = PRESETS_HEAD_BG;
-            colorBackground[] = {0.9098, 0.7922, 0.1059, 1};
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (381 / 1080) * SafeZoneH";
-            w = "(224 / 1920) * SafeZoneW";
-            h = "(25 / 1080) * SafeZoneH";
-        };
-        class presetsBack: IGUIBack {
-            idc = PRESETS_BG;
-            colorBackground[] = {0, 0, 0, 0.6};
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
-            w = "(224 / 1920) * SafeZoneW";
-            h = "(292 / 1080) * SafeZoneH";
-        };
-        class presetsNameTXT: RscText {
-            idc = PRESETS_NAME_TXT;
-            font = "PuristaLight";
-            sizeEx = 0.035;
-            text = CSTRING(ui_general_presetsNameTXT);
-            colorBackground[] = {0, 0, 0, 0.3};
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (661 / 1080) * SafeZoneH";
-            w = "(224 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-        };
-        class deletePresetsBG: IGUIBack {
-            idc = DELETE_PRESETS_BG;
-            colorBackground[] = {0, 0, 0, 0.7};
-            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(20 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
+        class OperationalCondition: Identity {
+            idc = PREVIEW_LYR_OPERATIONAL_CONDITION;
         };
     };
+};
 
+
+class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
     class controls {
-        class bluBTNframe: RscPicture {
-            idc = FRIENDLY_BTN_FRAME;
-            x = "SafeZoneX + (774.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            style = 64;
-            colorText[] = {1,1,1,1};
+        class Background: RscText {
+            idc = CONFIG_BG;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(CONFIG_W);
+            h = QPOS_H(CONFIG_H);
+            colorBackground[] = {BG_COLOR};
         };
-        class bluBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
-            idc = FRIENDLY_BTN_BACK;
-            x = "SafeZoneX + (774.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
+
+        class FrameBackground: RscPicture {
+            idc = FRAME_BG;
+            x = QPOS_W((CONFIG_W - 12) / 2);
+            y = QPOS_H(4.1);
+            w = QPOS_W(12);
+            h = QPOS_H(12);
+            text = QPATHTOF(data\ui\mts_markers_ui_frame_background.paa);
         };
-        class bluBTNctrl: RscButton {
+
+        class IdentityText: GVAR(RscText) {
+            idc = IDENTITY_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(0.5);
+            w = QPOS_W(4);
+            h = QPOS_H(FRAME_BUTTON_H);
+            text = CSTRING(ui_general_identityTXT);
+        };
+
+        class ButtonGroup: RscControlsGroupNoScrollbars {
+            idc = IDENTITY_BUTTON_GROUP;
+            x = QPOS_W((CONFIG_W - FRAME_BUTTONS_GROUP_W) / 2);
+            y = QPOS_H(0.5);
+            w = QPOS_W(FRAME_BUTTONS_GROUP_W);
+            h = QPOS_H(FRAME_BUTTONS_GROUP_H);
+
+            class controls {
+                class BluButtonFrame: RscPicture {
+                    idc = FRIENDLY_BTN_FRAME;
+                    x = QPOS_W(PADDING);
+                    y = QPOS_H(PADDING);
+                    w = QPOS_W(FRAME_BUTTON_W);
+                    h = QPOS_H(FRAME_BUTTON_H);
+                    style = ST_FRAME;
+                    colorText[] = {1,1,1,1};
+                };
+                class BluButtonIcon: RscPicture {
+                    idc = FRIENDLY_BTN_ICON;
+                    x = QPOS_W(PADDING);
+                    y = QPOS_H(PADDING);
+                    w = QPOS_W(FRAME_BUTTON_W);
+                    h = QPOS_H(FRAME_BUTTON_H);
+                    text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
+                };
+                class BluButton: GVAR(RscTransparentButton) {
+                    idc = FRIENDLY_BTN_CTRL;
+                    x = QPOS_W(PADDING);
+                    y = QPOS_H(PADDING);
+                    w = QPOS_W(FRAME_BUTTON_W);
+                    h = QPOS_H(FRAME_BUTTON_H);
+                    text = "";
+                    tooltip = CSTRING(ui_identity_friend);
+                    onButtonClick = QUOTE(['blu'] call FUNC(identityButtonsAction););
+                };
+
+                class RedButtonFrame: BluButtonFrame {
+                    idc = HOSTILE_BTN_FRAME;
+                    x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
+                };
+                class RedButtonIcon: BluButtonIcon {
+                    idc = HOSTILE_BTN_ICON;
+                    x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
+                    text = QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa);
+                };
+                class RedButton: BluButton {
+                    idc = HOSTILE_BTN_CTRL;
+                    x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
+                    tooltip = CSTRING(ui_identity_hostile);
+                    onButtonClick = QUOTE(['red'] call FUNC(identityButtonsAction););
+                };
+
+                class NeuButtonFrame: BluButtonFrame {
+                    idc = NEUTRAL_BTN_FRAME;
+                    x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
+                };
+                class NeuButtonIcon: BluButtonIcon {
+                    idc = NEUTRAL_BTN_ICON;
+                    x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
+                    text = QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa);
+                };
+                class NeuButton: BluButton {
+                    idc = NEUTRAL_BTN_CTRL;
+                    x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
+                    tooltip = CSTRING(ui_identity_neutral);
+                    onButtonClick = QUOTE(['neu'] call FUNC(identityButtonsAction););
+                };
+
+                class UnkButtonFrame: BluButtonFrame {
+                    idc = UNKNOWN_BTN_FRAME;
+                    x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
+                };
+                class UnkButtonIcon: BluButtonIcon {
+                    idc = UNKNOWN_BTN_ICON;
+                    x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
+                    text = QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa);
+                };
+                class UnkButton: BluButton {
+                    idc = UNKNOWN_BTN_CTRL;
+                    x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
+                    tooltip = CSTRING(ui_identity_unknown);
+                    onButtonClick = QUOTE(['unk'] call FUNC(identityButtonsAction););
+                };
+            };
+        };
+
+        class SuspectCheckbox: GVAR(RscCheckBoxSound) {
+            idc = SUSPECT_CHECKBOX;
+            x = QPOS_W(CONFIG_W - 7 - 1);
+            y = QPOS_H(FRAME_BUTTON_H / 2);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+        class SuspectText: GVAR(RscText) {
+            idc = SUSPECT_TXT;
+            x = QPOS_W(CONFIG_W - 7);
+            y = QPOS_H(FRAME_BUTTON_H / 2);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
             text = "";
-            idc = FRIENDLY_BTN_CTRL;
-            x = "SafeZoneX + (774.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,0};
-            colorBackgroundActive[] = {0,0,0,0};
-            colorBackgroundDisabled[] = {0,0,0,0};
-            colorText[] = {0,0,0,0};
-            period = 0;
-            tooltip = CSTRING(ui_identity_friend);
-            onButtonClick = QUOTE(['blu'] call FUNC(identityButtonsAction););
         };
-        class redBTNframe: RscPicture {
-            idc = HOSTILE_BTN_FRAME;
-            x = "SafeZoneX + (824.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            style = 64;
-            colorText[] = {1,1,1,1};
+
+        class EchelonText: GVAR(RscText) {
+            idc = ECHELON_TXT;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(4);
+            w = QPOS_W(10);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_echelonTXT);
         };
-        class redBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa);
-            idc = HOSTILE_BTN_BACK;
-            x = "SafeZoneX + (824.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-        };
-        class redBTNctrl: RscButton {
-            text = "";
-            idc = HOSTILE_BTN_CTRL;
-            x = "SafeZoneX + (824.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,0};
-            colorBackgroundActive[] = {0,0,0,0};
-            colorBackgroundDisabled[] = {0,0,0,0};
-            colorText[] = {0,0,0,0};
-            period = 0;
-            tooltip = CSTRING(ui_identity_hostile);
-            onButtonClick = QUOTE(['red'] call FUNC(identityButtonsAction););
-        };
-        class neuBTNframe: RscPicture {
-            idc = NEUTRAL_BTN_FRAME;
-            x = "SafeZoneX + (874.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            style = 64;
-            colorText[] = {1,1,1,1};
-        };
-        class neuBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa);
-            idc = NEUTRAL_BTN_BACK;
-            x = "SafeZoneX + (874.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-        };
-        class neuBTNctrl: RscButton {
-            text = "";
-            idc = NEUTRAL_BTN_CTRL;
-            x = "SafeZoneX + (874.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,0};
-            colorBackgroundActive[] = {0,0,0,0};
-            colorBackgroundDisabled[] = {0,0,0,0};
-            colorText[] = {0,0,0,0};
-            period = 0;
-            tooltip = CSTRING(ui_identity_neutral);
-            onButtonClick = QUOTE(['neu'] call FUNC(identityButtonsAction););
-        };
-        class unkBTNframe: RscPicture {
-            idc = UNKNOWN_BTN_FRAME;
-            x = "SafeZoneX + (924.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            style = 64;
-            colorText[] = {1,1,1,1};
-        };
-        class unkBTNback: RscPicture {
-            text = QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa);
-            idc = UNKNOWN_BTN_BACK;
-            x = "SafeZoneX + (924.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-        };
-        class unkBTNctrl: RscButton {
-            text = "";
-            idc = UNKNOWN_BTN_CTRL;
-            x = "SafeZoneX + (924.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (416 / 1080) * SafeZoneH";
-            w = "(45 / 1920) * SafeZoneW";
-            h = "(45 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,0};
-            colorBackgroundActive[] = {0,0,0,0};
-            colorBackgroundDisabled[] = {0,0,0,0};
-            colorText[] = {0,0,0,0};
-            period = 0;
-            tooltip = CSTRING(ui_identity_unknown);
-            onButtonClick = QUOTE(['unk'] call FUNC(identityButtonsAction););
-        };
-        class modCB: RscCheckBox {
-            idc = MOD_CHECKBOX;
-            x = "SafeZoneX + (768.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (461 / 1080) * SafeZoneH";
-            w = "(30 / 1920) * SafeZoneW";
-            h = "(30 / 1080) * SafeZoneH";
-        };
-        class iconDD: RscCombo {
-            idc = ICON_DROPDOWN;
-            x = "SafeZoneX + (814.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (491 / 1080) * SafeZoneH";
-            w = "(195 / 1920) * SafeZoneW";
-            h = "(21 / 1080) * SafeZoneH";
-        };
-        class mod1DD: RscCombo {
-            idc = MOD1_DROPDOWN;
-            x = "SafeZoneX + (814.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (516 / 1080) * SafeZoneH";
-            w = "(195 / 1920) * SafeZoneW";
-            h = "(21 / 1080) * SafeZoneH";
-        };
-        class mod2DD: RscCombo {
-            idc = MOD2_DROPDOWN;
-            x = "SafeZoneX + (814.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (541 / 1080) * SafeZoneH";
-            w = "(195 / 1920) * SafeZoneW";
-            h = "(21 / 1080) * SafeZoneH";
-        };
-        class echelonDD: RscCombo {
+        class EchelonCombo: GVAR(RscCombo) {
             idc = ECHELON_DROPDOWN;
-            x = "SafeZoneX + (814.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (566 / 1080) * SafeZoneH";
-            w = "(195 / 1920) * SafeZoneW";
-            h = "(21 / 1080) * SafeZoneH";
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(5);
+            w = QPOS_W(10);
+            h = QPOS_H(1);
         };
-        class reinforcedCB: RscCheckBox {
+
+        class DTGText: GVAR(RscText) {
+            idc = DTG_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(4);
+            w = QPOS_W(7.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_dtgTXT);
+        };
+        class DTGButton: RscButtonMenu {
+            idc = DTG_BUTTON;
+            x = QPOS_W(0.5);
+            y = QPOS_H(5);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = "";
+            tooltip = CSTRING(ui_general_dtgBTN_tooltip);
+            style = ST_CENTER;
+            onButtonClick = QUOTE([ctrlParent (_this select 0)] call FUNC(initializeDTGUI));
+            class Attributes
+            {
+                font = "RobotoCondensed";
+                color = "#E5E5E5";
+                align = "center";
+                shadow = "true";
+            };
+        };
+        class ClearDTGButton: RscButton {
+            idc = CLEAR_DTG_BUTTON;
+            x = QPOS_W(7);
+            y = QPOS_H(5);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            colorBackground[] = {0, 0, 0, 0.3};
+            colorFocused[] = {0, 0, 0, 0.7};
+            text = "X";
+            tooltip = CSTRING(ui_general_clearDtgBTN_tooltip);
+            onButtonClick = QUOTE(call FUNC(clearDTG));
+        };
+
+        class Mod1Text: EchelonText {
+            idc = MOD1_TXT;
+            y = QPOS_H(7);
+            text = CSTRING(ui_general_mod1TXT);
+        };
+        class Mod1Combo: EchelonCombo {
+            idc = MOD1_DROPDOWN;
+            y = QPOS_H(8);
+        };
+
+        class IconText: Mod1Text {
+            idc = ICON_TXT;
+            y = QPOS_H(9);
+            text = CSTRING(ui_general_iconTXT);
+        };
+        class IconCombo: EchelonCombo {
+            idc = ICON_DROPDOWN;
+            y = QPOS_H(10);
+        };
+
+        class Mod2Text: Mod1Text {
+            idc = MOD2_TXT;
+            y = QPOS_H(11);
+            text = CSTRING(ui_general_mod2TXT);
+        };
+        class Mod2Combo: EchelonCombo {
+            idc = MOD2_DROPDOWN;
+            y = QPOS_H(12);
+        };
+
+        class ReinforcedCheckbox: GVAR(RscCheckBoxSound) {
             idc = REINFORCED_CHECKBOX;
-            x = "SafeZoneX + (779.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (587 / 1080) * SafeZoneH";
-            w = "(30 / 1920) * SafeZoneW";
-            h = "(30 / 1080) * SafeZoneH";
+            x = QPOS_W(CONFIG_W - 7 - 1);
+            y = QPOS_H(4);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
         };
-        class reducedCB: RscCheckBox {
+        class ReinforcedText: GVAR(RscText) {
+            idc = REINFORCED_TXT;
+            x = QPOS_W(CONFIG_W - 7);
+            y = QPOS_H(4);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_reinforcedTXT);
+        };
+        class ReducedCheckbox: ReinforcedCheckbox {
             idc = REDUCED_CHECKBOX;
-            x = "SafeZoneX + (929.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (587 / 1080) * SafeZoneH";
-            w = "(30 / 1920) * SafeZoneW";
-            h = "(30 / 1080) * SafeZoneH";
+            y = QPOS_H(5);
         };
-        class higherEF: RscEdit {
-            idc = HIGHER_EDIT;
-            type = 2;
-            style = 512;
-            x = "SafeZoneX + (834.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (618 / 1080) * SafeZoneH";
-            w = "(175 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,1};
-            sizeEx = 0.035;
-            shadow = 0;
-            maxChars = HIGHER_FORMATION_MAX_CHARS;
+        class ReducedText: ReinforcedText {
+            idc = REDUCED_TXT;
+            y = QPOS_H(5);
+            text = CSTRING(ui_general_reducedTXT);
         };
-        class uniqueEF: RscEdit {
+
+        class AdditionalInfoText: GVAR(RscText) {
+            idc = ADDITIONAL_TXT;
+            x = QPOS_W(CONFIG_W - 7.5 - 0.5);
+            y = QPOS_H(9);
+            w = QPOS_W(7.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_additionalTXT);
+        };
+        class AdditionalInfoEdit: GVAR(RscEdit) {
+            idc = ADDITIONAL_EDIT;
+            x = QPOS_W(CONFIG_W - 7.5 - 0.5);
+            y = QPOS_H(10);
+            w = QPOS_W(7.5);
+            h = QPOS_H(1);
+        };
+        class UniqueDesignationText: AdditionalInfoText {
+            idc = UNIQUE_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(11);
+            text = CSTRING(ui_general_uniqueTXT);
+        };
+        class UniqueDesignationEdit: AdditionalInfoEdit {
             idc = UNIQUE_EDIT;
-            type = 2;
-            style = 512;
-            x = "SafeZoneX + (834.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (643 / 1080) * SafeZoneH";
-            w = "(175 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,1};
-            sizeEx = 0.035;
-            shadow = 0;
+            x = QPOS_W(0.5);
+            y = QPOS_H(12);
             maxChars = UNIQUE_DESIGNATION_MAX_CHARS;
         };
-        class additionalEF: RscEdit {
-            idc = ADDITIONAL_EDIT;
-            type = 2;
-            style = 512;
-            x = "SafeZoneX + (834.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (668 / 1080) * SafeZoneH";
-            w = "(175 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,1};
-            sizeEx = 0.035;
-            shadow = 0;
+        class HigherFormationText: AdditionalInfoText {
+            idc = HIGHER_TXT;
+            x = QPOS_W(CONFIG_W - 7.5 - 0.5);
+            y = QPOS_H(11);
+            text = CSTRING(ui_general_higherTXT);
         };
-        class channelDD: RscCombo {
+        class HigherFormationEdit: AdditionalInfoEdit {
+            idc = HIGHER_EDIT;
+            x = QPOS_W(CONFIG_W - 7.5 - 0.5);
+            y = QPOS_H(12);
+            maxChars = HIGHER_FORMATION_MAX_CHARS;
+        };
+
+        class HQText: GVAR(RscText) {
+            idc = HQ_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(15);
+            w = QPOS_W(6.5);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_headquatersTXT);
+            style = ST_RIGHT;
+        };
+        class HQCheckbox: GVAR(RscCheckBoxSound) {
+            idc = HQ_CHECKBOX;
+            x = QPOS_W(0.5 + 6.5);
+            y = QPOS_H(15);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+
+        class DamagedCheckbox: GVAR(RscCheckBoxSound) {
+            idc = DAMAGED_CHECKBOX;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(14);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+        class DamagedText: GVAR(RscText) {
+            idc = DAMAGED_TXT;
+            x = QPOS_W((CONFIG_W - 10) / 2 + 1);
+            y = QPOS_H(14);
+            w = QPOS_W(9);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_damagedTXT);
+        };
+        class DestroyedCheckbox: DamagedCheckbox {
+            idc = DESTROYED_CHECKBOX;
+            y = QPOS_H(15);
+        };
+        class DestroyedText: DamagedText {
+            idc = DESTROYED_TXT;
+            y = QPOS_H(15);
+            text = CSTRING(ui_general_destroyedTXT);
+        };
+
+        class DirectionText: GVAR(RscText) {
+            idc = DIRECTION_TXT;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(17);
+            w = QPOS_W(10);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_directionTXT);
+        };
+        class DirectionCombo: GVAR(RscCombo) {
+            idc = DIRECTION_DROPDOWN;
+            x = QPOS_W((CONFIG_W - 10) / 2);
+            y = QPOS_H(18);
+            w = QPOS_W(10);
+            h = QPOS_H(1);
+        };
+
+        class AlphaText: GVAR(RscText) {
+            idc = ALPHA_TXT;
+            x = QPOS_W(0.5);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_alphaTXT);
+        };
+        class AlphaSlider: RscXSliderH {
+            idc = ALPHA_SLIDER;
+            x = QPOS_W(0.5);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            tooltip = CSTRING(ui_general_resetSlider_tooltip);
+            sliderPosition = MARKER_ALPHA;
+            sliderRange[] = {MIN_ALPHA, MAX_ALPHA};
+        };
+
+        class ScaleText: GVAR(RscText) {
+            idc = SCALE_TXT;
+            x = QPOS_W((CONFIG_W - 8.8) / 2);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_scaleTXT);
+        };
+        class ScaleSlider: RscXSliderH {
+            idc = SCALE_SLIDER;
+            x = QPOS_W((CONFIG_W - 8.8) / 2);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            tooltip = CSTRING(ui_general_resetSlider_tooltip);
+            sliderPosition = MARKER_SCALE;
+            sliderRange[] = {MIN_SCALE, MAX_SCALE};
+        };
+
+        class ChannelText: GVAR(RscText) {
+            idc = CHANNEL_TXT;
+            x = QPOS_W(CONFIG_W - 8.8 - 0.5);
+            y = QPOS_H(CONFIG_H - 2 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
+            text = CSTRING(ui_general_channelTXT);
+        };
+        class ChannelCombo: GVAR(RscCombo) {
             idc = CHANNEL_DROPDOWN;
-            x = "SafeZoneX + (814.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (696 / 1080) * SafeZoneH";
-            w = "(195 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
+            x = QPOS_W(CONFIG_W - 8.8 - 0.5);
+            y = QPOS_H(CONFIG_H - 1 - 0.5);
+            w = QPOS_W(8.8);
+            h = QPOS_H(1);
         };
-        class okBTN: RscButton {
-            idc = OK_BUTTON;
-            font = "PuristaMedium";
-            text = CSTRING(ui_general_okBTN);
-            x = "SafeZoneX + (1045.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(100 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,0.7};
-            colorFocused[] = {0,0,0,0.7};
-            style = 2;
-            default = 1;
-            onButtonClick = QUOTE([true] call FUNC(transmitUIData););
+    };
+};
+
+class GVAR(RscPresets): RscControlsGroupNoScrollbars {
+    class controls {
+        class Background: RscText {
+            idc = PRESETS_BG;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(PRESETS_W);
+            h = QPOS_H(PRESETS_H - (SMALL_BUTTON_H + PADDING));
+            colorBackground[] = {BG_COLOR};
         };
-        class cancelBTN: RscButton {
-            idc = CANCEL_BUTTON;
-            font = "PuristaMedium";
-            text = CSTRING(ui_general_cancelBTN);
-            x = "SafeZoneX + (1148.50 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(99 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0,0,0,0.7};
-            colorFocused[] = {0,0,0,0.7};
-            style = 2;
-            onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
+        class DeleteButtonBackground: RscText {
+            idc = DELETE_PRESETS_BG;
+            x = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            y = QPOS_H(PRESETS_H - SMALL_BUTTON_W);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            colorBackground[] = {BG_COLOR};
         };
-        class togglePresetsBTN: RscButton {
-            idc = TOGGLE_PRESETS_BUTTON;
-            font = "PuristaMedium";
-            text = "<<";
-            tooltip = CSTRING(ui_general_togglePresetsBTN_tooltip);
-            x = "SafeZoneX + (1222.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (381 / 1080) * SafeZoneH";
-            w = "(25 / 1920) * SafeZoneW";
-            h = "(25 / 1080) * SafeZoneH";
-            colorBackground[] = {0.9098, 0.7922, 0.1059, 1};
-            colorFocused[] = {0.9098, 0.7922, 0.1059, 1};
-            style = 2;
-            onButtonClick = QUOTE([!ctrlShown ((ctrlParent (_this select 0)) displayCtrl PRESETS_BG)] call FUNC(showPresetsUI););
+
+        class SearchEdit: GVAR(RscEdit) {
+            idc = SEARCH_PRESETS_EDIT;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
         };
-        class savePresetsBTN: RscButton {
-            idc = SAVE_PRESETS_BUTTON;
-            font = "PuristaMedium";
-            text = CSTRING(ui_general_savePresetsBTN);
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(99 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 0.7};
-            colorFocused[] = {0, 0, 0, 0.7};
-            style = 2;
-            onButtonClick = QUOTE(call FUNC(savePreset););
-        };
-        class loadPresetsBTN: RscButton {
-            idc = LOAD_PRESETS_BUTTON;
-            font = "PuristaMedium";
-            text = CSTRING(ui_general_loadPresetsBTN);
-            x = "SafeZoneX + (1352.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(99 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 0.7};
-            colorFocused[] = {0, 0, 0, 0.7};
-            style = 2;
-            onButtonClick = QUOTE(call FUNC(loadPreset););
-        };
-        class deletePresetsPic: RscPicture {
-            idc = DELETE_PRESETS_PIC;
-            text = "A3\3den\Data\Displays\Display3DEN\PanelLeft\entityList_delete_ca.paa";
-            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(20 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-        };
-        class deletePresetsBTN: RscButton {
-            idc = DELETE_PRESETS_BUTTON;
-            tooltip = CSTRING(ui_general_deletePresetsBTN_tooltip);
-            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (704 / 1080) * SafeZoneH";
-            w = "(20 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 0};
-            colorBackgroundActive[] = {0, 0, 0, 0};
-            colorBackgroundDisabled[] = {0, 0, 0, 0};
-            colorText[] = {0, 0, 0, 0};
-            period = 0;
-            style = 2;
-            onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 1)]);
-            onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0, 0, 0, 0.7)]);
-            onButtonClick = QUOTE(call FUNC(deletePreset););
-        };
-        class searchPresetsBTN: RscButtonSearch {
+        class SearchButton: RscButtonSearch {
             idc = SEARCH_PRESETS_BUTTON;
-            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
-            w = "(20 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
+            x = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            y = QPOS_H(0);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
             colorBackground[] = {0, 0, 0, 0.3};
             colorFocused[] = {0, 0, 0, 0.7};
             onButtonClick = QUOTE(call FUNC(updatePresetsList););
         };
-        class searchPresetsEF: RscEdit {
-            idc = SEARCH_PRESETS_EDIT;
-            type = 2;
-            style = 512;
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (409 / 1080) * SafeZoneH";
-            w = "(204 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 1};
-            sizeEx = 0.035;
-            shadow = 0;
+
+        class PresetsList: RscListBox {
+            idc = PRESETS_LIST;
+            x = QPOS_W(0);
+            y = QPOS_H(SMALL_BUTTON_H);
+            w = QPOS_W(PRESETS_W);
+            h = QPOS_H(PRESETS_H - (4 * SMALL_BUTTON_H + PADDING));
         };
-        class namePresetsEF: RscEdit {
+
+        class NameText: RscText {
+            idc = PRESETS_NAME_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(PRESETS_H - (3 * SMALL_BUTTON_H + PADDING));
+            w = QPOS_W(PRESETS_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            font = "PuristaLight";
+            sizeEx = QUOTE(POS_H(0.8));
+            colorBackground[] = {0, 0, 0, 0.3};
+            text = CSTRING(ui_general_presetsNameTXT);
+        };
+        class NameEdit: GVAR(RscEdit) {
             idc = NAME_PRESETS_EDIT;
-            type = 2;
-            style = 512;
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (681 / 1080) * SafeZoneH";
-            w = "(204 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
-            colorBackground[] = {0, 0, 0, 1};
-            sizeEx = 0.035;
-            shadow = 0;
+            x = QPOS_W(0);
+            y = QPOS_H(PRESETS_H - (2 * SMALL_BUTTON_H + PADDING));
+            w = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
         };
-        class clearPresetsBTN: RscButton {
+        class ClearNameButton: RscButton {
             idc = CLEAR_PRESETS_BUTTON;
-            font = "PuristaMedium";
-            text = "X";
-            tooltip = CSTRING(ui_general_namePresetsBTN_tooltip);
-            x = "SafeZoneX + (1454.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (681 / 1080) * SafeZoneH";
-            w = "(20 / 1920) * SafeZoneW";
-            h = "(20 / 1080) * SafeZoneH";
+            x = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            y = QPOS_H(PRESETS_H - (2 * SMALL_BUTTON_H + PADDING));
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
             colorBackground[] = {0, 0, 0, 0.3};
             colorFocused[] = {0, 0, 0, 0.7};
+            text = "X";
+            tooltip = CSTRING(ui_general_namePresetsBTN_tooltip);
             onButtonClick = QUOTE(((ctrlParent (_this select 0)) displayCtrl NAME_PRESETS_EDIT) ctrlSetText '';);
         };
-        class presetsList: RscListBox {
-            idc = PRESETS_LIST;
-            x = "SafeZoneX + (1250.5 / 1920) * SafeZoneW";
-            y = "SafeZoneY + (429 / 1080) * SafeZoneH";
-            w = "(224 / 1920) * SafeZoneW";
-            h = "(232 / 1080) * SafeZoneH";
+
+        class SaveButton: RscButtonMenu {
+            idc = SAVE_PRESETS_BUTTON;
+            x = QPOS_W(0);
+            y = QPOS_H(PRESETS_H - WIDE_BUTTON_H);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            text = CSTRING(ui_general_savePresetsBTN);
+            onButtonClick = QUOTE(call FUNC(savePreset););
+        };
+
+        class LoadButton: RscButtonMenu {
+            idc = LOAD_PRESETS_BUTTON;
+            x = QPOS_W(WIDE_BUTTON_W + PADDING);
+            y = QPOS_H(PRESETS_H - WIDE_BUTTON_H);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            text = CSTRING(ui_general_loadPresetsBTN);
+            onButtonClick = QUOTE(call FUNC(loadPreset););
+        };
+
+        class DeleteButtonIcon: RscPicture {
+            idc = DELETE_PRESETS_ICON;
+            x = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            y = QPOS_H(PRESETS_H - SMALL_BUTTON_H);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            text = "A3\3den\Data\Displays\Display3DEN\PanelLeft\entityList_delete_ca.paa";
+        };
+        class DeleteButton: GVAR(RscTransparentButton) {
+            idc = DELETE_PRESETS_BUTTON;
+            x = QPOS_W(PRESETS_W - SMALL_BUTTON_W);
+            y = QPOS_H(PRESETS_H - SMALL_BUTTON_H);
+            w = QPOS_W(SMALL_BUTTON_W);
+            h = QPOS_H(SMALL_BUTTON_H);
+            tooltip = CSTRING(ui_general_deletePresetsBTN_tooltip);
+            onMouseEnter = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [ARR_4(0,0,0,1)]);
+            onMouseExit = QUOTE(((ctrlParent (_this select 0)) displayCtrl DELETE_PRESETS_BG) ctrlSetBackgroundColor [BG_COLOR]);
+            onButtonClick = QUOTE(call FUNC(deletePreset););
+        };
+    };
+};
+
+class GVAR(Dialog) {
+    idd = MAIN_DISPLAY;
+    movingEnable = 0;
+
+    class controls {
+        class HeaderBackground: RscText {
+            idc = HEAD_BG;
+            x = QPOS_X(0);
+            y = QPOS_Y(0);
+            w = QPOS_W(HEADER_W);
+            h = QPOS_H(HEADER_H);
+            colorBackground[] = {
+                "profileNamespace getVariable ['GUI_BCG_RGB_R',0.77]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_G',0.51]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_B',0.08]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_A',0.8]"
+            };
+        };
+        class HeaderTitle: RscTitle {
+            idc = HEAD_TXT;
+            x = QPOS_X(0);
+            y = QPOS_Y(0);
+            w = QPOS_W(HEADER_W / 2);
+            h = QPOS_H(HEADER_H);
+            text = CSTRING(ui_general_headTXT);
+        };
+        class Help: RscStructuredText {
+            idc = HEAD_HELP_TXT;
+            x = QPOS_X(HEADER_W / 2);
+            y = QPOS_Y(0);
+            w = QPOS_W(HEADER_W / 2);
+            h = QPOS_H(HEADER_H);
+            text = CSTRING(ui_general_helpTXT);
+            tooltip = CSTRING(ui_general_helpTXT_tooltip);
+            class Attributes
+            {
+                font = "RobotoCondensed";
+                color = "#ffffff";
+                colorLink = "#ffffff";
+                align = "right";
+                shadow = 1;
+                href = "https://github.com/Metis-Team/mts_marker/wiki/User-Manuel";
+            };
+        };
+
+        class Preview: GVAR(RscPreview) {
+            idc = PREVIEW_GROUP;
+            x = QPOS_X(CONFIG_W + PADDING);
+            y = QPOS_Y(HEADER_H + PADDING);
+            w = QPOS_W(PREVIEW_W);
+            h = QPOS_H(PREVIEW_H);
+        };
+
+        class Presets: GVAR(RscPresets) {
+            idc = PRESETS_GROUP;
+            x = QPOS_X(CONFIG_W + PADDING);
+            y = QPOS_Y(HEADER_H + PREVIEW_H + 2 * PADDING);
+            w = QPOS_W(PRESETS_W);
+            h = QPOS_H(PRESETS_H);
+        };
+
+        class Configuration: GVAR(RscConfiguration) {
+            idc = CONFIG_GROUP;
+            x = QPOS_X(0);
+            y = QPOS_Y(HEADER_H + PADDING);
+            w = QPOS_W(CONFIG_W);
+            h = QPOS_H(CONFIG_H);
+        };
+
+        class CancelButton: RscButtonMenuCancel {
+            idc = CANCEL_BUTTON;
+            x = QPOS_X(0);
+            y = QPOS_Y(HEADER_H + CONFIG_H + 2 * PADDING);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
+        };
+
+        class OkButton: RscButtonMenuOK {
+            idc = OK_BUTTON;
+            x = QPOS_X(CONFIG_W - WIDE_BUTTON_W);
+            y = QPOS_Y(HEADER_H + CONFIG_H + 2 * PADDING);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            default = 1;
+            onButtonClick = QUOTE([true] call FUNC(transmitUIData););
+        };
+    };
+};
+
+// -----------------------------------------------------------------------------------
+// --------------------------------- Date-Time Group ---------------------------------
+// -----------------------------------------------------------------------------------
+class GVAR(DTG): RscControlsGroupNoScrollbars {
+    class controls {
+        class Background: RscText {
+            idc = DTG_BG;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_H);
+            colorBackground[] = {BG_COLOR};
+        };
+
+        class ShortFormatCheckbox: GVAR(RscCheckBoxSound) {
+            idc = DTG_SHORT_FORMAT_CHECKBOX;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(DTG_PADDING);
+            w = QPOS_W(1);
+            h = QPOS_H(1);
+        };
+        class ShortFormatText: GVAR(RscText) {
+            idc = DTG_SHORT_FORMAT_TXT;
+            x = QPOS_W(DTG_TEXT_W + 1);
+            y = QPOS_H(DTG_PADDING);
+            w = QPOS_W(3 * DTG_DATE_COMBO_W - 1);
+            h = QPOS_H(1);
+            text = CSTRING(ui_dtg_shortFormat);
+        };
+
+        class DateText: GVAR(RscText) {
+            idc = DTG_DATE_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(2);
+            w = QPOS_W(DTG_TEXT_W);
+            h = QPOS_H(1);
+            style = ST_RIGHT;
+            text = "$STR_3DEN_Environment_Attribute_Date_Displayname";
+        };
+        class YearCombo: GVAR(RscCombo) {
+            idc = DTG_YEAR_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(2);
+            w = QPOS_W(DTG_DATE_COMBO_W);
+            h = QPOS_H(1);
+        };
+        class MonthCombo: YearCombo {
+            idc = DTG_MONTH_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + DTG_DATE_COMBO_W);
+        };
+        class DayCombo: YearCombo {
+            idc = DTG_DAY_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + 2 * DTG_DATE_COMBO_W);
+        };
+
+        class TimeText: GVAR(RscText) {
+            idc = DTG_TIME_TXT;
+            x = QPOS_W(0);
+            y = QPOS_H(3 + DTG_PADDING);
+            w = QPOS_W(DTG_TEXT_W);
+            h = QPOS_H(1);
+            style = ST_RIGHT;
+            text = "$STR_3DEN_Environment_Attribute_Daytime_Displayname";
+        };
+        class TimeSlider: RscXSliderH {
+            idc = DTG_TIME_SLIDER;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(3 + DTG_PADDING);
+            w = QPOS_W(DTG_SLIDER_W);
+            h = QPOS_H(1);
+        };
+        class Frame: RscFrame {
+            idc = DTG_TIME_FRAME;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(3 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W);
+            h = QPOS_H(1);
+        };
+        class Separator: RscText {
+            idc = DTG_TIME_SEPARATOR;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(3 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W);
+            h = QPOS_H(1);
+            style = ST_CENTER;
+            text = ":";
+            font = "EtelkaMonospaceProBold";
+            sizeEx = QPOS_H(1);
+            colorBackground[] = {0, 0, 0, 0.2};
+        };
+        class Hours: RscEdit {
+            idc = DTG_HOURS_EDIT;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W);
+            y = QPOS_H(3 + DTG_PADDING);
+            w = QPOS_W(DTG_TIME_FRAME_W / 2);
+            h = QPOS_H(1);
+            style = QUOTE(ST_CENTER + ST_NO_RECT);
+            tooltip = "$STR_3DEN_Attributes_SliderTime_Hour_tooltip";
+            font = "EtelkaMonospaceProBold";
+            sizeEx = QPOS_H(0.9);
+            maxChars = 2;
+        };
+        class Minutes: Hours {
+            idc = DTG_MINUTES_EDIT;
+            tooltip = "$STR_3DEN_Attributes_SliderTime_Minute_tooltip";
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + 2);
+        };
+        class TimezoneCombo: GVAR(RscCombo) {
+            idc = DTG_TIMEZONE_DROPDOWN;
+            x = QPOS_W(DTG_TEXT_W + DTG_SLIDER_W + DTG_TIME_FRAME_W);
+            y = QPOS_H(3 + DTG_PADDING);
+            w = QPOS_W(DTG_TIMEZONE_COMBO_W);
+            h = QPOS_H(1);
+        };
+
+        class SetLocalTimeButton: RscButtonMenu {
+            idc = DTG_LOCALTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W);
+            y = QPOS_H(4 + 2 * DTG_PADDING);
+            w = QPOS_W(DTG_BUTTON_W);
+            h = QPOS_H(1);
+            text = CSTRING(ui_dtg_localTime);
+            tooltip = CSTRING(ui_dtg_setLocalTime_tooltip);
+            onButtonClick = QUOTE([date] call FUNC(setDTGUIData););
+        };
+        class SetSystemTimeButton: SetLocalTimeButton {
+            idc = DTG_SYSTEMTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W + DTG_BUTTON_W + PADDING);
+            text = CSTRING(ui_dtg_systemTime);
+            tooltip = CSTRING(ui_dtg_setSystemTime_tooltip);
+            onButtonClick = QUOTE(call FUNC(setDTGUIToSystemTime););
+        };
+        class SetSystemUTCTimeButtonButton: SetLocalTimeButton {
+            idc = DTG_SYSTEMUTCTIME_BUTTON;
+            x = QPOS_W(DTG_TEXT_W + 2 * (DTG_BUTTON_W + PADDING));
+            text = CSTRING(ui_dtg_systemUTCTime);
+            tooltip = CSTRING(ui_dtg_setSystemUTCTime_tooltip);
+            onButtonClick = QUOTE([ARR_2(systemTimeUTC,'Z')] call FUNC(setDTGUIData););
+        };
+    };
+};
+
+class GVAR(DTGDialog) {
+    idd = DTG_DISPLAY;
+
+    class controls {
+        class HeaderBackground: RscText {
+            idc = DTG_HEAD_BG;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_HEADER_H);
+            colorBackground[] = {
+                "profileNamespace getVariable ['GUI_BCG_RGB_R',0.77]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_G',0.51]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_B',0.08]",
+                "profileNamespace getVariable ['GUI_BCG_RGB_A',0.8]"
+            };
+        };
+        class HeaderTitle: RscTitle {
+            idc = DTG_HEAD_TXT;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_HEADER_H);
+            text = CSTRING(ui_dtg);
+        };
+
+        class DTG: GVAR(DTG) {
+            idc = DTG_GROUP;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + PADDING);
+            w = QPOS_W(DTG_W);
+            h = QPOS_H(DTG_H);
+        };
+
+        class CancelButton: RscButtonMenuCancel {
+            idc = DTG_CANCEL_BUTTON;
+            x = QPOS_X((MAX_W - DTG_W) / 2);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
+        };
+
+        class OkButton: RscButtonMenuOK {
+            idc = DTG_OK_BUTTON;
+            x = QPOS_X((MAX_W - DTG_W) / 2 + DTG_W - WIDE_BUTTON_W);
+            y = QPOS_Y((MAX_H - DTG_H) / 2 + DTG_HEADER_H + DTG_H + 2 * PADDING);
+            w = QPOS_W(WIDE_BUTTON_W);
+            h = QPOS_H(WIDE_BUTTON_H);
+            default = 1;
+            onButtonClick = QUOTE([[] call FUNC(getDTGUIData)] call FUNC(saveAndDisplayDTG); (ctrlParent (_this select 0)) closeDisplay 1;);
         };
     };
 };

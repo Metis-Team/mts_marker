@@ -21,7 +21,7 @@ private _presetsList = _mainDisplay displayCtrl PRESETS_LIST;
 private _index = lbCurSel _presetsList;
 CHECK(_index < 0);
 
-(_mainDisplay displayctrl NAME_PRESETS_EDIT) ctrlSetText (_presetsList lbText _index);
+(_mainDisplay displayCtrl NAME_PRESETS_EDIT) ctrlSetText (_presetsList lbText _index);
 
 private _UIData = parseSimpleArray (_presetsList lbData _index);
 CHECK(_UIData isEqualTo []);

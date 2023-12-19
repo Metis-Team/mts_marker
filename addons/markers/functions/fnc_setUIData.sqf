@@ -6,30 +6,37 @@
  *      Sets the core data for the UI.
  *
  *  Parameter(s):
- *      0: ARRAY - Frameshape.
- *      1: ARRAY - Modifer.
- *      2: ARRAY - Group size.
- *      3: ARRAY - Left text.
- *      4: STRING - Right text.
+ *      Same marker configuration as in createMarkerLocal.
  *
  *  Returns:
  *      Nothing.
  *
  *  Example:
- *      [["blu", false], [4,0,0], [4, false, true], ["3","3"], "9"] call mts_markers_fnc_setUIData
+ *      _markerParameter call mts_markers_fnc_setUIData
  *
  */
 
 params [
-    ["_frameshape", ["",false], [[]]],
-    ["_modifier", [0,0,0], [[]], 3],
-    ["_size", [0,false,false], [[]], 3],
+    ["_frameshape", ["", false, false], [[]]],
+    ["_modifier", [0, 0, 0], [[]], 3],
+    ["_size", [0, false, false], [[]], 3],
     ["_uniqueDesignation", [], [[]]],
     ["_additionalInfo", "", [""]],
-    ["_higherFormation", [], [[]]]
+    ["_higherFormation", [], [[]]],
+    ["_operationalCondition", 0, [0]],
+    ["_dateTimeGroup", [], [[]]],
+    ["_direction", "", [""]]
 ];
-_frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]]];
-_size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
+_frameshape params [
+    ["_identity", "", [""]],
+    ["_dashedFrameshape", false, [false]],
+    ["_isHq", false, [false]]
+];
+_size params [
+    ["_grpsize", 0, [0]],
+    ["_reinforced", false, [false]],
+    ["_reduced", false, [false]]
+];
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 
@@ -39,7 +46,7 @@ private _ctrlArray = [
     [(_mainDisplay displayCtrl MOD2_DROPDOWN), GVAR(mod2Array)]
 ];
 
-//because of the sorting, the index needs to be found with the help of the value
+// Because of the sorting, the index needs to be found with the help of the value
 {
     _x params ["_ctrl", "_dropdownArray"];
 
@@ -59,6 +66,28 @@ private _ctrlArray = [
 (_mainDisplay displayCtrl HIGHER_EDIT) ctrlSetText (_higherFormation joinString "");
 (_mainDisplay displayCtrl ADDITIONAL_EDIT) ctrlSetText _additionalInfo;
 
-//select right identity in the dialog & update preview
-(_mainDisplay displayCtrl MOD_CHECKBOX) cbSetChecked _dashedFrameshape;
+(_mainDisplay displayCtrl HQ_CHECKBOX) cbSetChecked _isHq;
+
+private _directionIndex = (GVAR(directions) findIf {_x isEqualTo _direction}) + 1; // +1 because no direction is 0
+(_mainDisplay displayCtrl DIRECTION_DROPDOWN) lbSetCurSel _directionIndex;
+
+switch (_operationalCondition) do {
+    case OC_DAMAGED: {
+        (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked true;
+        (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked false;
+    };
+    case OC_DESTROYED: {
+        (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked false;
+        (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked true;
+    };
+    default {
+        (_mainDisplay displayCtrl DAMAGED_CHECKBOX) cbSetChecked false;
+        (_mainDisplay displayCtrl DESTROYED_CHECKBOX) cbSetChecked false;
+    };
+};
+
+[_dateTimeGroup] call FUNC(saveAndDisplayDTG);
+
+// Select right identity in the dialog & update preview
+(_mainDisplay displayCtrl SUSPECT_CHECKBOX) cbSetChecked _dashedFrameshape;
 [_identity] call FUNC(identityButtonsAction);

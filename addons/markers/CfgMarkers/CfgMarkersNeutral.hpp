@@ -70,3 +70,6 @@ MARKER(neu,size,9);
 MARKER(neu,size,10);
 MARKER(neu,size,11);
 MARKER(neu,size,12);
+
+//Neutral Direction of Movement
+#include "CfgMarkersNeutralDir.hpp"

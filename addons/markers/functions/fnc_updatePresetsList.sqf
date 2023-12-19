@@ -17,10 +17,10 @@
  */
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
-private _presetsList = _mainDisplay displayctrl PRESETS_LIST;
+private _presetsList = _mainDisplay displayCtrl PRESETS_LIST;
 
 //get the search filter
-private _search = toLower (ctrlText (_mainDisplay displayctrl SEARCH_PRESETS_EDIT));
+private _search = toLower (ctrlText (_mainDisplay displayCtrl SEARCH_PRESETS_EDIT));
 
 //get all saved presets
 private _presets = profileNamespace getVariable [QGVAR(presets), []];

@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
-        <img src="https://img.shields.io/badge/Version-1.7.0-blue.svg?style=flat-square" alt="Metis Marker Version">
+        <img src="https://img.shields.io/badge/Version-1.8.0-blue.svg?style=flat-square" alt="Metis Marker Version">
     </a>
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
         <img src="https://img.shields.io/github/downloads/Metis-Team/mts_marker/total.svg?style=flat-square&label=Downloads" alt="Metis Marker Downloads">
@@ -24,7 +24,7 @@
     <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases/latest">CBA A3</a>.</sup></strong>
 </p>
 
-**Metis Marker** brings you the opportunity to create NATO joint military symbols according to *APP-6(C)*.  
+**Metis Marker** brings you the opportunity to create NATO joint military symbols according to *APP-6(E)*.  
 It allows to build symbols from components, including frame, icon, first modifier, second modifier and amplifiers, rather than pre-define all possible symbols.
 
 ## Features:
@@ -36,7 +36,7 @@ It allows to build symbols from components, including frame, icon, first modifie
 - Build in preview
 - Full 3DEN support
 - Full Briefing support
-- Communication channel support e.g. Global-, Side- or Groupchannel 
+- Communication channel support e.g. Global, Side or Group channel 
 
 ## Customizable marker system
 Our customizable marker system consists of:  
@@ -49,6 +49,10 @@ Our customizable marker system consists of:
     - Higher Formation
     - Unique Designation
     - Additional Information
+    - Date-Time Group (DTG)
+    - Operational Condition 
+    - Direction of Movement Arrow
+    - Headquarters Staff Indicator
 
 ## FAQ
 - Q: Does the mod have to be run on the server?  
@@ -64,7 +68,7 @@ Our customizable marker system consists of:
 - Q: I can't see markers placed in the 3DEN editor when I'm ingame?  
   A: The mission needs to be saved for the markers to appear ingame.
 - Q: Is there an option to change the color scheme of the markers to the Arma vanilla style?  
-  A: Yes! In the CBA Settings you can set Metis Marker to use Arma colors instead of the APP-6(C) colors.
+  A: Yes! In the CBA Settings you can set Metis Marker to use Arma colors instead of the APP-6 colors.
 - Q: Where can I find more infos about this mod?  
   A: You can read our [Wiki](https://github.com/Metis-Team/mts_marker/wiki)
 
@@ -74,7 +78,7 @@ Our customizable marker system consists of:
 
 ## Contributing
 - [Issues & Feature requests](https://github.com/Metis-Team/mts_marker/issues)
-- [Become a developer](https://github.com/Metis-Team/mts_marker/wiki/For-developers)
+- [Become a developer](https://github.com/Metis-Team/mts_marker/wiki/Developer-Manuel)
 
 ## Contact
 Do you want to get in touch with us?  
@@ -88,14 +92,14 @@ Metis Marker is licensed under Arma Public License No Derivatives ([APL-ND](http
     <img src="https://i.imgur.com/ZHi6e4d.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/gI50G7B.jpg" width="1024">
+    <img src="https://i.imgur.com/wEkaPVh.jpg" width="1024">
 </p>
 <p align="center">
     <img src="https://i.imgur.com/0WT8eAE.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/u7R6yoL.jpg" width="1024">
+    <img src="https://i.imgur.com/t5qGMRv.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/2alXzvc.jpg" width="1024">
+    <img src="https://i.imgur.com/x6EY6YK.jpg" width="1024">
 </p>

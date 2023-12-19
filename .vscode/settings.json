@@ -10,6 +10,7 @@
         "**/*.exe": true,
         "**/keys": true,
         "**/release": true,
+        "**/__pycache__": true,
     },
     "files.associations": {
         "**/*.hpp": "ext",
@@ -18,6 +19,12 @@
         "**/XEH_PREP.hpp": "sqf",
         "*.rpt": "log",
         "init*.hpp": "sqf",
+    },
+    "search.exclude": {
+        "**/venv": true,
+    },
+    "explorer.autoRevealExclude": {
+        "**/venv": true
     },
     "sqf.enableACE3": false,
     "sqf.enableCBA": true,

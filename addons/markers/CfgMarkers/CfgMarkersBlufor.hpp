@@ -70,3 +70,6 @@ MARKER(blu,size,9);
 MARKER(blu,size,10);
 MARKER(blu,size,11);
 MARKER(blu,size,12);
+
+//Blufor Direction of Movement
+#include "CfgMarkersBluforDir.hpp"

@@ -53,7 +53,7 @@ if (_isForMarkerCreation) then {
         };
     } count _higherFormation;
 
-    private _okBtnCtrl = _mainDisplay displayctrl OK_BUTTON;
+    private _okBtnCtrl = _mainDisplay displayCtrl OK_BUTTON;
     private _pos = _okBtnCtrl getVariable [QGVAR(createMarkerMousePosition), [0,0]];
 
     private _broadcastChannel = call {
@@ -68,6 +68,9 @@ if (_isForMarkerCreation) then {
     };
     setCurrentChannel _broadcastChannel;
 
+    private _markerScale = sliderPosition (_mainDisplay displayCtrl SCALE_SLIDER);
+    private _markerAlpha = sliderPosition (_mainDisplay displayCtrl ALPHA_SLIDER);
+
     //check if marker is being editing, if so delete old marker and create new one
     private _editMarkerNamePrefix = _okBtnCtrl getVariable [QGVAR(editMarkerNamePrefix), ""];
     if (_editMarkerNamePrefix isNotEqualTo "") then {
@@ -78,7 +81,7 @@ if (_isForMarkerCreation) then {
         // Only save frameshape, modifier and size
         GVAR(lastSelection) = _markerParameter select [0, 3];
     };
-    [_pos, _broadcastChannel, !is3DEN, _markerParameter, MARKER_SCALE] call FUNC(createMarker);
+    [_pos, _broadcastChannel, !is3DEN, _markerParameter, _markerScale, _markerAlpha] call FUNC(createMarker);
     _mainDisplay closeDisplay 1;
 } else {
     _markerParameter call FUNC(setMarkerPreview);
