@@ -663,6 +663,7 @@ class GVAR(Dialog) {
             w = QPOS_W(HEADER_W / 2);
             h = QPOS_H(HEADER_H);
             text = CSTRING(ui_general_helpTXT);
+            tooltip = CSTRING(ui_general_helpTXT_tooltip);
             class Attributes
             {
                 font = "RobotoCondensed";

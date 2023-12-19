@@ -168,6 +168,10 @@
                 <Original>Help</Original>
                 <German>Hilfe</German>
             </Key>
+            <Key ID="str_mts_markers_ui_general_helpTXT_tooltip">
+                <Original>Opens the user manuel in the browser</Original>
+                <German>Öffnet die Bedienungsanleitung im Browser</German>
+            </Key>
         </Container>
         <Container name="UI_dtg">
             <Key ID="str_mts_markers_ui_dtg">
