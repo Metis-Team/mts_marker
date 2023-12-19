@@ -72,6 +72,7 @@
 
 // Text
 #define HEAD_TXT 200
+#define HEAD_HELP_TXT 201
 #define IDENTITY_TXT 202
 #define ICON_TXT 203
 #define SUSPECT_TXT 204
