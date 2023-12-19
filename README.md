@@ -36,7 +36,7 @@ It allows to build symbols from components, including frame, icon, first modifie
 - Build in preview
 - Full 3DEN support
 - Full Briefing support
-- Communication channel support e.g. Global-, Side- or Groupchannel 
+- Communication channel support e.g. Global, Side or Group channel 
 
 ## Customizable marker system
 Our customizable marker system consists of:  
@@ -78,7 +78,7 @@ Our customizable marker system consists of:
 
 ## Contributing
 - [Issues & Feature requests](https://github.com/Metis-Team/mts_marker/issues)
-- [Become a developer](https://github.com/Metis-Team/mts_marker/wiki/For-developers)
+- [Become a developer](https://github.com/Metis-Team/mts_marker/wiki/Developer-Manuel)
 
 ## Contact
 Do you want to get in touch with us?  
