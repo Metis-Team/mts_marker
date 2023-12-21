@@ -92,8 +92,8 @@
                 <Original>Additional Info:</Original>
                 <German>Zusatzinformationen:</German>
             </Key>
-            <Key ID="str_mts_markers_ui_general_headquatersTXT">
-                <Original>Headquaters</Original>
+            <Key ID="str_mts_markers_ui_general_headquartersTXT">
+                <Original>Headquarters</Original>
                 <German>Führungseinrichtung</German>
             </Key>
             <Key ID="str_mts_markers_ui_general_damagedTXT">
