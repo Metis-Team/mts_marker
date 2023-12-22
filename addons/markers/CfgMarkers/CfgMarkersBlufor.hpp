@@ -1,4 +1,4 @@
-//Blufor Icons
+//Blufor Icon
 MARKER(blu,mod,armor);
 MARKER(blu,mod,infantry);
 MARKER(blu,mod,motorized);
@@ -33,6 +33,7 @@ MARKER(blu,mod,special_operation_forces);
 MARKER(blu,mod,combined_arms);
 MARKER(blu,mod,radar);
 MARKER(blu,mod,field_artillery_observer);
+MARKER(blu,mod,eod);
 
 //Blufor Mod1
 MARKER(blu,mod,attack);
@@ -46,6 +47,7 @@ MARKER(blu,mod,naval_top);
 MARKER(blu,mod,radar_top);
 MARKER(blu,mod,bridging);
 MARKER(blu,mod,medevac);
+MARKER(blu,mod,eod_top);
 
 //Blufor Mod2
 MARKER(blu,mod,airborne);

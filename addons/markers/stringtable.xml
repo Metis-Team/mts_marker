@@ -656,6 +656,10 @@
                 <Original>Field Artillery Observer</Original>
                 <German>Artilleriebeobachter</German>
             </Key>
+            <Key ID="str_mts_markers_ui_icon_eod">
+                <Original>Explosive Ordnance Disposal (EOD)</Original>
+                <German>Kampfmittelabwehr (EOD)</German>
+            </Key>
         </Container>
         <Container name="UI_mod1">
             <Key ID="str_mts_markers_ui_mod1_empty">
@@ -729,6 +733,10 @@
             <Key ID="str_mts_markers_ui_mod1_medevac">
                 <Original>Medical Evacuation</Original>
                 <German>Verwundetentransport</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_mod1_eod_top">
+                <Original>Explosive Ordnance Disposal (EOD)</Original>
+                <German>Kampfmittelabwehr (EOD)</German>
             </Key>
         </Container>
         <Container name="UI_mod2">

@@ -1,4 +1,4 @@
-//Neutral Mods
+//Neutral Icon
 MARKER(neu,mod,armor);
 MARKER(neu,mod,infantry);
 MARKER(neu,mod,motorized);
@@ -33,6 +33,7 @@ MARKER(neu,mod,special_operation_forces);
 MARKER(neu,mod,combined_arms);
 MARKER(neu,mod,radar);
 MARKER(neu,mod,field_artillery_observer);
+MARKER(neu,mod,eod);
 
 //Neutral Mod1
 MARKER(neu,mod,attack);
@@ -46,6 +47,7 @@ MARKER(neu,mod,naval_top);
 MARKER(neu,mod,radar_top);
 MARKER(neu,mod,bridging);
 MARKER(neu,mod,medevac);
+MARKER(neu,mod,eod_top);
 
 //Neutral Mod2
 MARKER(neu,mod,airborne);
