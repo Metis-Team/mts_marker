@@ -44,6 +44,7 @@ GVAR(iconArray) = [
     ["radar"],
     ["field_artillery_observer"],
     ["eod"],
+    ["ranger"]
 ];
 
 GVAR(mod1Array) = [

@@ -660,6 +660,10 @@
                 <Original>Explosive Ordnance Disposal (EOD)</Original>
                 <German>Kampfmittelabwehr (EOD)</German>
             </Key>
+            <Key ID="str_mts_markers_ui_icon_ranger">
+                <Original>Ranger</Original>
+                <German>Ranger</German>
+            </Key>
         </Container>
         <Container name="UI_mod1">
             <Key ID="str_mts_markers_ui_mod1_empty">

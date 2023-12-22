@@ -34,6 +34,7 @@ MARKER(unk,mod,combined_arms);
 MARKER(unk,mod,radar);
 MARKER(unk,mod,field_artillery_observer);
 MARKER(unk,mod,eod);
+MARKER(unk,mod,ranger);
 
 //Unknown Mod1
 MARKER(unk,mod,attack);

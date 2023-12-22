@@ -34,6 +34,7 @@ MARKER(red,mod,combined_arms);
 MARKER(red,mod,radar);
 MARKER(red,mod,field_artillery_observer);
 MARKER(red,mod,eod);
+MARKER(red,mod,ranger);
 
 //Redfor Mod1
 MARKER(red,mod,attack);

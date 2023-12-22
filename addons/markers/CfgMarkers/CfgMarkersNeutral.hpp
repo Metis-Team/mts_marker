@@ -34,6 +34,7 @@ MARKER(neu,mod,combined_arms);
 MARKER(neu,mod,radar);
 MARKER(neu,mod,field_artillery_observer);
 MARKER(neu,mod,eod);
+MARKER(neu,mod,ranger);
 
 //Neutral Mod1
 MARKER(neu,mod,attack);
