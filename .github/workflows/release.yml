@@ -52,7 +52,7 @@ jobs:
     - name: Build (HEMTT)
       run: |
         echo "${{ env.MOD_NAME }} v${{ env.VERSION }} (${{ env.SHA_SHORT }})"
-        hemtt release
+        hemtt release --no-archive
       env:
         BIOUTPUT: 1  # output binarize log
 

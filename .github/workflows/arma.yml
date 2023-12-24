@@ -18,3 +18,13 @@ jobs:
       run: python3 tools/config_style_checker.py
     - name: Check for BOM
       uses: arma-actions/bom-check@v1
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the source code
+      uses: actions/checkout@v4
+    - name: Setup HEMTT
+      uses: arma-actions/hemtt@v1
+    - name: Run HEMTT build
+      run: hemtt build
