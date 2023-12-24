@@ -404,7 +404,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             y = QPOS_H(15);
             w = QPOS_W(6.5);
             h = QPOS_H(1);
-            text = CSTRING(ui_general_headquatersTXT);
+            text = CSTRING(ui_general_headquartersTXT);
             style = ST_RIGHT;
         };
         class HQCheckbox: GVAR(RscCheckBoxSound) {
