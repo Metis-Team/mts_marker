@@ -42,12 +42,6 @@ jobs:
         echo "VERSION_SHORT=$version_short" >> $env:GITHUB_ENV
         echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $env:GITHUB_ENV
 
-    - name: Setup P-Drive for ArmaScriptCompiler
-      run: |
-        echo "Creating P: and linking ${{ env.MAIN_PREFIX }}\${{ env.PREFIX }}\addons"
-        subst p: include
-        New-Item -ItemType Junction -Path "p:${{ env.MAIN_PREFIX }}\${{ env.PREFIX }}\addons" -Target "addons"
-
     - name: Test Binarize
       run: |
         echo "::group::Run Binarize without arguments (look for missing DLLs)"
