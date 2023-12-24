@@ -664,6 +664,50 @@
                 <Original>Ranger</Original>
                 <German>Ranger</German>
             </Key>
+            <Key ID="str_mts_markers_ui_icon_aviation_composite">
+                <Original>Aviation Composite</Original>
+                <German>Starr- und Drehflügler</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_electromagnetic_warfare">
+                <Original>Electromagnetic Warfare</Original>
+                <German>Elektronischer Kampf</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_internal_security_force">
+                <Original>Internal Security Force</Original>
+                <German>Interne Sicherheitskräfte</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_isaf">
+                <Original>International Security Assistance Force (ISAF)</Original>
+                <German>Internationale Schutztruppe für Afghanistan (ISAF)</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_liaison">
+                <Original>Liaison</Original>
+                <German>Verbindung</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_main_gun_system">
+                <Original>Main Gun System</Original>
+                <German>Ausstattung mit schwerem Waffensystem</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_main_gun_system_infantry">
+                <Original>Infantry with Main Gun System</Original>
+                <German>Infanterie mit schwerem Waffensystem</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_main_gun_system_mechanized">
+                <Original>Mechanized Infantry with Main Gun System</Original>
+                <German>Mechanisierte Infanterie mit schwerem Waffensystem</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_main_gun_system_air_defence">
+                <Original>Air Defence with Main Gun System</Original>
+                <German>Flugabwehr mit schwerem Waffensystem</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_police">
+                <Original>Police</Original>
+                <German>Polizei</German>
+            </Key>
+            <Key ID="str_mts_markers_ui_icon_search_and_rescue">
+                <Original>Search and Rescue</Original>
+                <German>Such- und Rettungsdienst</German>
+            </Key>
         </Container>
         <Container name="UI_mod1">
             <Key ID="str_mts_markers_ui_mod1_empty">

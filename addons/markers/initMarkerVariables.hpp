@@ -44,7 +44,18 @@ GVAR(iconArray) = [
     ["radar"],
     ["field_artillery_observer"],
     ["eod"],
-    ["ranger"]
+    ["ranger"],
+    ["aviation_composite"],
+    ["electromagnetic_warfare"],
+    ["internal_security_force"],
+    ["isaf"],
+    ["liaison"],
+    ["main_gun_system"],
+    ["main_gun_system_infantry", ["main_gun_system", "infantry"]],
+    ["main_gun_system_mechanized", ["main_gun_system", "infantry", "armor"]],
+    ["main_gun_system_air_defence", ["main_gun_system", "air_defence"]],
+    ["police"],
+    ["search_and_rescue"]
 ];
 
 GVAR(mod1Array) = [

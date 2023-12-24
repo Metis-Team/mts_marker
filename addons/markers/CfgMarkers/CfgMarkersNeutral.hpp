@@ -35,6 +35,14 @@ MARKER(neu,mod,radar);
 MARKER(neu,mod,field_artillery_observer);
 MARKER(neu,mod,eod);
 MARKER(neu,mod,ranger);
+MARKER(neu,mod,aviation_composite);
+MARKER(neu,mod,electromagnetic_warfare);
+MARKER(neu,mod,internal_security_force);
+MARKER(neu,mod,isaf);
+MARKER(neu,mod,liaison);
+MARKER(neu,mod,main_gun_system);
+MARKER(neu,mod,police);
+MARKER(neu,mod,search_and_rescue);
 
 //Neutral Mod1
 MARKER(neu,mod,attack);
