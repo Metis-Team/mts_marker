@@ -1,4 +1,4 @@
-//Unknown Mods
+//Unknown Icon
 MARKER(unk,mod,armor);
 MARKER(unk,mod,infantry);
 MARKER(unk,mod,motorized);
@@ -33,6 +33,16 @@ MARKER(unk,mod,special_operation_forces);
 MARKER(unk,mod,combined_arms);
 MARKER(unk,mod,radar);
 MARKER(unk,mod,field_artillery_observer);
+MARKER(unk,mod,eod);
+MARKER(unk,mod,ranger);
+MARKER(unk,mod,aviation_composite);
+MARKER(unk,mod,electromagnetic_warfare);
+MARKER(unk,mod,internal_security_force);
+MARKER(unk,mod,isaf);
+MARKER(unk,mod,liaison);
+MARKER(unk,mod,main_gun_system);
+MARKER(unk,mod,police);
+MARKER(unk,mod,search_and_rescue);
 
 //Unknown Mod1
 MARKER(unk,mod,attack);
@@ -46,6 +56,7 @@ MARKER(unk,mod,naval_top);
 MARKER(unk,mod,radar_top);
 MARKER(unk,mod,bridging);
 MARKER(unk,mod,medevac);
+MARKER(unk,mod,eod_top);
 
 //Unknown Mod2
 MARKER(unk,mod,airborne);

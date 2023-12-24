@@ -1,4 +1,4 @@
-//Redfor Mods
+//Redfor Icon
 MARKER(red,mod,armor);
 MARKER(red,mod,infantry);
 MARKER(red,mod,motorized);
@@ -33,6 +33,16 @@ MARKER(red,mod,special_operation_forces);
 MARKER(red,mod,combined_arms);
 MARKER(red,mod,radar);
 MARKER(red,mod,field_artillery_observer);
+MARKER(red,mod,eod);
+MARKER(red,mod,ranger);
+MARKER(red,mod,aviation_composite);
+MARKER(red,mod,electromagnetic_warfare);
+MARKER(red,mod,internal_security_force);
+MARKER(red,mod,isaf);
+MARKER(red,mod,liaison);
+MARKER(red,mod,main_gun_system);
+MARKER(red,mod,police);
+MARKER(red,mod,search_and_rescue);
 
 //Redfor Mod1
 MARKER(red,mod,attack);
@@ -46,6 +56,7 @@ MARKER(red,mod,naval_top);
 MARKER(red,mod,radar_top);
 MARKER(red,mod,bridging);
 MARKER(red,mod,medevac);
+MARKER(red,mod,eod_top);
 
 //Redfor Mod2
 MARKER(red,mod,airborne);
