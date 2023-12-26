@@ -12,44 +12,35 @@ jobs:
     if: github.repository == 'Metis-Team/mts_marker' && ! contains(github.event.head_commit.message, '[ci skip]')
     runs-on: windows-latest
     outputs:
-      NAME: ${{ env.NAME }}
       MOD_NAME: ${{ env.MOD_NAME }}
-      PREFIX: ${{ env.PREFIX }}
-      MAIN_PREFIX: ${{ env.MAIN_PREFIX }}
       VERSION: ${{ env.VERSION }}
       VERSION_SHORT: ${{ env.VERSION_SHORT }}
       SHA_SHORT: ${{ env.SHA_SHORT }}
     steps:
     - name: Checkout the source code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+
+    - name: Setup HEMTT
+      uses: arma-actions/hemtt@v1
 
     - name: Setup Tools
       run: |
         C:\msys64\usr\bin\wget.exe ${{ secrets.FTP_SERVER }}/arma_tools.zip --user ${{ secrets.FTP_USERNAME }} --password ${{ secrets.FTP_PASSWORD }} -q
         Expand-Archive arma_tools.zip -DestinationPath ci
-        echo "Check HEMTT: $(Test-Path .\\ci\\hemtt.exe)"
         echo "Check Binarize: $(Test-Path .\\ci\\binarize\\binarize_x64.exe)"
-        echo "Check ArmaScriptCompiler: $(Test-Path .\\ci\\ArmaScriptCompiler.exe)"
-        .\ci\hemtt.exe --version
+        hemtt --version
         echo "Install Binarize dependencies"
         cp .\ci\binarize\X3DAudio1_7.dll,.\ci\binarize\XAPOFX1_5.dll C:\Windows\System32\
         echo "::group::Set Binarize registry path"
         New-Item "HKCU:\\Software\\Bohemia Interactive\\binarize" -Force | New-ItemProperty -Name path -Value "${{ github.workspace }}\ci\binarize"
         echo "::endgroup::"
         echo "Set env variables"
-        echo "NAME=$(.\\ci\\hemtt.exe var name)" >> $env:GITHUB_ENV
-        echo "MOD_NAME=$(.\\ci\\hemtt.exe var modname)" >> $env:GITHUB_ENV
-        echo "PREFIX=$(.\\ci\\hemtt.exe var prefix)" >> $env:GITHUB_ENV
-        echo "MAIN_PREFIX=$(.\\ci\\hemtt.exe var mainprefix)" >> $env:GITHUB_ENV
-        echo "VERSION=$(.\\ci\\hemtt.exe var version)" >> $env:GITHUB_ENV
-        echo "VERSION_SHORT=$(($(.\\ci\\hemtt.exe var version) | Select-String -Pattern '^\d+\.\d+\.\d+').Matches.Value)" >> $env:GITHUB_ENV
+        echo "MOD_NAME=Metis_Marker" >> $env:GITHUB_ENV
+        $version = Select-String -Path "addons\\markers\\script_version.hpp" -Pattern '#define (MAJOR|MINOR|PATCHLVL|BUILD) (\d+)' | ForEach-Object { $_.Matches.Groups[2].Value } | Join-String -Separator "."
+        $version_short = (Select-String -InputObject $version -Pattern '^\d+\.\d+\.\d+').Matches.Value
+        echo "VERSION=$version" >> $env:GITHUB_ENV
+        echo "VERSION_SHORT=$version_short" >> $env:GITHUB_ENV
         echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $env:GITHUB_ENV
-
-    - name: Setup P-Drive for ArmaScriptCompiler
-      run: |
-        echo "Creating P: and linking ${{ env.MAIN_PREFIX }}\${{ env.PREFIX }}\addons"
-        subst p: include
-        New-Item -ItemType Junction -Path "p:${{ env.MAIN_PREFIX }}\${{ env.PREFIX }}\addons" -Target "addons"
 
     - name: Test Binarize
       run: |
@@ -60,17 +51,21 @@ jobs:
 
     - name: Build (HEMTT)
       run: |
-        echo "${{ env.NAME }} v${{ env.VERSION_SHORT }} (${{ env.VERSION }}; ${{ env.SHA_SHORT }})"
-        .\ci\hemtt.exe build --release --ci --time
+        echo "${{ env.MOD_NAME }} v${{ env.VERSION }} (${{ env.SHA_SHORT }})"
+        hemtt release --no-archive
       env:
         BIOUTPUT: 1  # output binarize log
 
+    - name: Rename build folder
+      run: mv .hemttout/release .hemttout/@${{ env.MOD_NAME }}
+
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ env.MOD_NAME }}
-        path: releases/${{ env.VERSION }}/* # Upload folder to avoid double-zip artifacts
+        path: .hemttout/@*
         retention-days: 1
+
 
   publish-release:
     needs: build
@@ -78,14 +73,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download Artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
+
     - name: Prepare Archives
       run: |
         mv ${{ needs.build.outputs.MOD_NAME }}/* .
         echo "::group::Archive build"
         zip -r ${{ needs.build.outputs.MOD_NAME }}_${{ needs.build.outputs.VERSION_SHORT }}.zip @${{ needs.build.outputs.MOD_NAME }}
         echo "::endgroup::"
-    - name: Prepare GitHub
+
+    - name: Prepare GitHub Release
       id: release_drafter
       uses: release-drafter/release-drafter@v5
       with:
@@ -94,8 +91,9 @@ jobs:
         version: ${{ needs.build.outputs.VERSION }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload to GitHub
-      uses: actions/upload-release-asset@v1
+
+    - name: Upload mod archive to GitHub Release
+      uses: shogo82148/actions-upload-release-asset@v1.7.2
       with:
         upload_url: ${{ steps.release_drafter.outputs.upload_url }}
         asset_path: ./${{ needs.build.outputs.MOD_NAME }}_${{ needs.build.outputs.VERSION_SHORT }}.zip
