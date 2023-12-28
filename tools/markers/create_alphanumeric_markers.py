@@ -45,10 +45,10 @@ special_chars = {
 }
 
 def get_alphanum_macro(anchor, pos, letter):
-    return f'ALPHANUMMARKER({anchor},{pos},{letter});'
+    return f'ALPHANUM_MARKER({anchor},{pos},{letter});'
 
 def get_special_macro(anchor, pos, letter):
-    return f'SPECIALCHARMARKER({anchor},{pos},{letter});'
+    return f'SPECIAL_CHAR_MARKER({anchor},{pos},{letter});'
 
 printable_char_sets = {
     'alphanum': {
