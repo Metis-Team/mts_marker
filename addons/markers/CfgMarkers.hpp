@@ -1,7 +1,6 @@
-#define IDENTITY_MARKER_FILE(IDENTITY,MODIFIER,NAME) mts_markers_##IDENTITY##_##MODIFIER##_##NAME##.paa
 #define IDENTITY_MARKER(IDENTITY,MODIFIER,NAME) \
 class mts_##IDENTITY##_##MODIFIER##_##NAME##: mts_##IDENTITY##_frameshape { \
-    icon = QPATHTOF(data\IDENTITY\MODIFIER\MARKER_FILE(IDENTITY,MODIFIER,NAME)); \
+    icon = QPATHTOF(data\IDENTITY\MODIFIER\mts_markers_##IDENTITY##_##MODIFIER##_##NAME##.paa); \
 }
 
 // Default marker
@@ -14,33 +13,29 @@ class mts_##IDENTITY##_##MODIFIER##_##NAME##: mts_##IDENTITY##_frameshape { \
 // Common markers
 #define COM_MARKER(MODIFIER,NAME) \
 class mts_com_##MODIFIER##_##NAME##: mts_blu_frameshape { \
-    icon = QPATHTOF(data\com\MODIFIER\IDENTITY_MARKER_FILE(com,MODIFIER,NAME)); \
+    icon = QPATHTOF(data\com\MODIFIER\mts_markers_com_##MODIFIER##_##NAME##.paa); \
 }
 
 // Character markers
-#define ALPHANUM_MARKER_FILE(ANCHOR,POSITION,LETTER) mts_markers_alphanum_##ANCHOR##_##POSITION##_##LETTER##.paa
 #define ALPHANUM_MARKER(ANCHOR,POSITION,LETTER) \
 class mts_alphanum_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
-    icon = QPATHTOF(data\alphanum\ANCHOR\POSITION\ALPHANUM_MARKER_FILE(ANCHOR,POSITION,LETTER)); \
+    icon = QPATHTOF(data\alphanum\ANCHOR\POSITION\mts_markers_alphanum_##ANCHOR##_##POSITION##_##LETTER##.paa); \
 }
-#define SPECIAL_CHAR_MARKER_FILE(ANCHOR,POSITION,LETTER) mts_markers_special_##ANCHOR##_##POSITION##_##LETTER##.paa
 #define SPECIAL_CHAR_MARKER(ANCHOR,POSITION,LETTER) \
 class mts_special_##ANCHOR##_##POSITION##_##LETTER##: mts_blu_frameshape { \
-    icon = QPATHTOF(data\special\ANCHOR\POSITION\SPECIAL_CHAR_MARKER_FILE(ANCHOR,POSITION,LETTER)); \
+    icon = QPATHTOF(data\special\ANCHOR\POSITION\mts_markers_special_##ANCHOR##_##POSITION##_##LETTER##.paa); \
 }
 
 // Date-Time Group markers
-#define DTG_MARKER_FILE(POSITION,LETTER) mts_markers_dtg_##POSITION##_##LETTER##.paa
 #define DTG_MARKER(POSITION,LETTER) \
 class mts_dtg_##POSITION##_##LETTER##: mts_blu_frameshape { \
-    icon = QPATHTOF(data\dtg\POSITION\DTG_MARKER_FILE(POSITION,LETTER)); \
+    icon = QPATHTOF(data\dtg\POSITION\mts_markers_dtg_##POSITION##_##LETTER##.paa); \
 }
 
 // Direction of Movement markers
-#define IDENTITY_DIR_MARKER_FILE(IDENTITY,DIRECTION) mts_markers_##IDENTITY##_dir_##DIRECTION##.paa
 #define IDENTITY_DIR_MARKER(IDENTITY,DIRECTION) \
 class mts_##IDENTITY##_dir_##DIRECTION##: mts_##IDENTITY##_frameshape { \
-    icon = QPATHTOF(data\IDENTITY\dir\DIR_MARKER_FILE(IDENTITY,DIRECTION)); \
+    icon = QPATHTOF(data\IDENTITY\dir\mts_markers_##IDENTITY##_dir_##DIRECTION##.paa); \
 }
 #define DIR_MARKER(DIRECTION) \
     IDENTITY_DIR_MARKER(blu,DIRECTION); \
@@ -49,10 +44,9 @@ class mts_##IDENTITY##_dir_##DIRECTION##: mts_##IDENTITY##_frameshape { \
     IDENTITY_DIR_MARKER(unk,DIRECTION)
 
 // Direction of Movement markers for modifications (e.g. HQ)
-#define IDENTITY_ALT_DIR_MARKER_FILE(IDENTITY,MOD,DIRECTION) mts_markers_##IDENTITY##_dir_##MOD##_##DIRECTION##.paa
 #define IDENTITY_ALT_DIR_MARKER(IDENTITY,MOD,DIRECTION) \
 class mts_##IDENTITY##_dir_##MOD##_##DIRECTION##: mts_##IDENTITY##_frameshape { \
-    icon = QPATHTOF(data\IDENTITY\dir\MOD\ALT_DIR_MARKER_FILE(IDENTITY,MOD,DIRECTION)); \
+    icon = QPATHTOF(data\IDENTITY\dir\MOD\mts_markers_##IDENTITY##_dir_##MOD##_##DIRECTION##.paa); \
 }
 #define DIR_MOD_MARKER(MOD,DIRECTION) \
     IDENTITY_ALT_DIR_MARKER(blu,MOD,DIRECTION); \
