@@ -1,3 +1,3 @@
 @echo off
-hemtt build
+hemtt dev
 pause
