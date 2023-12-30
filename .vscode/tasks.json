@@ -6,7 +6,7 @@
             "detail": "Build Arma addon with HEMTT in debug mode.",
             "type": "process",
             "command": "hemtt",
-            "args": ["build"],
+            "args": ["dev"],
             "group": "build",
             "presentation": {
                 "close": true,

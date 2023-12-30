@@ -34,3 +34,8 @@ preset = "Hemtt"
 
 [hemtt.release]
 folder = "Metis_Marker"
+
+[hemtt.launch.default]
+workshop = [
+    "450814997", # CBA_A3's Workshop ID
+]
