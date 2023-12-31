@@ -24,8 +24,8 @@ def main():
   This script will create your Metis dev environment for you.
 
   Before you run this, you should already have:
-    - The Arma 3 Tools installed properly via Steam
-    - A properly set up P-drive
+    - The Arma 3 Tools installed properly via Steam (optional)
+    - A properly set up P-drive (optional)
 
   If you have not done those things yet, please abort this script in the next step and do so first.
 
@@ -59,19 +59,26 @@ def main():
     try:
         os.makedirs(devpath, exist_ok=True)
 
-        if not os.path.exists("P:\\"):
-            print("No P-drive detected. Skipping it.")
-        elif not os.path.exists(os.path.join("P:", MAINDIR, PROJECTDIR)):
-            os.makedirs(os.path.join("P:", MAINDIR), exist_ok=True)
-            _winapi.CreateJunction(devpath, os.path.join("P:", MAINDIR, PROJECTDIR))
-        else:
-            print("Link on P: already exists. Skipping it.")
+        if os.path.exists("P:\\"):
+            link = os.path.join("P:", MAINDIR, PROJECTDIR)
+            if os.path.exists(link):
+                os.unlink(link)
+                print("Previous link on P: deleted.")
 
-        if not os.path.exists(os.path.join(armapath, MAINDIR, PROJECTDIR)):
-            os.makedirs(os.path.join(armapath, MAINDIR), exist_ok=True)
-            _winapi.CreateJunction(devpath, os.path.join(armapath, MAINDIR, PROJECTDIR))
+            os.makedirs(os.path.dirname(link), exist_ok=True)
+            _winapi.CreateJunction(devpath, link)
+            print("Link on P: created.")
         else:
-            print("Link in Arma directory already exists. Skipping it.")
+            print("No P-drive detected. Skipping it.")
+
+        link = os.path.join(armapath, MAINDIR, PROJECTDIR)
+        if os.path.exists(link):
+            os.unlink(link)
+            print("Previous link in Arma directory deleted.")
+
+        os.makedirs(os.path.dirname(link), exist_ok=True)
+        _winapi.CreateJunction(devpath, link)
+        print("Link in Arma directory created.")
     except:
         print("Something went wrong during the link creation. Please finish the setup manually.")
         raise
