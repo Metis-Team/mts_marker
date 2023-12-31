@@ -75,11 +75,11 @@ identities = {
     'unk': 'Unknown',
 }
 
-def get_dir_macro(identity, direction):
-    return f'DIRMARKER({identity},{direction});'
+def get_dir_macro(direction):
+    return f'DIR_MARKER({direction});'
 
-def get_alternative_dir_macro(identity, mod, direction):
-    return f'ALTDIRMARKER({identity},{mod},{direction});'
+def get_alternative_dir_macro(mod, direction):
+    return f'DIR_MOD_MARKER({mod},{direction});'
 
 class Point(NamedTuple):
     x: float
@@ -227,28 +227,26 @@ def create_all_images(offsets: dict[str, dict[str, dict[str]]]):
 
     return images, icons
 
-def write_include_files(output_dir: pathlib.Path, offsets: dict[str, dict[str, dict[str]]]):
+def write_include_files(output_dir: pathlib.Path, mods: list[str]):
     """Writes all marker into a include files.
 
     Args:
         path (Path): Path to the directory where the include files should be saved.
-        offsets (dict[str, dict[str, dict[str]]]): Markers to create.
+        mods (list[str]): Default, HQ, ... modifications.
     """
+    with open(output_dir / f'CfgMarkersDirections.hpp', 'w') as f:
+        comment = util.get_generated_comment_lines('Character markers for Direction of Movement')
+        f.writelines(comment)
 
-    for identity, identity_config in offsets.items():
-        with open(output_dir / f'CfgMarkers{identities[identity]}Dir.hpp', 'w') as f:
-            comment = util.get_generated_comment_lines('Character markers for Direction of Movement')
-            f.writelines(comment)
+        for mod in mods:
+            for direction in directions:
+                if mod == 'default':
+                    macro = get_dir_macro(direction)
+                else:
+                    macro = get_alternative_dir_macro(mod, direction)
+                f.write(macro + '\n')
 
-            for mod in identity_config:
-                for direction in directions:
-                    if mod == 'default':
-                        macro = get_dir_macro(identity, direction)
-                    else:
-                        macro = get_alternative_dir_macro(identity, mod, direction)
-                    f.write(macro + '\n')
-
-                f.write('\n')
+            f.write('\n')
 
 
 def debug_create_marker(direction: str, identity: str = 'blu', hq: bool = False):
@@ -298,7 +296,7 @@ def main(args: argparse.Namespace):
     print(f'Exported {len(all_images)} images.\n')
 
     print('Creating include file...')
-    write_include_files(args.output_dir, offsets)
+    write_include_files(args.output_dir, offsets['blu'].keys())
 
     print('Finished generating character marker files.')
     d,h,m,s = util.fract_sec(timeit.default_timer() - start_time)
