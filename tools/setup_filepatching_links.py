@@ -42,10 +42,6 @@ def main():
         print("Failed to determine Arma 3 Path.")
         return 2
 
-    if not os.path.exists("P:\\"):
-        print("No P-drive detected.")
-        return 3
-
     scriptpath = os.path.realpath(__file__)
     projectpath = os.path.dirname(os.path.dirname(scriptpath))
     devpath = os.path.join(projectpath, '.hemttout', 'dev')
@@ -63,7 +59,9 @@ def main():
     try:
         os.makedirs(devpath, exist_ok=True)
 
-        if not os.path.exists(os.path.join("P:", MAINDIR, PROJECTDIR)):
+        if not os.path.exists("P:\\"):
+            print("No P-drive detected. Skipping it.")
+        elif not os.path.exists(os.path.join("P:", MAINDIR, PROJECTDIR)):
             os.makedirs(os.path.join("P:", MAINDIR), exist_ok=True)
             _winapi.CreateJunction(devpath, os.path.join("P:", MAINDIR, PROJECTDIR))
         else:
