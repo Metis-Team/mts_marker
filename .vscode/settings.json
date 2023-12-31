@@ -22,9 +22,15 @@
     },
     "search.exclude": {
         "**/venv": true,
+        ".hemttout/dev": true,
+        ".hemttout/build": true,
+        ".hemttout/release": true,
     },
     "explorer.autoRevealExclude": {
-        "**/venv": true
+        "**/venv": true,
+        ".hemttout/dev": true,
+        ".hemttout/build": true,
+        ".hemttout/release": true,
     },
     "sqf.enableACE3": false,
     "sqf.enableCBA": true,

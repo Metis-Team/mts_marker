@@ -13,7 +13,7 @@
  *          0: ARRAY - Frameshape of the marker.
  *              0: STRING - Identity (blu, red, neu, unk).
  *              1: BOOLEAN - Dashed (e.g. supect).
- *              2: BOOLEAN - Headquaters.
+ *              2: BOOLEAN - Headquarters.
  *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *              0: NUMBER - Icon (0 for none).
  *              1: NUMBER - Modifier 1 (0 for none).

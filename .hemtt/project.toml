@@ -1,0 +1,41 @@
+name = "Metis_Marker"
+mainprefix = "z"
+prefix = "mts"
+author = "Bix, PhILoX, Timi007"
+
+[files]
+include = [
+    "mod.cpp",
+    "README.md",
+    "LICENSE",
+    "mts_picture.paa",
+    "mts_logo_small.paa",
+    "mts_logo_over_small.paa",
+    "meta.cpp"
+]
+
+[signing]
+authority = "mts_markers"
+
+[version]
+path = "addons/markers/script_version.hpp"
+git_hash = 0
+
+[asc]
+enabled = true
+exclude = [
+    "/initsettings.sqf",
+    "/initkeybinds.sqf",
+    "/xeh_prep.sqf",
+]
+
+[hemtt.config]
+preset = "Hemtt"
+
+[hemtt.release]
+folder = "Metis_Marker"
+
+[hemtt.launch.default]
+workshop = [
+    "450814997", # CBA_A3's Workshop ID
+]

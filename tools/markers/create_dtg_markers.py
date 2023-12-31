@@ -47,7 +47,7 @@ short_format_alphabets: list[str | list[str]] = [
 formats = [long_format_alphabets, short_format_alphabets]
 
 def get_dtg_macro(pos, letter):
-    return f'DTGMARKER({pos},{letter});'
+    return f'DTG_MARKER({pos},{letter});'
 
 def create_image(font: FreeTypeFont, letter: str, pos: int):
     """Creates a image of a character in given position and location (anchor).

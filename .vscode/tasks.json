@@ -5,8 +5,8 @@
             "label": "Build Debug",
             "detail": "Build Arma addon with HEMTT in debug mode.",
             "type": "process",
-            "command": "hemtt.exe",
-            "args": ["build"],
+            "command": "hemtt",
+            "args": ["dev"],
             "group": "build",
             "presentation": {
                 "close": true,
@@ -18,13 +18,8 @@
             "label": "Build Release",
             "detail": "Build Arma addon with HEMTT for release.",
             "type": "process",
-            "command": "hemtt.exe",
-            "args": [
-                "build",
-                "--release",
-                "--time",
-                "-f"
-            ],
+            "command": "hemtt",
+            "args": ["release"],
             "group": "build"
         }
     ]

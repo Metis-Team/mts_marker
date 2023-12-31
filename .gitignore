@@ -1,4 +1,3 @@
-release/*
 *.cache
 *.pbo
 texHeaders.bin
@@ -9,10 +8,11 @@ Thumbs.db
 *.sqfc
 *.exe
 
-## Added by HEMTT
+#### HEMTT
 hemtt
 hemtt.exe
-releases/*
-keys/*
-.hemtt/local
+release/
+releases/
+keys/
+.hemttout/
 ####

@@ -4,7 +4,7 @@
 
 <p align="center">
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
-        <img src="https://img.shields.io/badge/Version-1.8.0-blue.svg?style=flat-square" alt="Metis Marker Version">
+        <img src="https://img.shields.io/badge/Version-1.8.1-blue.svg?style=flat-square" alt="Metis Marker Version">
     </a>
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
         <img src="https://img.shields.io/github/downloads/Metis-Team/mts_marker/total.svg?style=flat-square&label=Downloads" alt="Metis Marker Downloads">
@@ -92,14 +92,14 @@ Metis Marker is licensed under Arma Public License No Derivatives ([APL-ND](http
     <img src="https://i.imgur.com/ZHi6e4d.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/wEkaPVh.jpg" width="1024">
+    <img src="https://i.imgur.com/4aQSkFt.jpg" width="1024">
 </p>
 <p align="center">
     <img src="https://i.imgur.com/0WT8eAE.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/t5qGMRv.jpg" width="1024">
+    <img src="https://i.imgur.com/ZlA9GQw.jpg" width="1024">
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/x6EY6YK.jpg" width="1024">
+    <img src="https://i.imgur.com/4yb05tw.jpg" width="1024">
 </p>
