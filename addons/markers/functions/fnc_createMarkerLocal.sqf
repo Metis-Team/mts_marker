@@ -139,7 +139,7 @@ if (_direction isEqualTo "" && _isHq) then {
 
 // Direction of Movement Arrow
 if (_direction isNotEqualTo "") then {
-    private _mod = if (_isHq) then { "dir_hq" } else { "dir" };
+    private _mod = ["dir", "dir_hq"] select _isHq;
     private _markerName = format ["%1_%2_%3", _namePrefix, _mod, _direction];
     private _markerType = format ["mts_%1_%2_%3", _identity, _mod, _direction];
 
