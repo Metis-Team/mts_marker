@@ -18,7 +18,7 @@
 
 params [["_namePrefix", "", [""]]];
 
-CHECKRET([_namePrefix] call FUNC(isMtsMarker) isNotEqualTo 1, QUOTE(-1));
+CHECKRET([_namePrefix] call FUNC(isMtsMarker) isNotEqualTo 1,"-1");
 
 (_namePrefix splitString "/") param [1, "-1"]
 

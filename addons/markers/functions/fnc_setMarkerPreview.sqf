@@ -38,7 +38,7 @@ _size params [
     ["_reduced", false, [false]]
 ];
 
-CHECKRET(_identity isEqualTo "", ERROR("No identity"));
+CHECKRET(_identity isEqualTo "",ERROR("No identity"));
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _previewIdentityCtrl = _mainDisplay displayCtrl PREVIEW_LYR_IDENTITY;

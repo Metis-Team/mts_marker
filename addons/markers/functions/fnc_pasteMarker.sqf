@@ -19,12 +19,12 @@
 
 private _params = params [["_mapCtrl", controlNull, [controlNull]], ["_mousepos", [0,0], [[]], [2]]];
 
-CHECKRET((GVAR(clipboard) isEqualTo "" || !_params), false);
+CHECKRET((GVAR(clipboard) isEqualTo "" || !_params),false);
 
 GVAR(clipboard) params ["_namePrefix", "_scale", "_alpha"];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
-CHECKRET(_markerInformation isEqualTo [], false);
+CHECKRET(_markerInformation isEqualTo [],false);
 
 _markerInformation params ["", "_markerParameter"];
 

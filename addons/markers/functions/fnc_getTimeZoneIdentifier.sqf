@@ -20,7 +20,7 @@
 params [["_time", [], [[]]], ["_timeUtc", [], [[]]]];
 
 private _timeZone = [_time, _timeUtc] call FUNC(getTimeZone); // _timeDiffH hour is in range -12..+12
-CHECKRET(_timeZone isEqualTo [], "");
+CHECKRET(_timeZone isEqualTo [],"");
 
 // Simplify time zones according to ATP 6-02.70 Appendix E
 // Do not consider the minutes

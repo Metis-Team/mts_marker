@@ -10,7 +10,7 @@ ADDON = true;
 
 // Print version to rpt log
 private _version = getText (configFile >> "CfgPatches" >> "mts_markers" >> "versionStr");
-INFO_1("Metis Marker version: %1.", _version);
+INFO_1("Metis Marker version: %1.",_version);
 
 //create namespace
 if (isServer || (!isMultiplayer)) then {

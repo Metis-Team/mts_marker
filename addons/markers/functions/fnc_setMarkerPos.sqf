@@ -19,12 +19,12 @@
 
 params [["_namePrefix", "", [""]], ["_newPos", [0,0], [[]], [2,3]]];
 
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 //get channel ID from marker prefix
 private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Invalid marker prefix. No MTS marker"));
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Invalid marker prefix. No MTS marker"));
 
 //broadcast marker depending on channel ID
 [_namePrefix, _newPos] remoteExecCall [QFUNC(setMarkerPosLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
