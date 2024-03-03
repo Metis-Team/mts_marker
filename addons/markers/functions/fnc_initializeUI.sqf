@@ -24,7 +24,7 @@ params [["_curMapDisplay", displayNull, [displayNull]], ["_mousePos", [0,0], [[]
 
 //Open interface
 private _displayCheck = _curMapDisplay createDisplay QGVAR(Dialog);
-CHECKRET(isNull _displayCheck, ERROR("Failed to create dialog"));
+CHECKRET(isNull _displayCheck,ERROR("Failed to create dialog"));
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _mapCtrl = _curMapDisplay displayCtrl MAP_CTRL;

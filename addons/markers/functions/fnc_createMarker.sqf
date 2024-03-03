@@ -50,7 +50,7 @@ params [
     ["_alpha", MARKER_ALPHA, [0]]
 ];
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Channel ID not supported"));
 
 //get player UID
 private _playerUID = getPlayerUID player;

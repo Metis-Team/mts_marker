@@ -21,16 +21,16 @@
  */
 
 params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]], ["_displayShort", false, [false]]];
-TRACE_2("params", _date, _timeZone);
+TRACE_1("params",_this);
 
-CHECKRET((_date isEqualTo []) || (count _timeZone != 1), []);
+CHECKRET((_date isEqualTo []) || (count _timeZone != 1),[]);
 
 _date params [["_year", MIN_YEAR, [0]], ["_month", 1, [0]], ["_day", 1, [0]], ["_hour", 0, [0]], ["_minute", 0, [0]]];
 
-CHECKRET(_month < 1 || _month > 12, []);
-CHECKRET(_day < 1 || _day > 31, []);
-CHECKRET(_hour < 0 || _hour > 23, []);
-CHECKRET(_minute < 0 || _minute > 59, []);
+CHECKRET(_month < 1 || _month > 12,[]);
+CHECKRET(_day < 1 || _day > 31,[]);
+CHECKRET(_hour < 0 || _hour > 23,[]);
+CHECKRET(_minute < 0 || _minute > 59,[]);
 
 private _hourStr = [_hour, 2] call CBA_fnc_formatNumber;
 private _minuteStr = [_minute, 2] call CBA_fnc_formatNumber;

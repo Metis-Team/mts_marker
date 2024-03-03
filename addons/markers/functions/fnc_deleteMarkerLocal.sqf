@@ -19,7 +19,7 @@
 
 params [["_namePrefix", "", [""]]];
 CHECK(!hasInterface);
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 //get marker set
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);

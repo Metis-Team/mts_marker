@@ -18,15 +18,15 @@
  */
 
 params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false, [false]]];
-CHECKRET(isNull _mapCtrl, false);
+CHECKRET(isNull _mapCtrl,false);
 
 //get marker prefix
 private _namePrefix = [_mapCtrl, _includeNoEditMarker] call FUNC(getMouseOverMarkerPrefix);
-CHECKRET(_namePrefix isEqualTo "", false);
+CHECKRET(_namePrefix isEqualTo "",false);
 
 //get marker set
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
-CHECKRET(_markerFamily isEqualTo [], false);
+CHECKRET(_markerFamily isEqualTo [],false);
 
 private _originAlpha = markerAlpha (_markerFamily select 0);
 

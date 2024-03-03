@@ -31,6 +31,6 @@
 
 params [["_namePrefix", "", [""]]];
 
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 (GVAR(namespace) getVariable [_namePrefix, []]) param [1, []]

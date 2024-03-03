@@ -67,8 +67,8 @@ _markerParameter params [
 _size params [["_grpsize", 0, [0]], ["_reinforced", false, [false]], ["_reduced", false, [false]]];
 
 CHECK(!hasInterface);
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
-CHECKRET((_frameshape select 0) isEqualTo "", ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN, BOOLEAN]"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
+CHECKRET((_frameshape select 0) isEqualTo "",ERROR("No frameshape or wrong format. Expected format: [STRING, BOOLEAN, BOOLEAN]"));
 
 _frameshape params [["_identity", "", [""]], ["_dashedFrameshape", false, [false]], ["_isHq", false, [false]]];
 _identity = toLower _identity;
@@ -85,14 +85,14 @@ if (_alpha < 0 || _alpha > 1) then {
 };
 
 if !(_identity in ["blu", "red", "neu", "unk"]) exitWith {
-    ERROR_1("Unknown Identity %1", _identity);
+    ERROR_1("Unknown Identity %1",_identity);
 };
 
-CHECKRET(_operationalCondition < 0 || _operationalCondition > 2, ERROR("Operational condition must be a number between 0 and 2."));
+CHECKRET(_operationalCondition < 0 || _operationalCondition > 2,ERROR("Operational condition must be a number between 0 and 2."));
 
 _direction = toUpper _direction;
 if (_direction isNotEqualTo "" && {!(_direction in GVAR(directions))}) exitWith {
-    ERROR_2("Unknown direction of movement %1. Allowed values: %2", _direction, GVAR(directions) joinString ", ");
+    ERROR_2("Unknown direction of movement %1. Allowed values: %2",_direction,GVAR(directions) joinString ", ");
 };
 
 //create frameshape marker
@@ -121,7 +121,7 @@ private _frameshapeColor = if (GVAR(useVanillaColors)) then {
 } else {
     format ["mts_%1_color", _identity]
 };
-CHECKRET(_frameshapeColor isEqualTo "", ERROR_1("Could not get corresponding vanilla color for identity %1.", _identity));
+CHECKRET(_frameshapeColor isEqualTo "",ERROR_1("Could not get corresponding vanilla color for identity %1.",_identity));
 
 _markerFrame setMarkerColorLocal _frameshapeColor;
 
@@ -139,7 +139,7 @@ if (_direction isEqualTo "" && _isHq) then {
 
 // Direction of Movement Arrow
 if (_direction isNotEqualTo "") then {
-    private _mod = if (_isHq) then { "dir_hq" } else { "dir" };
+    private _mod = ["dir", "dir_hq"] select _isHq;
     private _markerName = format ["%1_%2_%3", _namePrefix, _mod, _direction];
     private _markerType = format ["mts_%1_%2_%3", _identity, _mod, _direction];
 
@@ -204,13 +204,13 @@ if (_additionalInfo isNotEqualTo "") then {
 
 // create text marker (bottom left of marker)
 if ((count _uniqueDesignation) > 0) then {
-    TRACE_1("uniqueDesignation input", _uniqueDesignation);
+    TRACE_1("uniqueDesignation input",_uniqueDesignation);
     scopeName "textLeftCreation";
+
     //only take the first three characters of the left text
     if ((count _uniqueDesignation) > UNIQUE_DESIGNATION_MAX_CHARS) then {
         _uniqueDesignation resize UNIQUE_DESIGNATION_MAX_CHARS;
     };
-
 
     //check if all characters are valid & make all characters uppercase
     {
@@ -231,7 +231,7 @@ if ((count _uniqueDesignation) > 0) then {
         private _letter = _uniqueDesignation select _numIndex;
 
         ([_namePrefix, "uniqueDesignation", _letterPos, _letter] call FUNC(getCharMarkerType)) params ["_letterType", "_markerName"];
-        TRACE_3("uniqueDesignation", _letter, _letterType, _markerName);
+        TRACE_3("uniqueDesignation",_letter,_letterType,_markerName);
 
         private _markerUniqueDesignation = createMarkerLocal [_markerName, _pos];
         _markerUniqueDesignation setMarkerTypeLocal _letterType;
@@ -246,9 +246,9 @@ if ((count _uniqueDesignation) > 0) then {
 
 // create text marker (bottom right of marker)
 if ((count _higherFormation) > 0) then {
-    TRACE_1("higherFormation input", _higherFormation);
-
+    TRACE_1("higherFormation input",_higherFormation);
     scopeName "textRightCreation";
+
     //only take the first n characters of the left text
     if ((count _higherFormation) > HIGHER_FORMATION_MAX_CHARS) then {
         _higherFormation resize HIGHER_FORMATION_MAX_CHARS;
@@ -270,7 +270,7 @@ if ((count _higherFormation) > 0) then {
         private _letter = _x;
 
         ([_namePrefix, "higherFormation", _forEachIndex, _letter] call FUNC(getCharMarkerType)) params ["_letterType", "_markerName"];
-        TRACE_3("higherFormation", _letter, _letterType, _markerName);
+        TRACE_3("higherFormation",_letter,_letterType,_markerName);
 
         private _markerHigherFormation = createMarkerLocal [_markerName, _pos];
         _markerHigherFormation setMarkerTypeLocal _letterType;
@@ -304,7 +304,7 @@ if ((count _dateTimeGroup) > 0) then {
     // Returns array in format [D, D, H, H, M, M, Z, mmm, Y, Y].
     private _dtgCharacters = _dateTimeGroup call FUNC(toDTGCharaters);
 
-    CHECKRET(_dtgCharacters isEqualTo [], WARNING_1("Date-Time Group is invalid. Will not create DTG markers. DTG: %1", _dateTimeGroup));
+    CHECKRET(_dtgCharacters isEqualTo [],WARNING_1("Date-Time Group is invalid. Will not create DTG markers. DTG: %1",_dateTimeGroup));
 
     // Iterate reversed because char pos starts closest to frameshape, meaning with the year.
     //             DDHHMMZmmmYY ┌───────┐

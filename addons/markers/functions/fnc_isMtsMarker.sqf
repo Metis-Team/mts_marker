@@ -17,7 +17,7 @@
  */
 
 params [["_markerName", "", [""]]];
-CHECKRET(_markerName isEqualTo "", 0);
+CHECKRET(_markerName isEqualTo "",0);
 
 private _markerNamePrefix = toLower (_markerName select [0, 9]);
 

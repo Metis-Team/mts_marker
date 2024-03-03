@@ -21,7 +21,7 @@
 params [["_editable", true, [true]], ["_broadcastChannel", -1, [0]], ["_playerUID", "0", [""]]];
 private ["_namePrefix"];
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)), ERROR("Channel ID not supported"));
+CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Channel ID not supported"));
 
 //generate unique marker name & return
 private _uniqueName = false;

@@ -17,10 +17,10 @@
  */
 
 params [["_mapCtrl", controlNull, [controlNull]]];
-CHECKRET(isNull _mapCtrl, false);
+CHECKRET(isNull _mapCtrl,false);
 
 private _namePrefix = [_mapCtrl, true] call FUNC(getMouseOverMarkerPrefix);
-CHECKRET(_namePrefix isEqualTo "", false);
+CHECKRET(_namePrefix isEqualTo "",false);
 
 private _scale = [_namePrefix] call FUNC(getMarkerScale);
 private _alpha = [_namePrefix] call FUNC(getMarkerAlpha);

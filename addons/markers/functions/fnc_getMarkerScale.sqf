@@ -18,6 +18,6 @@
 
 params [["_namePrefix", "", [""]]];
 
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 (getMarkerSize format ["%1_frame", _namePrefix]) select 0

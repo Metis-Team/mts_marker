@@ -18,6 +18,6 @@
 
 params [["_namePrefix", "", [""]]];
 
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 (markerAlpha format ["%1_frame", _namePrefix])

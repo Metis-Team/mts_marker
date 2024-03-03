@@ -18,7 +18,7 @@
 
 params [["_namePrefix", "", [""]]];
 
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 switch ([_namePrefix] call FUNC(isMtsMarker)) do {
      case 1: {

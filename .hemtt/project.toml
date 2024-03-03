@@ -21,14 +21,6 @@ authority = "mts_markers"
 path = "addons/markers/script_version.hpp"
 git_hash = 0
 
-[asc]
-enabled = true
-exclude = [
-    "/initsettings.sqf",
-    "/initkeybinds.sqf",
-    "/xeh_prep.sqf",
-]
-
 [hemtt.config]
 preset = "Hemtt"
 

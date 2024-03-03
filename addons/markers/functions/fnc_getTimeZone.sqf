@@ -22,7 +22,7 @@
 
 params [["_time", [], [[]], [2, 7]], ["_timeUtc", [], [[]], [2, 7]]];
 
-CHECKRET((_time isEqualTo []) || (_timeUtc isEqualTo []), []);
+CHECKRET((_time isEqualTo []) || (_timeUtc isEqualTo []),[]);
 
 // time is passed from systemTime command
 if ((count _time) isEqualTo 7) then {
