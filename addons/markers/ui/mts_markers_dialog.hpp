@@ -58,6 +58,21 @@ class GVAR(RscCombo): RscCombo {
     };
 };
 
+class GVAR(RscDimensionButton): RscButtonMenu {
+    colorBackground[] = {0, 0, 0, 0};
+    w = QPOS_W(DIMENSION_BUTTON_W);
+    h = QPOS_H(DIMENSION_BUTTON_H);
+};
+
+class GVAR(RscPreviewLayer): RscPicture {
+    x = 0;
+    y = 0;
+    w = QPOS_W(PREVIEW_LAYER_W);
+    h = QPOS_H(PREVIEW_LAYER_H);
+    text = "";
+};
+
+
 class GVAR(RscPreview): RscControlsGroupNoScrollbars {
     class controls {
         class Background: RscText {
@@ -78,40 +93,12 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
             text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
         };
 
-        class Identity: RscPicture {
-            idc = PREVIEW_LYR_IDENTITY;
+        class Layers: RscControlsGroupNoScrollbars {
+            idc = PREVIEW_LYR_GRP;
             x = QPOS_W((PREVIEW_W - PREVIEW_LAYER_W) / 2);
             y = QPOS_H((PREVIEW_H - PREVIEW_LAYER_H) / 2);
             w = QPOS_W(PREVIEW_LAYER_W);
             h = QPOS_H(PREVIEW_LAYER_H);
-            text = "";
-        };
-        class HQ: Identity {
-            idc = PREVIEW_LYR_HQ;
-        };
-        class Direction: Identity {
-            idc = PREVIEW_LYR_DIRECTION;
-        };
-        class Mod1: Identity {
-            idc = PREVIEW_LYR_MOD_1;
-        };
-        class Mod2: Identity {
-            idc = PREVIEW_LYR_MOD_2;
-        };
-        class Mod3: Identity {
-            idc = PREVIEW_LYR_MOD_3;
-        };
-        class Mod4: Identity {
-            idc = PREVIEW_LYR_MOD_4;
-        };
-        class Echelon: Identity {
-            idc = PREVIEW_LYR_ECHELON;
-        };
-        class Size: Identity {
-            idc = PREVIEW_LYR_SIZE_MOD;
-        };
-        class OperationalCondition: Identity {
-            idc = PREVIEW_LYR_OPERATIONAL_CONDITION;
         };
     };
 };
@@ -119,15 +106,6 @@ class GVAR(RscPreview): RscControlsGroupNoScrollbars {
 
 class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
     class controls {
-        class Background: RscText {
-            idc = CONFIG_BG;
-            x = QPOS_W(0);
-            y = QPOS_H(0);
-            w = QPOS_W(CONFIG_W);
-            h = QPOS_H(CONFIG_H);
-            colorBackground[] = {BG_COLOR};
-        };
-
         class FrameBackground: RscPicture {
             idc = FRAME_BG;
             x = QPOS_W((CONFIG_W - 12) / 2);
@@ -179,7 +157,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                     h = QPOS_H(FRAME_BUTTON_H);
                     text = "";
                     tooltip = CSTRING(ui_identity_friend);
-                    onButtonClick = QUOTE(['blu'] call FUNC(identityButtonsAction););
+                    onButtonClick = QUOTE([ARR_2(_this select 0,'blu')] call FUNC(onIdentityButtonClick););
                 };
 
                 class RedButtonFrame: BluButtonFrame {
@@ -195,7 +173,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                     idc = HOSTILE_BTN_CTRL;
                     x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
                     tooltip = CSTRING(ui_identity_hostile);
-                    onButtonClick = QUOTE(['red'] call FUNC(identityButtonsAction););
+                    onButtonClick = QUOTE([ARR_2(_this select 0,'red')] call FUNC(onIdentityButtonClick););
                 };
 
                 class NeuButtonFrame: BluButtonFrame {
@@ -211,7 +189,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                     idc = NEUTRAL_BTN_CTRL;
                     x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
                     tooltip = CSTRING(ui_identity_neutral);
-                    onButtonClick = QUOTE(['neu'] call FUNC(identityButtonsAction););
+                    onButtonClick = QUOTE([ARR_2(_this select 0,'neu')] call FUNC(onIdentityButtonClick););
                 };
 
                 class UnkButtonFrame: BluButtonFrame {
@@ -227,7 +205,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
                     idc = UNKNOWN_BTN_CTRL;
                     x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
                     tooltip = CSTRING(ui_identity_unknown);
-                    onButtonClick = QUOTE(['unk'] call FUNC(identityButtonsAction););
+                    onButtonClick = QUOTE([ARR_2(_this select 0,'unk')] call FUNC(onIdentityButtonClick););
                 };
             };
         };
@@ -443,7 +421,7 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
         class DirectionText: GVAR(RscText) {
             idc = DIRECTION_TXT;
             x = QPOS_W((CONFIG_W - 10) / 2);
-            y = QPOS_H(17);
+            y = QPOS_H(16);
             w = QPOS_W(10);
             h = QPOS_H(1);
             text = CSTRING(ui_general_directionTXT);
@@ -451,62 +429,8 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
         class DirectionCombo: GVAR(RscCombo) {
             idc = DIRECTION_DROPDOWN;
             x = QPOS_W((CONFIG_W - 10) / 2);
-            y = QPOS_H(18);
+            y = QPOS_H(17);
             w = QPOS_W(10);
-            h = QPOS_H(1);
-        };
-
-        class AlphaText: GVAR(RscText) {
-            idc = ALPHA_TXT;
-            x = QPOS_W(0.5);
-            y = QPOS_H(CONFIG_H - 2 - 0.5);
-            w = QPOS_W(8.8);
-            h = QPOS_H(1);
-            text = CSTRING(ui_general_alphaTXT);
-        };
-        class AlphaSlider: RscXSliderH {
-            idc = ALPHA_SLIDER;
-            x = QPOS_W(0.5);
-            y = QPOS_H(CONFIG_H - 1 - 0.5);
-            w = QPOS_W(8.8);
-            h = QPOS_H(1);
-            tooltip = CSTRING(ui_general_resetSlider_tooltip);
-            sliderPosition = MARKER_ALPHA;
-            sliderRange[] = {MIN_ALPHA, MAX_ALPHA};
-        };
-
-        class ScaleText: GVAR(RscText) {
-            idc = SCALE_TXT;
-            x = QPOS_W((CONFIG_W - 8.8) / 2);
-            y = QPOS_H(CONFIG_H - 2 - 0.5);
-            w = QPOS_W(8.8);
-            h = QPOS_H(1);
-            text = CSTRING(ui_general_scaleTXT);
-        };
-        class ScaleSlider: RscXSliderH {
-            idc = SCALE_SLIDER;
-            x = QPOS_W((CONFIG_W - 8.8) / 2);
-            y = QPOS_H(CONFIG_H - 1 - 0.5);
-            w = QPOS_W(8.8);
-            h = QPOS_H(1);
-            tooltip = CSTRING(ui_general_resetSlider_tooltip);
-            sliderPosition = MARKER_SCALE;
-            sliderRange[] = {MIN_SCALE, MAX_SCALE};
-        };
-
-        class ChannelText: GVAR(RscText) {
-            idc = CHANNEL_TXT;
-            x = QPOS_W(CONFIG_W - 8.8 - 0.5);
-            y = QPOS_H(CONFIG_H - 2 - 0.5);
-            w = QPOS_W(8.8);
-            h = QPOS_H(1);
-            text = CSTRING(ui_general_channelTXT);
-        };
-        class ChannelCombo: GVAR(RscCombo) {
-            idc = CHANNEL_DROPDOWN;
-            x = QPOS_W(CONFIG_W - 8.8 - 0.5);
-            y = QPOS_H(CONFIG_H - 1 - 0.5);
-            w = QPOS_W(8.8);
             h = QPOS_H(1);
         };
     };
@@ -658,9 +582,9 @@ class GVAR(Dialog) {
         };
         class Help: RscStructuredText {
             idc = HEAD_HELP_TXT;
-            x = QPOS_X(HEADER_W / 2);
+            x = QPOS_X(3 * HEADER_W / 4);
             y = QPOS_Y(0);
-            w = QPOS_W(HEADER_W / 2);
+            w = QPOS_W(HEADER_W / 4);
             h = QPOS_H(HEADER_H);
             text = CSTRING(ui_general_helpTXT);
             tooltip = CSTRING(ui_general_helpTXT_tooltip);
@@ -691,18 +615,116 @@ class GVAR(Dialog) {
             h = QPOS_H(PRESETS_H);
         };
 
-        class Configuration: GVAR(RscConfiguration) {
-            idc = CONFIG_GROUP;
+        class Dimensions: RscControlsGroupNoScrollbars {
+            idc = DIMENSIONS_BUTTON_GROUP;
             x = QPOS_X(0);
             y = QPOS_Y(HEADER_H + PADDING);
+            w = QPOS_W(DIMENSIONS_W);
+            h = QPOS_H(DIMENSIONS_H);
+
+            class controls {
+                class Background: RscText {
+                    idc = DIMENSIONS_BG;
+                    x = QPOS_W(0);
+                    y = QPOS_H(0);
+                    w = QPOS_W(DIMENSIONS_W);
+                    h = QPOS_H(DIMENSIONS_H);
+                    colorBackground[] = {0, 0, 0, 1};
+                };
+
+                // Dimension selection buttons are added in script
+            };
+        };
+
+        class Configuration: RscControlsGroupNoScrollbars {
+            idc = CONFIG_BASE_GROUP;
+            x = QPOS_X(0);
+            y = QPOS_Y(HEADER_H + PADDING + DIMENSIONS_H);
             w = QPOS_W(CONFIG_W);
             h = QPOS_H(CONFIG_H);
+
+            class controls {
+                class Background: RscText {
+                    idc = CONFIG_BG;
+                    x = QPOS_W(0);
+                    y = QPOS_H(0);
+                    w = QPOS_W(CONFIG_W);
+                    h = QPOS_H(CONFIG_H);
+                    colorBackground[] = {BG_COLOR};
+                };
+
+                class DimensionConfiguration: RscControlsGroupNoScrollbars {
+                    idc = CONFIG_DIMENSION_GROUP;
+                    x = QPOS_W(0);
+                    y = QPOS_H(0);
+                    w = QPOS_W(CONFIG_W);
+                    h = QPOS_H(CONFIG_H - 2 - 0.5);
+
+                    class controls {
+                        // Dimension specific configuration pages are added in script
+                    };
+                };
+
+                class AlphaText: GVAR(RscText) {
+                    idc = ALPHA_TXT;
+                    x = QPOS_W(0.5);
+                    y = QPOS_H(CONFIG_H - 2 - 0.5);
+                    w = QPOS_W(8.8);
+                    h = QPOS_H(1);
+                    text = CSTRING(ui_general_alphaTXT);
+                };
+                class AlphaSlider: RscXSliderH {
+                    idc = ALPHA_SLIDER;
+                    x = QPOS_W(0.5);
+                    y = QPOS_H(CONFIG_H - 1 - 0.5);
+                    w = QPOS_W(8.8);
+                    h = QPOS_H(1);
+                    tooltip = CSTRING(ui_general_resetSlider_tooltip);
+                    sliderPosition = MARKER_ALPHA;
+                    sliderRange[] = {MIN_ALPHA, MAX_ALPHA};
+                };
+
+                class ScaleText: GVAR(RscText) {
+                    idc = SCALE_TXT;
+                    x = QPOS_W((CONFIG_W - 8.8) / 2);
+                    y = QPOS_H(CONFIG_H - 2 - 0.5);
+                    w = QPOS_W(8.8);
+                    h = QPOS_H(1);
+                    text = CSTRING(ui_general_scaleTXT);
+                };
+                class ScaleSlider: RscXSliderH {
+                    idc = SCALE_SLIDER;
+                    x = QPOS_W((CONFIG_W - 8.8) / 2);
+                    y = QPOS_H(CONFIG_H - 1 - 0.5);
+                    w = QPOS_W(8.8);
+                    h = QPOS_H(1);
+                    tooltip = CSTRING(ui_general_resetSlider_tooltip);
+                    sliderPosition = MARKER_SCALE;
+                    sliderRange[] = {MIN_SCALE, MAX_SCALE};
+                };
+
+                class ChannelText: GVAR(RscText) {
+                    idc = CHANNEL_TXT;
+                    x = QPOS_W(CONFIG_W - 8.8 - 0.5);
+                    y = QPOS_H(CONFIG_H - 2 - 0.5);
+                    w = QPOS_W(8.8);
+                    h = QPOS_H(1);
+                    text = CSTRING(ui_general_channelTXT);
+                };
+                class ChannelCombo: GVAR(RscCombo) {
+                    idc = CHANNEL_DROPDOWN;
+                    x = QPOS_W(CONFIG_W - 8.8 - 0.5);
+                    y = QPOS_H(CONFIG_H - 1 - 0.5);
+                    w = QPOS_W(8.8);
+                    h = QPOS_H(1);
+                };
+            };
         };
 
         class CancelButton: RscButtonMenuCancel {
             idc = CANCEL_BUTTON;
             x = QPOS_X(0);
-            y = QPOS_Y(HEADER_H + CONFIG_H + 2 * PADDING);
+            y = QPOS_Y(HEADER_H + DIMENSIONS_H + CONFIG_H + 2 * PADDING);
             w = QPOS_W(WIDE_BUTTON_W);
             h = QPOS_H(WIDE_BUTTON_H);
             onButtonClick = QUOTE((ctrlParent (_this select 0)) closeDisplay 2;);
@@ -711,7 +733,7 @@ class GVAR(Dialog) {
         class OkButton: RscButtonMenuOK {
             idc = OK_BUTTON;
             x = QPOS_X(CONFIG_W - WIDE_BUTTON_W);
-            y = QPOS_Y(HEADER_H + CONFIG_H + 2 * PADDING);
+            y = QPOS_Y(HEADER_H + DIMENSIONS_H + CONFIG_H + 2 * PADDING);
             w = QPOS_W(WIDE_BUTTON_W);
             h = QPOS_H(WIDE_BUTTON_H);
             default = 1;

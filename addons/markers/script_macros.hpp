@@ -24,4 +24,17 @@
 #define CHECK(CONDITION) if (CONDITION) exitWith {}
 #define CHECKRET(CONDITION,RETURN) if (CONDITION) exitWith {RETURN;}
 
+#include "\a3\ui_f\hpp\defineCommonGrids.inc"
+#include "\a3\ui_f\hpp\defineResincl.inc"
+
+#define POS_X(N) ((N) * GUI_GRID_W + GUI_GRID_CENTER_X)
+#define POS_Y(N) ((N) * GUI_GRID_H + GUI_GRID_CENTER_Y)
+#define POS_W(N) ((N) * GUI_GRID_W)
+#define POS_H(N) ((N) * GUI_GRID_H)
+
+#define QPOS_X(N) QUOTE(POS_X(N))
+#define QPOS_Y(N) QUOTE(POS_Y(N))
+#define QPOS_W(N) QUOTE(POS_W(N))
+#define QPOS_H(N) QUOTE(POS_H(N))
+
 #include "\z\mts\addons\markers\script_debug.hpp"

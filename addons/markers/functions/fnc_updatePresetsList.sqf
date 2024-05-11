@@ -29,13 +29,18 @@ private _presets = profileNamespace getVariable [QGVAR(presets), []];
 lbClear _presetsList;
 
 {
-    _x params ["_presetName", "_namespaceIndex", "_UIData", "_picture"];
+    _x params ["_presetName", "_namespaceIndex", "_markerParameter", "_picture", "_dimension"];
+
+    if !(_dimension in GVAR(dimensions)) then {
+        // Dimension is not available. Don't show in list.
+        continue;
+    };
 
     //only add Presets to the list which are being searched
     if (((toLower _presetName) find _search) isNotEqualTo -1) then {
         private _index = _presetsList lbAdd _presetName;
         _presetsList lbSetValue [_index, _namespaceIndex];
-        _presetsList lbSetData [_index, str _UIData];
+        _presetsList lbSetData [_index, str [_dimension, _markerParameter]]; // TODO: Optimize
         _presetsList lbSetPicture [_index, _picture];
     };
 } count _presets;

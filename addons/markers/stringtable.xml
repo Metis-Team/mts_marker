@@ -17,6 +17,12 @@
                 <Korean>https://github.com/Metis-Team</Korean>
             </Key>
         </Container>
+        <Container name="UI_dimensions">
+            <Key ID="str_mts_markers_ui_dimensions_landUnit">
+                <Original>Land Unit</Original>
+                <German>Land Einheiten</German>
+            </Key>
+        </Container>
         <Container name="UI_general">
             <Key ID="str_mts_markers_ui_general_headTXT">
                 <Original>UNIT MARKER</Original>

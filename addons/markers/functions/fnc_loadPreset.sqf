@@ -23,6 +23,10 @@ CHECK(_index < 0);
 
 (_mainDisplay displayCtrl NAME_PRESETS_EDIT) ctrlSetText (_presetsList lbText _index);
 
-private _UIData = parseSimpleArray (_presetsList lbData _index);
-CHECK(_UIData isEqualTo []);
-_UIData call FUNC(setUIData);
+private _data = parseSimpleArray (_presetsList lbData _index);
+CHECK(_data isEqualTo []);
+_data params ["_dimension", "_markerParameter"];
+
+private _cfgCtrlGrp = [_dimension] call FUNC(setDimension);
+private _setUIData = (GVAR(dimensions) get _dimension) get "uiSetData";
+[_cfgCtrlGrp, _markerParameter] call _setUIData;

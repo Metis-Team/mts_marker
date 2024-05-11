@@ -26,7 +26,7 @@ GVAR(clipboard) params ["_namePrefix", "_scale", "_alpha"];
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 CHECKRET(_markerInformation isEqualTo [],false);
 
-_markerInformation params ["", "_markerParameter"];
+_markerInformation params ["", "_markerParameter", "", "_dimension"];
 
 private _pos = _mapCtrl ctrlMapScreenToWorld _mousepos;
 
@@ -41,5 +41,5 @@ private _broadcastChannel = call {
     if (currentChannel > 5) then {3} else {currentChannel};
 };
 
-[_pos, _broadcastChannel, !is3DEN, _markerParameter, _scale, _alpha] call FUNC(createMarker);
+[_pos, _broadcastChannel, !is3DEN, _dimension, _markerParameter, _scale, _alpha] call FUNC(createMarker);
 true

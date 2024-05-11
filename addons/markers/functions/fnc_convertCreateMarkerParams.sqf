@@ -3,13 +3,13 @@
  *  Author: Timi007
  *
  *  Description:
- *      Converts legacy createMarker parameters to new format. (BWC since version 1.3.0)
+ *      Converts legacy createMarkerLocal parameters to new format. (BWC since version 1.3.0)
  *
  *  Parameter(s):
- *      0: ARRAY - Old or new createMarker parameters format.
+ *      0: ARRAY - Old or new createMarkerLocal parameters format.
  *
  *  Returns:
- *      ARRAY - New createMarker format.
+ *      ARRAY - New createMarkerLocal format.
  *
  *  Example:
  *      [_this] call mts_markers_fnc_convertCreateMarkerParams
@@ -19,7 +19,7 @@
 params ["_createMarkerParams"];
 
 // Support old parameter format
-private _params = if ((_createMarkerParams select 4) isEqualType 0) then { // Check if scale param is at index 4
+private _params = if ((_createMarkerParams select 4) isEqualType 0 || (_createMarkerParams select 5) isEqualType 0) then { // Check if scale param is at index 4 (BWC version 1.3.0) or 5 (BWC version 1.9.0)
     _createMarkerParams
 } else {
     private _markerParameter = [_createMarkerParams select 3, _createMarkerParams select 4, _createMarkerParams select 5, _createMarkerParams select 6, _createMarkerParams select 7];
@@ -39,6 +39,12 @@ if (_frameshape isEqualType "") then {
     };
 
     _markerParameter set [0, [_frameshape, _dashedFrameshape, false]];
+};
+
+// BWC version 1.9.0
+if (_params isEqualTypeParams ["", 0, [], []]) then {
+    // Old parameter format without dimension
+    _params insert [3, [DEFAULT_DIMENSION]];
 };
 
 TRACE_2("Converted createMarker params",_params,_createMarkerParams);

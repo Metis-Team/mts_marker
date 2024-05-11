@@ -41,58 +41,46 @@ if (!is3DEN) then {
     }];
 };
 
-//combobox controls
-private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
-private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
-private _mod2Ctrl = _mainDisplay displayCtrl MOD2_DROPDOWN;
-private _echelonCtrl = _mainDisplay displayCtrl ECHELON_DROPDOWN;
+//call same ui events that CBA is adding to the map display. Thanks to commy2 for this work-around!
+if ((ctrlIDD _curMapDisplay) isEqualTo MAP_PLAYER_DISPLAY) then {
+    _mainDisplay call (uiNamespace getVariable "cba_events_fnc_initDisplayMainMap");
+};
+if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVER_DISPLAY]) then {
+    _mainDisplay call (uiNamespace getVariable "cba_events_fnc_initDisplayCurator");
+};
 
-private _ctrlArray = [
-    [_iconCtrl, GVAR(iconArray), "icon"],
-    [_mod1Ctrl, GVAR(mod1Array), "mod1"],
-    [_mod2Ctrl, GVAR(mod2Array), "mod2"],
-    [_echelonCtrl, GVAR(echelonArray), "echelon"]
-];
-
-//fill the icon, mod1, mod2 and echelon comboboxes
-{
-    _x params ["_ctrl", "_dropdownArray", "_arrayPathPrefix"];
-
-    {
-        _x params ["_selectionTextSuffix"];
-
-        private _selectionText = format [LSTRING(ui_%1_%2), _arrayPathPrefix, _selectionTextSuffix];
-        private _index = _ctrl lbAdd (localize _selectionText);
-        _ctrl lbSetValue [_index, _index];
-
-        private _selectionPicturePath = format [QPATHTOF(data\ui\%1\mts_markers_ui_%1_%2.paa), _arrayPathPrefix, _selectionTextSuffix];
-        _ctrl lbSetPicture [_index, _selectionPicturePath];
-    } count _dropdownArray;
-
-    //sort icon, mod1 and mod2 dropdowns alphabetically
-    if (_ctrl isNotEqualTo _echelonCtrl) then {
-        lbSort _ctrl;
-    };
-    _ctrl lbSetCurSel 0;
-} forEach _ctrlArray;
-
-// Direction of Movement
-private _directionCtrl = _mainDisplay displayCtrl DIRECTION_DROPDOWN;
-private _directionIndex = _directionCtrl lbAdd LLSTRING(ui_direction_empty);
-_directionCtrl lbSetPicture [_directionIndex, "#(argb,8,8,3)color(0,0,0,0)"];
+// Add dimension selection buttons
+private _dimensionBtnCtrlGrp = _mainDisplay displayCtrl DIMENSIONS_BUTTON_GROUP;
+private _dimensionParentCfgCtrlGrp = _mainDisplay displayCtrl CONFIG_DIMENSION_GROUP;
+private _dimensionBtnCtrls = [];
+private _dimensionCfgCtrlGrps = [];
 
 {
-    _x params ["_dir", "_dirShort"];
+    // Configure dimension button
+    private _dimensionBtnCtrl = _mainDisplay ctrlCreate [QGVAR(RscDimensionButton), -1, _dimensionBtnCtrlGrp];
+    _dimensionBtnCtrl setVariable [QGVAR(dimension), _x];
+    _dimensionBtnCtrl ctrlSetText ((GVAR(dimensions) get _x) get "name");
 
-    private _index = _directionCtrl lbAdd (localize _dir);
-    private _picturePath = format [QPATHTOF(data\ui\dir\mts_markers_ui_dir_%1.paa), GVAR(directions) select _forEachIndex];
-    _directionCtrl lbSetPicture [_index, _picturePath];
+    (ctrlPosition _dimensionBtnCtrl) params ["", "", "_width", "_height"];
+    _dimensionBtnCtrl ctrlSetPosition [_width * _forEachIndex, 0, _width, _height];
 
-    // Set transparent picture to the right this will be the padding right for the text right
-    _directionCtrl lbSetPictureRight [_index, "#(argb,8,8,3)color(0,0,0,0)"];
-    _directionCtrl lbSetTextRight [_index, localize _dirShort];
-} forEach GVAR(directionLocalization);
-_directionCtrl lbSetCurSel 0;
+    _dimensionBtnCtrl ctrlAddEventHandler ["ButtonClick", {
+        params ["_btnCtrl"];
+        private _cfgCtrlGrp = [_btnCtrl getVariable QGVAR(dimension)] call FUNC(setDimension);
+        [_cfgCtrlGrp] call FUNC(updateMarkerPreview);
+    }];
+
+    _dimensionBtnCtrl ctrlCommit 0;
+    _dimensionBtnCtrls pushBack _dimensionBtnCtrl;
+
+    // Create all dimension configuration control groups
+    private _uiCreate = (GVAR(dimensions) get _x) get "uiCreate";
+    private _cfgCtrlGrp = [_dimensionParentCfgCtrlGrp] call _uiCreate;
+    _dimensionCfgCtrlGrps pushBack _cfgCtrlGrp;
+} forEach GVAR(dimensionKeysSorted);
+
+_dimensionBtnCtrlGrp setVariable [QGVAR(btnCtrls), _dimensionBtnCtrls];
+_dimensionParentCfgCtrlGrp setVariable [QGVAR(cfgCtrlGrps), _dimensionCfgCtrlGrps];
 
 // Channel
 private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
@@ -126,17 +114,8 @@ if (!isMultiplayer || is3DEN) then {
     } count _channelDropdownArray;
 };
 
-private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
-private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
-private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
-private _hqCbCtrl = _mainDisplay displayCtrl HQ_CHECKBOX;
-
 private _markerScale = MARKER_SCALE;
 private _markerAlpha = MARKER_ALPHA;
-
-// Operational Condition
-private _damagedCbCtrl = _mainDisplay displayCtrl DAMAGED_CHECKBOX;
-private _destroyedCbCtrl = _mainDisplay displayCtrl DESTROYED_CHECKBOX;
 
 private _setPosAndPrefix = {
     params [
@@ -155,9 +134,8 @@ private _setPosAndPrefix = {
     };
 
     CHECK(isNil "_pos" || isNull _mainDisplay);
-    private _okBtnCtrl = _mainDisplay displayCtrl OK_BUTTON;
-    _okBtnCtrl setVariable [QGVAR(editMarkerNamePrefix), _namePrefix];
-    _okBtnCtrl setVariable [QGVAR(createMarkerMousePosition), _pos];
+    _mainDisplay setVariable [QGVAR(editMarkerNamePrefix), _namePrefix];
+    _mainDisplay setVariable [QGVAR(createMarkerMousePosition), _pos];
 };
 
 if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
@@ -177,15 +155,18 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     //save future marker position
     [_mainDisplay, nil, _mapCtrl, _mousePos] call _setPosAndPrefix;
 
-    //select blufor identity as default & update marker preview
-    ["blu"] call FUNC(identityButtonsAction);
+    // Default is dimension with lowest priority value
+    private _cfgCtrlGrp = [GVAR(dimensionKeysSorted) select 0] call FUNC(setDimension);
+    [_cfgCtrlGrp] call FUNC(updateMarkerPreview);
 } else {
     //when editing marker or saving of last selection is enabled
     private _markerParameter = [];
     private _broadcastChannel = -1;
+    private _dimension = GVAR(dimensionKeysSorted) select 0; // Default dimension
+
     if (GVAR(saveLastSelection) && (_namePrefix isEqualTo "")) then {
         if (GVAR(lastSelection) isEqualTo []) then {
-            _markerParameter set [0, ["blu", false]];
+            _markerParameter set [0, ["blu", false]]; // Default frame
         } else {
             _markerParameter = GVAR(lastSelection);
         };
@@ -196,18 +177,24 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
             _broadcastChannel = _selectedChannel;
         };
 
+        if (GVAR(currentDimension) isNotEqualTo "") then {
+            _dimension = GVAR(currentDimension);
+        };
+
         [_mainDisplay, nil, _mapCtrl, _mousePos] call _setPosAndPrefix;
     } else {
         //get marker family parameter & information from namespace
         private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
         _markerParameter = _markerInformation param [1, [], [[]]];
         _broadcastChannel = _markerInformation param [2, -1, [0]];
+        _dimension = _markerInformation param [3, "", [""]];
+
         _markerScale = [_namePrefix] call FUNC(getMarkerScale);
         _markerAlpha = [_namePrefix] call FUNC(getMarkerAlpha);
 
         [_mainDisplay, _namePrefix] call _setPosAndPrefix;
     };
-    CHECK(_markerParameter isEqualTo []);
+    CHECK((_markerParameter isEqualTo []) || (_dimension isEqualTo ""));
 
     //select the original broadcast channel in dropdown
     for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
@@ -217,37 +204,23 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         };
     };
 
-    _markerParameter call FUNC(setUIData);
+    private _cfgCtrlGrp = [_dimension] call FUNC(setDimension);
+    private _setUIData = (GVAR(dimensions) get _dimension) get "uiSetData";
+    [_cfgCtrlGrp, _markerParameter] call _setUIData;
+    [_cfgCtrlGrp] call FUNC(updateMarkerPreview);
 };
 
-//call same ui events that CBA is adding to the map display. Thanks to commy2 for this work-around!
-if ((ctrlIDD _curMapDisplay) isEqualTo MAP_PLAYER_DISPLAY) then {
-    _mainDisplay call (uiNamespace getVariable "cba_events_fnc_initDisplayMainMap");
-};
-if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVER_DISPLAY]) then {
-    _mainDisplay call (uiNamespace getVariable "cba_events_fnc_initDisplayCurator");
-};
+private _scaleSlider = _mainDisplay displayCtrl SCALE_SLIDER;
+_scaleSlider sliderSetPosition _markerScale;
+[_scaleSlider, _markerScale] call FUNC(onScaleSliderPosChanged);
+_scaleSlider ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onScaleSliderPosChanged)];
+_scaleSlider ctrlAddEventHandler ["MouseButtonUp", LINKFUNC(onScaleSliderMouseButtonUp)];
 
-//add EH for marker preview updating
-{
-    _x ctrlAddEventHandler ["LBSelChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [
-    _iconCtrl,
-    _mod1Ctrl,
-    _mod2Ctrl,
-    _echelonCtrl,
-    _directionCtrl];
-
-{
-    _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];
-} forEach [
-    _suspectedCbCtrl,
-    _reinforcedCbCtrl,
-    _reducedCbCtrl,
-    _hqCbCtrl,
-    _damagedCbCtrl,
-    _destroyedCbCtrl
-];
+private _alphaSlider = _mainDisplay displayCtrl ALPHA_SLIDER;
+_alphaSlider sliderSetPosition _markerAlpha;
+[_alphaSlider, _markerAlpha] call FUNC(onAlphaSliderPosChanged);
+_alphaSlider ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onAlphaSliderPosChanged)];
+_alphaSlider ctrlAddEventHandler ["MouseButtonUp", LINKFUNC(onAlphaSliderMouseButtonUp)];
 
 //fill the Presets list with saved Presets from the profile
 call FUNC(updatePresetsList);
@@ -261,22 +234,3 @@ _presetsList ctrlAddEventHandler ["LBDblClick", LINKFUNC(loadPreset)];
 private _searchCtrl = _mainDisplay displayCtrl SEARCH_PRESETS_EDIT;
 _searchCtrl ctrlAddEventHandler ["KeyDown", LINKFUNC(updatePresetsList)];
 _searchCtrl ctrlAddEventHandler ["KeyUp", LINKFUNC(updatePresetsList)];
-
-{
-    _x ctrlAddEventHandler ["CheckedChanged", LINKFUNC(onOperationalConditionChanged)];
-} forEach [
-    _damagedCbCtrl,
-    _destroyedCbCtrl
-];
-
-private _scaleSlider = _mainDisplay displayCtrl SCALE_SLIDER;
-_scaleSlider sliderSetPosition _markerScale;
-[_scaleSlider, _markerScale] call FUNC(onScaleSliderPosChanged);
-_scaleSlider ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onScaleSliderPosChanged)];
-_scaleSlider ctrlAddEventHandler ["MouseButtonUp", LINKFUNC(onScaleSliderMouseButtonUp)];
-
-private _alphaSlider = _mainDisplay displayCtrl ALPHA_SLIDER;
-_alphaSlider sliderSetPosition _markerAlpha;
-[_alphaSlider, _markerAlpha] call FUNC(onAlphaSliderPosChanged);
-_alphaSlider ctrlAddEventHandler ["SliderPosChanged", LINKFUNC(onAlphaSliderPosChanged)];
-_alphaSlider ctrlAddEventHandler ["MouseButtonUp", LINKFUNC(onAlphaSliderMouseButtonUp)];

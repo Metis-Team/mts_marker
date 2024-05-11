@@ -6,9 +6,6 @@
 //#define DISABLE_COMPILE_CACHE
 //#define CBA_DEBUG_SYNCHRONOUS
 
-#include "\a3\ui_f\hpp\defineCommonGrids.inc"
-#include "\a3\ui_f\hpp\defineResincl.inc"
-
 #ifdef DEBUG_ENABLED_MARKERS
     #define DEBUG_MODE_FULL
 #endif
@@ -21,16 +18,12 @@
 
 // Dialog macros
 #include "\z\mts\addons\markers\ui\mts_markers_ui_macros.hpp"
+#include "\z\mts\addons\markers\ui\mts_markers_ui_idc.hpp"
 
-#define POS_X(N) ((N) * GUI_GRID_W + GUI_GRID_CENTER_X)
-#define POS_Y(N) ((N) * GUI_GRID_H + GUI_GRID_CENTER_Y)
-#define POS_W(N) ((N) * GUI_GRID_W)
-#define POS_H(N) ((N) * GUI_GRID_H)
+#define DEFAULT_DIMENSION "land_unit"
 
-#define QPOS_X(N) QUOTE(POS_X(N))
-#define QPOS_Y(N) QUOTE(POS_Y(N))
-#define QPOS_W(N) QUOTE(POS_W(N))
-#define QPOS_H(N) QUOTE(POS_H(N))
+#define COLOR_BUTTON_ENABLED [1, 1, 1, 1]
+#define COLOR_BUTTON_DISABLED [0, 0, 0, 1]
 
 // Map displays
 #define MAP_3DEN_DISPLAY 313

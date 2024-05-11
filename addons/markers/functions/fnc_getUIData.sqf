@@ -3,32 +3,36 @@
  *  Author: Timi007
  *
  *  Description:
- *      Returns all data of the UI.
+ *      Returns the Land Unit dimension specific marker configuration from the UI.
+ *      This function is dimension specific and implements the "uiGetData" hook.
  *
  *  Parameter(s):
- *      None.
+ *      0: CONTROL - Marker configuration control group.
  *
  *  Returns:
- *      ARRAY - Frameshape, modifers, group size and text data.
+ *      ARRAY - Dimension specific marker configuration, i.e. frameshape, modifers, group size and text data.
  *
  *  Example:
- *      _UIData = call mts_markers_fnc_getUIData
+ *      _markerParameter = [_cfgCtrlGrp] call mts_markers_fnc_getUIData
  *
  */
 
-private _mainDisplay = findDisplay MAIN_DISPLAY;
+params [["_cfgCtrlGrp", controlNull, [controlNull]]];
 
 //get identity
-private _identity = (_mainDisplay displayCtrl FRIENDLY_BTN_FRAME) getVariable [QGVAR(currentIdentitySelected), ""];
-CHECKRET(_identity isEqualTo "",ERROR("No identity"));
+private _identity = _cfgCtrlGrp getVariable [QGVAR(currentIdentitySelected), ""];
+if (_identity isEqualTo "") exitWith {
+    ERROR_1("No identity saved in control group.",_cfgCtrlGrp);
+    []
+};
 
 // Check if frameshape is dashed or HQ
-private _dashedFrameshape = cbChecked (_mainDisplay displayCtrl SUSPECT_CHECKBOX);
-private _isHq = cbChecked (_mainDisplay displayCtrl HQ_CHECKBOX);
+private _dashedFrameshape = cbChecked (_cfgCtrlGrp controlsGroupCtrl SUSPECT_CHECKBOX);
+private _isHq = cbChecked (_cfgCtrlGrp controlsGroupCtrl HQ_CHECKBOX);
 
-private _iconCtrl = _mainDisplay displayCtrl ICON_DROPDOWN;
-private _mod1Ctrl = _mainDisplay displayCtrl MOD1_DROPDOWN;
-private _mod2Ctrl = _mainDisplay displayCtrl MOD2_DROPDOWN;
+private _iconCtrl = _cfgCtrlGrp controlsGroupCtrl ICON_DROPDOWN;
+private _mod1Ctrl = _cfgCtrlGrp controlsGroupCtrl MOD1_DROPDOWN;
+private _mod2Ctrl = _cfgCtrlGrp controlsGroupCtrl MOD2_DROPDOWN;
 
 //get values
 private _lbIconValue = _iconCtrl lbValue (lbCurSel _iconCtrl);
@@ -39,35 +43,35 @@ private _lbMod2Value = _mod2Ctrl lbValue (lbCurSel _mod2Ctrl);
 private _modifier = [_lbIconValue, _lbMod1Value, _lbMod2Value];
 
 //get group size
-private _grpsize = lbCurSel (_mainDisplay displayCtrl ECHELON_DROPDOWN);
+private _grpsize = lbCurSel (_cfgCtrlGrp controlsGroupCtrl ECHELON_DROPDOWN);
 
 //get echelon modifier values
-private _reinforced = cbChecked (_mainDisplay displayCtrl REINFORCED_CHECKBOX);
-private _reduced = cbChecked (_mainDisplay displayCtrl REDUCED_CHECKBOX);
+private _reinforced = cbChecked (_cfgCtrlGrp controlsGroupCtrl REINFORCED_CHECKBOX);
+private _reduced = cbChecked (_cfgCtrlGrp controlsGroupCtrl REDUCED_CHECKBOX);
 
 //get the bottom left text (unique designation)
-private _uniqueDesignation = (toUpper (ctrlText (_mainDisplay displayCtrl UNIQUE_EDIT))) splitString "";
+private _uniqueDesignation = (toUpper (ctrlText (_cfgCtrlGrp controlsGroupCtrl UNIQUE_EDIT))) splitString "";
 
 //get the bottom right text (higher formation)
-private _higherFormation = (toUpper (ctrlText (_mainDisplay displayCtrl HIGHER_EDIT))) splitString "";
+private _higherFormation = (toUpper (ctrlText (_cfgCtrlGrp controlsGroupCtrl HIGHER_EDIT))) splitString "";
 
 //get the right text (additional information)
-private _additionalInfo = ctrlText (_mainDisplay displayCtrl ADDITIONAL_EDIT);
+private _additionalInfo = ctrlText (_cfgCtrlGrp controlsGroupCtrl ADDITIONAL_EDIT);
 
 // Operational condition
 private _operationalCondition = OC_FULLY_CAPABLE;
-if (cbChecked (_mainDisplay displayCtrl DAMAGED_CHECKBOX)) then {
+if (cbChecked (_cfgCtrlGrp controlsGroupCtrl DAMAGED_CHECKBOX)) then {
     _operationalCondition = OC_DAMAGED;
 };
-if (cbChecked (_mainDisplay displayCtrl DESTROYED_CHECKBOX)) then {
+if (cbChecked (_cfgCtrlGrp controlsGroupCtrl DESTROYED_CHECKBOX)) then {
     _operationalCondition = OC_DESTROYED;
 };
 
 // Get the Date-Time Group saved in the button
-private _dateTimeGroup = (_mainDisplay displayCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
+private _dateTimeGroup = (_cfgCtrlGrp controlsGroupCtrl DTG_BUTTON) getVariable [QGVAR(dateTimeGroup), []];
 
 // Get direction of movement
-private _directionSelIndex = lbCurSel (_mainDisplay displayCtrl DIRECTION_DROPDOWN);
+private _directionSelIndex = lbCurSel (_cfgCtrlGrp controlsGroupCtrl DIRECTION_DROPDOWN);
 // Direction index 0 is no direction, 1 is N, 2 is NNE, ...
 private _direction = "";
 if (_directionSelIndex > 0 && _directionSelIndex < (count GVAR(directions) + 1)) then {

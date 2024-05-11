@@ -18,6 +18,27 @@ if (isServer || (!isMultiplayer)) then {
     publicVariable QGVAR(namespace);
 };
 
+// Collect all dimension extensions
+GVAR(dimensions) = createHashMap;
+private _dimensionClasses = "true" configClasses (configFile >> QGVAR(dimensions));
+{
+    private _cache = createHashMap;
+    _cache set ["name", getText (_x >> "name")];
+    _cache set ["priority", getNumber (_x >> "priority")];
+
+    _cache set ["uiCreate", compile getText (_x >> "uiCreate")];
+    _cache set ["uiGetData", compile getText (_x >> "uiGetData")];
+    _cache set ["uiSetData", compile getText (_x >> "uiSetData")];
+    _cache set ["uiGetPreviewImages", compile getText (_x >> "uiGetPreviewImages")];
+    _cache set ["uiValidateData", compile getText (_x >> "uiValidateData")];
+
+    _cache set ["createDimensionMarker", compile getText (_x >> "createDimensionMarker")];
+
+    GVAR(dimensions) set [configName _x, _cache];
+} forEach _dimensionClasses;
+GVAR(dimensionKeysSorted) = [keys GVAR(dimensions), [], {(GVAR(dimensions) get _x) get "priority"}, "ASCEND"] call BIS_fnc_sortBy;
+GVAR(currentDimension) = "";
+
 CHECK(!hasInterface);
 
 #include "initKeybinds.hpp"
