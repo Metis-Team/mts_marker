@@ -17,8 +17,8 @@
 #include "\z\mts\addons\markers\script_macros.hpp"
 
 // Dialog macros
-#include "\z\mts\addons\markers\ui\mts_markers_ui_macros.hpp"
-#include "\z\mts\addons\markers\ui\mts_markers_ui_idc.hpp"
+#include "\z\mts\addons\markers\ui\ui_macros.hpp"
+#include "\z\mts\addons\markers\ui\ui_idc.hpp"
 
 #define DEFAULT_DIMENSION "land_unit"
 

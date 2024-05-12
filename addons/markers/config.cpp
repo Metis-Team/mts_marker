@@ -30,7 +30,7 @@ class CfgSettings {
 #include "Cfg3DEN.hpp"
 #include "CfgMarkerColors.hpp"
 #include "CfgMarkers.hpp"
-#include "ui\mts_markers_dialog.hpp"
+#include "ui\dialog.hpp"
 
 class GVAR(dimensions) {
     class land_unit { // Unique dimension id. This is used in the API to identify the dimension of the marker. This name must be stable.
