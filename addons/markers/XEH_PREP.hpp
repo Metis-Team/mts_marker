@@ -5,6 +5,7 @@ PREP(convertCreateMarkerParams);
 PREP(copyMarker);
 PREP(createConfigurationUI);
 PREP(createDimensionMarker);
+PREP(createIdentityButtons);
 PREP(createMarker);
 PREP(createMarkerLocal);
 PREP(deleteMarker);

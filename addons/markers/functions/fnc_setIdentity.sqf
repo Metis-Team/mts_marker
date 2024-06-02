@@ -14,58 +14,37 @@
  *      Nothing.
  *
  *  Example:
- *      [_identityCtrlGrp, "blu"] call mts_markers_fnc_setIdentity
+ *      [_cfgCtrlGrp, "blu"] call mts_markers_fnc_setIdentity
  *
  */
 
 params [["_cfgCtrlGrp", controlNull, [controlNull]], ["_identity", "blu", [""]]];
 
 private _identityCtrlGrp = _cfgCtrlGrp controlsGroupCtrl IDENTITY_BUTTON_GROUP;
-private _friendlyBtnCtrl = _identityCtrlGrp controlsGroupCtrl FRIENDLY_BTN_FRAME;
-private _hostileBtnCtrl = _identityCtrlGrp controlsGroupCtrl HOSTILE_BTN_FRAME;
-private _neutralBtnCtrl = _identityCtrlGrp controlsGroupCtrl NEUTRAL_BTN_FRAME;
-private _unknownBtnCtrl = _identityCtrlGrp controlsGroupCtrl UNKNOWN_BTN_FRAME;
-private _suspectedCbCtrl = _cfgCtrlGrp controlsGroupCtrl SUSPECT_CHECKBOX;
-private _checkboxTxtCtrl = _cfgCtrlGrp controlsGroupCtrl SUSPECT_TXT;
+
+private _frameCtrlMap = _identityCtrlGrp getVariable [QGVAR(frameCtrlMap), createHashMap];
+private _suspectTxtMap = _identityCtrlGrp getVariable [QGVAR(suspectTxtMap), createHashMap];
+
+private _suspectCtrls = _identityCtrlGrp getVariable [QGVAR(suspectCtrls), []];
+_suspectCtrls params ["_suspectCheckboxCtrl", "_suspectTextCtrl"];
 
 {
     _x ctrlShow false;
-} forEach [_friendlyBtnCtrl, _hostileBtnCtrl, _neutralBtnCtrl, _unknownBtnCtrl];
+} forEach (values _frameCtrlMap);
 
-switch (_identity) do {
-    case "blu": {
-        //show the "suspected" button
-        _suspectedCbCtrl ctrlShow true;
-        _checkboxTxtCtrl ctrlSetText LLSTRING(ui_identity_assumed_friend);
+private _identityFrameCtrl = _frameCtrlMap getOrDefault [_identity, controlNull];
+CHECKRET(isNull _identityFrameCtrl,ERROR_1("Identity %1 not valid!",_identity));
 
-        //show frame of the button
-        _friendlyBtnCtrl ctrlShow true;
-    };
-    case "red": {
-        //show the "suspected" button
-        _suspectedCbCtrl ctrlShow true;
-        _checkboxTxtCtrl ctrlSetText LLSTRING(ui_identity_suspect);
+_identityFrameCtrl ctrlShow true;
 
-        //show frame of the button
-        _hostileBtnCtrl ctrlShow true;
-    };
-    case "neu": {
-        //hide the "suspected" button
-        _suspectedCbCtrl ctrlShow false;
-        _suspectedCbCtrl cbSetChecked false;
-        _checkboxTxtCtrl ctrlSetText "";
-
-        //show frame of the button
-        _neutralBtnCtrl ctrlShow true;
-    };
-    case "unk": {
-        //show the "suspected" button
-        _suspectedCbCtrl ctrlShow true;
-        _checkboxTxtCtrl ctrlSetText LLSTRING(ui_identity_pending);
-
-        //show frame of the button
-        _unknownBtnCtrl ctrlShow true;
-    };
+private _suspectTxt = _suspectTxtMap getOrDefault [_identity, ""];
+if (_suspectTxt isEqualTo "") then {
+    _suspectCheckboxCtrl ctrlShow false;
+    _suspectCheckboxCtrl cbSetChecked false;
+    _suspectTextCtrl ctrlSetText "";
+} else {
+    _suspectCheckboxCtrl ctrlShow true;
+    _suspectTextCtrl ctrlSetText _suspectTxt;
 };
 
 //save the current selected identity to the button

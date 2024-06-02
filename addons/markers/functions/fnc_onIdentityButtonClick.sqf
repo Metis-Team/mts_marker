@@ -7,20 +7,21 @@
  *
  *  Parameter(s):
  *      0: CONTROL - Button clicked.
- *      1: STRING - Identity of the button.
  *
  *  Returns:
  *      Nothing.
  *
  *  Example:
- *      [_this select 0, "blu"] call mts_markers_fnc_onIdentityButtonClick
+ *      [_this select 0] call mts_markers_fnc_onIdentityButtonClick
  *
  */
 
-params ["_btnCtrl", "_identity"];
+params ["_btnCtrl"];
 
 private _identityCtrlGrp = ctrlParentControlsGroup _btnCtrl;
 private _cfgCtrlGrp = ctrlParentControlsGroup _identityCtrlGrp;
+
+private _identity = _btnCtrl getVariable [QGVAR(identity), ""];
 
 [_cfgCtrlGrp, _identity] call FUNC(setIdentity);
 

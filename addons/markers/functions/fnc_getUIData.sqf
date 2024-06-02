@@ -22,12 +22,19 @@ params [["_cfgCtrlGrp", controlNull, [controlNull]]];
 //get identity
 private _identity = _cfgCtrlGrp getVariable [QGVAR(currentIdentitySelected), ""];
 if (_identity isEqualTo "") exitWith {
-    ERROR_1("No identity saved in control group.",_cfgCtrlGrp);
+    ERROR_1("No identity saved in control group %1.",_cfgCtrlGrp);
     []
 };
 
 // Check if frameshape is dashed or HQ
-private _dashedFrameshape = cbChecked (_cfgCtrlGrp controlsGroupCtrl SUSPECT_CHECKBOX);
+private _suspectCtrls = (_cfgCtrlGrp controlsGroupCtrl IDENTITY_BUTTON_GROUP) getVariable [QGVAR(suspectCtrls), []];
+private _suspectCbCtrl = _suspectCtrls param [0, controlNull, [controlNull]];
+if (isNull _suspectCbCtrl) exitWith {
+    ERROR_1("Could not find suspect checkbox control in %1.",_cfgCtrlGrp);
+    []
+};
+private _dashedFrameshape = cbChecked _suspectCbCtrl;
+
 private _isHq = cbChecked (_cfgCtrlGrp controlsGroupCtrl HQ_CHECKBOX);
 
 private _iconCtrl = _cfgCtrlGrp controlsGroupCtrl ICON_DROPDOWN;

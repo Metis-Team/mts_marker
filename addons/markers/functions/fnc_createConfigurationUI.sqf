@@ -22,6 +22,16 @@ params [["_parentCtrlGrp", controlNull, [controlNull]]];
 private _mainDisplay = ctrlParent _parentCtrlGrp;
 private _cfgCtrlGrp = _mainDisplay ctrlCreate [QGVAR(RscConfiguration), -1, _parentCtrlGrp];
 _cfgCtrlGrp ctrlSetPosition (ctrlPosition _parentCtrlGrp);
+_cfgCtrlGrp ctrlCommit 0;
+
+// Create identity button group
+private _identites = [
+    ['blu', QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa), LLSTRING(ui_identity_friend), LLSTRING(ui_identity_assumed_friend)],
+    ['red', QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa), LLSTRING(ui_identity_hostile), LLSTRING(ui_identity_suspect)],
+    ['neu', QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa), LLSTRING(ui_identity_neutral)],
+    ['unk', QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa), LLSTRING(ui_identity_unknown), LLSTRING(ui_identity_pending)]
+];
+private _identityBtnCtrlGrp = [_cfgCtrlGrp, _identites] call FUNC(createIdentityButtons);
 
 // set default identity
 [_cfgCtrlGrp] call FUNC(setIdentity);
@@ -79,7 +89,6 @@ _directionCtrl lbSetPicture [_directionIndex, "#(argb,8,8,3)color(0,0,0,0)"];
 } forEach GVAR(directionLocalization);
 _directionCtrl lbSetCurSel 0;
 
-private _suspectedCbCtrl = _cfgCtrlGrp controlsGroupCtrl SUSPECT_CHECKBOX;
 private _reinforcedCbCtrl = _cfgCtrlGrp controlsGroupCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _cfgCtrlGrp controlsGroupCtrl REDUCED_CHECKBOX;
 private _hqCbCtrl = _cfgCtrlGrp controlsGroupCtrl HQ_CHECKBOX;
@@ -102,7 +111,6 @@ private _destroyedCbCtrl = _cfgCtrlGrp controlsGroupCtrl DESTROYED_CHECKBOX;
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[ctrlParentControlsGroup (_this select 0)] call FUNC(updateMarkerPreview)}];
 } forEach [
-    _suspectedCbCtrl,
     _reinforcedCbCtrl,
     _reducedCbCtrl,
     _hqCbCtrl,
@@ -116,7 +124,5 @@ private _destroyedCbCtrl = _cfgCtrlGrp controlsGroupCtrl DESTROYED_CHECKBOX;
     _damagedCbCtrl,
     _destroyedCbCtrl
 ];
-
-_cfgCtrlGrp ctrlCommit 0;
 
 _cfgCtrlGrp

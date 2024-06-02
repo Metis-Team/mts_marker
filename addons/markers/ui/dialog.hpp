@@ -23,6 +23,12 @@ class GVAR(RscTransparentButton): RscButton {
     colorBackgroundDisabled[] = {0, 0, 0, 0};
     colorText[] = {0, 0, 0, 0};
     period = 0;
+    text = "";
+};
+
+class GVAR(RscFrame): RscPicture {
+    style = ST_FRAME;
+    colorText[] = {1, 1, 1, 1};
 };
 
 class GVAR(RscEdit): RscEdit {
@@ -72,35 +78,116 @@ class GVAR(RscPreviewLayer): RscPicture {
     text = "";
 };
 
+class GVAR(IdentityText): GVAR(RscText) {
+    idc = IDENTITY_TXT;
+    x = QPOS_W(0.5);
+    y = QPOS_H(0.5);
+    w = QPOS_W(4);
+    h = QPOS_H(FRAME_BUTTON_H);
+    text = CSTRING(ui_general_identityTXT);
+};
 
-class GVAR(RscPreview): RscControlsGroupNoScrollbars {
+class GVAR(IdentityButtonGroup): RscControlsGroupNoScrollbars {
+    idc = IDENTITY_BUTTON_GROUP;
+    x = QPOS_W((CONFIG_W - FRAME_BUTTONS_GROUP_W) / 2);
+    y = QPOS_H(0.5);
+    w = QPOS_W(FRAME_BUTTONS_GROUP_W);
+    h = QPOS_H(FRAME_BUTTONS_GROUP_H);
+
     class controls {
-        class Background: RscText {
-            idc = PREVIEW_BG;
-            x = QPOS_W(0);
-            y = QPOS_H(0);
-            w = QPOS_W(PREVIEW_W);
-            h = QPOS_H(PREVIEW_H);
-            colorBackground[] = {BG_COLOR};
+        class BluButtonFrame: RscPicture {
+            idc = FRIENDLY_BTN_FRAME;
+            x = QPOS_W(PADDING);
+            y = QPOS_H(PADDING);
+            w = QPOS_W(FRAME_BUTTON_W);
+            h = QPOS_H(FRAME_BUTTON_H);
+            style = ST_FRAME;
+            colorText[] = {1, 1, 1, 1};
+        };
+        class BluButtonIcon: RscPicture {
+            idc = FRIENDLY_BTN_ICON;
+            x = QPOS_W(PADDING);
+            y = QPOS_H(PADDING);
+            w = QPOS_W(FRAME_BUTTON_W);
+            h = QPOS_H(FRAME_BUTTON_H);
+            text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
+        };
+        class BluButton: GVAR(RscTransparentButton) {
+            idc = FRIENDLY_BTN_CTRL;
+            x = QPOS_W(PADDING);
+            y = QPOS_H(PADDING);
+            w = QPOS_W(FRAME_BUTTON_W);
+            h = QPOS_H(FRAME_BUTTON_H);
+            tooltip = CSTRING(ui_identity_friend);
+            onButtonClick = QUOTE([ARR_2(_this select 0,'blu')] call FUNC(onIdentityButtonClick););
         };
 
-        class Grid: RscPicture {
-            idc = PREVIEW_GRID;
-            x = QPOS_W((PREVIEW_W - PREVIEW_GRID_W) / 2);
-            y = QPOS_H((PREVIEW_H - PREVIEW_GRID_H) / 2);
-            w = QPOS_W(PREVIEW_GRID_W);
-            h = QPOS_H(PREVIEW_GRID_H);
-            text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
+        class RedButtonFrame: BluButtonFrame {
+            idc = HOSTILE_BTN_FRAME;
+            x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
+        };
+        class RedButtonIcon: BluButtonIcon {
+            idc = HOSTILE_BTN_ICON;
+            x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
+            text = QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa);
+        };
+        class RedButton: BluButton {
+            idc = HOSTILE_BTN_CTRL;
+            x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
+            tooltip = CSTRING(ui_identity_hostile);
+            onButtonClick = QUOTE([ARR_2(_this select 0,'red')] call FUNC(onIdentityButtonClick););
         };
 
-        class Layers: RscControlsGroupNoScrollbars {
-            idc = PREVIEW_LYR_GRP;
-            x = QPOS_W((PREVIEW_W - PREVIEW_LAYER_W) / 2);
-            y = QPOS_H((PREVIEW_H - PREVIEW_LAYER_H) / 2);
-            w = QPOS_W(PREVIEW_LAYER_W);
-            h = QPOS_H(PREVIEW_LAYER_H);
+        class NeuButtonFrame: BluButtonFrame {
+            idc = NEUTRAL_BTN_FRAME;
+            x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
+        };
+        class NeuButtonIcon: BluButtonIcon {
+            idc = NEUTRAL_BTN_ICON;
+            x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
+            text = QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa);
+        };
+        class NeuButton: BluButton {
+            idc = NEUTRAL_BTN_CTRL;
+            x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
+            tooltip = CSTRING(ui_identity_neutral);
+            onButtonClick = QUOTE([ARR_2(_this select 0,'neu')] call FUNC(onIdentityButtonClick););
+        };
+
+        class UnkButtonFrame: BluButtonFrame {
+            idc = UNKNOWN_BTN_FRAME;
+            x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
+        };
+        class UnkButtonIcon: BluButtonIcon {
+            idc = UNKNOWN_BTN_ICON;
+            x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
+            text = QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa);
+        };
+        class UnkButton: BluButton {
+            idc = UNKNOWN_BTN_CTRL;
+            x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
+            tooltip = CSTRING(ui_identity_unknown);
+            onButtonClick = QUOTE([ARR_2(_this select 0,'unk')] call FUNC(onIdentityButtonClick););
         };
     };
+};
+
+
+class GVAR(SuspectCheckbox): GVAR(RscCheckBoxSound) {
+    idc = SUSPECT_CHECKBOX;
+    x = QPOS_W(CONFIG_W - 7 - 1);
+    y = QPOS_H(FRAME_BUTTON_H / 2);
+    w = QPOS_W(1);
+    h = QPOS_H(1);
+};
+
+class GVAR(SuspectText): GVAR(RscText) {
+    idc = SUSPECT_TXT;
+    x = QPOS_W(CONFIG_W - 7);
+    y = QPOS_H(FRAME_BUTTON_H / 2);
+    w = QPOS_W(6.5);
+    h = QPOS_H(1);
+    text = "";
 };
 
 
@@ -115,116 +202,10 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
             text = QPATHTOF(data\ui\mts_markers_ui_frame_background.paa);
         };
 
-        class IdentityText: GVAR(RscText) {
-            idc = IDENTITY_TXT;
-            x = QPOS_W(0.5);
-            y = QPOS_H(0.5);
-            w = QPOS_W(4);
-            h = QPOS_H(FRAME_BUTTON_H);
-            text = CSTRING(ui_general_identityTXT);
-        };
-
-        class ButtonGroup: RscControlsGroupNoScrollbars {
-            idc = IDENTITY_BUTTON_GROUP;
-            x = QPOS_W((CONFIG_W - FRAME_BUTTONS_GROUP_W) / 2);
-            y = QPOS_H(0.5);
-            w = QPOS_W(FRAME_BUTTONS_GROUP_W);
-            h = QPOS_H(FRAME_BUTTONS_GROUP_H);
-
-            class controls {
-                class BluButtonFrame: RscPicture {
-                    idc = FRIENDLY_BTN_FRAME;
-                    x = QPOS_W(PADDING);
-                    y = QPOS_H(PADDING);
-                    w = QPOS_W(FRAME_BUTTON_W);
-                    h = QPOS_H(FRAME_BUTTON_H);
-                    style = ST_FRAME;
-                    colorText[] = {1,1,1,1};
-                };
-                class BluButtonIcon: RscPicture {
-                    idc = FRIENDLY_BTN_ICON;
-                    x = QPOS_W(PADDING);
-                    y = QPOS_H(PADDING);
-                    w = QPOS_W(FRAME_BUTTON_W);
-                    h = QPOS_H(FRAME_BUTTON_H);
-                    text = QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa);
-                };
-                class BluButton: GVAR(RscTransparentButton) {
-                    idc = FRIENDLY_BTN_CTRL;
-                    x = QPOS_W(PADDING);
-                    y = QPOS_H(PADDING);
-                    w = QPOS_W(FRAME_BUTTON_W);
-                    h = QPOS_H(FRAME_BUTTON_H);
-                    text = "";
-                    tooltip = CSTRING(ui_identity_friend);
-                    onButtonClick = QUOTE([ARR_2(_this select 0,'blu')] call FUNC(onIdentityButtonClick););
-                };
-
-                class RedButtonFrame: BluButtonFrame {
-                    idc = HOSTILE_BTN_FRAME;
-                    x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
-                };
-                class RedButtonIcon: BluButtonIcon {
-                    idc = HOSTILE_BTN_ICON;
-                    x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
-                    text = QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa);
-                };
-                class RedButton: BluButton {
-                    idc = HOSTILE_BTN_CTRL;
-                    x = QPOS_W(FRAME_BUTTON_W + 2 * PADDING);
-                    tooltip = CSTRING(ui_identity_hostile);
-                    onButtonClick = QUOTE([ARR_2(_this select 0,'red')] call FUNC(onIdentityButtonClick););
-                };
-
-                class NeuButtonFrame: BluButtonFrame {
-                    idc = NEUTRAL_BTN_FRAME;
-                    x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
-                };
-                class NeuButtonIcon: BluButtonIcon {
-                    idc = NEUTRAL_BTN_ICON;
-                    x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
-                    text = QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa);
-                };
-                class NeuButton: BluButton {
-                    idc = NEUTRAL_BTN_CTRL;
-                    x = QPOS_W(2 * FRAME_BUTTON_W + 3 * PADDING);
-                    tooltip = CSTRING(ui_identity_neutral);
-                    onButtonClick = QUOTE([ARR_2(_this select 0,'neu')] call FUNC(onIdentityButtonClick););
-                };
-
-                class UnkButtonFrame: BluButtonFrame {
-                    idc = UNKNOWN_BTN_FRAME;
-                    x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
-                };
-                class UnkButtonIcon: BluButtonIcon {
-                    idc = UNKNOWN_BTN_ICON;
-                    x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
-                    text = QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa);
-                };
-                class UnkButton: BluButton {
-                    idc = UNKNOWN_BTN_CTRL;
-                    x = QPOS_W(3 * FRAME_BUTTON_W + 4 * PADDING);
-                    tooltip = CSTRING(ui_identity_unknown);
-                    onButtonClick = QUOTE([ARR_2(_this select 0,'unk')] call FUNC(onIdentityButtonClick););
-                };
-            };
-        };
-
-        class SuspectCheckbox: GVAR(RscCheckBoxSound) {
-            idc = SUSPECT_CHECKBOX;
-            x = QPOS_W(CONFIG_W - 7 - 1);
-            y = QPOS_H(FRAME_BUTTON_H / 2);
-            w = QPOS_W(1);
-            h = QPOS_H(1);
-        };
-        class SuspectText: GVAR(RscText) {
-            idc = SUSPECT_TXT;
-            x = QPOS_W(CONFIG_W - 7);
-            y = QPOS_H(FRAME_BUTTON_H / 2);
-            w = QPOS_W(6.5);
-            h = QPOS_H(1);
-            text = "";
-        };
+        // class IdentityText: GVAR(IdentityText) {};
+        // class ButtonGroup: GVAR(IdentityButtonGroup) {};
+        // class SuspectCheckbox: GVAR(SuspectCheckbox) {};
+        // class SuspectText: GVAR(SuspectText) {};
 
         class EchelonText: GVAR(RscText) {
             idc = ECHELON_TXT;
@@ -435,6 +416,38 @@ class GVAR(RscConfiguration): RscControlsGroupNoScrollbars {
         };
     };
 };
+
+
+class GVAR(RscPreview): RscControlsGroupNoScrollbars {
+    class controls {
+        class Background: RscText {
+            idc = PREVIEW_BG;
+            x = QPOS_W(0);
+            y = QPOS_H(0);
+            w = QPOS_W(PREVIEW_W);
+            h = QPOS_H(PREVIEW_H);
+            colorBackground[] = {BG_COLOR};
+        };
+
+        class Grid: RscPicture {
+            idc = PREVIEW_GRID;
+            x = QPOS_W((PREVIEW_W - PREVIEW_GRID_W) / 2);
+            y = QPOS_H((PREVIEW_H - PREVIEW_GRID_H) / 2);
+            w = QPOS_W(PREVIEW_GRID_W);
+            h = QPOS_H(PREVIEW_GRID_H);
+            text = QPATHTOF(data\ui\mts_markers_ui_preview_background.paa);
+        };
+
+        class Layers: RscControlsGroupNoScrollbars {
+            idc = PREVIEW_LYR_GRP;
+            x = QPOS_W((PREVIEW_W - PREVIEW_LAYER_W) / 2);
+            y = QPOS_H((PREVIEW_H - PREVIEW_LAYER_H) / 2);
+            w = QPOS_W(PREVIEW_LAYER_W);
+            h = QPOS_H(PREVIEW_LAYER_H);
+        };
+    };
+};
+
 
 class GVAR(RscPresets): RscControlsGroupNoScrollbars {
     class controls {
