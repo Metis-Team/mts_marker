@@ -20,6 +20,10 @@
     #define PREP(fncName) [QPATHTOF(functions\DOUBLES(fnc,fncName).sqf), QFUNC(fncName)] call CBA_fnc_compileFunction
 #endif
 
+// Replace ERROR macro with version which includes file and line number
+#undef ERROR
+#define ERROR(MESSAGE) LOG_SYS_FILELINENUMBERS('ERROR',MESSAGE)
+
 // Check
 #define CHECK(CONDITION) if (CONDITION) exitWith {}
 #define CHECKRET(CONDITION,RETURN) if (CONDITION) exitWith {RETURN;}
