@@ -339,7 +339,7 @@ if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     if (is3DEN) then {
         //save 3DEN marker data in a hidden attribute
         private _3denData = "Scenario" get3DENMissionAttribute QGVAR(3denData);
-        _3denData pushbackUnique _this;
+        _3denData pushBackUnique _this;
         set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
     };
 };

@@ -35,7 +35,7 @@ GVAR(localMarkers) deleteAt _namePrefix;
 if (is3DEN) then {
     //delete 3DEN marker from attribute
     private _3denData = "Scenario" get3DENMissionAttribute QGVAR(3denData);
-    private _index = _3denData findif {(_x select 0) isEqualTo _namePrefix};
+    private _index = _3denData findIf {(_x select 0) isEqualTo _namePrefix};
     _3denData deleteAt _index;
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };
