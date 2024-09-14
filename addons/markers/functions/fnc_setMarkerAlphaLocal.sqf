@@ -36,7 +36,7 @@ CHECK(_markerFamily isEqualTo []);
 if (is3DEN) then {
     // Update 3DEN marker's alpha in attributes
     private _3denData = "Scenario" get3DENMissionAttribute QGVAR(3denData);
-    private _index = _3denData findif {(_x select 0) isEqualTo _namePrefix};
+    private _index = _3denData findIf {(_x select 0) isEqualTo _namePrefix};
     (_3denData select _index) set [5, _alpha];
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };
