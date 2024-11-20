@@ -4,7 +4,7 @@
  *
  *  Description:
  *      Places Land Unit dimension marker set/family on map.
- *      This function is dimension specific and implements the "createDimensionMarker" hook.
+ *      This function is dimension specific and implements the "createMarker" hook.
  *      This function has a local effect.
  *
  *  Parameter(s):
@@ -39,7 +39,7 @@
  *     ARRAY - Names/handles of all created markers.
  *
  *  Example:
- *      _markerFamily = ["mtsmarker#123/0/1", [2000,1000], [["blu", false, false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createDimensionMarker
+ *      _markerFamily = ["mtsmarker#123/0/1", [2000,1000], [["blu", false, false], [4,0,0], [4, false, true], ["3","3"], "9", ["4"]]] call mts_markers_fnc_createLandUnitMarker
  *
  */
 

@@ -8,7 +8,7 @@
  *
  *  Parameter(s):
  *      0: CONTROL - Marker configuration control group.
- *      1: ARRAY - Same marker configuration as in createDimensionMarker.
+ *      1: ARRAY - Same marker configuration as in createLandUnitMarker.
  *
  *  Returns:
  *      Nothing.

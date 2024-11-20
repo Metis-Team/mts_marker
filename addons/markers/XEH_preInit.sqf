@@ -32,7 +32,7 @@ private _dimensionClasses = "true" configClasses (configFile >> QGVAR(dimensions
     _cache set ["uiGetPreviewImages", compile getText (_x >> "uiGetPreviewImages")];
     _cache set ["uiValidateData", compile getText (_x >> "uiValidateData")];
 
-    _cache set ["createDimensionMarker", compile getText (_x >> "createDimensionMarker")];
+    _cache set ["createMarker", compile getText (_x >> "createMarker")];
 
     GVAR(dimensions) set [configName _x, _cache];
 } forEach _dimensionClasses;

@@ -44,6 +44,6 @@ class GVAR(dimensions) {
         uiGetPreviewImages = QUOTE(_this call FUNC(getPreviewImages));
         uiValidateData = QUOTE(_this call FUNC(validateUIData));
 
-        createDimensionMarker = QUOTE(_this call FUNC(createDimensionMarker));
+        createMarker = QUOTE(_this call FUNC(createLandUnitMarker));
     };
 };

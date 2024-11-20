@@ -55,8 +55,8 @@ if (_alpha < 0 || _alpha > 1) then {
     _alpha = MARKER_ALPHA;
 };
 
-private _createDimensionMarker = (GVAR(dimensions) get _dimension) get "createDimensionMarker";
-private _markerFamily = [_namePrefix, _pos, _markerParameter, _scale, _alpha] call _createDimensionMarker;
+private _fnc_createMarker = (GVAR(dimensions) get _dimension) get "createMarker";
+private _markerFamily = [_namePrefix, _pos, _markerParameter, _scale, _alpha] call _fnc_createMarker;
 
 GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];
 
