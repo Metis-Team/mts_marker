@@ -41,11 +41,11 @@ GVAR(currentDimension) = "";
 
 CHECK(!hasInterface);
 
-#include "initKeybinds.hpp"
-#include "init3denKeybinds.hpp"
-#include "initSettings.hpp"
-#include "initMarkerVariables.hpp"
-#include "initCharacterMarkerVariables.hpp"
+#include "initKeybinds.inc.sqf"
+#include "init3denKeybinds.inc.sqf"
+#include "initSettings.inc.sqf"
+#include "initMarkerVariables.inc.sqf"
+#include "initCharacterMarkerVariables.inc.sqf"
 
 // Corresponding vanilla colors for each identity
 GVAR(vanillaColorMap) = createHashMapFromArray [["blu", "colorBLUFOR"], ["red", "colorOPFOR"], ["neu", "colorIndependent"], ["unk", "ColorUNKNOWN"]];

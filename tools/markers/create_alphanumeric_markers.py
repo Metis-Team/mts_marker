@@ -225,7 +225,7 @@ def write_include_files(output_dir: pathlib.Path, char_sets: dict[str, dict[str]
         print('Created \"CfgMarkersCharacters.hpp\"\n')
 
 def write_marker_variables(output_dir: pathlib.Path, char_sets: dict[str, dict[str]]):
-    path = output_dir / 'initCharacterMarkerVariables.hpp'
+    path = output_dir / 'initCharacterMarkerVariables.inc.sqf'
     with open(path, 'w') as f:
         comment = util.get_generated_comment_lines()
         f.writelines(comment)
