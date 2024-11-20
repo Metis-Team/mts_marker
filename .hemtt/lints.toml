@@ -1,0 +1,4 @@
+[sqf.var_all_caps]
+options.ignore = [
+    "MTS_RECOMPILES", "MTS_PREP_RECOMPILE"
+]
