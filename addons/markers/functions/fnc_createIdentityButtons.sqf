@@ -3,20 +3,25 @@
  *  Author: Timi007
  *
  *  Description:
- *      Description
+ *      Creates the identity buttons.
  *
  *  Parameter(s):
- *      0: TYPE - Parameter description
+ *      0: CONTROL - Parent control group where the configuration control should be created in.
+ *      1: ARRAY<ARRAY> - Multiple identities in format:
+ *          0: STRING: Id
+ *          1: STRING: Image
+ *          2: STRING: Tooltip
+ *          3: STRING: Suspect text
  *
  *  Returns:
- *      TYPE - Description
+ *      CONTROL - Identity button control group.
  *
  *  Example:
- *      _this call mts_markers_fnc_createIdentityButtons
+ *      [_cfgCtrlGrp, [['blu', 'blu.paa', 'Friendly', 'Assumed Friend']]] call mts_markers_fnc_createIdentityButtons
  *
  */
 
-params [["_parentCtrlGrp", controlNull, [controlNull]], ["_identites", [], [[]]]];
+params [["_parentCtrlGrp", controlNull, [controlNull]], ["_identities", [], [[]]]];
 
 private _mainDisplay = ctrlParent _parentCtrlGrp;
 private _identityBtnCtrlGrp = _mainDisplay ctrlCreate ["RscControlsGroupNoScrollbars", IDENTITY_BUTTON_GROUP, _parentCtrlGrp];
@@ -32,12 +37,10 @@ _identityBtnCtrlGrp ctrlSetPosition _identityBtnCtrlGrpPos;
 _identityBtnCtrlGrp ctrlCommit 0;
 
 private _btnCtrlGrp = _mainDisplay ctrlCreate ["RscControlsGroupNoScrollbars", -1, _identityBtnCtrlGrp];
-private _numButtons = count _identites;
+private _numButtons = count _identities;
 
 private _btnGrpW = POS_W(_numButtons * FRAME_BUTTON_W + (_numButtons + 1) * PADDING);
 private _btnGrpH = POS_H(FRAME_BUTTON_H + 2 * PADDING);
-
-
 _btnCtrlGrp ctrlSetPosition [
     (_identityBtnCtrlGrpPos select 2) / 2 - _btnGrpW / 2,
     (_identityBtnCtrlGrpPos select 3) / 2 - _btnGrpH / 2,
@@ -92,7 +95,7 @@ private _suspectTxtMap = createHashMap;
     if (_suspectTxt isNotEqualTo "") then {
         _suspectTxtMap set [_identity, _suspectTxt];
     };
-} forEach _identites;
+} forEach _identities;
 
 _identityBtnCtrlGrp setVariable [QGVAR(frameCtrlMap), _frameCtrlMap];
 _identityBtnCtrlGrp setVariable [QGVAR(suspectTxtMap), _suspectTxtMap];
@@ -115,7 +118,12 @@ _suspectCheckboxCtrl ctrlSetPosition [
     POS_H(1)
 ];
 // Trigger update marker preview when checked
-_suspectCheckboxCtrl ctrlAddEventHandler ["CheckedChanged", {[ctrlParentControlsGroup (_this select 0)] call FUNC(updateMarkerPreview)}];
+_suspectCheckboxCtrl ctrlAddEventHandler ["CheckedChanged", {
+    params ["_cbCtrl"];
+    private _identityBtnCtrlGrp = ctrlParentControlsGroup _cbCtrl;
+    private _cfgCtrlGrp = ctrlParentControlsGroup _identityBtnCtrlGrp;
+    [_cfgCtrlGrp] call FUNC(updateMarkerPreview)
+}];
 _suspectCheckboxCtrl ctrlCommit 0;
 
 _identityBtnCtrlGrp setVariable [QGVAR(suspectCtrls), [_suspectCheckboxCtrl, _suspectTextCtrl]];

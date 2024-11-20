@@ -49,3 +49,4 @@ if (_suspectTxt isEqualTo "") then {
 
 //save the current selected identity to the button
 _cfgCtrlGrp setVariable [QGVAR(currentIdentitySelected), _identity];
+TRACE_1("Saved identity",_identity);

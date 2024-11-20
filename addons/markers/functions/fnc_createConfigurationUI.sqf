@@ -25,16 +25,19 @@ _cfgCtrlGrp ctrlSetPosition (ctrlPosition _parentCtrlGrp);
 _cfgCtrlGrp ctrlCommit 0;
 
 // Create identity button group
-private _identites = [
-    ['blu', QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa), LLSTRING(ui_identity_friend), LLSTRING(ui_identity_assumed_friend)],
-    ['red', QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa), LLSTRING(ui_identity_hostile), LLSTRING(ui_identity_suspect)],
-    ['neu', QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa), LLSTRING(ui_identity_neutral)],
-    ['unk', QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa), LLSTRING(ui_identity_unknown), LLSTRING(ui_identity_pending)]
+private _identities = [
+    ["blu", QPATHTOF(data\ui\mts_markers_ui_blu_frameshape.paa), LLSTRING(ui_identity_friend), LLSTRING(ui_identity_assumed_friend)],
+    ["red", QPATHTOF(data\ui\mts_markers_ui_red_frameshape.paa), LLSTRING(ui_identity_hostile), LLSTRING(ui_identity_suspect)],
+    ["neu", QPATHTOF(data\ui\mts_markers_ui_neu_frameshape.paa), LLSTRING(ui_identity_neutral)],
+    ["unk", QPATHTOF(data\ui\mts_markers_ui_unk_frameshape.paa), LLSTRING(ui_identity_unknown), LLSTRING(ui_identity_pending)]
 ];
-private _identityBtnCtrlGrp = [_cfgCtrlGrp, _identites] call FUNC(createIdentityButtons);
+private _identityBtnCtrlGrp = [_cfgCtrlGrp, _identities] call FUNC(createIdentityButtons);
 
 // set default identity
 [_cfgCtrlGrp] call FUNC(setIdentity);
+
+private _identity = _cfgCtrlGrp getVariable [QGVAR(currentIdentitySelected), ""];
+TRACE_1("Default identity",_identity);
 
 //combobox controls
 private _iconCtrl = _cfgCtrlGrp controlsGroupCtrl ICON_DROPDOWN;

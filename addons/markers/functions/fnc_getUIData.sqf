@@ -21,8 +21,9 @@ params [["_cfgCtrlGrp", controlNull, [controlNull]]];
 
 //get identity
 private _identity = _cfgCtrlGrp getVariable [QGVAR(currentIdentitySelected), ""];
+TRACE_1("Retrieved identity",_identity);
 if (_identity isEqualTo "") exitWith {
-    ERROR_1("No identity saved in control group %1.",_cfgCtrlGrp);
+    ERROR("No identity saved in control group.");
     []
 };
 
@@ -30,7 +31,7 @@ if (_identity isEqualTo "") exitWith {
 private _suspectCtrls = (_cfgCtrlGrp controlsGroupCtrl IDENTITY_BUTTON_GROUP) getVariable [QGVAR(suspectCtrls), []];
 private _suspectCbCtrl = _suspectCtrls param [0, controlNull, [controlNull]];
 if (isNull _suspectCbCtrl) exitWith {
-    ERROR_1("Could not find suspect checkbox control in %1.",_cfgCtrlGrp);
+    ERROR("Could not find suspect checkbox control.");
     []
 };
 private _dashedFrameshape = cbChecked _suspectCbCtrl;
