@@ -8,7 +8,7 @@ Fast Recompiling via function
     #define LINKFUNC(x) {_this call FUNC(x)}
     #define PREP_RECOMPILE_START    if (isNil "MTS_PREP_RECOMPILE") then {MTS_RECOMPILES = []; MTS_PREP_RECOMPILE = {{call _x} forEach MTS_RECOMPILES;}}; private _recomp = {
     #define PREP_RECOMPILE_END      }; call _recomp; MTS_RECOMPILES pushBack _recomp;\
-        [LLSTRING(cba_category_name), QGVAR(recompile), "Recompile Functions", {\
+        [LELSTRING(markers,cba_category_name), QGVAR(recompile), "Recompile Functions", {\
             private _start = diag_tickTime;\
             [] call MTS_PREP_RECOMPILE;\
             private _end = diag_tickTime;\
