@@ -7,7 +7,7 @@
  *      This function is dimension specific and implements the "uiGetPreviewImages" hook.
  *
  *  Parameter(s):
- *      Same dimension specific marker configuration as in createDimensionMarker.
+ *      Same dimension specific marker configuration as in createLandUnitMarker.
  *
  *  Returns:
  *      ARRAY - List of images in order of drawing height (first element = first to draw or furthest back).
