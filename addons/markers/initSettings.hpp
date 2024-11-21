@@ -8,7 +8,7 @@
     {
         GVAR(lastSelection) = [];
     }
-] call CBA_settings_fnc_init;
+] call CBA_fnc_addSetting;
 
 [
     QGVAR(useVanillaColors),
@@ -18,7 +18,7 @@
     false,
     0,
     {}
-] call CBA_settings_fnc_init;
+] call CBA_fnc_addSetting;
 
 [
     QGVAR(displayShortDTG),
@@ -28,4 +28,4 @@
     true,
     2,
     {}
-] call CBA_settings_fnc_init;
+] call CBA_fnc_addSetting;
