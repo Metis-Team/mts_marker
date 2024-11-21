@@ -131,8 +131,8 @@ private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
 private _hqCbCtrl = _mainDisplay displayCtrl HQ_CHECKBOX;
 
-private _markerScale = MARKER_SCALE;
-private _markerAlpha = MARKER_ALPHA;
+private _markerScale = GVAR(defaultMarkerScale); // CBA Setting
+private _markerAlpha = GVAR(defaultMarkerAlpha); // CBA Setting
 
 // Operational Condition
 private _damagedCbCtrl = _mainDisplay displayCtrl DAMAGED_CHECKBOX;

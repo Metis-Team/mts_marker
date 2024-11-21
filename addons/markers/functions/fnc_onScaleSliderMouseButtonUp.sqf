@@ -22,5 +22,5 @@ params ["_ctrl", "_button"];
 // Must be RMB
 CHECK(_button isNotEqualTo 1);
 
-_ctrl sliderSetPosition MARKER_SCALE;
-[_ctrl, MARKER_SCALE] call FUNC(onScaleSliderPosChanged);
+_ctrl sliderSetPosition GVAR(defaultMarkerScale);
+[_ctrl, GVAR(defaultMarkerScale)] call FUNC(onScaleSliderPosChanged);
