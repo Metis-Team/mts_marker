@@ -1043,6 +1043,22 @@
                 <Original>Use the short Date-Time Group display format (HHMMZ) as default.</Original>
                 <German>Nutze das kurze Datum/Zeit-Gruppe Anzeigeformat (HHMMZ) standardmäßig.</German>
             </Key>
+            <Key ID="str_mts_markers_cba_settings_default_marker_scale">
+                <Original>Default marker scale</Original>
+                <German>Standard Marker-Skalierung</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_default_marker_scale_tooltip">
+                <Original>Sets the initial marker scale in the UI.</Original>
+                <German>Setzt die initiale Marker-Skalierung in der Benutzeroberfläche.</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_default_marker_alpha">
+                <Original>Default marker opacity</Original>
+                <German>Standard Marker-Deckkraft</German>
+            </Key>
+            <Key ID="str_mts_markers_cba_settings_default_marker_alpha_tooltip">
+                <Original>Sets the initial marker opacity in the UI.</Original>
+                <German>Setzt die initiale Marker-Deckkraft in der Benutzeroberfläche.</German>
+            </Key>
         </Container>
     </Package>
 </Project>

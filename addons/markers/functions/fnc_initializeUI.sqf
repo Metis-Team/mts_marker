@@ -114,8 +114,8 @@ if (!isMultiplayer || is3DEN) then {
     } count _channelDropdownArray;
 };
 
-private _markerScale = MARKER_SCALE;
-private _markerAlpha = MARKER_ALPHA;
+private _markerScale = GVAR(defaultMarkerScale); // CBA Setting
+private _markerAlpha = GVAR(defaultMarkerAlpha); // CBA Setting
 
 private _setPosAndPrefix = {
     params [

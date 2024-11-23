@@ -22,5 +22,5 @@ params ["_ctrl", "_button"];
 // Must be RMB
 CHECK(_button isNotEqualTo 1);
 
-_ctrl sliderSetPosition MARKER_ALPHA;
-[_ctrl, MARKER_ALPHA] call FUNC(onAlphaSliderPosChanged);
+_ctrl sliderSetPosition GVAR(defaultMarkerAlpha);
+[_ctrl, GVAR(defaultMarkerAlpha)] call FUNC(onAlphaSliderPosChanged);
