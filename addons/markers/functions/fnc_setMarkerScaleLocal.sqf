@@ -20,7 +20,7 @@
 
 params [["_namePrefix", "", [""]], ["_newScale", MARKER_SCALE, [0]]];
 CHECK(!hasInterface);
-CHECKRET(_namePrefix isEqualTo "", ERROR("No marker prefix"));
+CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
 //get marker set
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
@@ -34,7 +34,7 @@ CHECK(_markerFamily isEqualTo []);
 if (is3DEN) then {
     //update 3DEN marker's position in attributes
     private _3denData = "Scenario" get3DENMissionAttribute QGVAR(3denData);
-    private _index = _3denData findif {(_x select 0) isEqualTo _namePrefix};
+    private _index = _3denData findIf {(_x select 0) isEqualTo _namePrefix};
     (_3denData select _index) set [4, _newScale];
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };

@@ -17,7 +17,7 @@
  */
 
 params [["_namePrefix", "", [""]]];
-CHECKRET(_namePrefix isEqualTo "", []);
+CHECKRET(_namePrefix isEqualTo "",[]);
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
 

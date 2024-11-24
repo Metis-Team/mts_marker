@@ -18,15 +18,15 @@
  */
 
 params [["_mapCtrl", controlNull, [controlNull]], ["_includeNoEditMarker", false, [false]]];
-CHECKRET(isNull _mapCtrl, "");
+CHECKRET(isNull _mapCtrl,"");
 
 private _mouseOverMarker = ctrlMapMouseOver _mapCtrl;
 private _type = _mouseOverMarker param [0, ""];
-CHECKRET(_type isNotEqualTo "marker", "");
+CHECKRET(_type isNotEqualTo "marker","");
 private _markerName = _mouseOverMarker select 1;
 
 private _isMtsMarker = [_markerName] call FUNC(isMtsMarker);
-CHECKRET(_isMtsMarker isEqualTo 0, "");
+CHECKRET(_isMtsMarker isEqualTo 0,"");
 
 if (_isMtsMarker isEqualTo 1 || _includeNoEditMarker) exitWith {
     (_markerName splitString "_") select 0

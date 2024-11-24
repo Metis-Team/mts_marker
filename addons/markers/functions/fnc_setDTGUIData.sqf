@@ -20,7 +20,7 @@
  */
 
 params [["_date", [], [[]], [5, 6, 7]], ["_timeZone", "J", [""]], ["_displayShort", nil, [false]]];
-TRACE_1("params", _this);
+TRACE_1("params",_this);
 
 CHECK(_date isEqualTo []);
 

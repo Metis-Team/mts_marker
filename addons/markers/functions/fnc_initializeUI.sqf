@@ -24,7 +24,7 @@ params [["_curMapDisplay", displayNull, [displayNull]], ["_mousePos", [0,0], [[]
 
 //Open interface
 private _displayCheck = _curMapDisplay createDisplay QGVAR(Dialog);
-CHECKRET(isNull _displayCheck, ERROR("Failed to create dialog"));
+CHECKRET(isNull _displayCheck,ERROR("Failed to create dialog"));
 
 private _mainDisplay = findDisplay MAIN_DISPLAY;
 private _mapCtrl = _curMapDisplay displayCtrl MAP_CTRL;
@@ -118,7 +118,7 @@ if (!isMultiplayer || is3DEN) then {
         _x params ["_channelText", "_channelID", "_channelColor"];
 
         if (!((channelEnabled _channelID) isEqualTo [false, false]) || _channelID isEqualTo 3) then {
-            private _selectionColor = (configfile >> "RscChatListMission" >> _channelColor) call BIS_fnc_colorConfigToRGBA;
+            private _selectionColor = (configFile >> "RscChatListMission" >> _channelColor) call BIS_fnc_colorConfigToRGBA;
             private _index = _channelCtrl lbAdd (localize _channelText);
             _channelCtrl lbSetValue [_index, _channelID];
             _channelCtrl lbSetColor [_index, _selectionColor];
@@ -131,8 +131,8 @@ private _reinforcedCbCtrl = _mainDisplay displayCtrl REINFORCED_CHECKBOX;
 private _reducedCbCtrl = _mainDisplay displayCtrl REDUCED_CHECKBOX;
 private _hqCbCtrl = _mainDisplay displayCtrl HQ_CHECKBOX;
 
-private _markerScale = MARKER_SCALE;
-private _markerAlpha = MARKER_ALPHA;
+private _markerScale = GVAR(defaultMarkerScale); // CBA Setting
+private _markerAlpha = GVAR(defaultMarkerAlpha); // CBA Setting
 
 // Operational Condition
 private _damagedCbCtrl = _mainDisplay displayCtrl DAMAGED_CHECKBOX;

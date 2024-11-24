@@ -22,7 +22,7 @@ params [["_parentDisplay", displayNull, [displayNull]]];
 
 // Open Date-Time Group configuration
 private _dtgDisplay = _parentDisplay createDisplay QGVAR(DTGDialog);
-CHECKRET(isNull _dtgDisplay, ERROR("Failed to create DTG dialog"));
+CHECKRET(isNull _dtgDisplay,ERROR("Failed to create DTG dialog"));
 
 private _dateYearCtrl = _dtgDisplay displayCtrl DTG_YEAR_DROPDOWN;
 private _dateMonthCtrl = _dtgDisplay displayCtrl DTG_MONTH_DROPDOWN;
