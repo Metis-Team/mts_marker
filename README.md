@@ -4,16 +4,16 @@
 
 <p align="center">
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
-        <img src="https://img.shields.io/badge/Version-1.8.2-blue.svg?style=flat-square" alt="Metis Marker Version">
+        <img src="https://img.shields.io/github/v/release/Metis-Team/mts_marker?label=Version&style=flat-square" alt="Metis Marker Version">
     </a>
     <a href="https://github.com/Metis-Team/mts_marker/releases/latest">
-        <img src="https://img.shields.io/github/downloads/Metis-Team/mts_marker/total.svg?style=flat-square&label=Downloads" alt="Metis Marker Downloads">
+        <img src="https://img.shields.io/github/downloads/Metis-Team/mts_marker/total.svg?label=Downloads&logo=Github&style=flat-square" alt="Metis Marker Downloads">
     </a>
     <a href="https://forums.bohemia.net/forums/topic/219275-metis-marker/">
         <img src="https://img.shields.io/badge/BIF-Thread-lightgrey.svg?style=flat-square" alt="BIF Thread">
     </a>
     <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1508091616">
-        <img src="https://img.shields.io/badge/Steam-Workshop-green.svg?style=flat-square" alt="Steam Workshop">
+        <img src="https://img.shields.io/badge/Steam-Workshop-green.svg?logo=Steam&style=flat-square" alt="Steam Workshop">
     </a>
     <a href="https://github.com/Metis-Team/mts_marker/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/License-APL--ND-red.svg?style=flat-square" alt="APL-ND License">
