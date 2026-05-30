@@ -8,7 +8,7 @@
  *      Adds Combobox selections and pictures.
  *
  *  Parameter(s):
- *      0: DISPLAY - Display on which the dialog should apear. (Check mts_markers_fnc_getDisplay)
+ *      0: DISPLAY - Display on which the dialog should appear. (Check mts_markers_fnc_getDisplay)
  *      1: ARRAY - Mouse position on map. (Not needed if parameter 2 is given e.g. nil)
  *      2: STRING - Unique marker prefix for editing set marker. (Not needed if dialog should open with default settings)
  *

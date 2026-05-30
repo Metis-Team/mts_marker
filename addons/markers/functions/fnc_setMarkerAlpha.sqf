@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Sets the transparancy (alpha) value of given marker.
+ *      Sets the transparency (alpha) value of given marker.
  *      When alpha equals 1, the marker is visible, but if alpha equals 0, then the marker is invisible.
  *
  *  Parameter(s):

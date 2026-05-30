@@ -3,7 +3,7 @@
  *  Author: PhILoX, Timi007
  *
  *  Description:
- *      Event triggerd when mouse button is pressed on map to start moving the marker.
+ *      Event triggered when mouse button is pressed on map to start moving the marker.
  *
  *  Parameter(s):
  *      0: CONTROL - Map control. (Optional, default: Map control)
