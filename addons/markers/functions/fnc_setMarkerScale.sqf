@@ -26,7 +26,13 @@ private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
 CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Invalid marker prefix. No MTS marker"));
 
+private _jipId = format [QGVAR(setMarkerScale_%1), _namePrefix];
+
 //broadcast marker depending on channel ID
-[_namePrefix, _newScale] remoteExecCall [QFUNC(setMarkerScaleLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+[_namePrefix, _newScale] remoteExecCall [
+    QFUNC(setMarkerScaleLocal),
+    ([_broadcastChannel] call FUNC(getBroadcastTargets)),
+    _jipId
+];
 
 nil
