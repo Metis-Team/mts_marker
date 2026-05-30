@@ -23,7 +23,7 @@ CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"); false);
 //get channel ID from marker prefix
 private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Invalid marker prefix. No MTS marker"); false);
+CHECKRET(!([_broadcastChannel] call FUNC(isValidBroadcastChannel)),ERROR("Invalid marker prefix. No MTS marker"); false);
 
 //broadcast marker depending on channel ID
 [_namePrefix] remoteExecCall [QFUNC(deleteMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
