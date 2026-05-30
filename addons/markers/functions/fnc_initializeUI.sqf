@@ -123,7 +123,7 @@ if (!isMultiplayer || is3DEN) then {
             _channelCtrl lbSetValue [_index, _channelID];
             _channelCtrl lbSetColor [_index, _selectionColor];
         };
-    } count _channelDropdownArray;
+    } forEach _channelDropdownArray;
 };
 
 private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;

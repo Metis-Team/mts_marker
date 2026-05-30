@@ -203,7 +203,7 @@ if (_additionalInfo isNotEqualTo "") then {
 };
 
 // create text marker (bottom left of marker)
-if ((count _uniqueDesignation) > 0) then {
+if (_uniqueDesignation isNotEqualTo []) then {
     TRACE_1("uniqueDesignation input",_uniqueDesignation);
     scopeName "textLeftCreation";
 
@@ -245,7 +245,7 @@ if ((count _uniqueDesignation) > 0) then {
 };
 
 // create text marker (bottom right of marker)
-if ((count _higherFormation) > 0) then {
+if (_higherFormation isNotEqualTo []) then {
     TRACE_1("higherFormation input",_higherFormation);
     scopeName "textRightCreation";
 
@@ -300,7 +300,7 @@ if (_operationalCondition > 0) then {
 };
 
 // Create Date-Time Group markers
-if ((count _dateTimeGroup) > 0) then {
+if (_dateTimeGroup isNotEqualTo []) then {
     // Returns array in format [D, D, H, H, M, M, Z, mmm, Y, Y].
     private _dtgCharacters = _dateTimeGroup call FUNC(toDTGCharacters);
 
