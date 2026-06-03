@@ -69,4 +69,7 @@ private _jipId = format [QGVAR(createMarker_%1), _namePrefix];
     _jipId
 ];
 
+// Provide hook
+[QGVAR(missionMarkerCreated), [_namePrefix]] call CBA_fnc_serverEvent;
+
 _namePrefix

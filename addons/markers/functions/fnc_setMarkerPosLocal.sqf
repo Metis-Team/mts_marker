@@ -26,6 +26,8 @@ CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
 CHECK(_markerFamily isEqualTo []);
 
+private _originPos = getMarkerPos [_markerFamily select 0, (count _newPos) isEqualTo 3];
+
 //move the marker set
 {
     _x setMarkerPosLocal _newPos;
@@ -38,3 +40,7 @@ if (is3DEN) then {
     (_3denData select _index) set [2, _newPos];
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };
+
+// Provide hook
+TRACE_3("Marker moved",_namePrefix,_newPos,_originPos);
+[QGVAR(markerMoved), [_namePrefix, _newPos, _originPos]] call CBA_fnc_localEvent;

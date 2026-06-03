@@ -26,4 +26,9 @@ private _scale = [_namePrefix] call FUNC(getMarkerScale);
 private _alpha = [_namePrefix] call FUNC(getMarkerAlpha);
 
 GVAR(clipboard) = [_namePrefix, _scale, _alpha];
+
+// Provide hook
+TRACE_1("Marker saved to clipboard",_namePrefix);
+[QGVAR(markerSavedToClipboard), [_namePrefix]] call CBA_fnc_localEvent;
+
 true

@@ -45,4 +45,7 @@ if (_targets isEqualTo 0) then {
     } forEach ["createMarker", "setMarkerAlpha", "setMarkerPos", "setMarkerScale"];
 };
 
+// Provide hook
+[QGVAR(missionMarkerDeleted), [_namePrefix]] call CBA_fnc_serverEvent;
+
 true
