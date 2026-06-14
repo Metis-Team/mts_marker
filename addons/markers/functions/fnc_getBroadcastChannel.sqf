@@ -20,14 +20,19 @@ params [["_namePrefix", "", [""]]];
 
 CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 
-switch ([_namePrefix] call FUNC(isMtsMarker)) do {
-     case 1: {
-        parseNumber ((_namePrefix splitString "/") param [2, "-1"])
-     };
-     case 2: {
-        parseNumber ((_namePrefix splitString "~") param [1, "-1"])
-     };
-     default {
-        -2
-     };
- };
+private _channelStr = switch ([_namePrefix] call FUNC(isMtsMarker)) do {
+    case 1: {
+        (_namePrefix splitString "/") param [2, ""]
+    };
+    case 2: {
+        (_namePrefix splitString "~") param [1, ""]
+    };
+    default {
+        ""
+    };
+};
+
+if (_channelStr isEqualTo "") exitWith {BC_INVALID};
+if (_channelStr isEqualTo BC_SCRIPTED_GLOBAL_MARKER_SUFFIX) exitWith {BC_SCRIPTED_GLOBAL};
+
+parseNumber _channelStr

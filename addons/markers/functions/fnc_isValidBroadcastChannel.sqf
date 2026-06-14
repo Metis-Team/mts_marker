@@ -16,6 +16,6 @@
  *
  */
 
-params [["_broadcastChannel", -2, [0]]];
+params [["_broadcastChannel", BC_INVALID, [0]]];
 
-_broadcastChannel <= 5 && {_broadcastChannel >= -1 || _broadcastChannel isEqualTo -10}
+_broadcastChannel <= 5 && {_broadcastChannel >= BC_SCRIPTED_LOCAL || _broadcastChannel isEqualTo BC_SCRIPTED_GLOBAL}

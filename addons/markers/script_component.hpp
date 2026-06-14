@@ -68,3 +68,9 @@
 // DTG
 #define MIN_YEAR 1900
 #define MAX_YEAR 2050
+
+// Special broadcast channels
+#define BC_SCRIPTED_LOCAL -1
+#define BC_INVALID -2
+#define BC_SCRIPTED_GLOBAL -10
+#define BC_SCRIPTED_GLOBAL_MARKER_SUFFIX "-1g"

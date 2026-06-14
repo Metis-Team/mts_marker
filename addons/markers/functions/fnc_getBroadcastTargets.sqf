@@ -22,7 +22,7 @@
 params [["_broadcastChannel", -1, [0]]];
 
 switch (_broadcastChannel) do {
-    case -10; // global creation without channel alpha
+    case BC_SCRIPTED_GLOBAL; // global creation without channel alpha
     case 0: {
         0
     };
