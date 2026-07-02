@@ -26,6 +26,8 @@ CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
 CHECK(_markerFamily isEqualTo []);
 
+private _originScale = (getMarkerSize (_markerFamily select 0)) select 0;
+
 //set scale on the marker set
 {
     _x setMarkerSizeLocal [_newScale, _newScale];
@@ -38,3 +40,7 @@ if (is3DEN) then {
     (_3denData select _index) set [4, _newScale];
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };
+
+// Provide hook
+TRACE_3("Marker scale updated",_namePrefix,_newScale,_originScale);
+[QGVAR(markerScaleUpdated), [_namePrefix, _newScale, _originScale]] call CBA_fnc_localEvent;

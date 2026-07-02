@@ -334,6 +334,7 @@ GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
     //save immutable variables of marker
+    TRACE_5("Save marker in namespace",_namePrefix,_broadcastChannel,isRemoteExecuted,remoteExecutedOwner,clientOwner);
     GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel], true];
 
     if (is3DEN) then {
@@ -343,5 +344,9 @@ if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
         set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
     };
 };
+
+// Provide hook
+TRACE_1("Marker created",_namePrefix);
+[QGVAR(markerCreated), [_namePrefix]] call CBA_fnc_localEvent;
 
 _namePrefix

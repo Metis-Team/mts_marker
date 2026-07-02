@@ -28,6 +28,8 @@ CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 private _markerFamily = [_namePrefix] call FUNC(getMarkerFamily);
 CHECK(_markerFamily isEqualTo []);
 
+private _originAlpha = markerAlpha (_markerFamily select 0);
+
 // Set alpha of marker set
 {
     _x setMarkerAlphaLocal _alpha;
@@ -40,3 +42,7 @@ if (is3DEN) then {
     (_3denData select _index) set [5, _alpha];
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };
+
+// Provide hook
+TRACE_3("Marker alpha updated",_namePrefix,_alpha,_originAlpha);
+[QGVAR(markerAlphaUpdated), [_namePrefix, _alpha, _originAlpha]] call CBA_fnc_localEvent;
