@@ -96,14 +96,15 @@ _directionCtrl lbSetCurSel 0;
 
 // Channel
 private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
+private _channelTxtCtrl = _mainDisplay displayCtrl CHANNEL_TXT;
 if (!isMultiplayer || is3DEN) then {
     //hide channel dropdown in singleplayer and 3DEN editor
     _channelCtrl ctrlShow false;
-    (_mainDisplay displayCtrl CHANNEL_TXT) ctrlShow false;
+    _channelTxtCtrl ctrlShow false;
 } else {
     //fill the channel combobox & select current channel
     _channelCtrl ctrlShow true;
-    (_mainDisplay displayCtrl CHANNEL_TXT) ctrlShow true;
+    _channelTxtCtrl ctrlShow true;
 
     private _channelDropdownArray = [
         ["str_channel_global", 0, "colorGlobalChannel"],
@@ -184,7 +185,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
 } else {
     //when editing marker or saving of last selection is enabled
     private _markerParameter = [];
-    private _broadcastChannel = -1;
+    private _broadcastChannel = BC_SCRIPTED_LOCAL;
     if (GVAR(saveLastSelection) && (_namePrefix isEqualTo "")) then {
         if (GVAR(lastSelection) isEqualTo []) then {
             _markerParameter set [0, ["blu", false]];
@@ -203,7 +204,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         //get marker family parameter & information from namespace
         private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
         _markerParameter = _markerInformation param [1, [], [[]]];
-        _broadcastChannel = _markerInformation param [2, -1, [0]];
+        _broadcastChannel = _markerInformation param [2, BC_SCRIPTED_LOCAL, [0]];
         _markerScale = [_namePrefix] call FUNC(getMarkerScale);
         _markerAlpha = [_namePrefix] call FUNC(getMarkerAlpha);
 
@@ -211,7 +212,12 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     };
     CHECK(_markerParameter isEqualTo []);
 
-    //select the original broadcast channel in dropdown
+    if (isMultiplayer && _broadcastChannel < 0) then {
+        // Set default fallback channel to group when editing special scripted marker in MP.
+        _broadcastChannel = 3;
+    };
+
+    // Select the original broadcast channel in dropdown
     for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
         private _channelID = _channelCtrl lbValue _index;
         if (_channelID isEqualTo _broadcastChannel) exitWith {

@@ -24,7 +24,7 @@ CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 //get channel ID from marker prefix
 private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Invalid marker prefix. No MTS marker"));
+CHECKRET(!([_broadcastChannel] call FUNC(isValidBroadcastChannel)),ERROR("Invalid marker prefix. No MTS marker"));
 
 private _jipId = format [QGVAR(setMarkerPos_%1), _namePrefix];
 

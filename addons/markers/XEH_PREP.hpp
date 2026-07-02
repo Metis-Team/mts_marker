@@ -30,6 +30,7 @@ PREP(identityButtonsAction);
 PREP(initializeDTGUI);
 PREP(initializeUI);
 PREP(isMtsMarker);
+PREP(isValidBroadcastChannel);
 PREP(loadPreset);
 PREP(moveMarkerInProgress);
 PREP(moveMarkerInProgress3DEN);

@@ -7,7 +7,9 @@
  *
  *  Parameter(s):
  *      0: ARRAY - Position where the marker will be placed.
- *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
+ *      1: NUMBER - Channel ID where marker is broadcasted.
+ *          Check "currentChannel" command for channel ID (-1 up to 5 are supported)
+ *          Use -1 for local creation and -10 for global without channel alpha.
  *      2: BOOLEAN - Is the marker editable.
  *      3: ARRAY - The marker configuration.
  *          0: ARRAY - Frameshape of the marker.
@@ -50,7 +52,7 @@ params [
     ["_alpha", MARKER_ALPHA, [0]]
 ];
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Channel ID not supported"));
+CHECKRET(!([_broadcastChannel] call FUNC(isValidBroadcastChannel)),ERROR("Channel ID not supported."));
 
 //get player UID
 private _playerUID = getPlayerUID player;

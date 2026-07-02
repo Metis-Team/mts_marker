@@ -60,8 +60,8 @@ if (_isForMarkerCreation) then {
         if (is3DEN) exitWith {
             0
         };
-        if !(isMultiplayer) exitWith {
-            -1
+        if (!isMultiplayer) exitWith {
+            BC_SCRIPTED_LOCAL
         };
         private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
         _channelCtrl lbValue (lbCurSel _channelCtrl)
