@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Constructs and returns the Date-Time Group charaters.
+ *      Constructs and returns the Date-Time Group characters.
  *
  *  Parameter(s):
  *      0: ARRAY - Year, month, day, hours, minutes from date, systemTime or systemTimeUTC command.
@@ -11,12 +11,12 @@
  *      2: BOOLEAN - Display in short format (HHMMZ) (Default: false).
  *
  *  Returns:
- *      ARRAY - Date-Time Group charaters in format [D, D, H, H, M, M, Z, mmm, Y, Y] (long) or [H, H, M, M, Z] (short).
+ *      ARRAY - Date-Time Group characters in format [D, D, H, H, M, M, Z, mmm, Y, Y] (long) or [H, H, M, M, Z] (short).
  *              To get the equivalent string, just join the element with joinString "".
  *              Returns empty array on invalid date.
  *
  *  Example:
- *      [[2023, 12, 7, 12, 35], "A"] call mts_markers_fnc_toDTGCharaters
+ *      [[2023, 12, 7, 12, 35], "A"] call mts_markers_fnc_toDTGCharacters
  *
  */
 
@@ -47,7 +47,7 @@ if (_displayShort) exitWith {
 };
 
 private _dayStr = [_day, 2] call CBA_fnc_formatNumber;
-private _monthAbbrivation = GVAR(monthAbbreviations) get _month;
+private _monthAbbreviation = GVAR(monthAbbreviations) get _month;
 private _yearStr = [_year, 4] call CBA_fnc_formatNumber;
 
 // Long format DDHHMMZmmmYY
@@ -59,7 +59,7 @@ private _yearStr = [_year, 4] call CBA_fnc_formatNumber;
     _minuteStr select [0, 1],
     _minuteStr select [1, 1],
     toUpper _timeZone,
-    toLower _monthAbbrivation,
+    toLower _monthAbbreviation,
     _yearStr select [2, 1],
     _yearStr select [3, 1]
 ]

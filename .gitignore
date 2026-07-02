@@ -15,4 +15,5 @@ release/
 releases/
 keys/
 .hemttout/
+*.hemttprivatekey
 ####

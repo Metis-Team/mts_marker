@@ -24,7 +24,7 @@ private _mainDisplay = findDisplay MAIN_DISPLAY;
 //get all data
 private _markerParameter = [] call FUNC(getUIData);
 
-//chose where the data will be transmited
+//chose where the data will be transmitted
 scopeName "main";
 if (_isForMarkerCreation) then {
     private _uniqueDesignation = _markerParameter param [3, []];

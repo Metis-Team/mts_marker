@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Event triggerd when marker is being moved.
+ *      Event triggered when marker is being moved.
  *
  *  Parameter(s):
  *      0: ARRAY - Arguments for the PerFrameHandler.

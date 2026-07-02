@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Returnes broadcast targets for remoteExec based on the broadcast channel.
+ *      Returns broadcast targets for remoteExec based on the broadcast channel.
  *
  *  Parameter(s):
  *      0: NUMBER - Broadcast channel. (Check "currentChannel" command for channel ID; Use -1 for local creation)

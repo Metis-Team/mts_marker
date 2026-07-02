@@ -12,7 +12,7 @@
 #define MTS_TAG MTS
 
 // MINIMAL required version for the Mod. Components can specify others..
-#define REQUIRED_VERSION 2.14
+#define REQUIRED_VERSION 2.20
 #define REQUIRED_CBA_VERSION {3,16,1}
 
 #ifdef COMPONENT_BEAUTIFIED

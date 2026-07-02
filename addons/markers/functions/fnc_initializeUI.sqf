@@ -8,7 +8,7 @@
  *      Adds Combobox selections and pictures.
  *
  *  Parameter(s):
- *      0: DISPLAY - Display on which the dialog should apear. (Check mts_markers_fnc_getDisplay)
+ *      0: DISPLAY - Display on which the dialog should appear. (Check mts_markers_fnc_getDisplay)
  *      1: ARRAY - Mouse position on map. (Not needed if parameter 2 is given e.g. nil)
  *      2: STRING - Unique marker prefix for editing set marker. (Not needed if dialog should open with default settings)
  *
@@ -117,13 +117,15 @@ if (!isMultiplayer || is3DEN) then {
     {
         _x params ["_channelText", "_channelID", "_channelColor"];
 
-        if (!((channelEnabled _channelID) isEqualTo [false, false]) || _channelID isEqualTo 3) then {
+        (channelEnabled _channelID) params ["", "", ["_areMarkersEnabled", true, [true]]];
+
+        if (_areMarkersEnabled || _channelID isEqualTo 3) then {
             private _selectionColor = (configFile >> "RscChatListMission" >> _channelColor) call BIS_fnc_colorConfigToRGBA;
             private _index = _channelCtrl lbAdd (localize _channelText);
             _channelCtrl lbSetValue [_index, _channelID];
             _channelCtrl lbSetColor [_index, _selectionColor];
         };
-    } count _channelDropdownArray;
+    } forEach _channelDropdownArray;
 };
 
 private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
@@ -236,7 +238,8 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
     _mod1Ctrl,
     _mod2Ctrl,
     _echelonCtrl,
-    _directionCtrl];
+    _directionCtrl
+];
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];

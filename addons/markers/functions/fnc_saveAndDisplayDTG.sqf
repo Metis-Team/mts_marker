@@ -20,6 +20,6 @@ params ["_dateTimeGroup"];
 
 private _dtgButton = (findDisplay MAIN_DISPLAY) displayCtrl DTG_BUTTON;
 
-private _dtgChars = _dateTimeGroup call FUNC(toDTGCharaters);
+private _dtgChars = _dateTimeGroup call FUNC(toDTGCharacters);
 _dtgButton ctrlSetText (_dtgChars joinString "");
 _dtgButton setVariable [QGVAR(dateTimeGroup), _dateTimeGroup];
