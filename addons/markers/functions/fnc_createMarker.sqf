@@ -59,6 +59,12 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
 };
 
 private _namePrefix = [_editable, _broadcastChannel, _playerUID] call FUNC(generateUniquePrefix);
-[_namePrefix, _broadcastChannel, _pos, _markerParameter, _scale, _alpha] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+private _jipId = format [QGVAR(createMarker_%1), _namePrefix];
+
+[_namePrefix, _broadcastChannel, _pos, _markerParameter, _scale, _alpha] remoteExecCall [
+    QFUNC(createMarkerLocal),
+    ([_broadcastChannel] call FUNC(getBroadcastTargets)),
+    _jipId
+];
 
 _namePrefix
