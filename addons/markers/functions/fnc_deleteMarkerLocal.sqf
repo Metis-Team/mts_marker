@@ -39,3 +39,7 @@ if (is3DEN) then {
     _3denData deleteAt _index;
     set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
 };
+
+// Provide hook
+TRACE_1("Marker deleted",_namePrefix);
+[QGVAR(markerDeleted), [_namePrefix]] call CBA_fnc_localEvent;

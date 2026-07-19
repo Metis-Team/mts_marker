@@ -8,7 +8,7 @@
  *      Adds Combobox selections and pictures.
  *
  *  Parameter(s):
- *      0: DISPLAY - Display on which the dialog should apear. (Check mts_markers_fnc_getDisplay)
+ *      0: DISPLAY - Display on which the dialog should appear. (Check mts_markers_fnc_getDisplay)
  *      1: ARRAY - Mouse position on map. (Not needed if parameter 2 is given e.g. nil)
  *      2: STRING - Unique marker prefix for editing set marker. (Not needed if dialog should open with default settings)
  *
@@ -96,14 +96,15 @@ _directionCtrl lbSetCurSel 0;
 
 // Channel
 private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
+private _channelTxtCtrl = _mainDisplay displayCtrl CHANNEL_TXT;
 if (!isMultiplayer || is3DEN) then {
     //hide channel dropdown in singleplayer and 3DEN editor
     _channelCtrl ctrlShow false;
-    (_mainDisplay displayCtrl CHANNEL_TXT) ctrlShow false;
+    _channelTxtCtrl ctrlShow false;
 } else {
     //fill the channel combobox & select current channel
     _channelCtrl ctrlShow true;
-    (_mainDisplay displayCtrl CHANNEL_TXT) ctrlShow true;
+    _channelTxtCtrl ctrlShow true;
 
     private _channelDropdownArray = [
         ["str_channel_global", 0, "colorGlobalChannel"],
@@ -117,13 +118,15 @@ if (!isMultiplayer || is3DEN) then {
     {
         _x params ["_channelText", "_channelID", "_channelColor"];
 
-        if (!((channelEnabled _channelID) isEqualTo [false, false]) || _channelID isEqualTo 3) then {
+        (channelEnabled _channelID) params ["", "", ["_areMarkersEnabled", true, [true]]];
+
+        if (_areMarkersEnabled || _channelID isEqualTo 3) then {
             private _selectionColor = (configFile >> "RscChatListMission" >> _channelColor) call BIS_fnc_colorConfigToRGBA;
             private _index = _channelCtrl lbAdd (localize _channelText);
             _channelCtrl lbSetValue [_index, _channelID];
             _channelCtrl lbSetColor [_index, _selectionColor];
         };
-    } count _channelDropdownArray;
+    } forEach _channelDropdownArray;
 };
 
 private _suspectedCbCtrl = _mainDisplay displayCtrl SUSPECT_CHECKBOX;
@@ -182,7 +185,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
 } else {
     //when editing marker or saving of last selection is enabled
     private _markerParameter = [];
-    private _broadcastChannel = -1;
+    private _broadcastChannel = BC_SCRIPTED_LOCAL;
     if (GVAR(saveLastSelection) && (_namePrefix isEqualTo "")) then {
         if (GVAR(lastSelection) isEqualTo []) then {
             _markerParameter set [0, ["blu", false]];
@@ -201,7 +204,7 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
         //get marker family parameter & information from namespace
         private _markerInformation = GVAR(namespace) getVariable [_namePrefix, [[]]];
         _markerParameter = _markerInformation param [1, [], [[]]];
-        _broadcastChannel = _markerInformation param [2, -1, [0]];
+        _broadcastChannel = _markerInformation param [2, BC_SCRIPTED_LOCAL, [0]];
         _markerScale = [_namePrefix] call FUNC(getMarkerScale);
         _markerAlpha = [_namePrefix] call FUNC(getMarkerAlpha);
 
@@ -209,7 +212,12 @@ if ((_namePrefix isEqualTo "") && !GVAR(saveLastSelection)) then {
     };
     CHECK(_markerParameter isEqualTo []);
 
-    //select the original broadcast channel in dropdown
+    if (isMultiplayer && _broadcastChannel < 0) then {
+        // Set default fallback channel to group when editing special scripted marker in MP.
+        _broadcastChannel = 3;
+    };
+
+    // Select the original broadcast channel in dropdown
     for "_index" from 0 to ((lbSize _channelCtrl) -1) do {
         private _channelID = _channelCtrl lbValue _index;
         if (_channelID isEqualTo _broadcastChannel) exitWith {
@@ -236,7 +244,8 @@ if ((ctrlIDD _curMapDisplay) in [MAP_BRIEFING_CLIENT_DISPLAY, MAP_BRIEFING_SERVE
     _mod1Ctrl,
     _mod2Ctrl,
     _echelonCtrl,
-    _directionCtrl];
+    _directionCtrl
+];
 
 {
     _x ctrlAddEventHandler ["CheckedChanged", {[false] call FUNC(transmitUIData);}];

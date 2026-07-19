@@ -7,12 +7,14 @@
  *
  *  Parameter(s):
  *      0: ARRAY - Position where the marker will be placed.
- *      1: NUMBER - Channel ID where marker is broadcasted. (Check "currentChannel" command for channel ID (-1 up to 5 are supported); Use -1 for local creation)
+ *      1: NUMBER - Channel ID where marker is broadcasted.
+ *          Check "currentChannel" command for channel ID (-1 up to 5 are supported)
+ *          Use -1 for local creation and -10 for global without channel alpha.
  *      2: BOOLEAN - Is the marker editable.
  *      3: ARRAY - The marker configuration.
  *          0: ARRAY - Frameshape of the marker.
  *              0: STRING - Identity (blu, red, neu, unk).
- *              1: BOOLEAN - Dashed (e.g. supect).
+ *              1: BOOLEAN - Dashed (e.g. suspect).
  *              2: BOOLEAN - Headquarters.
  *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *              0: NUMBER - Icon (0 for none).
@@ -50,7 +52,7 @@ params [
     ["_alpha", MARKER_ALPHA, [0]]
 ];
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Channel ID not supported"));
+CHECKRET(!([_broadcastChannel] call FUNC(isValidBroadcastChannel)),ERROR("Channel ID not supported."));
 
 //get player UID
 private _playerUID = getPlayerUID player;
@@ -59,6 +61,15 @@ if ((_playerUID isEqualTo "_SP_PLAYER_") || {_playerUID isEqualTo "_SP_AI_"} || 
 };
 
 private _namePrefix = [_editable, _broadcastChannel, _playerUID] call FUNC(generateUniquePrefix);
-[_namePrefix, _broadcastChannel, _pos, _markerParameter, _scale, _alpha] remoteExecCall [QFUNC(createMarkerLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+private _jipId = format [QGVAR(createMarker_%1), _namePrefix];
+
+[_namePrefix, _broadcastChannel, _pos, _markerParameter, _scale, _alpha] remoteExecCall [
+    QFUNC(createMarkerLocal),
+    ([_broadcastChannel] call FUNC(getBroadcastTargets)),
+    _jipId
+];
+
+// Provide hook
+[QGVAR(missionMarkerCreated), [_namePrefix]] call CBA_fnc_serverEvent;
 
 _namePrefix

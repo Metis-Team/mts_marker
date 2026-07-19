@@ -24,7 +24,7 @@ private _mainDisplay = findDisplay MAIN_DISPLAY;
 //get all data
 private _markerParameter = [] call FUNC(getUIData);
 
-//chose where the data will be transmited
+//chose where the data will be transmitted
 scopeName "main";
 if (_isForMarkerCreation) then {
     private _uniqueDesignation = _markerParameter param [3, []];
@@ -60,8 +60,8 @@ if (_isForMarkerCreation) then {
         if (is3DEN) exitWith {
             0
         };
-        if !(isMultiplayer) exitWith {
-            -1
+        if (!isMultiplayer) exitWith {
+            BC_SCRIPTED_LOCAL
         };
         private _channelCtrl = _mainDisplay displayCtrl CHANNEL_DROPDOWN;
         _channelCtrl lbValue (lbCurSel _channelCtrl)
@@ -74,6 +74,7 @@ if (_isForMarkerCreation) then {
     //check if marker is being editing, if so delete old marker and create new one
     private _editMarkerNamePrefix = _okBtnCtrl getVariable [QGVAR(editMarkerNamePrefix), ""];
     if (_editMarkerNamePrefix isNotEqualTo "") then {
+        TRACE_1("Edit marker - Delete old marker",_editMarkerNamePrefix);
         [_editMarkerNamePrefix] call FUNC(deleteMarker);
     };
 
@@ -81,7 +82,16 @@ if (_isForMarkerCreation) then {
         // Only save frameshape, modifier and size
         GVAR(lastSelection) = _markerParameter select [0, 3];
     };
-    [_pos, _broadcastChannel, !is3DEN, _markerParameter, _markerScale, _markerAlpha] call FUNC(createMarker);
+
+    private _namePrefix = [_pos, _broadcastChannel, !is3DEN, _markerParameter, _markerScale, _markerAlpha] call FUNC(createMarker);
+
+    // Provide hook for edited marker
+    if (_editMarkerNamePrefix isNotEqualTo "") then {
+        TRACE_2("Edit marker - Marker updated",_namePrefix,_editMarkerNamePrefix);
+        [QGVAR(markerUpdated), [_namePrefix, _editMarkerNamePrefix]] call CBA_fnc_localEvent;
+        [QGVAR(missionMarkerUpdated), [_namePrefix, _editMarkerNamePrefix]] call CBA_fnc_serverEvent;
+    };
+
     _mainDisplay closeDisplay 1;
 } else {
     _markerParameter call FUNC(setMarkerPreview);

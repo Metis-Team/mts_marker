@@ -3,10 +3,13 @@
  *  Author: Timi007
  *
  *  Description:
- *      Returnes broadcast targets for remoteExec based on the broadcast channel.
+ *      Returns broadcast targets for remoteExec based on the broadcast channel.
  *
  *  Parameter(s):
- *      0: NUMBER - Broadcast channel. (Check "currentChannel" command for channel ID; Use -1 for local creation)
+ *      0: NUMBER - Broadcast channel. (
+ *          Check "currentChannel" command for channel ID.
+ *          Use -1  for local creation without channel alpha.
+ *          Use -10 for global creation without channel alpha.
  *
  *  Returns:
  *      ARRAY/SIDE/OBJECT - Broadcast targets. Array of players, player side or player object.
@@ -19,6 +22,7 @@
 params [["_broadcastChannel", -1, [0]]];
 
 switch (_broadcastChannel) do {
+    case BC_SCRIPTED_GLOBAL; // global creation without channel alpha
     case 0: {
         0
     };

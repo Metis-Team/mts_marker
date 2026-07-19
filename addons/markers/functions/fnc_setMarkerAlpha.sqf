@@ -3,7 +3,7 @@
  *  Author: Timi007
  *
  *  Description:
- *      Sets the transparancy (alpha) value of given marker.
+ *      Sets the transparency (alpha) value of given marker.
  *      When alpha equals 1, the marker is visible, but if alpha equals 0, then the marker is invisible.
  *
  *  Parameter(s):
@@ -25,9 +25,15 @@ CHECKRET(_namePrefix isEqualTo "",ERROR("No marker prefix"));
 // Get channel ID from marker prefix
 private _broadcastChannel = [_namePrefix] call FUNC(getBroadcastChannel);
 
-CHECKRET(((_broadcastChannel > 5) || (_broadcastChannel < -1)),ERROR("Invalid marker prefix. No MTS marker"));
+CHECKRET(!([_broadcastChannel] call FUNC(isValidBroadcastChannel)),ERROR("Invalid marker prefix. No MTS marker"));
+
+private _jipId = format [QGVAR(setMarkerAlpha_%1), _namePrefix];
 
 // Broadcast marker depending on channel ID
-[_namePrefix, _alpha] remoteExecCall [QFUNC(setMarkerAlphaLocal), ([_broadcastChannel] call FUNC(getBroadcastTargets)), true];
+[_namePrefix, _alpha] remoteExecCall [
+    QFUNC(setMarkerAlphaLocal),
+    ([_broadcastChannel] call FUNC(getBroadcastTargets)),
+    _jipId
+];
 
 nil

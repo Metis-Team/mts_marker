@@ -3,7 +3,7 @@
  *  Author: PhILoX
  *
  *  Description:
- *      Event triggerd when marker is being moved in 3DEN editor.
+ *      Event triggered when marker is being moved in 3DEN editor.
  *
  *  Parameter(s):
  *      None.

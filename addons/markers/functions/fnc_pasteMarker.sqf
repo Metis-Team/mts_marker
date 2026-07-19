@@ -41,5 +41,10 @@ private _broadcastChannel = call {
     if (currentChannel > 5) then {3} else {currentChannel};
 };
 
-[_pos, _broadcastChannel, !is3DEN, _markerParameter, _scale, _alpha] call FUNC(createMarker);
+private _newMarkerNamePrefix = [_pos, _broadcastChannel, !is3DEN, _markerParameter, _scale, _alpha] call FUNC(createMarker);
+
+// Provide hook
+TRACE_2("Marker copied",_newMarkerNamePrefix,_namePrefix);
+[QGVAR(markerCopied), [_newMarkerNamePrefix, _namePrefix]] call CBA_fnc_localEvent;
+
 true

@@ -14,7 +14,7 @@
  *      3: ARRAY - The marker configuration.
  *          0: ARRAY - Frameshape of the marker.
  *              0: STRING - Identity (blu, red, neu, unk).
- *              1: BOOLEAN - Dashed (e.g. supect).
+ *              1: BOOLEAN - Dashed (e.g. suspect).
  *              2: BOOLEAN - Headquarters.
  *          1: ARRAY - Composition of modifier for the marker. IDs are listed in the wiki. (Optional, default: no modifiers)
  *              0: NUMBER - Icon (0 for none).
@@ -203,7 +203,7 @@ if (_additionalInfo isNotEqualTo "") then {
 };
 
 // create text marker (bottom left of marker)
-if ((count _uniqueDesignation) > 0) then {
+if (_uniqueDesignation isNotEqualTo []) then {
     TRACE_1("uniqueDesignation input",_uniqueDesignation);
     scopeName "textLeftCreation";
 
@@ -245,7 +245,7 @@ if ((count _uniqueDesignation) > 0) then {
 };
 
 // create text marker (bottom right of marker)
-if ((count _higherFormation) > 0) then {
+if (_higherFormation isNotEqualTo []) then {
     TRACE_1("higherFormation input",_higherFormation);
     scopeName "textRightCreation";
 
@@ -300,9 +300,9 @@ if (_operationalCondition > 0) then {
 };
 
 // Create Date-Time Group markers
-if ((count _dateTimeGroup) > 0) then {
+if (_dateTimeGroup isNotEqualTo []) then {
     // Returns array in format [D, D, H, H, M, M, Z, mmm, Y, Y].
-    private _dtgCharacters = _dateTimeGroup call FUNC(toDTGCharaters);
+    private _dtgCharacters = _dateTimeGroup call FUNC(toDTGCharacters);
 
     CHECKRET(_dtgCharacters isEqualTo [],WARNING_1("Date-Time Group is invalid. Will not create DTG markers. DTG: %1",_dateTimeGroup));
 
@@ -333,7 +333,8 @@ GVAR(localMarkers) set [_namePrefix, CBA_missionTime, true];
 
 private _markerInformation = GVAR(namespace) getVariable [_namePrefix, []];
 if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
-    //save inmutable variables of marker
+    //save immutable variables of marker
+    TRACE_5("Save marker in namespace",_namePrefix,_broadcastChannel,isRemoteExecuted,remoteExecutedOwner,clientOwner);
     GVAR(namespace) setVariable [_namePrefix, [_markerFamily, _markerParameter, _broadcastChannel], true];
 
     if (is3DEN) then {
@@ -343,5 +344,9 @@ if (_markerInformation isEqualTo []) then { //save in mts_markers_namespace
         set3DENMissionAttributes [["Scenario", QGVAR(3denData), _3denData]];
     };
 };
+
+// Provide hook
+TRACE_1("Marker created",_namePrefix);
+[QGVAR(markerCreated), [_namePrefix]] call CBA_fnc_localEvent;
 
 _namePrefix

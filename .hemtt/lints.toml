@@ -1,0 +1,12 @@
+[sqf.var_all_caps]
+options.ignore = [
+    "MTS_RECOMPILES",
+    "MTS_PREP_RECOMPILE"
+]
+
+[sqf.banned_macros]
+options.release = [
+    "DEBUG_MODE_FULL",
+    "DISABLE_COMPILE_CACHE",
+    "CBA_DEBUG_SYNCHRONOUS"
+]
